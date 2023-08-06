@@ -1,23 +1,23 @@
----
+  # -----------------------------------------------------------------------
 
-- hosts: localhost
+- hosts: all
+  tags: always
+  become: true
   pre_tasks:
     - name: Update packages
       become: true
       community.general.pacman:
         update_cache: true
         upgrade: true
-      tags:
-        - install
-        - core
+      when: ansible_distribution == "Archlinux"
 
   # -----------------------------------------------------------------------
 
-- hosts: localhost
-  tags: base
-  become: true
-  roles:
-    - base
+# - hosts: all
+#   tags: base
+#   become: true
+#   roles:
+#     - base
 
   # -----------------------------------------------------------------------
 
