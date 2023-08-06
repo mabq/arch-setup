@@ -4,6 +4,6 @@
     - name: Import variables
       include_vars: users/mabq.yml
   tasks:
-    - import: tasks/create_user.yml
-    - import: tasks/setup_ssh.yml
+    - include: tasks/create_user.yml
+    - include: tasks/setup_ssh.yml
 
