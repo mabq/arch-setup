@@ -4,8 +4,7 @@
   tags: always
   become: true
   pre_tasks:
-    - name: Update packages
-      become: true
+    - name: System update
       community.general.pacman:
         update_cache: true
         upgrade: true
@@ -13,11 +12,11 @@
 
   # -----------------------------------------------------------------------
 
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
 
   # -----------------------------------------------------------------------
 

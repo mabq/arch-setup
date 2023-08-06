@@ -1,2 +1,4 @@
 # Make sure users exist on the system
-- import_tasks: users/mabq/main.yml
+- name: Setup users
+  block:
+  - import_tasks: users/mabq.yml
