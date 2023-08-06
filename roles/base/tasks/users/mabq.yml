@@ -15,12 +15,17 @@
       name: "{{ name }}"
 
   - name: Create user - {{ name }}
-    ansible.builtin.user:
-      name: "{{ name }}"
-      group: "{{ name }}"
-      groups: adm,wheel
-      password: "openssl passwd -6 {{ password }}"
-      shell: /bin/bash
+    block:
+    - name: Generate the password hash
+      ansible.builtin.command: "openssl passwd -6 {{ password }}"
+      register: password_hash
+    - name: 
+      ansible.builtin.user:
+        name: "{{ name }}"
+        group: "{{ name }}"
+        groups: adm,wheel
+        password: "{{ password_hash }}"
+        shell: /bin/bash
 
   # -----------------------------------------------------------------------
     
