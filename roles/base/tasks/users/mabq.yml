@@ -6,13 +6,6 @@
 
   # -----------------------------------------------------------------------
 
-- name: Print
-  tags: users,mabq,print
-  ansible.builtin.debug:
-    msg: "name: {{ name }}, password: {{ password }}"
-
-  # -----------------------------------------------------------------------
-
 - name: Create user - {{ name }}
   tags: users,mabq,create
   block:
@@ -26,7 +19,7 @@
       name: "{{ name }}"
       group: "{{ name }}"
       groups: adm,wheel
-      password: "{{ password }}"
+      password: "openssl passwd -6 {{ password }}"
       shell: /bin/bash
 
   # -----------------------------------------------------------------------
@@ -74,7 +67,7 @@
     # (the same key is used on all computers)
     ansible.posix.authorized_key:
       user: "{{ name }}"
-      key: "/home/{{ name }}/.ssh/{{ name }}.pub"
+      key: "users/{{ name }}/ssh/{{ name }}.pub"
 
     # There is no need to create a config file, we will re-use the same key for everything and the default value of `AddKeysToAgent` is `yes`.
 
