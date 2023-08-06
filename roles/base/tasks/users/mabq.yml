@@ -72,7 +72,9 @@
     # (the same key is used on all computers)
     ansible.posix.authorized_key:
       user: "{{ name }}"
-      key: "users/{{ name }}/ssh/{{ name }}.pub"
+      key: "{{ item }}"
+    with_file:
+      - "users/{{ name }}/ssh/{{ name }}.pub"
 
     # There is no need to create a config file, we will re-use the same key for everything and the default value of `AddKeysToAgent` is `yes`.
 
