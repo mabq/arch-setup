@@ -16,10 +16,10 @@
 
   - name: Create user - {{ name }}
     block:
-    - name: Generate the password hash
+    - name: Generate password hash
       ansible.builtin.command: "openssl passwd -6 {{ password }}"
       register: password_hash
-    - name: 
+    - name: Create user - {{ name }}
       ansible.builtin.user:
         name: "{{ name }}"
         group: "{{ name }}"
