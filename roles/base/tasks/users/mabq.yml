@@ -2,7 +2,7 @@
 
 - name: Include variables - mabq
   tags: users,mabq,variables
-  include_vars: "{{ users/mabq }}.yml"
+  include_vars: users/mabq.yml
 
   # -----------------------------------------------------------------------
 
