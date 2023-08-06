@@ -9,24 +9,24 @@
 
   # ---------------------------------------------------------------------------
 
-  - name: Create the user - {{ name }}
+  - name: Create the user - {{ username }}
     block:
 
-    - name: Create the group - {{ name }}
+    - name: Create the group - {{ username }}
       ansible.builtin.group:
-        name: "{{ name }}"
+        name: "{{ username }}"
 
-    - name: Create the user - {{ name }}
+    - name: Create the user - {{ username }}
       block:
 
       - name: Generate password hash
         ansible.builtin.command: "openssl passwd -6 {{ password }}"
         register: password_hash
 
-      - name: Create user - {{ name }}
+      - name: Create user - {{ username }}
         ansible.builtin.user:
-          name: "{{ name }}"
-          group: "{{ name }}"
+          name: "{{ username }}"
+          group: "{{ username }}"
           # - adm: commonly used to give read access to protected logs. It has full read access to journal files
           # - wheel: commonly used to give privileges to perform administrative actions
           groups: adm,wheel
@@ -34,11 +34,11 @@
           password: "{{ password_hash.stdout }}"
           shell: /bin/bash
 
-    - name: Setup privilege elevation - {{ name }}
+    - name: Setup privilege elevation - {{ username }}
       #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
       ansible.builtin.copy:
-        src: users/{{ name }}/sudoers
-        dest: /etc/sudoers.d/{{ name }}
+        src: users/{{ username }}/sudoers
+        dest: /etc/sudoers.d/{{ username }}
         owner: root
         group: root
         mode: 0440
@@ -48,37 +48,37 @@
   - name: Setup ssh
     block:
 
-    - name: Ensure .ssh directory exists - {{ name }}
+    - name: Ensure .ssh directory exists - {{ username }}
       ansible.builtin.file:
-        path: "/home/{{ name }}/.ssh"
+        path: "/home/{{ username }}/.ssh"
         state: directory
-        owner: "{{ name }}"
-        group: "{{ name }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: 0700
 
-    - name: Install private ssh key - {{ name }}
+    - name: Install private ssh key - {{ username }}
       ansible.builtin.copy:
-        src: "users/{{ name }}/ssh/{{ name }}"
-        dest: "/home/{{ name }}/.ssh/{{ name }}"
-        owner: "{{ name }}"
-        group: "{{ name }}"
+        src: "users/{{ username }}/ssh/{{ username }}"
+        dest: "/home/{{ username }}/.ssh/{{ username }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: 0600
 
-    - name: Install public ssh key - {{ name }}
+    - name: Install public ssh key - {{ username }}
       ansible.builtin.copy:
-        src: "users/{{ name }}/ssh/{{ name }}.pub"
-        dest: "/home/{{ name }}/.ssh/{{ name }}.pub"
-        owner: "{{ name }}"
-        group: "{{ name }}"
+        src: "users/{{ username }}/ssh/{{ username }}.pub"
+        dest: "/home/{{ username }}/.ssh/{{ username }}.pub"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: 0644
 
     - name: Add the public key to the `authorized_key` file
       # one key to rule them all
       ansible.posix.authorized_key:
-        user: "{{ name }}"
+        user: "{{ username }}"
         key: "{{ item }}"
       with_file:
-        - "users/{{ name }}/ssh/{{ name }}.pub"
+        - "users/{{ username }}/ssh/{{ username }}.pub"
 
     # - becasue I use a single key there is no need to create a config file. The default value of `AddKeysToAgent` is `yes`.
 
