@@ -1,0 +1,33 @@
+- name: Ensure .ssh directory exists - {{ name }}
+  ansible.builtin.file:
+    path: "/home/{{ name }}/.ssh"
+    state: directory
+    owner: "{{ name }}"
+    group: "{{ name }}"
+    mode: 0700
+
+- name: Install private ssh key - {{ name }}
+  ansible.builtin.copy:
+    src: "users/{{ name }}/ssh/{{ name }}"
+    dest: "/home/{{ name }}/.ssh/{{ name }}"
+    owner: "{{ name }}"
+    group: "{{ name }}"
+    mode: 0600
+
+- name: Install public ssh key - {{ name }}
+  ansible.builtin.copy:
+    src: "users/{{ name }}/ssh/{{ name }}.pub"
+    dest: "/home/{{ name }}/.ssh/{{ name }}.pub"
+    owner: "{{ name }}"
+    group: "{{ name }}"
+    mode: 0644
+
+- name: Add the public key to the `authorized_key` file
+  # we use a single key, so other computer will be able to access this computer with the same key
+  ansible.posix.authorized_key:
+    user: "{{ name }}"
+    key: "{{ item }}"
+  with_file:
+    - "users/{{ name }}/ssh/{{ name }}.pub"
+
+# There is no need to create a config file, we use a single key and the default value of `AddKeysToAgent` is `yes`

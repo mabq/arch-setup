@@ -1,0 +1,28 @@
+  # This user will be able to execute elevated privilege tasks without prompting for password. Make sure you don't leave your computer unattended without locking it first.
+
+- name: Create the group - {{ name }}
+  ansible.builtin.group:
+    name: "{{ name }}"
+
+- name: Create the user - {{ name }}
+  block:
+  - name: Generate password hash
+    ansible.builtin.command: "openssl passwd -6 {{ password }}"
+    register: password_hash
+  - name: Create user - {{ name }}
+    ansible.builtin.user:
+      name: "{{ name }}"
+      group: "{{ name }}"
+      groups: adm,wheel
+      password: "{{ password_hash.stdout }}"
+      shell: /bin/bash
+
+  - name: Setup sudoers file - {{ name }}
+    # so that no password is required when executing elevated privilege actions
+    ansible.builtin.copy:
+      src: users/{{ name }}/sudoers
+      dest: /etc/sudoers.d/{{ name }}
+      owner: root
+      group: root
+      mode: 0440
+
