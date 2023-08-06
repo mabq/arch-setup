@@ -24,7 +24,7 @@
         name: "{{ name }}"
         group: "{{ name }}"
         groups: adm,wheel
-        password: "{{ password_hash }}"
+        password: "{{ password_hash.stdout }}"
         shell: /bin/bash
 
   # -----------------------------------------------------------------------
