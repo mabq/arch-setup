@@ -3,7 +3,7 @@
   pre_tasks:
     - name: Import variables
       include_vars: users/mabq.yml
-  tasks:
-    - include: tasks/create_user.yml
-    - include: tasks/setup_ssh.yml
+  # tasks:
+  #   - include: tasks/create_user.yml
+  #   - include: tasks/setup_ssh.yml
 
