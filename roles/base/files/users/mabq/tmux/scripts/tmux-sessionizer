@@ -1,0 +1,49 @@
+#!/bin/sh
+
+#
+# AUTHOR: theprimeagen 
+# DATE: Feb 10, 2023
+# MODIFIED: Aug 07, 2023
+#
+# DESCRIPTION
+#   Simplify the creation of tmux sessions. This is a modified version of https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+#   If you do not understand bash syntax, ask ChatGPT
+#
+# REQUIRED PACKAGES
+#   fd (rust-based find)
+#
+# USAGE
+#   tmux-sessionizer
+#   Both, the shell and neovim, have mappings pointing to this script (Ctrl-f)
+#
+
+# Add any directoried you want (just use `$HOME` instead of `~`)
+directories="$HOME/ $HOME/projects/"
+
+if [[ $# -eq 1 ]]; then
+    working_directory=$1
+else
+    working_directory=$(fd --unrestricted --exact-depth=1 --type=directory . $directories | fzf)
+fi
+
+if [[ -z $working_directory ]]; then
+    exit 0
+fi
+
+# Use the directory name as the session name (session names cannot include dots, replace them with `_`)
+session_name=$(basename "$working_directory" | tr . _)
+
+# Create the session (if necessary) in detached mode
+if ! tmux has-session -t $session_name 2> /dev/null; then
+    tmux new-session -s $session_name -c $working_directory -d
+fi 
+
+# Go to the selected session (if we reach this point it means that tmux is running)
+if [[ -n $TMUX ]]; then 
+    # the current terminal is already attached to tmux, just switch (if necessary)
+    tmux switch-client -t $session_name
+else
+    # attach to tmux session
+    tmux attach-session -t $session_name
+fi
+
