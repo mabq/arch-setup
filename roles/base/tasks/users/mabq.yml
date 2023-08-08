@@ -121,9 +121,9 @@
         dest: /home/{{ username }}/{{ item.dest }}
         owner: "{{ username }}"
         group: "{{ username }}"
-        mode: "{{ item.mode | default(0600) }}"
+        mode: "{{ item.mode | default('0600') }}"
       with_items:
-        - { src: 'tmux/scripts/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: 0700 }
+        - { src: 'tmux/scripts/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
         - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
 
   # ---------------------------------------------------------------------------
