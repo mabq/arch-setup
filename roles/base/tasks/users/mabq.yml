@@ -38,7 +38,7 @@
     - name: Setup privilege elevation - {{ username }}
       #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
       ansible.builtin.copy:
-        src: users/{{ username }}/sudoers
+        src: users/{{ username }}/sudo/sudoers
         dest: /etc/sudoers.d/{{ username }}
         owner: root
         group: root
