@@ -91,7 +91,7 @@
 
     - name: Setup `.gitcongif` - {{ username }}
       ansible.builtin.copy:
-        src: "users/{{ username }}/git/gitcongif"
+        src: "users/{{ username }}/git/gitconfig"
         dest: "/home/{{ username }}/.gitconfig"
         owner: "{{ username }}"
         group: "{{ username }}"
