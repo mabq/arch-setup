@@ -119,9 +119,9 @@
       ansible.builtin.copy:
         src: users/{{ username }}/{{ item.src }}
         dest: /home/{{ username }}/{{ item.dest }}
-        owner: {{ username }}
-        group: {{ username }}
-        mode: {{ item.mode | default(0600) }}
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: "{{ item.mode | default(0600) }}"
       with_items:
         - { src: 'tmux/scripts/tmux-sessionizer', dest: '.local/bin', mode: 0700 }
         - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
