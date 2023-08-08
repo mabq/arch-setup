@@ -112,6 +112,7 @@
         mode: 0700
       with_items:
         - { dir: '.config' }
+        - { dir: '.config/tmux' }
         - { dir: '.local' }
         - { dir: '.local/bin' }
 
