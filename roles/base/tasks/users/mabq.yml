@@ -20,6 +20,7 @@
       block:
 
       - name: Generate password hash - {{ username }}
+        # for security, the file `/etc/shadow` stores the password hash, never the password itself
         ansible.builtin.command: "openssl passwd -6 {{ password }}"
         register: password_hash
 
@@ -48,13 +49,13 @@
   - name: SSH config - {{ username }}
     block:
 
-    - name: Ensure .ssh directory exists - {{ username }}
-      ansible.builtin.file:
-        path: "/home/{{ username }}/.ssh"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0700
+    # - name: Ensure .ssh directory exists - {{ username }}
+    #   ansible.builtin.file:
+    #     path: "/home/{{ username }}/.ssh"
+    #     state: directory
+    #     owner: "{{ username }}"
+    #     group: "{{ username }}"
+    #     mode: 0700
 
     - name: Install private ssh key - {{ username }}
       ansible.builtin.copy:
@@ -102,17 +103,17 @@
     tags: tmux
     block:
   
-    - name: Create directories for tmux - {{ username }}
-      ansible.builtin.file:
-        path: /home/{{ username }}/{{ item.dir }}
-        state: directory
-        owner: {{ username }}
-        group: {{ username }}
-        mode: 0700
-      with_items:
-        - { dir: '.config' }
-        - { dir: '.local' }
-        - { dir: '.local/bin' }
+    # - name: Create directories for tmux - {{ username }}
+    #   ansible.builtin.file:
+    #     path: /home/{{ username }}/{{ item.dir }}
+    #     state: directory
+    #     owner: {{ username }}
+    #     group: {{ username }}
+    #     mode: 0700
+    #   with_items:
+    #     - { dir: '.config' }
+    #     - { dir: '.local' }
+    #     - { dir: '.local/bin' }
 
     - name: Copy tmux config files - {{ username }}
       ansible.builtin.copy:
@@ -123,7 +124,7 @@
         mode: {{ item.mode | default(0600) }}
       with_items:
         - { src: 'tmux/scripts/tmux-sessionizer', dest: '.local/bin', mode: 0700 }
-        # - { src: 'bash/bash_profile', dest: '.bash_profile' }
+        - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
 
   # ---------------------------------------------------------------------------
 
@@ -136,3 +137,5 @@
     #     mode: 0600
     #   with_items:
     #     - { src: 'zsh/zshrc', dest: '.zshrc' }
+
+
