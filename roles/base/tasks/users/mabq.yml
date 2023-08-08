@@ -49,7 +49,7 @@
   - name: SSH config - {{ username }}
     block:
 
-    - name: Ensure directories for SSH exist - {{ username }}
+    - name: Ensure directories for SSH - {{ username }}
       ansible.builtin.file:
         path: "/home/{{ username }}/.ssh"
         state: directory
@@ -103,7 +103,7 @@
     tags: tmux
     block:
   
-    - name: Ensure directories for tmux exist - {{ username }}
+    - name: Ensure directories for tmux - {{ username }}
       ansible.builtin.file:
         path: /home/{{ username }}/{{ item.dir }}
         state: directory
