@@ -1,20 +1,15 @@
 #!/bin/sh
 
 #
-# AUTHOR: theprimeagen 
+# AUTHOR: theprimeagen --- this is a modified version of https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 # DATE: Feb 10, 2023
 # MODIFIED: Aug 07, 2023
 #
 # DESCRIPTION
-#   Simplify the creation of tmux sessions. This is a modified version of https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
-#   If you do not understand bash syntax, ask ChatGPT
+#   Simplify the creation of tmux sessions. Both, zsh and neovim, have mappings pointing to this script (Ctrl-f)
 #
 # REQUIRED PACKAGES
-#   fd (rust-based find)
-#
-# USAGE
-#   tmux-sessionizer
-#   Both, the shell and neovim, have mappings pointing to this script (Ctrl-f)
+#   fd, fzf
 #
 
 # Add any directoried you want (just use `$HOME` instead of `~`)

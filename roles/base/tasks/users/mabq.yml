@@ -5,11 +5,13 @@
   # ---------------------------------------------------------------------------
   
   - name: Import variables - mabq
+    tags: mabq_variables
     include_vars: users/mabq.yml
 
   # ---------------------------------------------------------------------------
 
   - name: Config user - {{ username }}
+    tags: mabq_config
     block:
 
     - name: Create group - {{ username }}
@@ -20,7 +22,7 @@
       block:
 
       - name: Generate password hash - {{ username }}
-        # for security, the file `/etc/shadow` stores the password hash, never the password itself
+        # `/etc/shadow` stores the password hash, never the password itself
         ansible.builtin.command: "openssl passwd -6 {{ password }}"
         register: password_hash
 
@@ -46,7 +48,10 @@
 
   # ---------------------------------------------------------------------------
   
+    # This are the user's configuration files only, ssh is installed and configured in the "system-setup" section
+    
   - name: SSH config - {{ username }}
+    tags: mabq_ssh
     block:
 
     - name: Ensure directories for SSH - {{ username }}
@@ -86,7 +91,7 @@
   # ---------------------------------------------------------------------------
   
   - name: Git config - {{ username }}
-    tags: git
+    tags: mabq_git
     block:
 
     - name: Setup `.gitcongif` - {{ username }}
@@ -100,7 +105,7 @@
   # ---------------------------------------------------------------------------
   
   - name: Tmux config - {{ username }}
-    tags: tmux
+    tags: mabq_tmux
     block:
   
     - name: Ensure directories for tmux - {{ username }}
