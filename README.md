@@ -1,8 +1,8 @@
 # Configure a Workstation with Ansible
 
-Before running:
+Notes:
 
-- Make sure there is a host entry for the machine where you intend to run the command.
+- There is no inventory because this is meant to be used with `ansible-pull` against the localhost.
 
 Ideas taken from:
 
