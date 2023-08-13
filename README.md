@@ -3,6 +3,7 @@
 Notes:
 
 - There is no inventory because this is meant to be used with `ansible-pull` against the localhost.
+- `ansible-pull -U https://github.com/mabq/ansible-archlinux-workstation --vault-password-file ~/.vault_key`
 
 Ideas taken from:
 

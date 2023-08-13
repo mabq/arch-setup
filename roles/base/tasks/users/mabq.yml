@@ -5,7 +5,7 @@
   # ---------------------------------------------------------------------------
   
   - name: Import variables - mabq
-    tags: mabq_vars
+    tags: always
     include_vars: users/mabq.yml
 
   # ---------------------------------------------------------------------------
@@ -108,29 +108,29 @@
     tags: mabq_tmux
     block:
   
-    # - name: Ensure directories for tmux - {{ username }}
-    #   ansible.builtin.file:
-    #     path: /home/{{ username }}/{{ item.dir }}
-    #     state: directory
-    #     owner: "{{ username }}"
-    #     group: "{{ username }}"
-    #     mode: 0700
-    #   with_items:
-    #     - { dir: '.config' }
-    #     - { dir: '.config/tmux' }
-    #     - { dir: '.local' }
-    #     - { dir: '.local/bin' }
+    - name: Ensure directories for tmux - {{ username }}
+      ansible.builtin.file:
+        path: /home/{{ username }}/{{ item.dir }}
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0700
+      with_items:
+        - { dir: '.config' }
+        - { dir: '.config/tmux' }
+        - { dir: '.local' }
+        - { dir: '.local/bin' }
 
     - name: Copy tmux config files - {{ username }}
       ansible.builtin.copy:
-        src: users/{{ username }}/{{ item.src }}
+        src: users/{{ username }}/tmux/{{ item.src }}
         dest: /home/{{ username }}/{{ item.dest }}
         owner: "{{ username }}"
         group: "{{ username }}"
         mode: "{{ item.mode | default('0600') }}"
       with_items:
-        - { src: 'tmux/scripts/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
-        - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
+        - { src: 'scripts/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
+        - { src: 'tmux.conf', dest: '.config/tmux/tmux.conf' }
 
   # ---------------------------------------------------------------------------
 

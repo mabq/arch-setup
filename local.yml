@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  tags: always
+  # tags: always
   become: true
   pre_tasks:
     - name: System update
