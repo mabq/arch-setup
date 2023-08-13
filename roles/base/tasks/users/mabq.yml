@@ -84,7 +84,7 @@
         user: "{{ username }}"
         key: "{{ item }}"
       with_file:
-        - "users/{{ username }}/ssh/{{ username }}.pub"
+        - "users/{{ username }}/ssh/id_ed25519.pub"
 
     # Note: becasue I use a single key there is no need to create a config file. The default value of `AddKeysToAgent` is `yes`.
 
