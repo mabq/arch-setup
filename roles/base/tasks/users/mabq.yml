@@ -64,16 +64,16 @@
 
     - name: Install private ssh key - {{ username }}
       ansible.builtin.copy:
-        src: "users/{{ username }}/ssh/{{ username }}"
-        dest: "/home/{{ username }}/.ssh/{{ username }}"
+        src: "users/{{ username }}/ssh/id_ed25519"
+        dest: "/home/{{ username }}/.ssh/id_ed25519"
         owner: "{{ username }}"
         group: "{{ username }}"
         mode: 0600
 
     - name: Install public ssh key - {{ username }}
       ansible.builtin.copy:
-        src: "users/{{ username }}/ssh/{{ username }}.pub"
-        dest: "/home/{{ username }}/.ssh/{{ username }}.pub"
+        src: "users/{{ username }}/ssh/id_ed25519.pub"
+        dest: "/home/{{ username }}/.ssh/id_ed25519.pub"
         owner: "{{ username }}"
         group: "{{ username }}"
         mode: 0644
