@@ -108,18 +108,18 @@
     tags: mabq_tmux
     block:
   
-    - name: Ensure directories for tmux - {{ username }}
-      ansible.builtin.file:
-        path: /home/{{ username }}/{{ item.dir }}
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0700
-      with_items:
-        - { dir: '.config' }
-        - { dir: '.config/tmux' }
-        - { dir: '.local' }
-        - { dir: '.local/bin' }
+    # - name: Ensure directories for tmux - {{ username }}
+    #   ansible.builtin.file:
+    #     path: /home/{{ username }}/{{ item.dir }}
+    #     state: directory
+    #     owner: "{{ username }}"
+    #     group: "{{ username }}"
+    #     mode: 0700
+    #   with_items:
+    #     - { dir: '.config' }
+    #     - { dir: '.config/tmux' }
+    #     - { dir: '.local' }
+    #     - { dir: '.local/bin' }
 
     - name: Copy tmux config files - {{ username }}
       ansible.builtin.copy:
