@@ -2,7 +2,7 @@
 
 Before running:
 
-- Make sure the IP addresses in `host_vars` are ok. 
+- Make sure there is a host entry for the machine where you intend to run the command.
 
 Ideas taken from:
 

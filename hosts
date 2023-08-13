@@ -2,6 +2,7 @@ workstation:
   hosts:
     xps:
     macbook:
+    nuc:
 
 server:
   hosts:
