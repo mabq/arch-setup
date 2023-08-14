@@ -1,0 +1,18 @@
+bg_high: '#232136'
+bg_medium: '#2a273f'
+bg_low: '#393552'
+
+fg_high: '#e0def4'
+fg_medium: '#908caa'
+fg_low: '#6e6a86'
+
+red: '#eb6f92'
+yellow: '#f6c177'
+pink: '#ea9a97'
+green: '#3e8fb0'
+cyan: '#9ccfd8'
+magenta: '#c4a7e7'
+
+sel_low: '#2a283e'
+sel_medium: '#44415a'
+sel_high: '#56526e'

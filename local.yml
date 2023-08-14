@@ -9,6 +9,9 @@
         upgrade: true
       when: ansible_distribution == "Archlinux"
 
+- name: Pick a theme
+  include_vars: "{{ playbook_dir }}/vars/rose-pine-dawn.yml"
+
 - hosts: localhost
   tags: base
   become: true
