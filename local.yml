@@ -10,10 +10,6 @@
       when: ansible_distribution == "Archlinux"
 
 - hosts: localhost
-  var_files:
-    - /vars/themes/rose-pine-dawn.yml"
-
-- hosts: localhost
   tags: base
   become: true
   roles:
