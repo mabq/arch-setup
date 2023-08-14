@@ -2,7 +2,7 @@
 
 - name: Pick a theme
   tags: always
-  include_vars: "../vars/themes/rose-pine-dawn.yml"
+  include_vars: "../vars/themes/rose-pine.yml"
 
 - name: Setup users
   block:
