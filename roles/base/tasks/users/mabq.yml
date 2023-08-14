@@ -130,7 +130,16 @@
         mode: "{{ item.mode | default('0600') }}"
       with_items:
         - { src: 'scripts/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
-        - { src: 'tmux.conf', dest: '.config/tmux/tmux.conf' }
+
+    - name: Template tmux config files - {{ username }}
+      ansible.builtin.template:
+        src: users/{{ username }}/tmux/{{ item.src }}
+        dest: /home/{{ username }}/{{ item.dest }}
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: "{{ item.mode | default('0600') }}"
+      with_items:
+        - { src: 'templates/tmux.conf', dest: '.config/tmux/tmux.conf' }
 
   # ---------------------------------------------------------------------------
 

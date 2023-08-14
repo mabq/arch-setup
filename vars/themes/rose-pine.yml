@@ -8,10 +8,10 @@ fg_low: '#6e6a86'
 
 red: '#eb6f92'
 yellow: '#f6c177'
-pink: '#ebbcba'
 green: '#31748f'
-cyan: '#9ccfd8'
+blue: '#9ccfd8'
 magenta: '#c4a7e7'
+cyan: '#ebbcba'
 
 sel_low: '#21202e'
 sel_medium: '#403d52'
