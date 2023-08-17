@@ -4,7 +4,7 @@
 
   # ---------------------------------------------------------------------------
   
-  - name: Import variables - mabq
+  - name: Import user variables - mabq
     tags: always
     include_vars: users/mabq.yml
 
@@ -48,8 +48,6 @@
 
   # ---------------------------------------------------------------------------
   
-    # This are the user's configuration files only, ssh is installed and configured in the "system-setup" section
-    
   - name: SSH config - {{ username }}
     tags: mabq_ssh
     block:
@@ -121,7 +119,7 @@
         - { dir: '.local' }
         - { dir: '.local/bin' }
 
-    - name: Copy tmux config files - {{ username }}
+    - name: Tmux config files - {{ username }}
       ansible.builtin.copy:
         src: users/{{ username }}/{{ item.src }}
         dest: /home/{{ username }}/{{ item.dest }}
@@ -131,7 +129,7 @@
       with_items:
         - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
 
-    - name: Template tmux config files - {{ username }}
+    - name: Tmux templates - {{ username }}
       ansible.builtin.template:
         src: users/{{ username }}/{{ item.src }}
         dest: /home/{{ username }}/{{ item.dest }}

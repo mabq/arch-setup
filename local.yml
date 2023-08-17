@@ -9,7 +9,7 @@
       when: ansible_distribution == "Archlinux"
     - name: Pick a theme
       tags: always
-      include_vars: "vars/themes/rose-pine.yml"
+      include_vars: "vars/themes/{{theme}}.yml"
 
 - hosts: localhost
   tags: base
