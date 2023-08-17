@@ -1,9 +1,5 @@
 # Make sure users exist on the system
 
-- name: Pick a theme
-  tags: always
-  include_vars: "../vars/themes/rose-pine.yml"
-
 - name: Setup users
   block:
   - import_tasks: users/mabq.yml
