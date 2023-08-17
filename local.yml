@@ -10,7 +10,7 @@
     - name: Print
       tags: always
       ansible.builtin.debug:
-        msg: Theme = {{ theme }}
+        msg: ansible_facts
     # - name: Pick a theme
     #   tags: always
     #   include_vars: "vars/themes/{{theme}}.yml"
