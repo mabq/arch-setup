@@ -2,7 +2,7 @@
 
 - name: Pick a theme
   tags: always
-  include_vars: "/vars/themes/{{theme}}.yml"
+  include_vars: "../../../vars/themes/{{theme}}.yml"
 
 # Make sure users exist on the system
 - name: Setup users
