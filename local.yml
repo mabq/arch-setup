@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   become: true
   pre_tasks:
     - name: System update
@@ -11,7 +11,7 @@
       tags: always
       include_vars: "vars/themes/{{theme}}.yml"
 
-- hosts: localhost
+- hosts: all
   tags: base
   become: true
   roles:
