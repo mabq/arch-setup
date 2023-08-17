@@ -1,9 +1,8 @@
 # Configure a Workstation with Ansible
 
-Notes:
+Before running this Ansible script, read [this](https://github.com/LearnLinuxTV/personal_ansible_desktop_configs/blob/main/README.md#how-does-it-work).
 
-- There is no inventory because this is meant to be used with `ansible-pull` against the localhost.
-- `ansible-pull -U https://github.com/mabq/ansible-archlinux-workstation --vault-password-file ~/.vault_key`
+Run it with: `ansible-pull -U https://github.com/mabq/ansible-archlinux-workstation --vault-password-file ~/.vault_key`
 
 Ideas taken from:
 
