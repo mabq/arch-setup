@@ -2,18 +2,13 @@
 - hosts: all
   become: true
   pre_tasks:
-    # - name: System update
-    #   community.general.pacman:
-    #     update_cache: true
-    #     upgrade: true
-    #   when: ansible_distribution == "Archlinux"
-    - name: Group
-      ansible.builtin.debug:
-        msg: Group - {{ group_names }}
-
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
-
+    - name: System update
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+      when: ansible_distribution == "Archlinux"
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
