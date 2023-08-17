@@ -37,7 +37,7 @@
           password: "{{ password_hash.stdout }}"
           shell: /bin/bash
 
-    - name: Setup privilege elevation - {{ username }}
+    - name: Add suddoers file - {{ username }}
       #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
       ansible.builtin.copy:
         src: users/{{ username }}/sudo/sudoers
@@ -52,7 +52,7 @@
     tags: mabq_ssh
     block:
 
-    - name: Ensure directories for SSH - {{ username }}
+    - name: Create .ssh directory - {{ username }}
       ansible.builtin.file:
         path: "/home/{{ username }}/.ssh"
         state: directory
@@ -68,7 +68,7 @@
         group: "{{ username }}"
         mode: 0600
 
-    - name: Install public ssh key - {{ username }}
+    - name: Add public key - {{ username }}
       ansible.builtin.copy:
         src: "users/{{ username }}/ssh/id_ed25519.pub"
         dest: "/home/{{ username }}/.ssh/id_ed25519.pub"
@@ -138,6 +138,9 @@
         mode: "{{ item.mode | default('0600') }}"
       with_items:
         - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
+
+
+      ################## tmux config is different for server and workstation, font gliphs, default terminal
 
   # ---------------------------------------------------------------------------
 

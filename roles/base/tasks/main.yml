@@ -1,6 +1,6 @@
 ---
 
-- name: Pick a theme
+- name: Load theme variables
   tags: always
   include_vars: "../../../vars/themes/{{theme}}.yml"
 
