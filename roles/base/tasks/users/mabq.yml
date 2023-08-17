@@ -1,157 +1,122 @@
-- name: Setup mabq
-  tags: mabq
+- name: Import user variables - mabq
+  tags: users,mabq
+  include_vars: users/mabq.yml
+
+# ---
+
+- name: Create group {{ username }}
+  tags: users,mabq,groups
+  ansible.builtin.group:
+    name: "{{ username }}"
+
+- name: Create user
+  tags: users,mabq,useradd
   block:
+  - name: Create user - password hash - {{ username }}
+    # `/etc/shadow` stores the password hash, never the password itself
+    ansible.builtin.command: "openssl passwd -6 {{ password }}"
+    register: password_hash
+  - name: Create user {{ username }}
+    ansible.builtin.user:
+      name: "{{ username }}"
+      group: "{{ username }}"
+      # - adm: commonly used to give read access to protected logs. It has full read access to journal files
+      # - wheel: commonly used to give privileges to perform administrative actions
+      groups: adm,wheel
+      # see `/etc/shadow`
+      password: "{{ password_hash.stdout }}"
+      shell: /bin/bash # 🔥 check later
 
-  # ---------------------------------------------------------------------------
-  
-  - name: Import user variables - mabq
-    tags: always
-    include_vars: users/mabq.yml
+- name: Add suddoers file - {{ username }}
+  #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
+  tags: users,mabq,sudo
+  ansible.builtin.copy:
+    src: users/{{ username }}/sudo/sudoers
+    dest: /etc/sudoers.d/{{ username }}
+    owner: root
+    group: root
+    mode: 0440
 
-  # ---------------------------------------------------------------------------
+# ---
 
-  - name: Config user - {{ username }}
-    tags: mabq_config
-    block:
+- name: Check ssh directories - {{ username }}
+  tags: users,mabq,ssh,dotfiles
+  ansible.builtin.file:
+    path: "/home/{{ username }}/.ssh"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
 
-    - name: Create group - {{ username }}
-      ansible.builtin.group:
-        name: "{{ username }}"
+- name: Add ssh keys - {{ username }}
+  tags: users,mabq,ssh,dotfiles
+  ansible.builtin.copy:
+    src: "users/{{ username }}/{{ item.src }}"
+    dest: "/home/{{ username }}/{{ item.dest }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { src: 'ssh/id_ed25519', dest: '.ssh/id_ed25519', mode: '0600' }
+    - { src: 'ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
 
-    - name: Create user - {{ username }}
-      block:
+- name: Append public key to `~/.ssh/authorized_keys` - {{ username }}
+  # by using a single key, this step authorizes each machine to access all other machines
+  tags: users,mabq,ssh,dotfiles
+  ansible.posix.authorized_key:
+    user: "{{ username }}"
+    key: "{{ item }}"
+  with_file:
+    - "users/{{ username }}/ssh/id_ed25519.pub"
 
-      - name: Generate password hash - {{ username }}
-        # `/etc/shadow` stores the password hash, never the password itself
-        ansible.builtin.command: "openssl passwd -6 {{ password }}"
-        register: password_hash
+# No need to create a config file (there is a single key). The default value of `AddKeysToAgent` is `yes`.
 
-      - name: Create user - {{ username }}
-        ansible.builtin.user:
-          name: "{{ username }}"
-          group: "{{ username }}"
-          # - adm: commonly used to give read access to protected logs. It has full read access to journal files
-          # - wheel: commonly used to give privileges to perform administrative actions
-          groups: adm,wheel
-          # see `/etc/shadow`
-          password: "{{ password_hash.stdout }}"
-          shell: /bin/bash
+# ---
 
-    - name: Add suddoers file - {{ username }}
-      #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
-      ansible.builtin.copy:
-        src: users/{{ username }}/sudo/sudoers
-        dest: /etc/sudoers.d/{{ username }}
-        owner: root
-        group: root
-        mode: 0440
+- name: Configure git - {{ username }}
+  tags: users,mabq,git,dotfiles
+  ansible.builtin.copy:
+    src: "users/{{ username }}/git/gitconfig"
+    dest: "/home/{{ username }}/.gitconfig"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0600
 
-  # ---------------------------------------------------------------------------
-  
-  - name: SSH config - {{ username }}
-    tags: mabq_ssh
-    block:
+# ---
 
-    - name: Create .ssh directory - {{ username }}
-      ansible.builtin.file:
-        path: "/home/{{ username }}/.ssh"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0700
+- name: Check tmux directories - {{ username }}
+  tags: users,mabq,tmux,dotfiles
+  ansible.builtin.file:
+    path: /home/{{ username }}/{{ item.dir }}
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+  with_items:
+    - { dir: '.config' }
+    - { dir: '.config/tmux' }
+    - { dir: '.local' }
+    - { dir: '.local/bin' }
 
-    - name: Install private ssh key - {{ username }}
-      ansible.builtin.copy:
-        src: "users/{{ username }}/ssh/id_ed25519"
-        dest: "/home/{{ username }}/.ssh/id_ed25519"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0600
+- name: Add tmux scripts - {{ username }}
+  tags: users,mabq,tmux,dotfiles
+  ansible.builtin.copy:
+    src: users/{{ username }}/{{ item.src }}
+    dest: /home/{{ username }}/{{ item.dest }}
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "{{ item.mode | default('0600') }}"
+  with_items:
+    - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
 
-    - name: Add public key - {{ username }}
-      ansible.builtin.copy:
-        src: "users/{{ username }}/ssh/id_ed25519.pub"
-        dest: "/home/{{ username }}/.ssh/id_ed25519.pub"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0644
-
-    - name: Add the public key to the `authorized_key` file
-      # one key to rule them all
-      ansible.posix.authorized_key:
-        user: "{{ username }}"
-        key: "{{ item }}"
-      with_file:
-        - "users/{{ username }}/ssh/id_ed25519.pub"
-
-    # Note: becasue I use a single key there is no need to create a config file. The default value of `AddKeysToAgent` is `yes`.
-
-  # ---------------------------------------------------------------------------
-  
-  - name: Git config - {{ username }}
-    tags: mabq_git
-    block:
-
-    - name: Setup `.gitcongif` - {{ username }}
-      ansible.builtin.copy:
-        src: "users/{{ username }}/git/gitconfig"
-        dest: "/home/{{ username }}/.gitconfig"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0600
-
-  # ---------------------------------------------------------------------------
-  
-  - name: Tmux config - {{ username }}
-    tags: mabq_tmux
-    block:
-  
-    - name: Ensure directories for tmux - {{ username }}
-      ansible.builtin.file:
-        path: /home/{{ username }}/{{ item.dir }}
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0700
-      with_items:
-        - { dir: '.config' }
-        - { dir: '.config/tmux' }
-        - { dir: '.local' }
-        - { dir: '.local/bin' }
-
-    - name: Tmux config files - {{ username }}
-      ansible.builtin.copy:
-        src: users/{{ username }}/{{ item.src }}
-        dest: /home/{{ username }}/{{ item.dest }}
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: "{{ item.mode | default('0600') }}"
-      with_items:
-        - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
-
-    - name: Tmux templates - {{ username }}
-      ansible.builtin.template:
-        src: users/{{ username }}/{{ item.src }}
-        dest: /home/{{ username }}/{{ item.dest }}
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: "{{ item.mode | default('0600') }}"
-      with_items:
-        - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
-
-
-      ################## tmux config is different for server and workstation, font gliphs, default terminal
-
-  # ---------------------------------------------------------------------------
-
-    # - name: Dotfiles - git - {{ username }}
-    #   copy:
-    #     src: users/{{ username }}/{{ item.src }}
-    #     dest: /home/{{ username }}/{{ item.dest }}
-    #     owner: "{{ username }}"
-    #     group: "{{ username }}"
-    #     mode: 0600
-    #   with_items:
-    #     - { src: 'zsh/zshrc', dest: '.zshrc' }
-
+- name: Add tmux config files - {{ username }}
+  tags: users,mabq,tmux,dotfiles
+  ansible.builtin.template:
+    src: users/{{ username }}/{{ item.src }}
+    dest: /home/{{ username }}/{{ item.dest }}
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "{{ item.mode | default('0600') }}"
+  with_items:
+    - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
 
