@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  # tags: always
   become: true
   pre_tasks:
     - name: System update
@@ -8,10 +7,9 @@
         update_cache: true
         upgrade: true
       when: ansible_distribution == "Archlinux"
-
-- name: Pick a theme
-  tags: always
-  include_vars: "vars/themes/rose-pine.yml"
+    - name: Pick a theme
+      tags: always
+      include_vars: "vars/themes/rose-pine.yml"
 
 - hosts: localhost
   tags: base
