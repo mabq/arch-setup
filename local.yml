@@ -7,9 +7,13 @@
         update_cache: true
         upgrade: true
       when: ansible_distribution == "Archlinux"
-    - name: Pick a theme
+    - name: Print
       tags: always
-      include_vars: "vars/themes/{{theme}}.yml"
+      ansible.builtin.debug:
+        msg: Theme = {{ theme }}
+    # - name: Pick a theme
+    #   tags: always
+    #   include_vars: "vars/themes/{{theme}}.yml"
 
 - hosts: all
   tags: base
