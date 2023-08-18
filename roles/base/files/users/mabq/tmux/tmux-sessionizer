@@ -13,7 +13,7 @@
 #
 
 # Add any directoried you want (just use `$HOME` instead of `~`)
-directories="$HOME/ $HOME/projects/ $HOME/projects/ansible"
+directories="$HOME/ $HOME/projects/"
 
 if [[ $# -eq 1 ]]; then
     # you can pass the directory directly, see `~/.config/tmux/tmux.conf`
