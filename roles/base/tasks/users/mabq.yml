@@ -12,7 +12,7 @@
 - name: Create user
   tags: users,mabq,useradd
   block:
-  - name: Create user - password hash - {{ username }}
+  - name: Create password hash - {{ username }}
     # `/etc/shadow` stores the password hash, never the password itself
     ansible.builtin.command: "openssl passwd -6 {{ password }}"
     register: password_hash
