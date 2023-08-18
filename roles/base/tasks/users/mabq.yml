@@ -1,4 +1,4 @@
-- name: Import user variables - mabq
+- name: Include user variables - mabq
   tags: users,mabq
   include_vars: users/mabq.yml
 
@@ -25,7 +25,7 @@
       groups: adm,wheel
       # see `/etc/shadow`
       password: "{{ password_hash.stdout }}"
-      shell: /bin/bash # 🔥 check later
+      shell: /bin/zsh # 🔥 check later
 
 - name: Add suddoers file - {{ username }}
   #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
