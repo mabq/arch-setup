@@ -78,7 +78,7 @@
     dest: "/home/{{ username }}/{{ item.dest }}"
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: "{{ item.mode }} | default('0600')"
+    mode: "{{ item.mode | default('0600') }}"
   with_items:
     - { src: 'ssh/id_ed25519', dest: '.ssh/id_ed25519' }
     - { src: 'ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
