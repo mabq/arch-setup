@@ -23,7 +23,7 @@
       groups: adm,wheel
       password: "{{ password_hash.stdout }}"
       # there is no zsh yet, we need to create the user first
-      shell: /bin/zsh
+      shell: /bin/zsh # CHANGE THIS LATER !!!!!!!!
   - name: "{{ username }} - add sudoers file"
     #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
     ansible.builtin.copy:
