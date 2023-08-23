@@ -6,7 +6,7 @@ alias cp='cp -iv'
 alias la='exa -al'
 alias ln='ln -iv'
 alias mkdir='mkdir -pv'
-alias mv='mv -iv --preserve-root'
+alias mv='mv -iv'
 alias rm='rm -iv --preserve-root'
 # alias tmux='tmux -2' # force tmux to assume that the terminal support 256 colors https://wiki.archlinux.org/title/tmux#256_colors
 
