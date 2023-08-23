@@ -28,7 +28,7 @@ SAVEHIST="${HISTSIZE}"
 HISTFILE=~/.cache/zsh/history  # avoid including the history file on the dotfiles repo
 
 # edit the PATH variable (use functions to avoid duplicates)
-appendToPATH_fn "$XDG_CONFIG_HOME/.local/bin"
-appendToPATH_fn "$XDG_CONFIG_HOME/.cargo/bin"
+appendToPATH_fn "$HOME/.local/bin"
+# appendToPATH_fn "$HOME/.cargo/bin"
 #prependToPATH_fn "$HOME/.volta/bin"
 
