@@ -44,7 +44,6 @@
     group: {{ username }}
     mode: 0700
   with_items:
-    - { dir: '/etc/zsh' }
     - { dir: '.bash' }
     - { dir: '.config' }
     - { dir: '.config/tmux' }
