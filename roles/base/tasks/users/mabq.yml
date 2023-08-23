@@ -40,8 +40,8 @@
   file:
     path: /home/{{ username }}/{{ item.dir }}
     state: directory
-    owner: {{ username }}
-    group: {{ username }}
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: 0700
   with_items:
     - { dir: '.bash' }
@@ -49,7 +49,7 @@
     - { dir: '.config/tmux' }
     - { dir: '.config/zsh' }
     - { dir: '.cache' }
-    - { dir: '.cache/zsh' }
+    - { dir: '.cache/zsh' }    # for zsh history
     # - { dir: '.config/htop' }
     - { dir: '.local' }
     - { dir: '.local/bin' }
