@@ -7,3 +7,5 @@ password: !vault |
           3037383136666531640a313837313133666533343838336332356163396535613835353761626161
           6138
 terminal: alacritty
+browser: brave
+editor: nvim

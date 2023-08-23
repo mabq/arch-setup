@@ -23,7 +23,7 @@
       groups: adm,wheel
       password: "{{ password_hash.stdout }}"
       # there is no zsh yet, we need to create the user first
-      shell: /bin/bash
+      shell: /bin/zsh # 🚩
   - name: "{{ username }} - add sudoers file"
     #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
     ansible.builtin.copy:
@@ -44,10 +44,13 @@
     group: {{ username }}
     mode: 0700
   with_items:
+    - { dir: '/etc/zsh' }
     - { dir: '.bash' }
     - { dir: '.config' }
     - { dir: '.config/tmux' }
     - { dir: '.config/zsh' }
+    - { dir: '.cache' }
+    - { dir: '.cache/zsh' }
     # - { dir: '.config/htop' }
     - { dir: '.local' }
     - { dir: '.local/bin' }
@@ -82,8 +85,15 @@
     - { src: 'ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
     - { src: 'git/gitconfig', dest: '.gitconfig' }
     - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
+    - { src: 'zsh/.zshenv', dest: '.zshenv' }
+    - { src: 'zsh/.zshrc', dest: '.config/zsh/.zshrc' }
+    - { src: 'zsh/bindkey.zsh', dest: '.config/zsh/bindkey.zsh' }
+    - { src: 'zsh/functions.zsh', dest: '.config/zsh/functions.zsh' }
+    - { src: 'zsh/options.zsh', dest: '.config/zsh/options.zsh' }
+    - { src: 'zsh/plugins.zsh', dest: '.config/zsh/plugins.zsh' }
 
 - name: "{{ username }} - process templates"
+  tags: users,mabq,dotfiles
   ansible.builtin.template:
     src: "users/{{ username }}/{{ item.src }}"
     dest: "/home/{{ username }}/{{ item.dest }}"
@@ -92,5 +102,6 @@
     mode: "{{ item.mode | default('0600') }}"
   with_items:
     - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
-
+    - { src: 'zsh/aliases.zsh', dest: '.config/zsh/aliases.zsh' }
+    - { src: 'zsh/exports.zsh', dest: '.config/zsh/exports.zsh' }
 
