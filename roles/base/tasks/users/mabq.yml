@@ -88,7 +88,7 @@
     - { src: 'joshuto/mimetype.toml',       dest: '.config/joshuto/mimetype.toml' }
     - { src: 'joshuto/theme.toml',          dest: '.config/joshuto/theme.toml' }
     - { src: 'joshuto/icons.toml',          dest: '.config/joshuto/icons.toml' }
-    - { src: 'joshuto/preview_script.sh',   dest: '.config/joshuto/preview_script.sh',       mode: '0700'}
+    - { src: 'joshuto/preview_file.sh',     dest: '.config/joshuto/preview_file.sh',       mode: '0700'}
     # tmux
     - { src: 'tmux/tmux-sessionizer',       dest: '.local/bin/tmux-sessionizer',      mode: '0700' }
     # zsh
