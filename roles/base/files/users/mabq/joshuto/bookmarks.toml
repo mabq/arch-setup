@@ -1,0 +1,8 @@
+# Default config:       https://github.com/kamiyaa/joshuto/blob/main/config/bookmarks.toml
+
+bookmark = [
+  { key = "r", path = "/" },
+  { key = "e", path = "/etc" },
+
+  { key = "h", path = "~/" },
+]

@@ -1,7 +1,7 @@
 # XDG Base Directory
 #   Only XDG_RUNTIME_DIR is set by default through pam_systemd(8). It is up to the user to explicitly define the other variables according to the specification.
 #   https://wiki.archlinux.org/title/XDG_Base_Directory#User_directories
-export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME="$HOME/.config"    # $HOME is set in `/etc/passwd` for each user
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"

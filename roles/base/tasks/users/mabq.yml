@@ -46,6 +46,7 @@
   with_items:
     - { dir: '.bash' }
     - { dir: '.config' }
+    - { dir: '.config/joshuto' }
     - { dir: '.config/tmux' }
     - { dir: '.config/zsh' }
     - { dir: '.cache' }
@@ -77,19 +78,26 @@
     mode: "{{ item.mode | default('0600') }}"
   with_items:
     # ssh
-    - { src: 'ssh/id_ed25519',        dest: '.ssh/id_ed25519' }
-    - { src: 'ssh/id_ed25519.pub',    dest: '.ssh/id_ed25519.pub',          mode: '0640' }
+    - { src: 'ssh/id_ed25519',              dest: '.ssh/id_ed25519' }
+    - { src: 'ssh/id_ed25519.pub',          dest: '.ssh/id_ed25519.pub',              mode: '0640' }
     # git
-    - { src: 'git/gitconfig',         dest: '.gitconfig' }
+    - { src: 'git/gitconfig',               dest: '.gitconfig' }
+    # joshuto
+    - { src: 'joshuto/joshuto.toml',        dest: '.config/joshuto/joshuto.toml' }
+    - { src: 'joshuto/keymap.toml',         dest: '.config/joshuto/keymap.toml' }
+    - { src: 'joshuto/mimetype.toml',       dest: '.config/joshuto/mimetype.toml' }
+    - { src: 'joshuto/theme.toml',          dest: '.config/joshuto/theme.toml' }
+    - { src: 'joshuto/icons.toml',          dest: '.config/joshuto/icons.toml' }
+    - { src: 'joshuto/preview_script.sh',   dest: '.config/joshuto/preview_script.sh',       mode: '0700'}
     # tmux
-    - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer',  mode: '0700' }
+    - { src: 'tmux/tmux-sessionizer',       dest: '.local/bin/tmux-sessionizer',      mode: '0700' }
     # zsh
-    - { src: 'zsh/.zshenv',           dest: '.zshenv' }
-    - { src: 'zsh/.zshrc',            dest: '.config/zsh/.zshrc' }
-    - { src: 'zsh/bindkey.zsh',       dest: '.config/zsh/bindkey.zsh' }
-    - { src: 'zsh/functions.zsh',     dest: '.config/zsh/functions.zsh' }
-    - { src: 'zsh/options.zsh',       dest: '.config/zsh/options.zsh' }
-    - { src: 'zsh/plugins.zsh',       dest: '.config/zsh/plugins.zsh' }
+    - { src: 'zsh/.zshenv',                 dest: '.zshenv' }
+    - { src: 'zsh/.zshrc',                  dest: '.config/zsh/.zshrc' }
+    - { src: 'zsh/bindkey.zsh',             dest: '.config/zsh/bindkey.zsh' }
+    - { src: 'zsh/functions.zsh',           dest: '.config/zsh/functions.zsh' }
+    - { src: 'zsh/options.zsh',             dest: '.config/zsh/options.zsh' }
+    - { src: 'zsh/plugins.zsh',             dest: '.config/zsh/plugins.zsh' }
 
 
 - name: "{{ username }} - process templates"
