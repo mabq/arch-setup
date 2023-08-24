@@ -8,3 +8,6 @@
 - name: Setup users
   block:
   - import_tasks: users/mabq.yml
+
+
+# zsh packages: zsh zoxide starship zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting lf p7zip ttf-iosevka-nerd

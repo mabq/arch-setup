@@ -13,6 +13,7 @@ alias rm='rm -iv --preserve-root'
 # renames
 alias font_preview='fontpreview-ueberzug'
 alias lf='lfcd_fn'    # calls custom function to automatically change to last directory on quit
+alias j='joshuto'
 alias pango='pango-list'
 alias trash='trash-put'
 alias vi='{{ editor }}'

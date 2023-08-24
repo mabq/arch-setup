@@ -1,5 +1,3 @@
-# Template!
- 
 # XDG Base Directory
 #   Only XDG_RUNTIME_DIR is set by default through pam_systemd(8). It is up to the user to explicitly define the other variables according to the specification.
 #   https://wiki.archlinux.org/title/XDG_Base_Directory#User_directories
@@ -13,8 +11,9 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 # defaults
 export BROWSER="{{ browser }}"
 export EDITOR="{{ editor }}"
-export GTK_THEME=Adwaita:dark
+export GTK_THEME="Adwaita:dark"
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"    # https://wiki.archlinux.org/title/Color_output_in_console#Using_less
 export PAGER="less -R --use-color -Dd+r -Du+b"
 export TERM="{{ terminal }}"
 export TERMINAL="{{ terminal }}"

@@ -25,7 +25,7 @@ function lfcd_fn {
     fi
 }
 
-extract () {
+function extract () {
   # Easily extract archives
   if [ -f $1 ] ; then
     case $1 in
@@ -33,15 +33,15 @@ extract () {
       *.tar.gz)    tar xzvf $1    ;;
       *.tar.xz)    tar xvf $1    ;;
       *.bz2)       bzip2 -d $1    ;;
-      *.rar)       unrar2dir $1    ;;
+      *.rar)       unrar $1    ;;
       *.gz)        gunzip $1    ;;
       *.tar)       tar xf $1    ;;
       *.tbz2)      tar xjf $1    ;;
       *.tgz)       tar xzf $1    ;;
-      *.zip)       unzip2dir $1     ;;
+      *.zip)       unzip $1     ;;
       *.Z)         uncompress $1    ;;
       *.7z)        7z x $1    ;;
-      *.ace)       unace x $1    ;;
+      # *.ace)       unace x $1    ;;
       *)           echo "'$1' cannot be extracted via extract()"   ;;
     esac
   else
@@ -49,7 +49,7 @@ extract () {
   fi
 }
 
-reload () {
+function reload () {
     exec "${SHELL}" "$@"
 }
 

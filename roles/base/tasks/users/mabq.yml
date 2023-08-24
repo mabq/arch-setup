@@ -50,15 +50,10 @@
     - { dir: '.config/zsh' }
     - { dir: '.cache' }
     - { dir: '.cache/zsh' }    # for zsh history
-    # - { dir: '.config/htop' }
     - { dir: '.local' }
     - { dir: '.local/bin' }
     - { dir: '.ssh' }
-    # - { dir: '.vim' }
-    # - { dir: '.vim/autoload' }
-    # - { dir: '.vim/bundle' }
-    # - { dir: '.vim/colors' }
-    # - { dir: '.vim/ftplugin' }
+      # neovim
 
 # ---
 
@@ -71,6 +66,7 @@
   with_file:
     - "users/{{ username }}/ssh/id_ed25519.pub"
 
+
 - name: "{{ username }} - copy dotfiles"
   tags: users,mabq,dotfiles
   ansible.builtin.copy:
@@ -80,16 +76,21 @@
     group: "{{ username }}"
     mode: "{{ item.mode | default('0600') }}"
   with_items:
-    - { src: 'ssh/id_ed25519', dest: '.ssh/id_ed25519' }
-    - { src: 'ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
-    - { src: 'git/gitconfig', dest: '.gitconfig' }
-    - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer', mode: '0700' }
-    - { src: 'zsh/.zshenv', dest: '.zshenv' }
-    - { src: 'zsh/.zshrc', dest: '.config/zsh/.zshrc' }
-    - { src: 'zsh/bindkey.zsh', dest: '.config/zsh/bindkey.zsh' }
-    - { src: 'zsh/functions.zsh', dest: '.config/zsh/functions.zsh' }
-    - { src: 'zsh/options.zsh', dest: '.config/zsh/options.zsh' }
-    - { src: 'zsh/plugins.zsh', dest: '.config/zsh/plugins.zsh' }
+    # ssh
+    - { src: 'ssh/id_ed25519',        dest: '.ssh/id_ed25519' }
+    - { src: 'ssh/id_ed25519.pub',    dest: '.ssh/id_ed25519.pub',          mode: '0640' }
+    # git
+    - { src: 'git/gitconfig',         dest: '.gitconfig' }
+    # tmux
+    - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/tmux-sessionizer',  mode: '0700' }
+    # zsh
+    - { src: 'zsh/.zshenv',           dest: '.zshenv' }
+    - { src: 'zsh/.zshrc',            dest: '.config/zsh/.zshrc' }
+    - { src: 'zsh/bindkey.zsh',       dest: '.config/zsh/bindkey.zsh' }
+    - { src: 'zsh/functions.zsh',     dest: '.config/zsh/functions.zsh' }
+    - { src: 'zsh/options.zsh',       dest: '.config/zsh/options.zsh' }
+    - { src: 'zsh/plugins.zsh',       dest: '.config/zsh/plugins.zsh' }
+
 
 - name: "{{ username }} - process templates"
   tags: users,mabq,dotfiles
@@ -100,7 +101,9 @@
     group: "{{ username }}"
     mode: "{{ item.mode | default('0600') }}"
   with_items:
+    # tmux
     - { src: 'tmux/tmux.conf', dest: '.config/tmux/tmux.conf' }
+    # zsh
     - { src: 'zsh/aliases.zsh', dest: '.config/zsh/aliases.zsh' }
     - { src: 'zsh/exports.zsh', dest: '.config/zsh/exports.zsh' }
 
