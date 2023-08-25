@@ -1,3 +1,5 @@
+# Aliases are used only in interactive shells, so using these aliases should not interfere with scripts.
+
 # add options to core utils
 alias chgrp='chgrp --preserve-root'
 alias chmod='chmod -c --preserve-root'

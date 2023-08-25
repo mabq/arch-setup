@@ -16,7 +16,7 @@ unsetopt menu_complete
 setopt complete_in_word
 
 # spelling correction for commands
-setopt correct
+# setopt correct
 
 # extended globbing, awesome!
 setopt extendedGlob
