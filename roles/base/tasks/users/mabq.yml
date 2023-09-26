@@ -115,3 +115,8 @@
     - { src: 'zsh/aliases.zsh', dest: '.config/zsh/aliases.zsh' }
     - { src: 'zsh/exports.zsh', dest: '.config/zsh/exports.zsh' }
 
+# ---
+
+# zsh 
+#   ssh-agent as a wrapper is not working, do it with systemd
+
