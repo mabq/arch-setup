@@ -1,31 +1,19 @@
----
-
-- name: Load theme variables
+# load variables
+- include_vars: "../../../vars/themes/{{theme}}.yml"
   tags: always
-  include_vars: "../../../vars/themes/{{theme}}.yml"
 
-# Make sure users exist on the system
-- name: Setup users
-  block:
+- block:
+  # create user and generate config files
   - import_tasks: users/mabq.yml
 
 
-# zsh packages: zsh zoxide starship zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting lf p7zip ttf-iosevka-nerd
-# joshuto: nsxiv inkscape
+  # setup the ansible environment (to review)
 
 
-# File managers:
-#   - Responsive
-#   - Comprehensive config files
-#   - Easy navigation:
-#     - Jump to any directory quickly
-#     - Jump to frequent directories via shortcuts
-#   - Easy identification:
-#     - Preview 
-#     - Open
-#   - Easy (cognitive, no accidental) file management:
-#     - make directories
-#     - make files 
-#     - copy/paste
-#     - move
-#     - rename#
+  # install base packages
+  
+  
+
+  # perform remaining tasks
+
+

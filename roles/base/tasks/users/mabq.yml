@@ -1,47 +1,58 @@
-- name: mabq - include variables
-  tags: always,users,mabq
+- name: base | users | mabq | include variables
+  # the user password is stored in a variable encrypted
+  tags: always
   include_vars: users/mabq.yml
 
-# ---
 
-- name: "{{ username }} - setup account"
-  tags: users,mabq
-  block:
-  - name: "{{ username }} - create group"
-    ansible.builtin.group:
-      name: "{{ username }}"
-  - name: "{{ username }} - generate password hash"
-    # `/etc/shadow` stores the password hash, never the password itself
-    ansible.builtin.command: "openssl passwd -6 {{ password }}"
-    register: password_hash
-  - name: "{{ username }} - create user"
-    ansible.builtin.user:
-      name: "{{ username }}"
-      group: "{{ username }}"
-      # adm group: commonly used to give read access to protected logs. It has full read access to journal files
-      # wheel group: commonly used to give privileges to perform administrative actions
-      groups: adm,wheel
-      password: "{{ password_hash.stdout }}"
-      # there is no zsh yet, we need to create the user first
-      shell: /bin/zsh # CHANGE THIS LATER !!!!!!!!
-  - name: "{{ username }} - add sudoers file"
-    #  https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
-    ansible.builtin.copy:
-      src: users/{{ username }}/sudo/sudoers
-      dest: /etc/sudoers.d/{{ username }}
-      owner: root
-      group: root
-      mode: 0440
+# --- create user account
+
+- name: base | users | mabq | create group
+  tags: groups,mabq,users
+  ansible.builtin.group:
+    name: mabq
+    state: present
+
+  # The `user` module below requires the hashed version of the password (sha512)
+  # The `-6` flag corresponds to the sha512 algorithm
+- name: base | users | mabq | generate password hash
+  tags: users,mabq,sudo
+  ansible.builtin.command: "openssl passwd -6 {{ password }}"
+  register: password_hash
+
+  # Groups:
+  #   adm - commonly used to give read access to protected logs, it has full read access to journal files
+  #   wheel - commonly used to give privileges to perform administrative actions
+  # The file `/etc/shadow` stores the password hash (sha512), never the password itself
+- name: base | users | mabq | create user
+  tags: users,mabq,sudo
+  ansible.builtin.user:
+    name: mabq
+    group: mabq # primary group
+    groups: adm,wheel # supplementary groups
+    state: present
+    comment: "Alejandro Banderas"
+    password: "{{ password_hash.stdout }}"
+    shell: /bin/bash
+
+  #  See https://wiki.archlinux.org/title/List_of_applications/Security#Privilege_elevation
+- name: base | users | mabq | add sudoers file
+  tags: users,mabq,sudo
+  ansible.builtin.copy:
+    src: users/mabq/sudo/sudoers
+    dest: /etc/sudoers.d/mabq
+    owner: root
+    group: root
+    mode: 0440
 
 # --- 
 
-- name: "{{ username }} - create config directories"
+- name: "mabq - create config directories"
   tags: users,mabq,dotfiles
   file:
-    path: /home/{{ username }}/{{ item.dir }}
+    path: /home/mabq/{{ item.dir }}
     state: directory
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    owner: "mabq"
+    group: "mabq"
     mode: 0700
   with_items:
     - { dir: '.bash' }
@@ -58,23 +69,23 @@
 
 # ---
 
-- name: "{{ username }} - add ssh public key to `~/.ssh/authorized_keys`"
+- name: "mabq - add ssh public key to `~/.ssh/authorized_keys`"
   # by using a single key, this step authorizes each machine to access all other machines
   tags: users,mabq,dotfiles
   ansible.posix.authorized_key:
-    user: "{{ username }}"
+    user: "mabq"
     key: "{{ item }}"
   with_file:
-    - "users/{{ username }}/ssh/id_ed25519.pub"
+    - "users/mabq/ssh/id_ed25519.pub"
 
 
-- name: "{{ username }} - copy dotfiles"
+- name: "mabq - copy dotfiles"
   tags: users,mabq,dotfiles
   ansible.builtin.copy:
-    src: "users/{{ username }}/{{ item.src }}"
-    dest: "/home/{{ username }}/{{ item.dest }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: "users/mabq/{{ item.src }}"
+    dest: "/home/mabq/{{ item.dest }}"
+    owner: "mabq"
+    group: "mabq"
     mode: "{{ item.mode | default('0600') }}"
   with_items:
     # ssh
@@ -100,13 +111,13 @@
     - { src: 'zsh/plugins.zsh',             dest: '.config/zsh/plugins.zsh' }
 
 
-- name: "{{ username }} - process templates"
+- name: "mabq - process templates"
   tags: users,mabq,dotfiles
   ansible.builtin.template:
-    src: "users/{{ username }}/{{ item.src }}"
-    dest: "/home/{{ username }}/{{ item.dest }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: "users/mabq/{{ item.src }}"
+    dest: "/home/mabq/{{ item.dest }}"
+    owner: "mabq"
+    group: "mabq"
     mode: "{{ item.mode | default('0600') }}"
   with_items:
     # tmux

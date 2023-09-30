@@ -1,0 +1,51 @@
+- name: base | software | install utility packages
+  tags: packages,system,settings
+  package:
+    state: latest
+    name:
+      # - at                # AT and batch delayed command scheduling utility and daemon
+      # - bind-tools        # A complete, highly portable implementation of the DNS protocol
+      # - colordiff         # A Perl script wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting
+      # - iotop             # View I/O usage of processes
+      # - lsof              # Lists open files for running Unix processes
+      # - mc                # A file manager that emulates Norton Commander
+      # - mosh              # Mobile shell, surviving disconnects with local echo and line editing  
+      # - net-tools         # Configuration tools for Linux networking
+      # - nfs-utils         # Support programs for Network File Systems
+      # - perl-rename       # Renames multiple files using Perl regular expressions
+      # - ranger            # Simple, vim-like file manager
+      # - screen            # Full-screen window manager that multiplexes a physical terminal
+      # - sshfs             # FUSE client based on the SSH File Transfer Protocol
+      - bpytop              # Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+      - curl                # Command line tool and library for transferring data with URLs
+      - htop                # Interactive process viewer
+      - lm_sensors          # Collection of user space tools for general SMBus access and hardware monitoring
+      - man-db              # A utility for reading man pages 
+      - man-pages           # Linux man pages
+      - ncdu                # Disk usage analyzer with an ncurses interface
+      - neofetch            # A CLI system information tool written in BASH that supports displaying images.
+      - nmap                # Utility for network discovery and security auditing
+      - rsync               # A fast and versatile file copying tool for remote and local files
+      - tmux                # Terminal multiplexer
+      - traceroute          # Tracks the route taken by packets over an IP network
+      - wget                # Network utility to retrieve files from the Web
+      - whois               # Intelligent WHOIS client
+      - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
+
+- name: base | software | install development packages
+  tags: packages,system,settings
+  package:
+    state: latest
+    name:
+      # - fabric            # Python library and command-line tool designed to streamline deploying applications or performing system administration tasks via the SSH protocol
+      # - flake8            # The modular source code checker: pep8, pyflakes and co
+      # - perl              # A highly capable, feature-rich programming language
+      # - python            # Next generation of the python high-level scripting language
+      # - python-pip        # The PyPA recommended tool for installing Python packages
+      # - python-pyflakes   # A lint-like tool for Python to identify common errors quickly without executing code
+      # - python-setuptools # Easily download, build, install, upgrade, and uninstall Python packages
+      # - python-virtualenv # Virtual Python Environment builder
+      # - ruby              # An object-oriented language for quick and easy programming
+      # - ruby-rake         # Make-like build tool implemented in Ruby
+      # - tig               # Text-mode interface for Git.
+      - git                 # The fast distributed version control system
