@@ -3,7 +3,7 @@
   become: true
   tags: always
   pre_tasks:
-    - name: pre-tasks | check distribution
+    - name: pre-tasks | skip if not Arch
       ansible.builtin.fail:
         msg: This host is not running Archlinux
       when: ansible_distribution != "Archlinux"
@@ -13,7 +13,7 @@
         upgrade: true
     - name: pre-tasks | load theme variables
       ansible.builtin.include_vars: 
-        file: "/themes/{{theme}}.yml"
+        file: "./themes/{{theme}}.yml"
     - name: pre-tasks | check theme variables
       ansible.builtin.debug:
         msg: "{{ color_black }}"
