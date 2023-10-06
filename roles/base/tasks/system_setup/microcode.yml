@@ -1,0 +1,25 @@
+- name: system-setup | microcode | get processor data
+  tags: cpu,microcode,system setup
+  ansible.builtin.set_fact:
+    processor: "{{ item is search('AuthenticAMD') | ternary('amd', 'intel')}}"
+  when: item is search('AuthenticAMD') or item is search('GenuineIntel') 
+  loop: "{{ ansible_facts.processor }}"
+
+- name: system-setup | microcode | print processor data
+  tags: cpu,microcode,system setup
+  ansible.builtin.debug:
+    msg: "processor = {{ processor }}"
+
+- name: system-setup | microcode | install amd-ucode
+  tags: amd,cpu,microcode,system setup
+  when: processor == 'amd'
+  package:
+    name: amd-ucode
+    state: latest
+
+- name: system-setup | microcode | install intel-ucode
+  tags: intel,cpu,microcode,system setup
+  when: processor == 'intel'
+  package:
+    name: intel-ucode
+    state: latest

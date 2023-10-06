@@ -1,26 +1,27 @@
 # tasks to complete before running roles
 - hosts: all
   become: true
+  tags: always
   pre_tasks:
-    - name: Pre-run | update all packages
-      tags: always
+    - name: pre-tasks | check distribution
+      ansible.builtin.fail:
+        msg: This host is not running Archlinux
+      when: ansible_distribution != "Archlinux"
+    - name: pre-tasks | update all packages
       community.general.pacman:
         update_cache: true
         upgrade: true
-      when: ansible_distribution == "Archlinux"
+    - name: pre-tasks | load theme variables
+      ansible.builtin.include_vars: 
+        file: "/themes/{{theme}}.yml"
+    - name: pre-tasks | check theme variables
+      ansible.builtin.debug:
+        msg: "{{ color_black }}"
 
 # run roles
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    # Create users, create configuration files, install base packages
-    - base
+# - hosts: all
+#   tags: base
+#   become: true
+#   roles:
+#     - base
 
-#   - workstation
-#     - all
-#     - mabq
-
-#   - server
-#     - all
-#     - mabq
