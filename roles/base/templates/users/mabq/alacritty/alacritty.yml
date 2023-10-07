@@ -253,7 +253,7 @@ colors:
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
       foreground: '{{color_white}}'
-      background: '{{color_black}}'
+      background: '{{color_black_low}}'
 
     # All characters after the first one in the hint label
     #
@@ -261,7 +261,7 @@ colors:
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
       foreground: '{{color_white_low}}'
-      background: '{{color_black}}'
+      background: '{{color_black_low}}'
 
   # Line indicator
   #
@@ -279,7 +279,7 @@ colors:
   # hyperlink URI preview, etc.
   #
   footer_bar:
-    background: '{{color_black}}'
+    background: '{{color_hightlight}}'
     foreground: '{{color_white_high}}'
 
   # Selection colors
@@ -305,7 +305,7 @@ colors:
 
   # Bright colors
   bright:
-    black:   '{{color_black_high}}'
+    black:   '{{color_highlight_med}}'
     red:     '{{color_red_high}}'
     green:   '{{color_green_high}}'
     yellow:  '{{color_yellow_high}}'
@@ -319,7 +319,7 @@ colors:
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
   dim:
-    black:   '{{color_black_low}}'
+    black:   '{{color_highlight_low}}'
     red:     '{{color_red_low}}'
     green:   '{{color_green_low}}'
     yellow:  '{{color_yellow_low}}'
