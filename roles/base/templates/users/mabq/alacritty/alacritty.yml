@@ -289,8 +289,8 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   selection:
-    text: CellBackground
-    background: CellForeground
+    text: '{{color_white_high}}' 
+    background: '{{color_yellow}}' 
 
   # Normal colors
   normal:
