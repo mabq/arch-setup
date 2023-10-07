@@ -200,7 +200,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '{{color_black_high}}'
+    background: '{{color_black_low}}'
     foreground: '{{color_white_high}}'
 
     # Bright and dim foreground colors
@@ -209,7 +209,7 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: '{{color_white}}'
+    dim_foreground: '{{color_white_med}}'
     bright_foreground: '{{color_white_high}}'
 
   # Cursor colors
@@ -239,11 +239,11 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     matches:
-      foreground: '{{color_white}}'
-      background: '{{color_black_low}}'
+      foreground: '{{color_white_med}}'
+      background: '{{color_highlight_low}}'
     focused_match:
-      foreground: '{{color_black_high}}'
-      background: '{{color_cyan}}'
+      foreground: '{{color_black_low}}'
+      background: '{{color_cyan_med}}'
 
   # Keyboard hints
   hints:
@@ -252,16 +252,16 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: '{{color_white}}'
-      background: '{{color_black_low}}'
+      foreground: '{{color_white_med}}'
+      background: '{{color_highlight_high}}'
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
-      foreground: '{{color_white_low}}'
-      background: '{{color_black_low}}'
+      foreground: '{{color_white_med}}'
+      background: '{{color_highlight_med}}'
 
   # Line indicator
   #
@@ -279,7 +279,7 @@ colors:
   # hyperlink URI preview, etc.
   #
   footer_bar:
-    background: '{{color_highlight}}'
+    background: '{{color_highlight_med}}'
     foreground: '{{color_white_high}}'
 
   # Selection colors
@@ -294,7 +294,7 @@ colors:
 
   # Normal colors
   normal:
-    black:   '{{color_black}}'
+    black:   '{{color_highlight_med}}'
     red:     '{{color_red}}'
     green:   '{{color_green}}'
     yellow:  '{{color_yellow}}'
@@ -305,7 +305,7 @@ colors:
 
   # Bright colors
   bright:
-    black:   '{{color_highlight_med}}'
+    black:   '{{color_highlight_high}}'
     red:     '{{color_red_high}}'
     green:   '{{color_green_high}}'
     yellow:  '{{color_yellow_high}}'
