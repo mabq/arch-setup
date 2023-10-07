@@ -91,7 +91,7 @@
   #     mode: 0700
 
   - name: base | users | mabq | dotfiles | alacritty | copy config file
-    ansible.builtin.copy:
+    ansible.builtin.template:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
       owner: mabq
