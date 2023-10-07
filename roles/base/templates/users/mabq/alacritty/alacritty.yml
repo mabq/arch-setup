@@ -240,10 +240,10 @@ colors:
     # affected cell, or hexadecimal colors like #ff00ff.
     matches:
       foreground: '{{color_white}}'
-      background: '{{color_highlight_low}}'
+      background: '{{color_highlight}}'
     focused_match:
-      foreground: '{{color_black_low}}'
-      background: '{{color_cyan}}'
+      foreground: '{{color_white_high}}'
+      background: '{{color_highlight_high}}'
 
   # Keyboard hints
   hints:
@@ -252,7 +252,7 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: '{{color_white}}'
+      foreground: '{{color_white_high}}'
       background: '{{color_highlight_high}}'
 
     # All characters after the first one in the hint label
@@ -289,7 +289,7 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   selection:
-    text: '{{color_white_high}}' 
+    text: '{{color_black_low}}' 
     background: '{{color_yellow}}' 
 
   # Normal colors
