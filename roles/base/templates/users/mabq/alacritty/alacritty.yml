@@ -279,7 +279,7 @@ colors:
   # hyperlink URI preview, etc.
   #
   footer_bar:
-    background: '{{color_hightlight}}'
+    background: '{{color_highlight}}'
     foreground: '{{color_white_high}}'
 
   # Selection colors
