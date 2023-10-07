@@ -98,7 +98,7 @@
       group: mabq
       mode: "{{ item.mode }}"
     with_items:
-      - { src: 'users/mabq/alacritty/alacritty.yml', dest: '/home/mabq/.config/alacritty/', mode: '0600' }
+      - { src: 'users/mabq/alacritty/alacritty.yml', dest: '/home/mabq/.config/alacritty/', mode: '0700' }
 
 
 # --- copy dotfiles
