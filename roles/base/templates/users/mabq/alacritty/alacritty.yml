@@ -200,8 +200,8 @@ font:
 colors:
   # Default colors
   primary:
-    background: '{color_black_high}'
-    foreground: '{color_white_high}'
+    background: "'{{color_black_high}}'"
+    foreground: "'{{color_white_high}}'"
 
     # Bright and dim foreground colors
     #
@@ -209,8 +209,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: '{color_white}'
-    bright_foreground: '{color_white_high}'
+  dim_foreground: "'{{color_white}}'"
+  bright_foreground: "'{{color_white_high}}'"
 
   # Cursor colors
   #
@@ -239,11 +239,11 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     matches:
-      foreground: '{color_white}'
-      background: '{color_black_low}'
+      foreground: "'{{color_white}}'"
+      background: "'{{color_black_low}}'"
     focused_match:
-      foreground: '{color_black_high}'
-      background: '{color_cyan}'
+      foreground: "'{{color_black_high}}'"
+      background: "'{{color_cyan}}'"
 
   # Keyboard hints
   hints:
@@ -252,16 +252,16 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: '{color_white}'
-      background: '{color_black}'
+      foreground: "'{{color_white}}'"
+      background: "'{{color_black}}'"
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
-      foreground: '{color_white_low}'
-      background: '{color_black}'
+      foreground: "'{{color_white_low}}'"
+      background: "'{{color_black}}'"
 
   # Line indicator
   #
@@ -279,8 +279,8 @@ colors:
   # hyperlink URI preview, etc.
   #
   footer_bar:
-    background: '{color_black}'
-    foreground: '{color_white_high}'
+    background: "'{{color_black}}'"
+    foreground: "'{{color_white_high}}'"
 
   # Selection colors
   #
@@ -294,39 +294,39 @@ colors:
 
   # Normal colors
   normal:
-    black:   '{color_black}'
-    red:     '{color_red}'
-    green:   '{color_green}'
-    yellow:  '{color_yellow}'
-    blue:    '{color_blue}'
-    magenta: '{color_magenta}'
-    cyan:    '{color_cyan}'
-    white:   '{color_white}'
+    black:   "'{{color_black}}'"
+    red:     "'{{color_red}}'"
+    green:   "'{{color_green}}'"
+    yellow:  "'{{color_yellow}}'"
+    blue:    "'{{color_blue}}'"
+    magenta: "'{{color_magenta}}'"
+    cyan:    "'{{color_cyan}}'"
+    white:   "'{{color_white}}'"
 
   # Bright colors
   bright:
-    black:   '{color_black_high}'
-    red:     '{color_red_high}'
-    green:   '{color_green_high}'
-    yellow:  '{color_yellow_high}'
-    blue:    '{color_blue_high}'
-    magenta: '{color_magenta_high}'
-    cyan:    '{color_cyan_high}'
-    white:   '{color_white_high}'
+    black:   "'{{color_black_high}}'"
+    red:     "'{{color_red_high}}'"
+    green:   "'{{color_green_high}}'"
+    yellow:  "'{{color_yellow_high}}'"
+    blue:    "'{{color_blue_high}}'"
+    magenta: "'{{color_magenta_high}}'"
+    cyan:    "'{{color_cyan_high}}'"
+    white:   "'{{color_white_high}}'"
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
   dim:
-    black:   '{color_black_low}'
-    red:     '{color_red_low}'
-    green:   '{color_green_low}'
-    yellow:  '{color_yellow_low}'
-    blue:    '{color_blue_low}'
-    magenta: '{color_magenta_low}'
-    cyan:    '{color_cyan_low}'
-    white:   '{color_white_low}'
+    black:   "'{{color_black_low}}'"
+    red:     "'{{color_red_low}}'"
+    green:   "'{{color_green_low}}'"
+    yellow:  "'{{color_yellow_low}}'"
+    blue:    "'{{color_blue_low}}'"
+    magenta: "'{{color_magenta_low}}'"
+    cyan:    "'{{color_cyan_low}}'"
+    white:   "'{{color_white_low}}'"
 
   # Indexed Colors
   #

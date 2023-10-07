@@ -82,24 +82,21 @@
 - tags: alacritty_mabq
   block:
 
-  # - name: base | users | mabq | dotfiles | alacritty | create directory
-  #   ansible.builtin.file:
-  #     path: /home/mabq/.config/alacritty
-  #     state: directory
-  #     owner: mabq
-  #     group: mabq
-  #     mode: 0700
+  - name: base | users | mabq | dotfiles | alacritty | copy config file
+    ansible.builtin.template:
+      src: users/mabq/alacritty/alacritty.yml
+      dest: /home/mabq/.config/alacritty/
+      owner: mabq
+      group: mabq
+      mode: '0600'
 
   - name: base | users | mabq | dotfiles | alacritty | copy config file
     ansible.builtin.template:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
+      src: users/mabq/alacritty/alacritty.yml
+      dest: /home/mabq/.configuration/alacritty/
       owner: mabq
       group: mabq
-      mode: "{{ item.mode }}"
-    with_items:
-      - { src: 'users/mabq/alacritty/alacritty.yml', dest: '/home/mabq/.config/alacritty/', mode: '0700' }
-
+      mode: '0600'
 
 # --- copy dotfiles
 
