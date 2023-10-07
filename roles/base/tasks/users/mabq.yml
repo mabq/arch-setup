@@ -77,28 +77,53 @@
       - { src: 'users/mabq/ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
 
 
+# --- dotfiles
+
+- tags: alacritty_mabq
+  block:
+
+  # - name: base | users | mabq | dotfiles | alacritty | create directory
+  #   ansible.builtin.file:
+  #     path: /home/mabq/.config/alacritty
+  #     state: directory
+  #     owner: mabq
+  #     group: mabq
+  #     mode: 0700
+
+  - name: base | users | mabq | dotfiles | alacritty | copy config file
+    ansible.builtin.copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: mabq
+      group: mabq
+      mode: "{{ item.mode }}"
+    with_items:
+      - { src: 'users/mabq/alacritty/alacritty.yml', dest: '/home/mabq/.config/alacritty/', mode: '0600' }
+
+
 # --- copy dotfiles
 
-- name: "mabq - create config directories"
-  tags: users,mabq,dotfiles
-  file:
-    path: /home/mabq/{{ item.dir }}
-    state: directory
-    owner: "mabq"
-    group: "mabq"
-    mode: 0700
-  with_items:
-    - { dir: '.bash' }
-    - { dir: '.config' }
-    - { dir: '.config/joshuto' }
-    - { dir: '.config/tmux' }
-    - { dir: '.config/zsh' }
-    - { dir: '.cache' }
-    - { dir: '.cache/zsh' }    # for zsh history
-    - { dir: '.local' }
-    - { dir: '.local/bin' }
-    - { dir: '.ssh' }
-      # neovim
+- tags: dotfiles_mabq
+  block:
+
+  - name: base | users | mabq | create dotfiles directories
+    ansible.builtin.file:
+      path: /home/mabq/{{ item.dir }}
+      state: directory
+      owner: mabq
+      group: mabq
+      mode: 0700
+    with_items:
+      # - { dir: '.bash' }
+      - { dir: '.config' }
+      # - { dir: '.config/joshuto' }
+      # - { dir: '.config/tmux' }
+      # - { dir: '.config/zsh' }
+      # - { dir: '.cache' }
+      # - { dir: '.cache/zsh' }    # for zsh history
+      # - { dir: '.local' }
+      # - { dir: '.local/bin' }
+        # neovim
 
 # ---
 
