@@ -14,14 +14,11 @@
     - name: pre-tasks | load theme variables
       ansible.builtin.include_vars: 
         file: "./themes/{{theme}}.yml"
-    - name: pre-tasks | check theme variables
-      ansible.builtin.debug:
-        msg: "{{ color_black }}"
 
 # run roles
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
 
