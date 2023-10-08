@@ -69,6 +69,7 @@
       - { src: 'users/mabq/ssh/id_ed25519', dest: '/home/mabq/.ssh/', mode: '0600' }
       - { src: 'users/mabq/ssh/id_ed25519.pub', dest: '/home/mabq/.ssh/', mode: '0640' }
 
+
   # - name: base | users | mabq | ssh | authorized_keys
   #   # should automatically create the ssh directory
   #   # because we use a single ssh key for all services this step authorizes each machines to access every other machine, they all share the same private and public keys
