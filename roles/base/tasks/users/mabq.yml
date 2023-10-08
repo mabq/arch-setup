@@ -58,25 +58,23 @@
   #     group: mabq
   #     mode: 0700
 
-  - name: base | users | mabq | ssh | authorized_keys
-    # should automatically create the ssh directory
-    # because we use a single ssh key for all services this step authorizes each machines to access every other machine, they all share the same private and public keys
-    ansible.posix.authorized_key:
-      user: mabq
-      key: "{{ item }}"
-    with_file:
-      - users/mabq/ssh/id_ed25519.pub
-
-  - name: base | users | mabq | ssh | private and public keys
-    ansible.builtin.template:
+  - name: base | users | mabq | ssh | copy private and public keys
+    ansible.builtin.copy:
       src: "{{ item.src }}"
-      dest: "/home/mabq/{{ item.dest }}"
+      dest: "{{ item.dest }}"
       owner: mabq
       group: mabq
-      mode: "{{ item.mode | default('0600') }}"
+      mode: "{{ item.mode }}"
     with_items:
-      - { src: 'users/mabq/ssh/id_ed25519', dest: '.ssh/id_ed25519' }
-      - { src: 'users/mabq/ssh/id_ed25519.pub', dest: '.ssh/id_ed25519.pub', mode: '0640' }
+      - { src: 'users/mabq/ssh/id_ed25519', dest: '/home/mabq/.ssh/', mode: '0600' }
+      - { src: 'users/mabq/ssh/id_ed25519.pub', dest: '/home/mabq/.ssh/', mode: '0640' }
+
+  # - name: base | users | mabq | ssh | authorized_keys
+  #   # should automatically create the ssh directory
+  #   # because we use a single ssh key for all services this step authorizes each machines to access every other machine, they all share the same private and public keys
+  #   ansible.posix.authorized_key:
+  #     user: mabq
+  #     key: "{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
 
 
 # --- dotfiles
