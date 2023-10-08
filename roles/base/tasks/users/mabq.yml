@@ -63,7 +63,9 @@
     # because we use a single ssh key for all services this step authorizes each machines to access every other machine, they all share the same private and public keys
     ansible.posix.authorized_key:
       user: mabq
-      key: users/mabq/ssh/id_ed25519.pub
+      key: "{{ item }}"
+    with_file:
+      - users/mabq/ssh/id_ed25519.pub
 
   - name: base | users | mabq | ssh | private and public keys
     ansible.builtin.template:
