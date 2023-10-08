@@ -65,7 +65,7 @@
     # since we use a single pair of ssh keys for all services this step authorizes each machine to access every other machine and vise-versa
     ansible.posix.authorized_key:
       user: mabq
-      key: "{{ lookup('file', '/home/mabq/.ssh/id_rsa.pub') }}"
+      key: "{{ lookup('file', '/home/mabq/.ssh/id_ed25519.pub') }}"
 
 
 # --- dotfiles
