@@ -1,0 +1,15 @@
+- block:
+  # create users and setup config files
+  - import_tasks: users/mabq.yml
+
+
+  # setup the ansible environment (to review)
+
+
+  # install base packages
+  
+  
+
+  # perform remaining tasks
+
+
