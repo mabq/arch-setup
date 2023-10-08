@@ -37,9 +37,9 @@
 
   - name: base | users | mabq | create sudoers file
     ansible.builtin.copy:
-      src: users/mabq/sudo/sudoers
+      src: users/mabq/sudoers/mabq
       # https://wiki.archlinux.org/title/Sudo#Configure_sudo_using_drop-in_files_in_/etc/sudoers.d
-      dest: /etc/sudoers.d/mabq
+      dest: /etc/sudoers.d/
       owner: root
       group: root
       mode: 0440
@@ -50,36 +50,36 @@
 - tags: mabq_dotfiles
   block:
 
-  - name: base | users | mabq | copy dotfiles
-    ansible.builtin.copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
+  - name: base | users | mabq | template dotfiles
+    ansible.builtin.template:
+      src: "users/mabq/{{ item.src }}"
+      dest: "/home/mabq/{{ item.dest }}"
       owner: mabq
       group: mabq
-      mode: "{{ item.mode }}"
+      mode: "{{ item.mode | default('0600') }}"
     with_items:
-      - { src: 'users/mabq/ssh/id_ed25519', dest: '/home/mabq/.ssh/', mode: '0600' }
-      - { src: 'users/mabq/ssh/id_ed25519.pub', dest: '/home/mabq/.ssh/', mode: '0640' }
+      - { src: 'git/.gitconfig', dest: '.' }
+      # - { src: 'ssh/id_ed25519', dest: '.ssh/' }
+      # - { src: 'ssh/id_ed25519.pub', dest: '.ssh/', mode: '0640' }
+      # - { src: 'tmux/tmux-sessionizer',       dest: '.local/bin/tmux-sessionizer',      mode: '0700' }
+      # - { src: 'zsh/.zshenv',                 dest: '.zshenv' }
+      # - { src: 'zsh/.zshrc',                  dest: '.config/zsh/.zshrc' }
+      # - { src: 'zsh/bindkey.zsh',             dest: '.config/zsh/bindkey.zsh' }
+      # - { src: 'zsh/functions.zsh',           dest: '.config/zsh/functions.zsh' }
+      # - { src: 'zsh/options.zsh',             dest: '.config/zsh/options.zsh' }
+      # - { src: 'zsh/plugins.zsh',             dest: '.config/zsh/plugins.zsh' }
+      # - { src: 'joshuto/joshuto.toml',        dest: '.config/joshuto/joshuto.toml' }
+      # - { src: 'joshuto/keymap.toml',         dest: '.config/joshuto/keymap.toml' }
+      # - { src: 'joshuto/mimetype.toml',       dest: '.config/joshuto/mimetype.toml' }
+      # - { src: 'joshuto/theme.toml',          dest: '.config/joshuto/theme.toml' }
+      # - { src: 'joshuto/icons.toml',          dest: '.config/joshuto/icons.toml' }
+      # - { src: 'joshuto/preview_file.sh',     dest: '.config/joshuto/preview_file.sh',       mode: '0700'}
 
-  - name: base | users | mabq | ssh authorized_keys
-    # since we use a single pair of ssh keys for all services this step authorizes each machine to access every other machine and vise-versa
-    ansible.posix.authorized_key:
-      user: mabq
-      key: "{{ lookup('file', '/home/mabq/.ssh/id_ed25519.pub') }}"
-
-
-# --- dotfiles
-
-# - tags: alacritty_mabq
-#   block:
-#
-#   - name: base | users | mabq | dotfiles | alacritty | copy config file
-#     ansible.builtin.template:
-#       src: users/mabq/alacritty/alacritty.yml
-#       dest: /home/mabq/.config/alacritty/
-#       owner: mabq
-#       group: mabq
-#       mode: '0600'
+  # - name: base | users | mabq | ssh authorized_keys
+  #   # since we use a single pair of ssh keys for all services this step authorizes each machine to access every other machine and vise-versa
+  #   ansible.posix.authorized_key:
+  #     user: mabq
+  #     key: "{{ lookup('file', '/home/mabq/.ssh/id_ed25519.pub') }}"
 
 
 # --- copy dotfiles
@@ -108,48 +108,6 @@
 
 # ---
 
-# - name: "mabq - add ssh public key to `~/.ssh/authorized_keys`"
-#   # by using a single key, this step authorizes each machine to access all other machines
-#   tags: users,mabq,dotfiles
-#   ansible.posix.authorized_key:
-#     user: "mabq"
-#     key: "{{ item }}"
-#   with_file:
-#     - "users/mabq/ssh/id_ed25519.pub"
-#
-#
-# - name: "mabq - copy dotfiles"
-#   tags: users,mabq,dotfiles
-#   ansible.builtin.copy:
-#     src: "users/mabq/{{ item.src }}"
-#     dest: "/home/mabq/{{ item.dest }}"
-#     owner: "mabq"
-#     group: "mabq"
-#     mode: "{{ item.mode | default('0600') }}"
-#   with_items:
-#     # ssh
-#     - { src: 'ssh/id_ed25519',              dest: '.ssh/id_ed25519' }
-#     - { src: 'ssh/id_ed25519.pub',          dest: '.ssh/id_ed25519.pub',              mode: '0640' }
-#     # git
-#     - { src: 'git/gitconfig',               dest: '.gitconfig' }
-#     # joshuto
-#     - { src: 'joshuto/joshuto.toml',        dest: '.config/joshuto/joshuto.toml' }
-#     - { src: 'joshuto/keymap.toml',         dest: '.config/joshuto/keymap.toml' }
-#     - { src: 'joshuto/mimetype.toml',       dest: '.config/joshuto/mimetype.toml' }
-#     - { src: 'joshuto/theme.toml',          dest: '.config/joshuto/theme.toml' }
-#     - { src: 'joshuto/icons.toml',          dest: '.config/joshuto/icons.toml' }
-#     - { src: 'joshuto/preview_file.sh',     dest: '.config/joshuto/preview_file.sh',       mode: '0700'}
-#     # tmux
-#     - { src: 'tmux/tmux-sessionizer',       dest: '.local/bin/tmux-sessionizer',      mode: '0700' }
-#     # zsh
-#     - { src: 'zsh/.zshenv',                 dest: '.zshenv' }
-#     - { src: 'zsh/.zshrc',                  dest: '.config/zsh/.zshrc' }
-#     - { src: 'zsh/bindkey.zsh',             dest: '.config/zsh/bindkey.zsh' }
-#     - { src: 'zsh/functions.zsh',           dest: '.config/zsh/functions.zsh' }
-#     - { src: 'zsh/options.zsh',             dest: '.config/zsh/options.zsh' }
-#     - { src: 'zsh/plugins.zsh',             dest: '.config/zsh/plugins.zsh' }
-#
-#
 # - name: "mabq - process templates"
 #   tags: users,mabq,dotfiles
 #   ansible.builtin.template:
