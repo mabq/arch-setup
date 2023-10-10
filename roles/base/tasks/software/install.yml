@@ -1,5 +1,5 @@
 - name: base | software | install utility packages
-  tags: packages,system,settings
+  tags: install_base
   package:
     state: latest
     name:
@@ -49,7 +49,7 @@
       - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
 
 - name: base | software | install development packages
-  tags: packages,system,settings
+  tags: install_dev
   package:
     state: latest
     name:
@@ -65,4 +65,10 @@
       # - ruby-rake         # Make-like build tool implemented in Ruby
       # - tig               # Text-mode interface for Git.
       - git                 # The fast distributed version control system
+
+- name: base | software | install tmux plugin manager
+  tags: install_tpm
+  ansible.builtin.git:
+    repo: git@github.com:tmux-plugins/tpm.git
+    dest: /home/mabq/.tmux/plugins/tpm
 

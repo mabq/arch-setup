@@ -4,6 +4,7 @@
 
 
   # setup the ansible environment (to review)
+  - import_tasks: software/install.yml
 
 
   # install base packages
