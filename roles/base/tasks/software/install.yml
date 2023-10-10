@@ -69,6 +69,6 @@
 - name: base | software | install tmux plugin manager
   tags: install_tpm
   ansible.builtin.git:
-    repo: git@github.com:tmux-plugins/tpm.git
+    repo: https://github.com/tmux-plugins/tpm
     dest: /home/mabq/.tmux/plugins/tpm
 
