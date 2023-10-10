@@ -64,7 +64,7 @@
       - { src: 'ssh/id_ed25519', dest: '.ssh/' }
       - { src: 'ssh/id_ed25519.pub', dest: '.ssh/', mode: '0640' }
       - { src: 'tmux/tmux.conf', dest: '.config/tmux/' }
-      - { src: 'tmux/tmux-sessionizer', dest: '.local/bin/', mode: '0700' }
+      - { src: 'tmux/tmux-sessionizer.sh', dest: '.config/tmux/scripts/', mode: '0700' }
       # - { src: 'zsh/.zshenv',                 dest: '.zshenv' }
       # - { src: 'zsh/.zshrc',                  dest: '.config/zsh/.zshrc' }
       # - { src: 'zsh/bindkey.zsh',             dest: '.config/zsh/bindkey.zsh' }
