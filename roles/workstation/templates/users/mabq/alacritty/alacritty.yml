@@ -23,7 +23,7 @@
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
 
-window:
+# window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. Both lines and columns
@@ -46,9 +46,9 @@ window:
   #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
-  padding:
-    x: 4
-    y: 0
+  # padding:
+  #   x: 4
+  #   y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -175,9 +175,9 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  offset:
-    x: 0
-    y: 2
+  # offset:
+  #   x: 0
+  #   y: 2
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -298,9 +298,9 @@ colors:
     red:     '{{color_red}}'
     green:   '{{color_green}}'
     yellow:  '{{color_yellow}}'
-    blue:    '{{color_blue}}'
+    blue:    '{{color_cyan}}'
     magenta: '{{color_magenta}}'
-    cyan:    '{{color_cyan}}'
+    cyan:    '{{color_rose}}'
     white:   '{{color_white}}'
 
   # Bright colors
@@ -309,9 +309,9 @@ colors:
     red:     '{{color_red_high}}'
     green:   '{{color_green_high}}'
     yellow:  '{{color_yellow_high}}'
-    blue:    '{{color_blue_high}}'
+    blue:    '{{color_cyan_high}}'
     magenta: '{{color_magenta_high}}'
-    cyan:    '{{color_cyan_high}}'
+    cyan:    '{{color_rose_high}}'
     white:   '{{color_white_high}}'
 
   # Dim colors
@@ -323,9 +323,9 @@ colors:
     red:     '{{color_red_low}}'
     green:   '{{color_green_low}}'
     yellow:  '{{color_yellow_low}}'
-    blue:    '{{color_blue_low}}'
+    blue:    '{{color_cyan_low}}'
     magenta: '{{color_magenta_low}}'
-    cyan:    '{{color_cyan_low}}'
+    cyan:    '{{color_rose_low}}'
     white:   '{{color_white_low}}'
 
   # Indexed Colors

@@ -22,15 +22,14 @@ color_yellow_low: "#f6c177"
 color_yellow: "#f6c177"
 color_yellow_high: "#f6c177"
 
-color_blue_low: "#9ccfd8"
-color_blue: "#9ccfd8"
-color_blue_high: "#9ccfd8"
+color_cyan_low: "#9ccfd8"
+color_cyan: "#9ccfd8"
+color_cyan_high: "#9ccfd8"
 
 color_magenta_low: "#c4a7e7"
 color_magenta: "#c4a7e7"
 color_magenta_high: "#c4a7e7"
 
-color_cyan_low: "#ebbcba"
-color_cyan: "#ebbcba"
-color_cyan_high: "#ebbcba"
-
+color_rose_low: "#ebbcba"
+color_rose: "#ebbcba"
+color_rose_high: "#ebbcba"

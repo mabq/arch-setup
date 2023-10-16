@@ -1,0 +1,8 @@
+- name: base | software | install fonts
+  tags: install_fonts
+  package:
+    state: latest
+    name:
+      - ttf-iosevka-nerd              # required for icons
+      # 'cartograph cf' must be installed manually
+
