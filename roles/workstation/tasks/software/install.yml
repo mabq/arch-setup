@@ -4,5 +4,8 @@
     state: latest
     name:
       - ttf-iosevka-nerd              # required for icons
+      - figlet                        # A program for making large letters out of ordinary text
+
       # 'cartograph cf' must be installed manually
+      # `logiops` must be installed with paru
 
