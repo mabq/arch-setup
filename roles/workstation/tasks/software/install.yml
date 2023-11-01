@@ -5,6 +5,7 @@
     name:
       - ttf-iosevka-nerd              # required for icons
       - figlet                        # A program for making large letters out of ordinary text
+      - pastel                        #	A command-line tool to generate, analyze, convert and manipulate colors
 
       # 'cartograph cf' must be installed manually
       # `logiops` must be installed with paru

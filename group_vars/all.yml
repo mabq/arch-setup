@@ -1,4 +1,4 @@
-# these are the default values for all hosts,
-# to overwrite a value for a specific host 
-# use the files in the `host_vars` directory.
-theme: 'rose-pine'
+# These are the default values for all hosts.
+# To overwrite a value for a specific host use a file in the `host_vars` directory.
+
+THEME: 'rose-pine'
