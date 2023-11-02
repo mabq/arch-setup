@@ -1,5 +1,30 @@
 - block:
 
+  # The user and it's home folder should already existe when running this script
+  # Create the `~/.vault_key` file (if not already there)
+
+  # base
+  # - ssh (the user's home directory is already there)
+  # - utils (core-utils and other packages without config files)
+  # - zsh (before user for default shell)
+  # - user (adjustments only, the home folder should already be there)
+  # - git
+  # - tmux
+  # - nvim
+  #   - many things here...
+  # - node
+  
+  # workstation
+  # - i3
+  #   - many programs here...
+  # - hyprland
+  #   - many programs here...
+  # - brave
+  # - personal_projects
+  
+  # server
+  # - (to do later)
+
   # create users and setup config files
   - import_tasks: users/mabq.yml
 

@@ -3,6 +3,9 @@
 
 # --- User account ---
 
+# To do:
+#   - change shell to zsh
+#
 - name: Create user account for "mabq"
   tags: users,users_mabq,users_mabq_create
   block:
@@ -24,6 +27,7 @@
       group: mabq
       # supplementary groups --- https://wiki.archlinux.org/title/Users_and_groups#Group_list
       # (`input` and `uinput` are required for `kmonad`)
+      # TODO: add input and uinput groups to mabq in the kmonad section, uinput does not exist during the live environment
       groups: adm,wheel,input,uinput
       # password hashed are stored in `/etc/shadow`
       password: "{{ password_hash.stdout }}"
