@@ -10,7 +10,7 @@
       when: ansible_distribution != "Archlinux"
     - name: print env
       ansible.builtin.debug:
-        msg: "{{ ansible_facts }}"
+        msg: "{{ lookup('env', 'HOME') }}"
 #     - name: pre-tasks | synchronize and update all packages
 #       community.general.pacman:
 #         update_cache: true
