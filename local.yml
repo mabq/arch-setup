@@ -8,26 +8,28 @@
       ansible.builtin.fail:
         msg: This host is not running Archlinux
       when: ansible_distribution != "Archlinux"
-    - name: pre-tasks | synchronize and update all packages
-      community.general.pacman:
-        update_cache: true
-        upgrade: true
-    - name: pre-tasks | load theme variables
-      ansible.builtin.include_vars: 
-        file: "./themes/{{ THEME }}.yml"
-
-
-# --- Run roles ---
-
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - base
-
-- hosts: workstation
-  tags: workstation
-  become: true
-  roles:
-    - workstation
+    - name: print env
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts }}"
+#     - name: pre-tasks | synchronize and update all packages
+#       community.general.pacman:
+#         update_cache: true
+#         upgrade: true
+#     - name: pre-tasks | load theme variables
+#       ansible.builtin.include_vars: 
+#         file: "./themes/{{ THEME }}.yml"
+#
+# # --- Run roles ---
+#
+# - hosts: all
+#   tags: base
+#   become: true
+#   roles:
+#     - base
+#
+# - hosts: workstation
+#   tags: workstation
+#   become: true
+#   roles:
+#     - workstation
 

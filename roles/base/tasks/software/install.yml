@@ -1,3 +1,5 @@
+# TODO: Add packages for file systems
+
 - name: base | software | install utility packages
   tags: install_base
   package:
@@ -17,11 +19,15 @@
       # - ranger            # Simple, vim-like file manager
       # - screen            # Full-screen window manager that multiplexes a physical terminal
       # - sshfs             # FUSE client based on the SSH File Transfer Protocol
+      # - udiskie             # Removable disk automounter using udisks
+      - base-devel          # Basic tools to build Arch Linux packages
       - bat                 # Cat clone with syntax highlighting and git integration
       - bpytop              # Resource monitor that shows usage and stats for processor, memory, disks, network and processes
       - broot               # Fuzzy Search + tree + cd
       - curl                # Command line tool and library for transferring data with URLs
+      - dosfstools          # DOS filesystem utilities
       - duf                 # Disk Usage/Free Utility
+      - exfatprogs          # exFAT filesystem userspace utilities for the Linux Kernel exfat driver
       - eza                 # Modern replacement for ls (community fork of exa)
       - fd                  # Simple, fast and user-friendly alternative to find
       - fzf                 # Command-line fuzzy finder
@@ -30,10 +36,12 @@
       - lm_sensors          # Collection of user space tools for general SMBus access and hardware monitoring
       - man-db              # A utility for reading man pages 
       - man-pages           # Linux man pages
+      - mtools              # A collection of utilities to access MS-DOS disks
       - ncdu                # Disk usage analyzer with an ncurses interface
       - neofetch            # A CLI system information tool written in BASH that supports displaying images.
       - nmap                # Utility for network discovery and security auditing (great to check open ports)
       - opensnitch          # A GNU/Linux application firewall
+      - openssh             # SSH protocol implementation for remote login, command execution and file transfer
       - pacman-contrib      # Contributed scripts and tools for pacman systems
       - ripgrep             # A search tool that combines the usability of ag with the raw speed of grep
       - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
@@ -41,7 +49,6 @@
       - sudo                # Give certain users the ability to run some commands as root
       - tmux                # Terminal multiplexer
       - traceroute          # Tracks the route taken by packets over an IP network
-      - udiskie             # Removable disk automounter using udisks
       - ufw                 # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
       - wget                # Network utility to retrieve files from the Web
       - whois               # Intelligent WHOIS client
