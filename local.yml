@@ -10,7 +10,7 @@
     when: ansible_distribution != "Archlinux"
   - name: Check home
     become: true
-    community.general.debug:
+    ansible.builtin.debug:
       msg: "{{ lookup('env', 'HOME') }}"
   # - name: Synchronize and update all packages
   #   community.general.pacman:
