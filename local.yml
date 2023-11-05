@@ -4,30 +4,26 @@
   become: true
   tags: always
   pre_tasks:
-    - name: pre-tasks | exit if not Arch
-      ansible.builtin.fail:
-        msg: This host is not running Archlinux
-      when: ansible_distribution != "Archlinux"
-    - name: print env
-      ansible.builtin.debug:
-        # Like all templating, lookups execute and are evaluated on the Ansible control machine. 
-        msg: "{{ HOME }}"
-#     - name: pre-tasks | synchronize and update all packages
-#       community.general.pacman:
-#         update_cache: true
-#         upgrade: true
-#     - name: pre-tasks | load theme variables
-#       ansible.builtin.include_vars: 
-#         file: "./themes/{{ THEME }}.yml"
-#
-# # --- Run roles ---
-#
+  - name: pre-tasks | exit if not Arch
+    ansible.builtin.fail:
+      msg: This host is not running Archlinux
+    when: ansible_distribution != "Archlinux"
+  - name: pre-tasks | synchronize and update all packages
+    community.general.pacman:
+      update_cache: true
+      upgrade: true
+  - name: pre-tasks | load theme variables
+    ansible.builtin.include_vars: 
+      file: "./themes/{{ theme }}.yml"
+
+# --- Run roles ---
+
 # - hosts: all
 #   tags: base
 #   become: true
 #   roles:
 #     - base
-#
+
 # - hosts: workstation
 #   tags: workstation
 #   become: true
