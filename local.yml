@@ -4,15 +4,19 @@
   become: true
   tags: always
   pre_tasks:
-  - name: pre-tasks | exit if not Arch
+  - name: Exit if not running Archlinux
     ansible.builtin.fail:
       msg: This host is not running Archlinux
     when: ansible_distribution != "Archlinux"
-  - name: pre-tasks | synchronize and update all packages
-    community.general.pacman:
-      update_cache: true
-      upgrade: true
-  - name: pre-tasks | load theme variables
+  - name: Check home
+    become: true
+    community.general.debug:
+      msg: "{{ lookup('env', 'HOME') }}"
+  # - name: Synchronize and update all packages
+  #   community.general.pacman:
+  #     update_cache: true
+  #     upgrade: true
+  - name: Load theme variables
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
 
@@ -30,3 +34,8 @@
 #   roles:
 #     - workstation
 
+# - hosts: server
+#   tags: server
+#   become: true
+#   roles:
+#     - workstation
