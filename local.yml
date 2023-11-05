@@ -10,7 +10,8 @@
       when: ansible_distribution != "Archlinux"
     - name: print env
       ansible.builtin.debug:
-        msg: "{{ lookup('env', 'HOME') }}"
+        # Like all templating, lookups execute and are evaluated on the Ansible control machine. 
+        msg: "{{ lookup('ansible.builtin.env', 'HOME') }}"
 #     - name: pre-tasks | synchronize and update all packages
 #       community.general.pacman:
 #         update_cache: true
