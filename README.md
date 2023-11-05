@@ -1,4 +1,17 @@
-# Configure a Workstation with Ansible
+# Ansible Post Installation Script
+
+I have built two Ansible scripts to automate the configuration of my setup:
+
+1. [ansible-arch-installation](https://github.com/mabq/ansible-arch-installation) - fully automates a [basic Archlinux installation](https://wiki.archlinux.org/title/Installation_guide), leaving the host ready to run the second script.
+2. [ansible-post-installation](https://github.com/mabq/ansible-post-installation) (this script) - installs and configures all the tools I need.
+
+Make sure you read the notes in the first script before you run this one.
+
+If you used some other method to install Archlinux, make sure you comply with the following requirements before running this script:
+
+   - Ansible must be already installed, this script is executed via `ansible-pull`
+   - You must be logged in as the user for which you want to create all the configuration files
+   - There must be a file called `~/.vault_key` with the decryption key on it (see notes on the first script)
 
 
 ## About this script
@@ -19,23 +32,10 @@ Using `stow` would be a much easier option, but it won't let us apply a color th
 
 ## Before running this script
 
-- This script is the continuation of the [ansible-arch-installation](https://github.com/mabq/ansible-arch-installation) script. Make sure you successfully run that script first.
 
 - Review `/hosts`:
 
-    Make sure the hostname of the machine where you will be executing this command is listed on the `/hosts` file. If you need to change the hostname use:
-
-    ```sh
-    sudo hostnamectl set-hostname {NEW-HOSTNAME}
-    ```
-
-    This command will update the following files: `/etc/hostname`, `/etc/hosts`, `/proc/sys/kernel/hostname`.
-
-    Reboot the system to apply changes:
-
-    ```sh
-    sudo reboot now
-    ```
+    Make sure the hostname of the machine where you will be executing this command is listed on the `/hosts` file.
 
 - Review/change the host variables:
 

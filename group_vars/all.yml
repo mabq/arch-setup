@@ -1,4 +1,6 @@
 # These are the default values for all hosts.
 # To overwrite a value for a specific host use a file in the `host_vars` directory.
 
-THEME: 'rose-pine'
+theme: 'rose-pine'
+# lookup env will get the given environment variable from the controller machine, this is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup
+home: {{ lookup('env', 'HOME') }}

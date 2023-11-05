@@ -11,7 +11,7 @@
     - name: print env
       ansible.builtin.debug:
         # Like all templating, lookups execute and are evaluated on the Ansible control machine. 
-        msg: "{{ lookup('ansible.builtin.env', 'COLOR_BLACK') }}"
+        msg: "{{ ~ }}"
 #     - name: pre-tasks | synchronize and update all packages
 #       community.general.pacman:
 #         update_cache: true
