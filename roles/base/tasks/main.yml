@@ -1,4 +1,4 @@
-# base
+- import_tasks: tasks/ssh.yml
 # - ssh (the user's home directory is already there)
 # - utils (core-utils and other packages without config files)
 # - zsh (before user for default shell)
@@ -21,7 +21,7 @@
 # - (to do later)
 
 # create users and setup config files
-- import_tasks: users/mabq.yml
+# - import_tasks: users/mabq.yml
 
 # setup the ansible environment (to review)
 # - import_tasks: software/install.yml
