@@ -8,10 +8,6 @@
     ansible.builtin.fail:
       msg: This host is not running Archlinux
     when: ansible_distribution != "Archlinux"
-  - name: Check home
-    become: true
-    ansible.builtin.debug:
-      msg: "{{ lookup('env', 'HOME') }}"
   # - name: Synchronize and update all packages
   #   community.general.pacman:
   #     update_cache: true
@@ -22,11 +18,11 @@
 
 # --- Run roles ---
 
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
 
 # - hosts: workstation
 #   tags: workstation
