@@ -27,7 +27,7 @@
     # since we use a single pair of ssh keys any machine will be able to access any other machine
     ansible.posix.authorized_key:
       user: "{{ user }}"
-      key: "{{ home }}/.ssh/id_ed25519.pub"
+      key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
   - name: ssh - Disable password authentication for all users
     ansible.builtin.lineinfile:
       dest: /etc/ssh/sshd_config
