@@ -79,7 +79,7 @@
         state: directory
     - name: ssh - add `SSH_AUTH_SOCK` as a systemd user environment variable 
       ansible.builtin.copy:
-        content: 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"'
+        content: "SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
         dest: "{{ home }}/.config/environment.d/ssh-agent.conf"
         owner: "{{ user }}"
         group: "{{ user }}"
