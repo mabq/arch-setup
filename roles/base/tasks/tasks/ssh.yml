@@ -61,7 +61,8 @@
         state: "started"
         scope: "user"
       environment:
-        XDG_RUNTIME_DIR: "/run/user/{{ lookup('env', 'UID') }}"
+        # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+        XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
     - name: ssh - Add a required config file for the ssh-agent user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
       block:
