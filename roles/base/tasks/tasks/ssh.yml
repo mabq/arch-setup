@@ -50,13 +50,10 @@
       enabled: true
       state: "started"
       scope: "system"
-
-- name: Configure ssh-agent
-  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
-  tags: install,ssh
-  block:
   - name: ssh - enable and start the `ssh-agent.service` as a 'user' service
-    # must be false to activate a user service
+    # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+    # requires the `SSH_AUTH_LOCK` variable to be set to work accross terminals (set on `~/.config/zsh/exports.zsh`)
+    # become must be false to activate a user service
     become: false
     ansible.builtin.systemd_service:
       name: "ssh-agent.service"
@@ -66,23 +63,4 @@
     environment:
       # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
       XDG_RUNTIME_DIR: "{{ xdg_runtime_dir }}"
-  - name: ssh - add `SSH_AUTH_SOCK` as a systemd user environment variable
-    # https://wiki.archlinux.org/title/Environment_variables#Per_user
-    # https://wiki.archlinux.org/title/Systemd/User#Environment_variables
-    block:
-    - name: ssh - ensure `~/.config/environment.d` directory exists
-      ansible.builtin.file:
-        path: "{{ home }}/.config/environment.d"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: 0700
-        state: directory
-    - name: ssh - add `SSH_AUTH_SOCK` as a systemd user environment variable 
-      ansible.builtin.copy:
-        content: "SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
-        dest: "{{ home }}/.config/environment.d/ssh-agent.conf"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: "0600"
 
-# hell
