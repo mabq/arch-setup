@@ -1,0 +1,16 @@
+- name: git - install config file
+  tags: dotfiles,git
+  ansible.builtin.template:
+    src: "git/.gitconfig"
+    dest: "{{ home }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0644"
+
+- name: git - install packages
+  tags: install,git
+  ansible.builtin.package:
+    state: latest
+    name:
+      - git           # the fast distributed version control system
+      - git-delta     # Syntax-highlighting pager for git and diff output

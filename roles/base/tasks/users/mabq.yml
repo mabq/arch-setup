@@ -1,9 +1,5 @@
-- tags: always
-  include_vars: users/mabq.yml
-
-- name: hello
-  ansible.builtin.debug:
-    msg: "hello"
+# - tags: always
+#   include_vars: users/mabq.yml
 
 # --- User account ---
 

@@ -1,7 +1,5 @@
-# TODO: Add packages for file systems
-
-- name: base | software | install utility packages
-  tags: install_base
+- name: no-config - base install
+  tags: install,no_config,no_config_base
   package:
     state: latest
     name:
@@ -11,19 +9,13 @@
       # - colordiff         # A Perl script wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting
       # - iotop             # View I/O usage of processes
       # - lsof              # Lists open files for running Unix processes
-      # - mc                # A file manager that emulates Norton Commander
-      # - mosh              # Mobile shell, surviving disconnects with local echo and line editing  
       # - net-tools         # Configuration tools for Linux networking
       # - nfs-utils         # Support programs for Network File Systems
-      # - perl-rename       # Renames multiple files using Perl regular expressions
-      # - ranger            # Simple, vim-like file manager
-      # - screen            # Full-screen window manager that multiplexes a physical terminal
-      # - sshfs             # FUSE client based on the SSH File Transfer Protocol
-      # - udiskie             # Removable disk automounter using udisks
+      # - udiskie           # Removable disk automounter using udisks
+      # - broot               # Fuzzy Search + tree + cd
       - base-devel          # Basic tools to build Arch Linux packages
       - bat                 # Cat clone with syntax highlighting and git integration
       - bpytop              # Resource monitor that shows usage and stats for processor, memory, disks, network and processes
-      - broot               # Fuzzy Search + tree + cd
       - curl                # Command line tool and library for transferring data with URLs
       - dosfstools          # DOS filesystem utilities
       - duf                 # Disk Usage/Free Utility
@@ -70,11 +62,10 @@
       # - ruby              # An object-oriented language for quick and easy programming
       # - ruby-rake         # Make-like build tool implemented in Ruby
       # - tig               # Text-mode interface for Git.
-      - git                 # The fast distributed version control system
 
-- name: base | software | install tmux plugin manager
-  tags: install_tpm
-  ansible.builtin.git:
-    repo: https://github.com/tmux-plugins/tpm
-    dest: /home/mabq/.tmux/plugins/tpm
+# - name: base | software | install tmux plugin manager
+#   tags: install_tpm
+#   ansible.builtin.git:
+#     repo: https://github.com/tmux-plugins/tpm
+#     dest: /home/mabq/.tmux/plugins/tpm
 
