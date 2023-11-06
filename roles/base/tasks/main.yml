@@ -1,5 +1,5 @@
 - import_tasks: tasks/ssh.yml
-- import_tasks: tasks/core-utils.yml
+# - import_tasks: tasks/core-utils.yml
 # - utils (core-utils and other packages without config files)
 # - zsh (before user for default shell)
 # - user (adjustments only, the home folder should already be there)
