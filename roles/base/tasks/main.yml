@@ -1,4 +1,9 @@
-- import_tasks: tasks/ssh.yml
+- name: print user id
+  ansible.builtin.debug:
+    msg: "/run/user/{{ lookup('env', 'UID') }}"
+
+
+# - import_tasks: tasks/ssh.yml
 # - ssh (the user's home directory is already there)
 # - utils (core-utils and other packages without config files)
 # - zsh (before user for default shell)
