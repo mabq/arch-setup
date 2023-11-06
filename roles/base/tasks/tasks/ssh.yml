@@ -53,8 +53,10 @@
       state: "started"
       scope: "system"
   - name: ssh - Enable and start the ssh-agent as a 'user' service
+    tags: client
     block:
     - name: ssh - Enable and start the ssh-agent as a 'user' service
+      become: true
       ansible.builtin.systemd_service:
         name: "ssh-agent.service"
         enabled: true
