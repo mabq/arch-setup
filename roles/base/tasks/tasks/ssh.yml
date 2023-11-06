@@ -83,5 +83,5 @@
         dest: "{{ home }}/.config/environment.d/ssh-agent.conf"
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: "0700"
+        mode: "0600"
 
