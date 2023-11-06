@@ -86,3 +86,4 @@
         mode: "0600"
 
 # check if ssh-agent works by setting the env variable in the zsh config files
+
