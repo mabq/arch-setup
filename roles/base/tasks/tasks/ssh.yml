@@ -51,7 +51,7 @@
       state: "started"
       scope: "system"
 
-- name: ssh-agent
+- name: Configure ssh-agent
   # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
   tags: install,ssh
   block:
