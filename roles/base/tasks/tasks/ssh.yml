@@ -43,7 +43,7 @@
     name: openssh
     state: latest
 
-- name: ssh - Systemd configurations
+- name: ssh - Systemd
   tags: install,ssh
   block:
   - name: ssh - Enable and start the sshd 'system' service
