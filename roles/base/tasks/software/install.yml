@@ -41,7 +41,6 @@
       - neofetch            # A CLI system information tool written in BASH that supports displaying images.
       - nmap                # Utility for network discovery and security auditing (great to check open ports)
       - opensnitch          # A GNU/Linux application firewall
-      - openssh             # SSH protocol implementation for remote login, command execution and file transfer
       - pacman-contrib      # Contributed scripts and tools for pacman systems
       - ripgrep             # A search tool that combines the usability of ag with the raw speed of grep
       - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.

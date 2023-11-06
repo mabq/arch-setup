@@ -1,0 +1,25 @@
+# Instruct the SSH-agent to automatically add the keys for all connections
+AddKeysToAgent yes
+
+# Syntax:
+#Host {SERVER_ALIAS}
+#    Hostname {SERVER_IP}
+#    Port {PORT} # Optional, defaults to 22
+#    User {SERVER_USER} # Optional, in case the client and server use different users
+#    IdentityFile "~/.ssh/{PRIVATE_KEY}"
+
+Host *github.com
+    IdentityFile "~/.ssh/id_ed25519"
+
+Host macbook
+    Hostname 192.168.100.24
+    IdentityFile "~/.ssh/id_ed25519"
+
+Host xps
+    Hostname 192.168.100.40
+    IdentityFile "~/.ssh/id_ed25519"
+
+Host nuc
+    Hostname 192.168.100.100
+    IdentityFile "~/.ssh/id_ed25519"
+
