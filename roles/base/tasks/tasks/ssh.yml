@@ -4,6 +4,8 @@
   - name: ssh - Ensure `.ssh` directory exists
     ansible.builtin.file:
       path: "{{ home }}/.ssh"
+      owner: "{{ user }}"
+      group: "{{ user }}"
       mode: 0700
       state: directory
   - name: ssh - Install ssh keys and client config file
@@ -63,6 +65,8 @@
       - name: ssh - Ensure `~/.config/environment.d` directory exists
         ansible.builtin.file:
           path: "{{ home }}/.config/environment.d"
+          owner: "{{ user }}"
+          group: "{{ user }}"
           mode: 0700
           state: directory
       - name: ssh - Copy `ssh-agent.conf` to `~/.config/environment.d/`
