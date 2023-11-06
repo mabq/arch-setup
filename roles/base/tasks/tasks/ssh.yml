@@ -58,7 +58,8 @@
       ansible.builtin.systemd_service:
         name: "ssh-agent.service"
         enabled: true
-        state: "user"
+        state: "started"
+        scope: "user"
     - name: ssh - Add a required config file for the ssh-agent user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
       block:
