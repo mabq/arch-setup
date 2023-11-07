@@ -7,10 +7,11 @@
     group: "{{ user }}"
     mode: "0644"
 
-- name: git - install packages
+- name: git - install
   tags: install,git
   ansible.builtin.package:
     state: latest
     name:
       - git           # the fast distributed version control system
       - git-delta     # Syntax-highlighting pager for git and diff output
+

@@ -1,14 +1,14 @@
 - name: Configure client
   tags: dotfiles,ssh
   block:
-  - name: ssh client - ensure `.ssh` directory exists
+  - name: ssh - ensure `.ssh` directory exists
     ansible.builtin.file:
       path: "{{ home }}/.ssh"
       owner: "{{ user }}"
       group: "{{ user }}"
       mode: 0700
       state: directory
-  - name: ssh client - install ssh keys and client config file
+  - name: ssh - install ssh keys and client config file
     ansible.builtin.copy:
       src: "ssh/{{ item.src }}"
       dest: "{{ home }}/.ssh"
@@ -23,24 +23,24 @@
 - name: Cofigure server
   tags: dotfiles,ssh
   block:
-  - name: ssh server - add public key to authorized_keys
+  - name: ssh - add public key to authorized_keys
     # access any machine from any other machine (single pair of keys)
     ansible.posix.authorized_key:
       user: "{{ user }}"
       key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
-  - name: ssh server - disable password authentication for all users
+  - name: ssh - disable password authentication for root
     ansible.builtin.lineinfile:
       dest: /etc/ssh/sshd_config
       regexp: '{{ item.regex }}'
       line: '{{ item.line }}'
     loop:
       - { regex: "^#PermitRootLogin", line: "PermitRootLogin prohibit-password" }
-      - { regex: "^#PasswordAuthentication", line: "PasswordAuthentication no" }
+      # - { regex: "^#PasswordAuthentication", line: "PasswordAuthentication no" }
 
 - name: Install
   tags: install,ssh
   block:
-  - name: ssh install - install openssh
+  - name: ssh - install
     ansible.builtin.package:
       name: openssh
       state: latest
