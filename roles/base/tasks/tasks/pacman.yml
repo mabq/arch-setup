@@ -1,0 +1,13 @@
+- name: pacman - edit config file
+  tags: dotfiles,pacman
+  ansible.builtin.lineinfile:
+    dest: /etc/pacman.conf
+    regexp: '{{ item.regex }}'
+    line: '{{ item.line }}'
+  loop:
+    # enable colored output
+    - { regex: "^#Color", line: "Color" }
+    # show package version number
+    - { regex: "^#VerbosePkgLists", line: "VerbosePkgLists" }
+    # enable parallel downloads
+    - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 10" }
