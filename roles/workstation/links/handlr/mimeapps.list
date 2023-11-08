@@ -1,0 +1,16 @@
+[Added Associations]
+application/x-zerosize=brave-browser.desktop;
+
+[Default Applications]
+application/json=nvim.desktop;
+application/pdf=org.gnome.Evince.desktop;brave-browser.desktop;
+application/x-zerosize=brave-browser.desktop;
+image/*=nsxiv.desktop;
+image/svg+xml=brave-browser.desktop;
+text/*=nvim.desktop;
+text/html=nvim.desktop;
+text/plain=nvim.desktop;
+text/x-objective-c=nvim.desktop;
+text/x-shellscript=nvim.desktop;
+video/mp4=mpv.desktop;
+

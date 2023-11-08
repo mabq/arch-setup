@@ -1,8 +1,4 @@
 # - configure pacman
-- name: print
-  ansible.builtin.copy:
-    content: "{{ ansible_facts }}"
-    dest: "{{ home }}/facts.json"
 # - import_tasks: tasks/no-config.yml
 # - import_tasks: tasks/pacman.yml
 # - import_tasks: tasks/git.yml
