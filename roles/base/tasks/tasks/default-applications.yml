@@ -1,0 +1,8 @@
+- name: default applications - install packages
+  tags: dotfiles,default_applications
+  ansible.builtin.package:
+    state: latest
+    name:
+      # - desktop-file-utils          # Command line utilities for working with desktop entries (NOT REQUIRED)
+      # - shared-mime-info            # Freedesktop.org Shared MIME Info (will be installed as a dependency of `handlr`)
+      - handlr                        # Powerful alternative to xdg-utils written in Rust

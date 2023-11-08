@@ -1,9 +1,8 @@
-- tags: install,no_config,no_config_base
+- tags: install,no_config
   block:
 
         # - tmux                # Terminal multiplexer
         # - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
-        # - sudo                # Give certain users the ability to run some commands as root
 
   # - name: base | software | install tmux plugin manager
   #   tags: install_tpm
@@ -25,6 +24,7 @@
         - man-pages           # Linux man pages
         - ripgrep             # A search tool that combines the usability of ag with the raw speed of grep (rust)
         - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
+        - tldr                # Command line client for tldr, a collection of simplified and community-driven man pages
         - zoxide              # A smarter cd command for your terminal
 
   - name: no-config - install archlinux related utilities

@@ -9,14 +9,15 @@ Make sure you read the notes in the first script before you run this one.
 
 If you used some other method to install Archlinux, make sure you comply with the following requirements before running this script:
 
-   - Ansible must be already installed, this script is executed via `ansible-pull`
-   - You must be logged in as the user for which you want to create all the configuration files
-   - There must be a file called `~/.vault_key` with the decryption key on it (see notes on the first script)
+   - `ansible` and `git` must be already installed, this script is executed via `ansible-pull`
+   - You must be logged in as the user for which you want to create all the configuration files, `sudo` must be installed and the sudoer file must be already configured
+   - The encryption password must be stored in a file called `/home/{user}/.vault_key` (see notes on the first script)
 
 
 ## About this script
 
 There are three roles:
+
     - `base` -- applies to all machines, includes all the base programs (command-line only) and configuration files
     - `workstation` -- includes gui programs and configuration files
     - `server` -- includes programs required for servers and configuration files
