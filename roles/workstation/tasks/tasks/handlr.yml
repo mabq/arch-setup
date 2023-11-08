@@ -2,7 +2,7 @@
   tags: dotfiles,handlr
   block:
   - name: handlr - ensure `.config` directory exist
-    ansible.builtin.import_tasks: /shared-tasks/ensure_config_directory.yml
+    ansible.builtin.import_tasks: ../../../../shared-tasks/ensure_config_directory.yml
   - name: handlr - link `mimeapps.list`
     ansible.builtin.file:
       src: "{{ PWD }}/roles/workstation/links/handlr/mimeapps.list"
