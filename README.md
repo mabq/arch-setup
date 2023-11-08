@@ -16,6 +16,8 @@ If you used some other method to install Archlinux, make sure you comply with th
 
 ## About this script
 
+This script must be run with `ansible-pull`. We specify where the repository must be cloned in 
+
 There are three roles:
 
     - `base` -- applies to all machines, includes all the base programs (command-line only) and configuration files
