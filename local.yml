@@ -18,7 +18,7 @@
   - name: set facts
     ansible.builtin.copy:
       content: "{{ ansible_facts }}"
-      path: /home/mabq/facts-new.json
+      dest: /home/mabq/facts-new.json
 
 # --- Run roles ---
 
