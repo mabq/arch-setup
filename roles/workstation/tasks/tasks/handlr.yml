@@ -6,7 +6,7 @@
   - name: handlr - link `mimeapps.list`
     ansible.builtin.file:
       src: "{{ ansible_facts.env.PWD }}/roles/workstation/links/handlr/mimeapps.list"
-      path: "{{ home }}/.config"
+      path: "{{ home }}/.config/mimeapps.list"
       owner: "{{ user }}"
       group: "{{ user }}"
       mode: 0600
