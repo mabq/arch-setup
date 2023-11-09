@@ -1,22 +1,19 @@
-- name: facts
-  ansible.builtin.debug:
-    msg: "{{ ansible_facts }}"
-# - name: handlr - link files
-#   tags: dotfiles,handlr
-#   block:
-#   - name: handlr - ensure `.config` directory exist
-#     ansible.builtin.import_tasks: "{{ playbook_dir }}/shared-tasks/ensure_config_directory.yml"
-#   - name: handlr - link `mimeapps.list`
-#     ansible.builtin.file:
-#       src: "{{ lookup('env', 'PWD') }}/roles/workstation/links/handlr/mimeapps.list"
-#       path: "{{ home }}/.config/mimeapps.list"
-#       owner: "{{ user }}"
-#       group: "{{ user }}"
-#       mode: 0600
-#       state: "link"
-#
-# - name: handlr - link files
-#   tags: dotfiles,handlr
-#   ansible.builtin.package:
-#     name: handlr              # Powerful alternative to xdg-utils written in Rust
-#     state: latest
+- name: handlr - link files
+  tags: dotfiles,handlr
+  block:
+  - name: handlr - ensure `.config` directory exist
+    ansible.builtin.import_tasks: "{{ playbook_dir }}/shared-tasks/ensure_config_directory.yml"
+  - name: handlr - link `mimeapps.list`
+    ansible.builtin.file:
+      src: "{{ ansible_facts.env.PWD }}/roles/workstation/links/handlr/mimeapps.list"
+      path: "{{ home }}/.config/mimeapps.list"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0600
+      state: "link"
+
+- name: handlr - link files
+  tags: dotfiles,handlr
+  ansible.builtin.package:
+    name: handlr              # Powerful alternative to xdg-utils written in Rust
+    state: latest

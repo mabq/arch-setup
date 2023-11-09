@@ -10,5 +10,3 @@ git_user_name: "mabq"
 home: "{{ lookup('env', 'HOME') }}"
 user: "{{ lookup('env', 'USER') }}"
 xdg_runtime_dir: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
-# wher ansible stores the cloned repo, required for links
-pull_directory: "{{ lookup('env', 'PWD') }}"
