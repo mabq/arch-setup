@@ -65,10 +65,10 @@ Using `stow` would be a much easier option, but it won't let us apply a color th
 
 ## Run the script
 
-Change directory into the cloned repo and run:
+Run the following command using the desired destination directory:
 
 ```sh
-ansible-pull -U https://github.com/mabq/ansible-archlinux-workstation --vault-password-file ~/.vault_key
+ansible-pull -U https://github.com/mabq/ansible-post-installation --vault-password-file ~/.vault_key -d {~/projects/ansible-post-installation}
 ```
 
 You will be prompted for the root password.
