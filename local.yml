@@ -15,21 +15,24 @@
   - name: Load theme variables
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
-
+  - name: set facts
+    ansible.builtin.copy:
+      content: "{{ ansible_facts }}"
+      path: /home/mabq/facts-new.json
 
 # --- Run roles ---
 
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - base
+# - hosts: all
+  # tags: base
+  # become: true
+  # roles:
+  #   - base
 
-- hosts: workstation
-  tags: workstation
-  become: true
-  roles:
-    - workstation
+# - hosts: workstation
+#   tags: workstation
+#   become: true
+#   roles:
+#     - workstation
 
 # - hosts: server
 #   tags: server
