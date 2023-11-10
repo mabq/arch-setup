@@ -68,7 +68,8 @@ Using `stow` would be a much easier option, but it won't let us apply a color th
 Run the following command using the desired destination directory:
 
 ```sh
-ansible-pull -U https://github.com/mabq/ansible-post-installation --vault-password-file ~/.vault_key -d {~/projects/ansible-post-installation}
+ansible-pull --url https://github.com/mabq/ansible-post-installation --vault-password-file ~/.vault_key --directory {~/projects/ansible-post-installation}
+ansible-pull --url ssh://user@host/path/to/repo.git --vault-password-file ~/.vault_key --directory {~/projects/ansible-post-installation}
 ```
 
 You will be prompted for the root password.

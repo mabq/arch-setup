@@ -15,10 +15,12 @@
   - name: Load theme variables
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
-  - name: set facts
-    ansible.builtin.copy:
-      content: "{{ ansible_facts }}"
-      dest: /home/mabq/facts-new.json
+  # - name: Change remote repository URL to use SSH instead of HTTP
+  #   # otherwise you won't be able to push changes to linked files
+  #   ansible.builtin.git:
+  #     repo: "{{ ansible_facts.env.PWD }}"
+  #     url: git@github.com:your_username/my_repository.git
+  #     force: yes
 
 # --- Run roles ---
 
