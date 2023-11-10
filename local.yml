@@ -15,7 +15,7 @@
   - name: Load theme variables
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
-  - name: Change remote url from https to ssh
+  - name: Change repository remote url (from https) to ssh
     # otherwise we won't be able to push changes
     ansible.builtin.replace:
       path: "{{ ansible_facts.env.PWD }}/.git/config"
