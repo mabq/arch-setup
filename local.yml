@@ -17,11 +17,10 @@
       file: "./themes/{{ theme }}.yml"
   - name: Change repository remote url (from https) to ssh
     # otherwise we won't be able to push changes
-    ansible.builtin.lineinfile:
-      dest: "{{ ansible_facts.env.PWD }}/.git/config"
-      regexp: (^\s*)url\s*=\s*https:\/\/(github\.com)\/(.+)\/(.+)\.git/gm
-      line: \1url = git@\2:\3/\4.git
-
+    ansible.builtin.replace:
+      path: "{{ ansible_facts.env.PWD }}/.git/config"
+      regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
+      replace: \1git@\2:\3
 
 
 # --- Run roles ---
