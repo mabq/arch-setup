@@ -15,12 +15,13 @@
   - name: Load theme variables
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
-  # - name: Change remote repository URL to use SSH instead of HTTP
-  #   # otherwise you won't be able to push changes to linked files
-  #   ansible.builtin.git:
-  #     repo: "{{ ansible_facts.env.PWD }}"
-  #     url: git@github.com:your_username/my_repository.git
-  #     force: yes
+  - name: Change remote url from https to ssh
+    # otherwise we won't be able to push changes
+    ansible.builtin.replace:
+      path: "{{ ansible_facts.env.PWD }}/.git/config"
+      regexp: /(^\s*)url\s*=\s*https:\/\/(github\.com)\/(.+)\/(.+)\.git      replace: \1url = git@\2:\3/\4.git
+
+
 
 # --- Run roles ---
 
