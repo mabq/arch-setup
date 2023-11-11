@@ -1,10 +1,10 @@
-# packages without config files
-- import_tasks: tasks/install-core-base-packages.yml
-
-# packages with config files
 - import_tasks: tasks/pacman.yml
+
+- import_tasks: tasks/no-config.yml
+
 - import_tasks: tasks/git.yml
 - import_tasks: tasks/ssh.yml
+
 # - zsh (before user for default shell)
 # - user (adjustments only, the home folder should already be there)
 # - tmux

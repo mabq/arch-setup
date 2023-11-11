@@ -1,17 +1,19 @@
-- name: handlr - ensure `.config` directory exist
-  ansible.builtin.import_tasks: "shared-tasks/ensure_config_directory.yml"
 - name: handlr - link config files
-  tags: dotfiles,handlr,handlr_linkfile
-  ansible.builtin.file:
-    src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
-    path: "{{ home }}/.config/mimeapps.list"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0600
-    state: "link"
-
-- name: handlr - link files
   tags: dotfiles,handlr
+  block:
+  - name: handlr - ensure `.config` directory exist
+    ansible.builtin.import_tasks: "shared-tasks/ensure_config_directory.yml"
+  - name: handlr - link config files
+    ansible.builtin.file:
+      src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
+      path: "{{ home }}/.config/mimeapps.list"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0600
+      state: "link"
+
+- name: handlr - install
+  tags: install,handlr
   ansible.builtin.package:
-    name: handlr              # Powerful alternative to xdg-utils written in Rust
+    name: handlr  # Powerful alternative to xdg-utils written in Rust
     state: latest

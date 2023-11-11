@@ -1,4 +1,4 @@
-- name: pacman - edit config file
+- name: pacman - change some options in the config file
   tags: dotfiles,pacman
   ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
@@ -7,4 +7,4 @@
   loop:
     - { regex: "^#Color", line: "Color" }
     - { regex: "^#VerbosePkgLists", line: "VerbosePkgLists" }
-    - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 10" }
+    - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 5" }

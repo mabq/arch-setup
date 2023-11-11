@@ -16,7 +16,7 @@
     ansible.builtin.include_vars: 
       file: "./themes/{{ theme }}.yml"
   - name: Change repository remote url (from https) to ssh
-    # otherwise we won't be able to push changes
+    # otherwise we won't be able to push changes made through links
     ansible.builtin.replace:
       path: "{{ srcdir }}/.git/config"
       regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
@@ -25,11 +25,11 @@
 
 # --- Run roles ---
 
- # - hosts: all
- #   tags: base
- #   become: true
- #   roles:
- #     - base
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
 
 - hosts: workstation
   tags: workstation

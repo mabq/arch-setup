@@ -1,4 +1,4 @@
-- name: git - install config file
+- name: git - create config file from template
   tags: dotfiles,git
   ansible.builtin.template:
     src: "git/.gitconfig"
@@ -12,5 +12,5 @@
   ansible.builtin.package:
     state: latest
     name:
-      - git           # the fast distributed version control system
-      - git-delta     # Syntax-highlighting pager for git and diff output
+      - git  # The fast distributed version control system
+      - git-delta  # Syntax-highlighting pager for git and diff output
