@@ -1,5 +1,5 @@
-# - name: handlr - ensure `.config` directory exist
-#   ansible.builtin.import_tasks: "{{ playbook_dir }}/shared-tasks/ensure_config_directory.yml"
+- name: handlr - ensure `.config` directory exist
+  ansible.builtin.import_tasks: "shared-tasks/ensure_config_directory.yml"
 - name: handlr - link config files
   tags: dotfiles,handlr,handlr_linkfile
   ansible.builtin.file:
