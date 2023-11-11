@@ -1,12 +1,14 @@
-# These are the default values for all hosts.
-# To overwrite a value for a specific host use a file in the `host_vars` directory.
+# These are the default values for all hosts
+
+# To overwrite a value for a specific host use a file in the `host_vars` directory
 
 theme: "rose-pine"
 
 git_user_email: "alejandro.banderas@me.com"
-git_user_name: "mabq"
+# leave empty to use the logged in user name
+git_user_name: ""
 
-# lookup env will get the given environment variable from the controller machine, this is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup
+# lookup env will get the given environment variable from the controller machine. This is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup
 home: "{{ lookup('env', 'HOME') }}"
 user: "{{ lookup('env', 'USER') }}"
-xdg_runtime_dir: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+srcdir: "{{ ansible_facts.env.PWD }}"

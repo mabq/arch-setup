@@ -1,7 +1,0 @@
-- name: shared tasks - ensure `.config` directory exists
-  ansible.builtin.file:
-    path: "ansible_facts.env.PWD"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0700
-    state: directory

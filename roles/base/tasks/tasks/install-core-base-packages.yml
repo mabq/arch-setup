@@ -1,16 +1,7 @@
-- tags: install,no_config
+- tags: install,core_base_packages
   block:
 
-        # - tmux                # Terminal multiplexer
-        # - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
-
-  # - name: base | software | install tmux plugin manager
-  #   tags: install_tpm
-  #   ansible.builtin.git:
-  #     repo: https://github.com/tmux-plugins/tpm
-  #     dest: /home/mabq/.tmux/plugins/tpm
-
-  - name: no-config - install core utilities
+  - name: install-core-base-packages - core-utils
     package:
       state: latest
       name:
@@ -28,14 +19,14 @@
         - which               # A utility to show the full path of commands
         - zoxide              # A smarter cd command for your terminal
 
-  - name: no-config - install archlinux related utilities
+  - name: install-core-base-packages - archlinux utils
     package:
       state: latest
       name:
         - base-devel          # Basic tools to build Arch Linux packages
         - pacman-contrib      # Contributed scripts and tools for pacman systems
 
-  - name: no-config - install system monitor related utilities
+  - name: install-core-base-packages - system monitor
     package:
       state: latest
       name:
@@ -47,7 +38,7 @@
         - inxi                # Full featured CLI system information tool
         - neofetch            # A CLI system information tool written in BASH that supports displaying images.
 
-  - name: no-config - install disk related utilities
+  - name: install-core-base-packages - disk
     package:
       state: latest
       name:
@@ -58,7 +49,7 @@
         - mtools              # A collection of utilities to access MS-DOS disks
         - ncdu                # Disk usage analyzer with an ncurses interface
 
-  - name: no-config - install network related utilities
+  - name: install-core-base-packages - network
     package:
       state: latest
       name:
@@ -66,10 +57,10 @@
         # - nfs-utils           # Support programs for Network File Systems
         # - nmap                # Utility for network discovery and security auditing (great to check open ports)
         # - opensnitch          # A GNU/Linux application firewall
+        # - traceroute          # Tracks the route taken by packets over an IP network
+        # - ufw                 # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
         # - wget                # Network utility to retrieve files from the Web
         # - whois               # Intelligent WHOIS client
         - curl                # Command line tool and library for transferring data with URLs
         - rsync               # A fast and versatile file copying tool for remote and local files
-        - traceroute          # Tracks the route taken by packets over an IP network
-        - ufw                 # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
 

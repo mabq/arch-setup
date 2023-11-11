@@ -1,16 +1,14 @@
-- name: handlr - link files
-  tags: dotfiles,handlr
-  block:
-  # - name: handlr - ensure `.config` directory exist
-  #   ansible.builtin.import_tasks: "{{ playbook_dir }}/shared-tasks/ensure_config_directory.yml"
-  - name: handlr - link `mimeapps.list`
-    ansible.builtin.file:
-      src: "{{ ansible_facts.env.PWD }}/roles/workstation/links/handlr/mimeapps.list"
-      path: "{{ home }}/.config/mimeapps.list"
-      owner: "{{ user }}"
-      group: "{{ user }}"
-      mode: 0600
-      state: "link"
+# - name: handlr - ensure `.config` directory exist
+#   ansible.builtin.import_tasks: "{{ playbook_dir }}/shared-tasks/ensure_config_directory.yml"
+- name: handlr - link config files
+  tags: dotfiles,handlr,handlr_linkfile
+  ansible.builtin.file:
+    src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
+    path: "{{ home }}/.config/mimeapps.list"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+    state: "link"
 
 - name: handlr - link files
   tags: dotfiles,handlr
