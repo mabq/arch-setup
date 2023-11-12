@@ -1,4 +1,4 @@
-- name: clock - start and enable `systemd-timesyncd.service`
+- name: base | system | clock | start and enable `systemd-timesyncd.service`
   tags: system,clock
   ansible.builtin.service:
     name: "systemd-timesyncd.service"
@@ -6,7 +6,7 @@
     state: "started"
     scope: "system"
 
-- name: clock | set time zone
+- name: base | system | clock | set timezone
   tags: system,clock,timezone
   community.general.timezone:
     name: "{{ timezone }}"

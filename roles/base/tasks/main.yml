@@ -2,16 +2,16 @@
 #   It's better to group tasks by what part of the system they affect
 
 # user setup
-- import_tasks: tasks/git.yml
+- import_tasks: user/git.yml
+- import_tasks: user/openssh.yml
 
 # install software
 - import_tasks: software/pacman.yml
 - import_tasks: software/install.yml
 
 # system setup
-#   some tasks require the files to be in place
-- import_tasks: system_setup/clock.yml
-- import_tasks: system_setup/ssh.yml
+- import_tasks: system/clock.yml
+- import_tasks: system/openssh.yml
 
 # - zsh (before user for default shell)
 # - user (adjustments only, the home folder should already be there)

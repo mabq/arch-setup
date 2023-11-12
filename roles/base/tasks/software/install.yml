@@ -1,11 +1,14 @@
-- name: install software (base)
-  tags: install,base
+- name: base | software | install | openssh (and notify restart)
+  ansible.builtin.package:
+    state: latest
+    name: openssh         # https://archlinux.org/packages/?sort=&q=openssh&maintainer=&flagged=
+  notify: restart_sshd
+
+- name: base | software | install | all other packages
+  tags: install,packages
   package:
     state: latest
     name:
-    ansible git
-
-      # ------------------------------------------------------------------------
       # Archlinux specific
       - base-devel          # Basic tools to build Arch Linux packages
       - pacman-contrib      # Contributed scripts and tools for pacman systems
@@ -14,7 +17,6 @@
       - git                 # The fast distributed version control system
       - git-delta           # Syntax-highlighting pager for git and diff output
       - neovim              # Fork of Vim aiming to improve user experience, plugins, and GUIs
-      - openssh             # https://archlinux.org/packages/?sort=&q=openssh&maintainer=&flagged=
       - sudo                # Give certain users the ability to run some commands as root (already installed)
       - tmux                # Terminal multiplexer
       - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
