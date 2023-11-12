@@ -4,32 +4,36 @@
   become: true
   tags: always
   pre_tasks:
-  - name: Exit if not running Archlinux
+
+  - name: pre_tasks | exit if not running archlinux
     ansible.builtin.fail:
       msg: This host is not running Archlinux
     when: ansible_distribution != "Archlinux"
-  # - name: Synchronize and update all packages
+
+  # - name: pre_tasks | synchronize and update all packages
   #   community.general.pacman:
   #     update_cache: true
   #     upgrade: true
-  - name: check processor
-    ansible.builtin.debug:
-      msg: "{{ is_intel }}"
+  
+  - name: pre_tasks | load theme variables
+    ansible.builtin.include_vars: 
+      file: "themes/{{ theme }}.yml"
 
+# ------------------------------------------------------------------------------
 
 # --- Roles
 
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
-#
-# - hosts: workstation
-#   tags: workstation
-#   become: true
-#   roles:
-#     - workstation
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
+
+- hosts: workstation
+  tags: workstation
+  become: true
+  roles:
+    - workstation
 
 # - hosts: server
 #   tags: server

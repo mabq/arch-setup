@@ -1,6 +1,6 @@
 - name: base | software | install | all other packages
   tags: software,noconfig
-  package:
+  ansible.builtin.package:
     state: latest
     name:
       # Archlinux specific
