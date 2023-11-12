@@ -14,7 +14,7 @@
   #     upgrade: true
   - name: check processor
     ansible.builtin.debug:
-      msg: "{{ ansible_processor_brand }}"
+      msg: "{{ ansible_processor }}"
 
 
 # --- Roles
