@@ -15,6 +15,11 @@
   - name: check processor
     ansible.builtin.debug:
       msg: "{{ ansible_processor }}"
+  - name: intel
+    ansible.builtin.debug:
+      msg: "Is intel"
+    when: "Intel in {{ item }}"
+    loop: "{{ ansible_processor }}"
 
 
 # --- Roles
