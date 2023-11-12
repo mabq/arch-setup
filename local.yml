@@ -18,7 +18,7 @@
   - name: intel
     ansible.builtin.debug:
       msg: "Is intel"
-    when: "'Intel' in ansible_processor"
+    when: "'GenuineIntel' in ansible_processor"
 
 
 # --- Roles
