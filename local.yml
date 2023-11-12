@@ -14,11 +14,7 @@
   #     upgrade: true
   - name: check processor
     ansible.builtin.debug:
-      msg: "{{ ansible_processor }}"
-  - name: intel
-    ansible.builtin.debug:
-      msg: "Is intel"
-    when: "'GenuineIntel' in ansible_processor"
+      msg: "{{ is_intel }}"
 
 
 # --- Roles
