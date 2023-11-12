@@ -1,9 +1,17 @@
-- import_tasks: tasks/pacman.yml
+# Why this way?
+#   It's better to group tasks by what part of the system they affect
 
-- import_tasks: tasks/no-config.yml
-
+# user setup
 - import_tasks: tasks/git.yml
-- import_tasks: tasks/ssh.yml
+
+# install software
+- import_tasks: software/pacman.yml
+- import_tasks: software/install.yml
+
+# system setup
+#   some tasks require the files to be in place
+- import_tasks: system_setup/clock.yml
+- import_tasks: system_setup/ssh.yml
 
 # - zsh (before user for default shell)
 # - user (adjustments only, the home folder should already be there)
@@ -11,25 +19,4 @@
 # - nvim
 #   - many things here...
 # - node
-
-# workstation
-# - i3
-#   - many programs here...
-# - hyprland
-#   - many programs here...
-# - brave
-# - personal_projects
-
-# server
-# - (to do later)
-
-# create users and setup config files
-# - import_tasks: users/mabq.yml
-
-# setup the ansible environment (to review)
-# - import_tasks: software/install.yml
-
-# install base packages
-
-# perform remaining tasks
 

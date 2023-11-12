@@ -1,4 +1,4 @@
-- name: Configure client
+- name: SSH client config files
   tags: dotfiles,ssh
   block:
   - name: ssh - ensure `.ssh` directory exists
@@ -8,7 +8,8 @@
       group: "{{ user }}"
       mode: 0700
       state: directory
-  - name: ssh - copy ssh keys
+  - name: ssh - uncrypt and copy ssh keys
+    # public key is not encrypted but it makes sense to put both keys in the same source dir
     ansible.builtin.copy:
       src: "ssh/{{ item.src }}"
       dest: "{{ home }}/.ssh"
@@ -18,47 +19,31 @@
     with_items:
       - { src: 'id_ed25519', mode: '0600' }
       - { src: 'id_ed25519.pub', mode: '0644' }
-  - name: ssh - link client config file
+  - name: ssh - create a link for the ssh client config file
     ansible.builtin.file:
-      src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
-      path: "{{ home }}/.config/mimeapps.list"
+      src: "{{ srcdir }}/roles/base/links/ssh/config"
+      path: "{{ home }}/.ssh/config"
       owner: "{{ user }}"
       group: "{{ user }}"
       mode: 0600
       state: "link"
 
-- name: Cofigure server
-  tags: dotfiles,ssh
-  block:
-  - name: ssh - add public key to authorized_keys
-    # access any machine from any other machine (single pair of keys)
-    ansible.posix.authorized_key:
-      user: "{{ user }}"
-      # lookup file works on the managed node
-      key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
-  - name: ssh - disable password authentication for root
-    ansible.builtin.lineinfile:
-      dest: /etc/ssh/sshd_config
-      regexp: '{{ item.regex }}'
-      line: '{{ item.line }}'
-    loop:
-      - { regex: "^#PermitRootLogin", line: "PermitRootLogin prohibit-password" }
-      # - { regex: "^#PasswordAuthentication", line: "PasswordAuthentication no" }
-
 - name: Install
   tags: install,ssh
   block:
-  - name: ssh - install
+  - name: ssh - install or update package
     ansible.builtin.package:
       name: openssh
       state: latest
-  - name: ssh - enable and start the `sshd.service` as a 'system' service
+    # must be restarted after an update
+    notify: restart_sshd
+  - name: ssh - start and enable `sshd.service` as a 'system' service
     ansible.builtin.systemd_service:
       name: "sshd.service"
       enabled: true
       state: "started"
       scope: "system"
-  - name: ssh - enable and start the `ssh-agent.service` as a 'user' service
+  - name: ssh - enable and start `ssh-agent.service` as a 'user' service
     # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
     # requires the `SSH_AUTH_LOCK` variable to be set to work accross terminals (set on `~/.config/zsh/exports.zsh`)
     # become must be false to activate a user service
@@ -72,3 +57,24 @@
       # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
       # must be executed via `ansible-pull`, environment variables are evaluated on the controller
       XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+
+- name: SSH server config files
+  # should be done after installation (the first time), once the server files are in place
+  tags: dotfiles,ssh
+  block:
+  - name: ssh - add public key to authorized_keys
+    # access any machine from any other machine (single pair of keys)
+    ansible.posix.authorized_key:
+      user: "{{ user }}"
+      # must be the file content, lookup file works on the managed node
+      key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
+  - name: ssh - disable password authentication for root
+    ansible.builtin.lineinfile:
+      dest: /etc/ssh/sshd_config
+      regexp: '{{ item.regex }}'
+      line: '{{ item.line }}'
+    loop:
+      - { regex: "^#PermitRootLogin", line: "PermitRootLogin prohibit-password" }
+      # uncomment the following line if you also want to disable password authentication for all other users
+      # - { regex: "^#PasswordAuthentication", line: "PasswordAuthentication no" }
+

@@ -1,16 +1,25 @@
-- name: base_no_config - archlinux utils
-  tags: install,base_no_config
+- name: install software (base)
+  tags: install,base
   package:
     state: latest
     name:
+    ansible git
+
+      # ------------------------------------------------------------------------
+      # Archlinux specific
       - base-devel          # Basic tools to build Arch Linux packages
       - pacman-contrib      # Contributed scripts and tools for pacman systems
-
-- name: base_no_config - core-utils
-  tags: install,base_no_config
-  package:
-    state: latest
-    name:
+      # ------------------------------------------------------------------------
+      # Essential tools (in case Arch was not installed with the first script)
+      - git                 # The fast distributed version control system
+      - git-delta           # Syntax-highlighting pager for git and diff output
+      - neovim              # Fork of Vim aiming to improve user experience, plugins, and GUIs
+      - openssh             # https://archlinux.org/packages/?sort=&q=openssh&maintainer=&flagged=
+      - sudo                # Give certain users the ability to run some commands as root (already installed)
+      - tmux                # Terminal multiplexer
+      - zsh                 # A very advanced and programmable command interpreter (shell) for UNIX
+      # ------------------------------------------------------------------------
+      # Core-utils alternatives
       - bat                 # Cat clone with syntax highlighting and git integration (rust)
       - eza                 # Modern replacement for ls (community fork of exa) (rust)
       - fd                  # Simple, fast and user-friendly alternative to find (rust)
@@ -19,21 +28,20 @@
       - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
       - which               # A utility to show the full path of commands
       - zoxide              # A smarter cd command for your terminal
-
-- name: base_no_config - help utils
-  tags: install,base_no_config
-  package:
-    state: latest
-    name:
+      # ------------------------------------------------------------------------
+      # Terminal file manager
+      - yazi                # Blazing fast terminal file manager written in Rust, based on async I/O
+      - ffmpegthumbnailer   # (optional, for video thumbnails) Lightweight video thumbnailer that can be used by file managers
+      - jq                  # (optional, for JSON preview) Command-line JSON processor
+      - poppler             # (optional, for PDF preview) PDF rendering library based on xpdf 3.0
+      # - ueberzugpp          # (AUR - required on X11) Command line util which allows to display images in combination with X11 written in C++
+      # ------------------------------------------------------------------------
+      # Help
       - man-db              # A utility for reading man pages 
       - man-pages           # Linux man pages
       - tldr                # Command line client for tldr, a collection of simplified and community-driven man pages
-
-- name: base_no_config - system monitor
-  tags: install,base_no_config
-  package:
-    state: latest
-    name:
+      # ------------------------------------------------------------------------
+      # System info
       # - btop                # A monitor of system resources, bpytop ported to C++
       # - iotop               # View I/O usage of processes
       # - lm_sensors          # Collection of user space tools for general SMBus access and hardware monitoring
@@ -41,32 +49,24 @@
       - htop                # Interactive process viewer
       - inxi                # Full featured CLI system information tool
       - neofetch            # A CLI system information tool written in BASH that supports displaying images.
-
-- name: base_no_config - disk
-  tags: install,base_no_config
-  package:
-    state: latest
-    name:
+      # ------------------------------------------------------------------------
+      # Disk
       # - udiskie             # Removable disk automounter using udisks
       - dosfstools          # DOS filesystem utilities
       - duf                 # Disk Usage/Free Utility
       - exfatprogs          # exFAT filesystem userspace utilities for the Linux Kernel exfat driver
       - mtools              # A collection of utilities to access MS-DOS disks
       - ncdu                # Disk usage analyzer with an ncurses interface
-
-- name: base_no_config - network
-  tags: install,base_no_config
-  package:
-    state: latest
-    name:
+      # ------------------------------------------------------------------------
+      # Network
       # - bind-tools          # A complete, highly portable implementation of the DNS protocol
       # - nfs-utils           # Support programs for Network File Systems
       # - nmap                # Utility for network discovery and security auditing (great to check open ports)
       # - opensnitch          # A GNU/Linux application firewall
-      # - traceroute          # Tracks the route taken by packets over an IP network
       # - ufw                 # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
-      # - wget                # Network utility to retrieve files from the Web
       # - whois               # Intelligent WHOIS client
       - curl                # Command line tool and library for transferring data with URLs
       - rsync               # A fast and versatile file copying tool for remote and local files
+      - traceroute          # Tracks the route taken by packets over an IP network
+      - wget                # Network utility to retrieve files from the Web
 
