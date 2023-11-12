@@ -19,5 +19,5 @@ ssh_disable_password_authentication_for_all_users: false
 home: "{{ lookup('env', 'HOME') }}"
 user: "{{ lookup('env', 'USER') }}"
 srcdir: "{{ ansible_facts.env.PWD }}"
-is_intel: "'GenuineIntel' in {{ ansible_processor }}"
+is_intel: "{{ 'GenuineIntel' in ansible_processor }}"
 
