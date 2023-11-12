@@ -1,4 +1,4 @@
-# --- Run pretasks ---
+# --- Pre-tasks
 
 - hosts: all
   become: true
@@ -12,30 +12,24 @@
   #   community.general.pacman:
   #     update_cache: true
   #     upgrade: true
-  - name: Load theme variables
-    ansible.builtin.include_vars: 
-      file: "./themes/{{ theme }}.yml"
-  - name: Change repository remote url (from https) to ssh
-    # otherwise we won't be able to push changes made through links
-    ansible.builtin.replace:
-      path: "{{ srcdir }}/.git/config"
-      regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
-      replace: \1git@\2:\3
+  - name: check processor
+    ansible.builtin.debug:
+      msg: "{{ ansible_processor_brand }}"
 
 
-# --- Run roles ---
+# --- Roles
 
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - base
-
-- hosts: workstation
-  tags: workstation
-  become: true
-  roles:
-    - workstation
+# - hosts: all
+#   tags: base
+#   become: true
+#   roles:
+#     - base
+#
+# - hosts: workstation
+#   tags: workstation
+#   become: true
+#   roles:
+#     - workstation
 
 # - hosts: server
 #   tags: server

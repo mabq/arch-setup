@@ -1,0 +1,15 @@
+- name: workstation | system_setup | logging | adjust retention period
+  # the default is 1month
+  tags: system_setup,logging
+  ansible.builtin.lineinfile:
+    dest: "/etc/systemd/journald.conf"
+    regexp: "^#MaxFileSec="
+    line: "MaxFileSec=5day"
+  register: journald_config
+
+- name: workstation | system_setup | logging | restart journald (config changed)
+  tags: system_setup,logging
+  service:
+    name: systemd-journald
+    state: restarted
+  when: journald_config.changed

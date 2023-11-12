@@ -1,1 +1,7 @@
-- import_tasks: tasks/handlr.yml
+- name: Load theme variables
+  tags: always
+  ansible.builtin.include_vars: 
+    file: "vars/themes/{{ theme }}.yml"
+
+- block:
+  - import_tasks: software/handlr.yml

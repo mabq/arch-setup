@@ -1,5 +1,5 @@
-- name: base | software | pacman | change lines in pacman configuration file
-  tags: install,pacman
+- name: base | software | pacman | change pacman config file
+  tags: software,pacman
   ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
     regexp: '{{ item.regex }}'

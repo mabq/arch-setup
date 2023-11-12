@@ -1,0 +1,98 @@
+- name: base | software | openssh | install
+  tags: software,ssh
+  ansible.builtin.package:
+    state: latest
+    name: openssh  # https://archlinux.org/packages/?sort=&q=openssh&maintainer=&flagged=
+  register: openssh_update
+
+- name: base | software | openssh | restart on update
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  when: openssh_update.changed
+
+
+# --- openssh client side configurations
+
+- name: base | software | openssh | ensure `.ssh` directory exists
+  tags: software,ssh
+  ansible.builtin.file:
+    path: "{{ home }}/.ssh"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+    state: directory
+
+- name: base | software | openssh | copy ssh keys
+  tags: software,ssh
+  # public key is not encrypted but it makes sense to put both keys in the same source dir
+  ansible.builtin.copy:
+    src: "openssh/{{ item.src }}"
+    dest: "{{ home }}/.ssh"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { src: 'id_ed25519', mode: '0600' }
+    - { src: 'id_ed25519.pub', mode: '0644' }
+
+- name: base | software | openssh | link client config file
+  tags: software,ssh
+  ansible.builtin.file:
+    src: "{{ srcdir }}/roles/base/links/openssh/config"
+    path: "{{ home }}/.ssh/config"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+    state: "link"
+
+- name: base | software | openssh | add public key to authorized keys
+  # this might seem like a ssh server configuration but it is not, it is tightly related to each user
+  tags: software,ssh
+  # access any machine from any other machine (single pair of keys)
+  ansible.posix.authorized_key:
+    user: "{{ user }}"
+    # must pass the content of the key, not the key path
+    key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
+
+
+# --- openssh server side configurations
+
+- name: base | software | openssh | start and enable `sshd.service`
+  tags: software,ssh
+  ansible.builtin.systemd_service:
+    name: "sshd.service"
+    enabled: true
+    state: "started"
+
+- name: base | software | openssh | enable and start `ssh-agent.service` as a 'user' service
+  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+  # requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+  tags: software,ssh
+  ansible.builtin.systemd_service:
+    name: "ssh-agent.service"
+    enabled: true
+    state: "started"
+    scope: "user"
+  # become must be false to activate a user service
+  become: false
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+  # must be executed via `ansible-pull`, environment variables are evaluated on the controller
+  environment:
+    XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+
+- name: base | software | openssh | disable password authentication for root
+  tags: software,ssh
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PermitRootLogin"
+    line: "PermitRootLogin prohibit-password" 
+
+- name: base | software | openssh | disable password authentication for all users
+  tags: software,ssh
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PasswordAuthentication"
+    line: "PasswordAuthentication no" 
+  when: "{{ ssh_disable_password_authentication_for_all_users }}"
+

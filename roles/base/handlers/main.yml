@@ -1,6 +1,0 @@
-# if you change the name of a task you must also update the place that emits the notification
-
-- name: restart_sshd
-  service:
-    name: sshd
-    state: restarted

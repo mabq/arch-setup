@@ -1,4 +1,5 @@
-- name: shared tasks - ensure `.config` directory exists
+- name: base | first | ensure directories | `~/.config`
+  tags: always
   ansible.builtin.file:
     path: "{{ home }}/.config"
     owner: "{{ user }}"

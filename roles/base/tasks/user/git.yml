@@ -1,8 +1,0 @@
-- name: base | user | git | generate config file from template
-  tags: dotfiles,git
-  ansible.builtin.template:
-    src: "git/.gitconfig"
-    dest: "{{ home }}"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "0644"

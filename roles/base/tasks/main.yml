@@ -1,22 +1,28 @@
-# Why this way?
-#   It's better to group tasks by what part of the system they affect
+- name: Load theme variables
+  tags: always
+  ansible.builtin.include_vars: 
+    file: "vars/themes/{{ theme }}.yml"
 
-# user setup
-- import_tasks: user/git.yml
-- import_tasks: user/openssh.yml
+- block:
+  - import_tasks: first/change_remote_url.yml
+  - import_tasks: first/ensure_directories.yml
 
-# install software
-- import_tasks: software/pacman.yml
-- import_tasks: software/install.yml
+  - import_tasks: software/pacman.yml
+  - import_tasks: software/openssh.yml
+  - import_tasks: software/git.yml
+  # - import_tasks: software/zsh.yml
+  # - import_tasks: software/tmux.yml
+  # - import_tasks: software/neovim.yml
+  # - import_tasks: software/no_config.yml
 
-# system setup
-- import_tasks: system/clock.yml
-- import_tasks: system/openssh.yml
+  - import_tasks: system_setup/clock.yml
+  - import_tasks: system_setup/locales.yml
+  - import_tasks: system_setup/logging.yml
 
-# - zsh (before user for default shell)
-# - user (adjustments only, the home folder should already be there)
-# - tmux
-# - nvim
-#   - many things here...
-# - node
+  # - zsh (before user for default shell)
+  # - user (adjustments only, the home folder should already be there)
+  # - tmux
+  # - nvim
+  #   - many things here...
+  # - node
 

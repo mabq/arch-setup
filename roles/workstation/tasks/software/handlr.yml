@@ -1,0 +1,15 @@
+- name: workstation | software | handlr | install
+  tags: software,handlr
+  ansible.builtin.package:
+    name: handlr  # Powerful alternative to xdg-utils written in Rust
+    state: latest
+
+- name: workstation | software | handlr | link config files
+  tags: software,handlr
+  ansible.builtin.file:
+    src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
+    path: "{{ home }}/.config/mimeapps.list"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+    state: "link"
