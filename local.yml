@@ -18,8 +18,7 @@
   - name: intel
     ansible.builtin.debug:
       msg: "Is intel"
-    when: 'Intel' in item
-    loop: "{{ ansible_processor }}"
+    when: "'Intel' in ansible_processor"
 
 
 # --- Roles
