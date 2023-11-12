@@ -18,7 +18,8 @@
   - name: intel
     ansible.builtin.debug:
       msg: "Is intel"
-    when: "'GenuineIntel' in ansible_processor"
+    when: "item is match('.*Intel.*')"
+    loop: "{{ ansible_processor }}"
 
 
 # --- Roles
