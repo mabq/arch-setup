@@ -14,6 +14,15 @@
   ansible.builtin.shell:
     cmd: "chsh -s $(which zsh) {{ user }}"
 
+- name: base | software | zsh | create shared history file
+  tags: software,zsh
+  ansible.builtin.file:
+    path: "{{ home }}/.cache/zsh/history"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+    state: touch
+
 - name: base | software | zsh | ensure `~/.config/zsh` directory exists
   tags: software,zsh
   ansible.builtin.file:
