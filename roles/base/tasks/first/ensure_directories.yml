@@ -6,3 +6,13 @@
     group: "{{ user }}"
     mode: 0700
     state: directory
+
+
+- name: base | first | ensure directories | `~/.cache`
+  tags: always
+  ansible.builtin.file:
+    path: "{{ home }}/.cache"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+    state: directory

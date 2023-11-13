@@ -16,12 +16,21 @@
 
 - name: base | software | zsh | create shared history file
   tags: software,zsh
-  ansible.builtin.file:
-    path: "{{ home }}/.cache/zsh/history"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0600
-    state: touch
+  block:
+  - name: base | software | zsh | ensure `~/.cache/zsh` directory
+    tags: always
+    ansible.builtin.file:
+      path: "{{ home }}/.cache/zsh"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0755
+      state: directory
+  - ansible.builtin.file:
+      path: "{{ home }}/.cache/zsh/history"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0600
+      state: touch
 
 - name: base | software | zsh | ensure `~/.config/zsh` directory exists
   tags: software,zsh

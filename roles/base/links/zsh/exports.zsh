@@ -9,7 +9,7 @@ appendToPATH_fn "$HOME/.local/bin"
 #   (no need to export, child processes don't need these variables)
 HISTSIZE=10000
 SAVEHIST="${HISTSIZE}"
-HISTFILE=~/.cache/zsh/history  # avoid including the history file on the dotfiles repo
+HISTFILE=~/.cache/zsh/history  # be carefull not to include this file on any git repo
 
 # XDG Base Directory ---
 #   Only XDG_RUNTIME_DIR is set by default through pam_systemd(8). It is up to the user to explicitly define the other variables according to the specification.
