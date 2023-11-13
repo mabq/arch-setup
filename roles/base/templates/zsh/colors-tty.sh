@@ -1,4 +1,5 @@
 #!/bin/sh
+
 [ "${TERM:-none}" = "linux" ] && \
     printf '%b' '\e]P0{{ color_black_low }}
                  \e]P1{{ color_red }}
