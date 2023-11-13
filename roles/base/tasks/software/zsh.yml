@@ -4,25 +4,36 @@
     state: latest
     name:
       - zsh  # A very advanced and programmable command interpreter (shell) for UNIX
-      - zoxide  # A smarter cd command for your terminal
       - starship  # The cross-shell prompt for astronauts
       - zsh-autosuggestions  # Fish-like autosuggestions for zsh
       - zsh-history-substring-search  # ZSH port of Fish history search (up arrow)
       - zsh-syntax-highlighting  # Fish shell like syntax highlighting for Zsh
 
+- name: base | software | zsh | ensure `~/.config/zsh` directory exists
+  tags: software,zsh
+  ansible.builtin.file:
+    path: "{{ home }}/.config/zsh"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+    state: directory
+
 - name: base | software | zsh | link config files
   tags: software,zsh
   ansible.builtin.file:
-    src: "{{ srcdir }}/roles/base/links/zsh/{{ src }}"
-    path: "{{ path }}"
+    src: "{{ srcdir }}/roles/base/links/zsh/{{ item.src }}"
+    path: "{{ item.dest }}"
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0600
     state: "link"
-
-    regexp: '{{ item.regex }}'
-    line: '{{ item.line }}'
   loop:
-    - { regex: ^FILES, line: FILES=(/crypto_keyfile.bin) }
-    - { regex: ^HOOKS, line: HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems fsck) }
+    - { src: ".zshenv", dest: "{{ home }}" }
+    - { src: ".zshrc", dest: "{{ home }}/.config/zsh" }
+    - { src: "options.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: "bindkey.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: "functions.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: "exports.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: "aliases.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: "plugins.zsh", dest: "{{ home }}/.config/zsh" }
 
