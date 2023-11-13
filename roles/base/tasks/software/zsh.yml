@@ -42,12 +42,3 @@
     - { src: "aliases.zsh", dest: "{{ home }}/.config/zsh/aliases.zsh" }
     - { src: "plugins.zsh", dest: "{{ home }}/.config/zsh/plugins.zsh" }
 
-- name: base | software | git | generate theme file
-  tags: software,zsh
-  ansible.builtin.template:
-    src: "zsh/theme.zsh"
-    dest: "{{ home }}/.config/zsh/theme.zsh"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0600
-

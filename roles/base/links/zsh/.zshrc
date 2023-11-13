@@ -5,5 +5,4 @@ source "$ZDOTDIR/functions.zsh"  # must go before aliases
 source "$ZDOTDIR/exports.zsh"
 source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/plugins.zsh"
-source "$ZDOTDIR/theme.zsh"
 
