@@ -9,6 +9,11 @@
       - zsh-history-substring-search  # ZSH port of Fish history search (up arrow)
       - zsh-syntax-highlighting  # Fish shell like syntax highlighting for Zsh
 
+- name: base | software | zsh | change default shell
+  tags: software,zsh
+  ansible.builtin.shell:
+    cmd: chsh -s $(which zsh)
+
 - name: base | software | zsh | ensure `~/.config/zsh` directory exists
   tags: software,zsh
   ansible.builtin.file:
