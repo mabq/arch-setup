@@ -21,20 +21,21 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
-# Defaults ---
-export BROWSER="brave"
-export VISUAL="nvim"  # https://wiki.archlinux.org/title/Sudo#Using_visudo
-export EDITOR="nvim"
-export GTK_THEME="Adwaita:dark"
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
-export MANROFFOPT="-P -c"  # https://wiki.archlinux.org/title/Color_output_in_console#Using_less
-export PAGER="less -R --use-color -Dd+r -Du+b"
-export TERM="alacritty"
-export TERMINAL="alacritty"
-# export GPG_TTY="${TTY:-$(tty)}"
-# export VOLTA_HOME="$XDG_CONFIG_HOME/.volta" # The hassle-free JavaScript Tools Manager
-
 # SSH-agent ---
 #   (required for the ssh-agent to work accross terminals)
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+
+# Defaults ---
+#   These variables define default applications when executing commands from the terminal
+export BROWSER="brave"  # when openning links
+export VISUAL="nvim"  # when openning a GUI editor
+export EDITOR="nvim"  # when openning a terminal editor
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"  # https://wiki.archlinux.org/title/Color_output_in_console#Using_less
+export PAGER="less -R --use-color -Dd+r -Du+b"
+# export TERM="alacritty"  # (must be set by the terminal emulator)
+# export GPG_TTY="${TTY:-$(tty)}"
+# export VOLTA_HOME="$XDG_CONFIG_HOME/.volta" # The hassle-free JavaScript Tools Manager
+
+export GTK_THEME="Adwaita:dark"
 
