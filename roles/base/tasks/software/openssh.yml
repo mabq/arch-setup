@@ -25,8 +25,7 @@
 
 - name: base | software | openssh | copy ssh keys
   tags: software,ssh
-  # public key is not encrypted but it makes sense to put both keys in the same source dir
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: "openssh/{{ item.src }}"
     dest: "{{ home }}/.ssh"
     owner: "{{ user }}"

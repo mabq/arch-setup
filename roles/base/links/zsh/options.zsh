@@ -31,7 +31,6 @@ unsetopt flowcontrol
 setopt share_history
 
 # write each new command to the history file as soon as it's entered, rather than waiting until the end of the session
- 
 setopt inc_append_history
 
 # save timestamp and command duration

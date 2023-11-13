@@ -21,7 +21,11 @@
       - ripgrep             # A search tool that combines the usability of ag with the raw speed of grep (rust)
       - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
       - which               # A utility to show the full path of commands
-      - zoxide              # A smarter cd command for your terminal
+      # ------------------------------------------------------------------------
+      # Compression/Uncompression tools (used by the extract function in zsh)
+      - unrar               # The RAR uncompression program
+      - unzip               # For extracting and viewing files in .zip archives
+      - p7zip               # Command-line file archiver with high compression ratio
       # ------------------------------------------------------------------------
       # Terminal file manager
       # - yazi                # Blazing fast terminal file manager written in Rust, based on async I/O
@@ -63,4 +67,5 @@
       - rsync               # A fast and versatile file copying tool for remote and local files
       - traceroute          # Tracks the route taken by packets over an IP network
       - wget                # Network utility to retrieve files from the Web
+      - wavemon             # Ncurses-based monitoring application for wireless network devices
 
