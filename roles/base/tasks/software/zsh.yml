@@ -18,14 +18,14 @@
   tags: software,zsh
   block:
   - name: base | software | zsh | ensure `~/.cache/zsh` directory
-    tags: always
     ansible.builtin.file:
       path: "{{ home }}/.cache/zsh"
       owner: "{{ user }}"
       group: "{{ user }}"
       mode: 0755
       state: directory
-  - ansible.builtin.file:
+  - name: base | software | zsh | create history file
+    ansible.builtin.file:
       path: "{{ home }}/.cache/zsh/history"
       owner: "{{ user }}"
       group: "{{ user }}"
