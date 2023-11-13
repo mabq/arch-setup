@@ -28,12 +28,12 @@
     mode: 0600
     state: "link"
   loop:
-    - { src: ".zshenv", dest: "{{ home }}" }
-    - { src: ".zshrc", dest: "{{ home }}/.config/zsh" }
-    - { src: "options.zsh", dest: "{{ home }}/.config/zsh" }
-    - { src: "bindkey.zsh", dest: "{{ home }}/.config/zsh" }
-    - { src: "functions.zsh", dest: "{{ home }}/.config/zsh" }
-    - { src: "exports.zsh", dest: "{{ home }}/.config/zsh" }
-    - { src: "aliases.zsh", dest: "{{ home }}/.config/zsh" }
-    - { src: "plugins.zsh", dest: "{{ home }}/.config/zsh" }
+    - { src: ".zshenv", dest: "{{ home }}/.zshenv" }
+    - { src: ".zshrc", dest: "{{ home }}/.config/zsh/.zshrc" }
+    - { src: "options.zsh", dest: "{{ home }}/.config/zsh/options.zsh" }
+    - { src: "bindkey.zsh", dest: "{{ home }}/.config/zsh/bindkey.zsh" }
+    - { src: "functions.zsh", dest: "{{ home }}/.config/zsh/functions.zsh" }
+    - { src: "exports.zsh", dest: "{{ home }}/.config/zsh/exports.zsh" }
+    - { src: "aliases.zsh", dest: "{{ home }}/.config/zsh/aliases.zsh" }
+    - { src: "plugins.zsh", dest: "{{ home }}/.config/zsh/plugins.zsh" }
 
