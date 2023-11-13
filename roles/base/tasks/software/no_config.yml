@@ -21,7 +21,7 @@
       - ripgrep             # A search tool that combines the usability of ag with the raw speed of grep (rust)
       - ripgrep-all         # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
       - which               # A utility to show the full path of commands
-      - zoxide  # A smarter cd command for your terminal
+      - zoxide              # A smarter cd command for your terminal
       # ------------------------------------------------------------------------
       # Compression/Uncompression tools (used by the extract function in zsh)
       - unrar               # The RAR uncompression program
