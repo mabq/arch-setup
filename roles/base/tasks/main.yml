@@ -14,7 +14,7 @@
 # - import_tasks: software/tmux.yml
 # - import_tasks: software/neovim.yml
 # - import_tasks: software/yazi.yml
-# - import_tasks: software/no_config.yml
+- import_tasks: software/no_config.yml
 
 
 # System setup ---
