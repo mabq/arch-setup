@@ -12,7 +12,7 @@
 - name: base | software | zsh | change default shell
   tags: software,zsh
   ansible.builtin.shell:
-    cmd: chsh -s $(which zsh)
+    cmd: "chsh -s $(which zsh) {{ user }}"
 
 - name: base | software | zsh | ensure `~/.config/zsh` directory exists
   tags: software,zsh
