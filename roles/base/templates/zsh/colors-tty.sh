@@ -1,7 +1,7 @@
 #!/bin/sh
 
 [ "${TERM:-none}" = "linux" ] && \
-    printf '%b' '\e]P0{{ color_black_low | remove_hash_from_hex_color }}
+    printf '%b' '\e]P0{{ color_yellow | remove_hash_from_hex_color }}
                  \e]P1{{ color_red | remove_hash_from_hex_color }}
                  \e]P2{{ color_green | remove_hash_from_hex_color }}
                  \e]P3{{ color_yellow | remove_hash_from_hex_color }}
