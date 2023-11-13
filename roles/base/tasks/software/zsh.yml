@@ -45,7 +45,7 @@
 - name: base | software | zsh | generate `colors-tty.sh` file
   tags: software,zsh
   ansible.builtin.template:
-    src: "zsh/colors-tth.sh"
+    src: "zsh/colors-tty.sh"
     dest: "{{ home }}/.config/zsh/"
     owner: "{{ user }}"
     group: "{{ user }}"
