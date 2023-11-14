@@ -61,7 +61,7 @@
     - { src: "plugins.zsh", dest: "{{ home }}/.config/zsh/plugins.zsh" }
 
 - name: base | software | zsh | generate `colors-tty.sh` file
-  tags: software,zsh
+  tags: software,zsh,theme
   ansible.builtin.template:
     src: "zsh/colors-tty.sh"
     dest: "{{ home }}/.config/zsh/"

@@ -27,13 +27,13 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlin
 
 # Defaults ---
 #   These variables define default applications when executing commands from the terminal
+#   Do not set the `TERM` variable, it is set by each terminal emulator
 export BROWSER="brave"  # when openning links
 export VISUAL="nvim"  # when openning a GUI editor
 export EDITOR="nvim"  # when openning a terminal editor
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"  # https://wiki.archlinux.org/title/Color_output_in_console#Using_less
 export PAGER="less -R --use-color -Dd+r -Du+b"
-# export TERM="alacritty"  # (must be set by the terminal emulator)
 # export GPG_TTY="${TTY:-$(tty)}"
 # export VOLTA_HOME="$XDG_CONFIG_HOME/.volta" # The hassle-free JavaScript Tools Manager
 

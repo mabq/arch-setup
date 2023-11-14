@@ -2,13 +2,6 @@
 
 # ------------------------------------------------------------------------------
 #
-#  _                                               _             _
-# | |_ _ __ ___  _   ___  __     ___  ___  ___ ___(_) ___  _ __ (_)_______ _ __
-# | __| '_ ` _ \| | | \ \/ /____/ __|/ _ \/ __/ __| |/ _ \| '_ \| |_  / _ \ '__|
-# | |_| | | | | | |_| |>  <_____\__ \  __/\__ \__ \ | (_) | | | | |/ /  __/ |
-#  \__|_| |_| |_|\__,_/_/\_\    |___/\___||___/___/_|\___/|_| |_|_/___\___|_|
-#
-#
 # Author: theprimeagen (this is a modified version)
 #   original script: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 #   theprimeagen developer workflow: https://www.youtube.com/watch?v=bdumjiHabhQ&t=208s

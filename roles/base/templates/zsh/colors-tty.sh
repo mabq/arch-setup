@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# ------------------------------------------------------------------------------
+# IMPORTANT!                             THIS FILE WAS GENERATED FROM A TEMPLATE
+# ------------------------------------------------------------------------------
+
 # With rose-pine:
 #   P0 must be `low`, regular black is too bright for background
 #   P7 must be `high`, regular does not offer enough contrast for text
