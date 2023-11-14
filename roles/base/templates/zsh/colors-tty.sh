@@ -13,7 +13,7 @@
                  \e]P5{{ color_magenta | remove_hash_from_hex_color }}
                  \e]P6{{ color_cyan | remove_hash_from_hex_color }}
                  \e]P7{{ color_white_high | remove_hash_from_hex_color }}
-                 \e]P8{{ color_highlight_high | remove_hash_from_hex_color }}
+                 \e]P8{{ color_highlight | remove_hash_from_hex_color }}
                  \e]P9{{ color_red_high | remove_hash_from_hex_color }}
                  \e]PA{{ color_green_high | remove_hash_from_hex_color }}
                  \e]PB{{ color_yellow_high | remove_hash_from_hex_color }}
