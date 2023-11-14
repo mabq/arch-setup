@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# P0 must is low because it is used for background
-# P7 is high because it is used for text
+# With rose-pine:
+#   P0 must be `low`, regular black is too bright for background
+#   P7 must be `high`, regular does not offer enough contrast for text
+#   p8 must be `highlight`, `black_high` does not have enougt contrast
 
 [ "${TERM:-none}" = "linux" ] && \
     printf '%b' '\e]P0{{ color_black_low | remove_hash_from_hex_color }}
@@ -12,7 +14,7 @@
                  \e]P5{{ color_magenta | remove_hash_from_hex_color }}
                  \e]P6{{ color_cyan | remove_hash_from_hex_color }}
                  \e]P7{{ color_white_high | remove_hash_from_hex_color }}
-                 \e]P8{{ color_black_high | remove_hash_from_hex_color }}
+                 \e]P8{{ color_highlight | remove_hash_from_hex_color }}
                  \e]P9{{ color_red_high | remove_hash_from_hex_color }}
                  \e]PA{{ color_green_high | remove_hash_from_hex_color }}
                  \e]PB{{ color_yellow_high | remove_hash_from_hex_color }}
