@@ -7,11 +7,11 @@
 # Software ---
 
 - import_tasks: software/pacman.yml
-- import_tasks: software/no_config.yml # must be first (use of `which` in zsh)
+- import_tasks: software/no_config.yml
 - import_tasks: software/openssh.yml
 - import_tasks: software/git.yml
 - import_tasks: software/microcode.yml
-- import_tasks: software/zsh.yml
+- import_tasks: software/zsh.yml  # must go after `no_config`, requires `which` to be installed
 # - import_tasks: software/tmux.yml
 # - import_tasks: software/neovim.yml
 # - import_tasks: software/yazi.yml

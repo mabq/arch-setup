@@ -3,7 +3,7 @@
   community.general.locale_gen:
     name: "{{ item }}.UTF-8"
     state: present
-  loop: '{{ locales }}'
+  loop: "{{ locales }}"
   register: locales
 
 - name: base | system_setup | locales | set first locale in list as default locale
