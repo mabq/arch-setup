@@ -44,7 +44,7 @@
 - name: base | software | tmux | ensure `./tmux/plugins` directory exists
   tags: software,tmux
   ansible.builtin.file:
-    path: "{{ home }}/.tmux/plugins"
+    path: "{{ home }}/.tmux/plugins/tpm"
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0755
@@ -54,5 +54,5 @@
   tags: software,tmux
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ home }}/.tmux/plugins/"
+    dest: "{{ home }}/.tmux/plugins/tpm"
 
