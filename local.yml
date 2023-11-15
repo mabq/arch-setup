@@ -19,25 +19,21 @@
     ansible.builtin.include_vars: 
       file: "themes/{{ theme }}.yml"
 
-  - name: pre_tasks | check group
-    ansible.builtin.debug:
-      msg: "{{ group_names }}"
-
 # ------------------------------------------------------------------------------
 
 # --- Roles
 
-# - hosts: all
-#   tags: base
-#   become: true
-#   roles:
-#     - base
-#
-# - hosts: workstation
-#   tags: workstation
-#   become: true
-#   roles:
-#     - workstation
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
+
+- hosts: workstation
+  tags: workstation
+  become: true
+  roles:
+    - workstation
 
 # - hosts: server
 #   tags: server
