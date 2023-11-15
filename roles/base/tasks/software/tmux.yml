@@ -37,7 +37,7 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-  when: 'workstation' in group_names
+  when: "'workstation' in group_names"
 
 - name: base | software | tmux | generate theme-options (server)
   tags: software,tmux,theme
@@ -47,7 +47,7 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-  when: 'server' in group_names
+  when: "'server' in group_names"
 
 
 # --- clone tmux plugin manager
