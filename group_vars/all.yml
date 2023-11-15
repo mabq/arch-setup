@@ -11,7 +11,7 @@ locales:  # the first one is the default one
 
 git_user_email: "alejandro.banderas@me.com"
 # leave empty to use the logged in user name
-git_user_name: ""
+git_user_name: "mabq"
 
 ssh_disable_password_authentication_for_all_users: false
 
