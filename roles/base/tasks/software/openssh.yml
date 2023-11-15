@@ -93,5 +93,5 @@
     dest: /etc/ssh/sshd_config
     regexp: "^#PasswordAuthentication"
     line: "PasswordAuthentication no" 
-  when: "{{ ssh_disable_password_authentication_for_all_users }}"
+  when: ssh_disable_password_authentication_for_all_users
 
