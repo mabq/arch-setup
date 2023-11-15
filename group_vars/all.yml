@@ -21,3 +21,8 @@ user: "{{ lookup('env', 'USER') }}"
 srcdir: "{{ ansible_facts.env.PWD }}"
 is_intel: "{{ 'GenuineIntel' in ansible_processor }}"
 
+# ---
+
+# Defautls
+git_user_name: "{{ git_user_name | default(user) }}"
+
