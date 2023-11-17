@@ -2,7 +2,7 @@
   tags: software,kmonad
   community.general.pacman:
     state: latest
-    executable: "paru"
+    executable: "/usr/bin/paru"
     name: kmonad-bin  # An advanced keyboard manager - static binary version
 
 # - name: base | software | zsh | ensure `~/.config/zsh` directory exists
