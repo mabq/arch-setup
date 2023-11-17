@@ -3,73 +3,16 @@
   ansible.builtin.git:
     repo: https://aur.archlinux.org/paru.git
     dest: "{{ home }}/.paru/"
-  register: paru_result
+  register: paru_clone
 
-- name: base | software | paru | check for updates in the repo
+- name: base | software | paru | notification
   tags: software,paru
   ansible.builtin.debug:
-    msg: "paru repository was updated ({{ paru_result.before }}, {{ paru_result.after }}"
-  # when: paru_result.before != paru_result.after
+    msg: "about to build paru (if necessary), this step could take a couple of minutes"
 
-# --- config files
+- name: base | software | paru | build paru
+  tags: software,paru
+  ansible.builtin.shell: "cd {{ home }}/.paru && makepkg -si"
+  # the `before` and `after` values are hashes of the current commit and the latest commit after the git task, respectively
+  when: paru_clone.before != paru_clone.after
 
-# - name: base | software | tmux | ensure `~/.config/tmux` directory exists
-#   tags: software,tmux
-#   ansible.builtin.file:
-#     path: "{{ home }}/.config/tmux"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: 0755
-#     state: directory
-#
-# - name: base | software | tmux | link config files
-#   tags: software,tmux
-#   ansible.builtin.file:
-#     src: "{{ srcdir }}/roles/base/links/tmux/{{ item.src }}"
-#     path: "{{ home }}/.config/tmux/{{ item.dest }}"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: "{{ item.mode }}"
-#     state: "link"
-#   with_items:
-#     - { src: 'tmux.conf', dest: "tmux.conf", mode: '0644' }
-#     - { src: 'tmux-sessionizer.sh', dest: "tmux-sessionizer.sh", mode: '0755' }
-#
-# - name: base | software | tmux | generate theme-options (workstation)
-#   tags: software,tmux,theme
-#   ansible.builtin.template:
-#     src: "tmux/theme-options-workstation.conf"
-#     dest: "{{ home }}/.config/tmux/theme-options.conf"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: 0644
-#   when: "'workstation' in group_names"
-#
-# - name: base | software | tmux | generate theme-options (server)
-#   tags: software,tmux,theme
-#   ansible.builtin.template:
-#     src: "tmux/theme-options-server.conf"
-#     dest: "{{ home }}/.config/tmux/theme-options.conf"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: 0644
-#   when: "'server' in group_names"
-#
-#
-# # --- clone tmux plugin manager
-#
-# - name: base | software | tmux | ensure `./tmux/plugins` directory exists
-#   tags: software,tmux
-#   ansible.builtin.file:
-#     path: "{{ home }}/.tmux/plugins/tpm"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: 0755
-#     state: directory
-#
-# - name: base | software | tmux | clone tmux plugin manager
-#   tags: software,tmux
-#   ansible.builtin.git:
-#     repo: https://github.com/tmux-plugins/tpm
-#     dest: "{{ home }}/.tmux/plugins/tpm"
-#
