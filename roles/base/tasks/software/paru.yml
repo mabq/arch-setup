@@ -2,8 +2,14 @@
   tags: software,paru
   ansible.builtin.git:
     repo: https://aur.archlinux.org/paru.git
-    dest: "{{ home }}/.paru/paru/"
+    dest: "{{ home }}/.paru/"
+  register: paru_result
 
+ - name: base | software | paru | check for updates in the repo
+   tags: software,paru
+   ansible.builtin.debug:
+     msg: "paru repository was updated"
+   when: paru_result.before != paru_result.after
 
 # --- config files
 
