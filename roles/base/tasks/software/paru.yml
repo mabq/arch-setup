@@ -8,7 +8,7 @@
 - name: base | software | paru | check for updates in the repo
   tags: software,paru
   ansible.builtin.debug:
-    msg: "paru repository was updated (paru_result.before, paru_result.after"
+    msg: "paru repository was updated ({{ paru_result.before }}, {{ paru_result.after }}"
   # when: paru_result.before != paru_result.after
 
 # --- config files
