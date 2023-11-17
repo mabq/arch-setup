@@ -3,7 +3,7 @@
   community.general.pacman:
     state: latest
     executable: "/usr/bin/paru"
-    name: kmonad-bin  # An advanced keyboard manager - static binary version
+    name: kmonad-bin
 
 # - name: base | software | zsh | ensure `~/.config/zsh` directory exists
 #   tags: software,zsh
