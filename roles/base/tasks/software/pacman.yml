@@ -7,6 +7,6 @@
   loop:
     - { regex: "^#Color", line: "Color" }
     - { regex: "^#VerbosePkgLists", line: "VerbosePkgLists" }
-    - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 5" }
+    - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 10" }
     # - { regex: "^#IgnorePkg", line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers" }
 
