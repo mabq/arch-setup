@@ -6,8 +6,8 @@
 # Software ---
 - import_tasks: software/pacman.yml
 - import_tasks: software/no_config.yml
-- import_tasks: software/paru.yml # must go after `no_config`, requires `base-devel`
-# - import_tasks: software/kmonad.yml
+- import_tasks: software/paru.yml # must go after `no_config`, building a package requires `base-devel`
+- import_tasks: software/kmonad.yml
 - import_tasks: software/openssh.yml
 - import_tasks: software/git.yml
 - import_tasks: software/zsh.yml  # must go after `no_config`, requires `which`

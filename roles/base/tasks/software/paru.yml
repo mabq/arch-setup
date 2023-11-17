@@ -10,18 +10,14 @@
   when: paru_version.rc != 0
   block:
   - name: base | software | paru | clone the repo
+    # the repo must be cloned as the non-root user to set the correct file permissions for `makepkg` to run successfully
     become_user: "{{ user }}"
     ansible.builtin.git:
       repo: https://aur.archlinux.org/paru.git
-      # use the tmp directory to automatically delete the repo on next boot and have all required permissions
       dest: "/tmp/paru/"
-  # - name: base | software | paru | set correct permissions for `makepkg` to work
-  #   become: true
-  #   ansible.builtin.debug:
-  #     msg: "About to build paru, this will take several minutes"
-  - name: base | software | paru | letting you know
+  - name: base | software | paru | just letting you know
     ansible.builtin.debug:
-      msg: "About to build paru, this will take several minutes"
+      msg: "About to build paru from source, this can take several minutes"
   - name: base | software | paru | build paru
     # makepkg cannot be run as root
     become: false
