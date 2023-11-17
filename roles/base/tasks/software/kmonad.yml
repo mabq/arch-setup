@@ -1,5 +1,13 @@
-- name: base | software | kmonad | install
+- name: base | software | kmonad | check if kmonad is already installed
   tags: software,kmonad
+  ansible.builtin.command: "kmonad --version"
+  register: kmonad_version
+  ignore_errors: true
+
+# Note: Once installed this will never run again, update manually with paru
+- name: install kmonad (if not already installed)
+  tags: software,kmonad
+  when: kmonad_version.rc != 0
   # paru must be executed as non-root
   become: false
   # the `ansible.builtin.git` module is not working with paru

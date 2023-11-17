@@ -17,7 +17,7 @@
   ignore_errors: true
 
 # Note: Once installed this will never run again, update paru with paru itself
-- name: install paru (if not previously installed)
+- name: install paru (if not already installed)
   tags: software,pacman
   when: paru_version.rc != 0
   block:
