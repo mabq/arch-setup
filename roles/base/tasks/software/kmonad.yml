@@ -1,8 +1,8 @@
 - name: base | software | kmonad | install
   tags: software,kmonad
-  ansible.builtin.package:
+  community.general.pacman:
     state: latest
-    use: "paru"
+    executable: "paru"
     name:
       - kmonad-bin  # An advanced keyboard manager - static binary version
 
