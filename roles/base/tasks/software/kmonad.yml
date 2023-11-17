@@ -2,5 +2,14 @@
   tags: software,kmonad
   # paru must be executed as non-root
   become: false
-  ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'
+  # the `ansible.builtin.git` module is not working with paru
+  ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'  # An advanced keyboard manager - static binary version
+
+- name: base | software | kmonad | install evtest
+  # required to check the input device-file name for the keyboard (see config)
+  tags: software,kmonad
+  ansible.builtin.package:
+    state: latest
+    name: evtest  # Input device event monitor and query tool
+
 
