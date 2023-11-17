@@ -1,4 +1,4 @@
 - name: base | software | kmonad | install
   tags: software,kmonad
-  community.general.shell: "paru -S --skipreview kmonad-bin"
+  ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'
 
