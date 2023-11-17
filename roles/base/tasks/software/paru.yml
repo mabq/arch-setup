@@ -9,15 +9,9 @@
   tags: software,paru
   when: paru_version.rc != 0
   block:
-  - name: base | software | paru | create a directory for the cloned repo
-    ansible.builtin.file:
-      path: "/tmp/paru"
-      owner: "{{ user }}"
-      group: "{{ user }}"
-      # the user must have write privileges to run `makepkg` later
-      mode: 0777
-      state: directory
   - name: base | software | paru | clone the repo
+    # must be run as the user for the directory and files to have the right permissions for `makepkg`
+    become: false
     ansible.builtin.git:
       repo: https://aur.archlinux.org/paru.git
       # use the tmp directory to automatically delete the repo on next boot and have all required permissions
@@ -26,7 +20,7 @@
     ansible.builtin.debug:
       msg: "About to build paru, this will take several minutes"
   - name: base | software | paru | build paru
-    ansible.builtin.shell: "cd /tmp/paru && makepkg -si"
     # makepkg cannot be run as root
     become: false
+    ansible.builtin.shell: "cd /tmp/paru && makepkg -si"
 
