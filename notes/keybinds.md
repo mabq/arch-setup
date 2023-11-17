@@ -1,0 +1,12 @@
+# Keybinds
+
+## Shell
+
+
+## Tmux
+
+
+## Neovim
+
+
+

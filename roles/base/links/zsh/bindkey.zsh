@@ -8,8 +8,9 @@ bindkey '^?' backward-delete-char
 bindkey -s '^f' "$HOME/.config/tmux/tmux-sessionizer.sh\n"
 
 # Move to start/end of line quickly (without entering vim mode)
-bindkey '^h' beginning-of-line
-bindkey '^l' end-of-line
+#   (disabled to use those keybindings with Harpoon)
+# bindkey '^h' beginning-of-line
+# bindkey '^l' end-of-line
 
 # History search up/down arrows (requires zsh-history-substring-search plugin)
 bindkey '^[[A' history-substring-search-up    # up arrow
