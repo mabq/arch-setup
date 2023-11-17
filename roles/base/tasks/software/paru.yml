@@ -12,6 +12,8 @@
 
 - name: base | software | paru | build paru
   tags: software,paru
+  # makepkg must not be run as root
+  become: false
   ansible.builtin.shell: "cd {{ home }}/.paru && makepkg -si"
   # the `before` and `after` values are hashes of the current commit and the latest commit after the git task, respectively
   when: paru_clone.before != paru_clone.after
