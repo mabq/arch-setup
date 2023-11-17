@@ -9,6 +9,14 @@
   tags: software,paru
   when: paru_version.rc != 0
   block:
+  - name: base | software | paru | create a directory for the cloned repo
+    ansible.builtin.file:
+      path: "/tmp/paru"
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      # the user must have write privileges to run `makepkg` later
+      mode: 0777
+      state: directory
   - name: base | software | paru | clone the repo
     ansible.builtin.git:
       repo: https://aur.archlinux.org/paru.git
