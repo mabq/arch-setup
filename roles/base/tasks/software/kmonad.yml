@@ -1,9 +1,6 @@
 - name: base | software | kmonad | install
   tags: software,kmonad
-  community.general.pacman:
-    state: latest
-    executable: "/usr/bin/paru"
-    name: kmonad-bin
+  community.general.shell: 'paru -S --skipreview kmonad-bin'
 
 # - name: base | software | zsh | ensure `~/.config/zsh` directory exists
 #   tags: software,zsh
