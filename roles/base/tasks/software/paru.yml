@@ -1,20 +1,24 @@
-- name: base | software | paru | clone the repo
+- name: base | software | paru | check if paru is already installed
   tags: software,paru
-  ansible.builtin.git:
-    repo: https://aur.archlinux.org/paru.git
-    dest: "{{ home }}/.paru/"
-  register: paru_clone
+  ansible.builtin.command: "paru --version"
+  register: paru_version
+  ignore_errors: true
 
-- name: base | software | paru | notification
+# Note: Once installed this will never run again, update paru with paru itself
+- name: install paru (if not previously installed)
   tags: software,paru
-  ansible.builtin.debug:
-    msg: "about to build paru (if necessary), this step could take a couple of minutes"
-
-- name: base | software | paru | build paru
-  tags: software,paru
-  # makepkg must not be run as root
-  become: false
-  ansible.builtin.shell: "cd {{ home }}/.paru && makepkg -si"
-  # the `before` and `after` values are hashes of the current commit and the latest commit after the git task, respectively
-  when: paru_clone.before != paru_clone.after
+  when: paru_version.rc != 0
+  block:
+  - name: base | software | paru | clone the repo
+    ansible.builtin.git:
+      repo: https://aur.archlinux.org/paru.git
+      # use the tmp directory to automatically delete the repo on next boot and have all required permissions
+      dest: "/tmp/paru/"
+  - name: base | software | paru | letting you know
+    ansible.builtin.debug:
+      msg: "About to build paru, this will take several minutes"
+  - name: base | software | paru | build paru
+    ansible.builtin.shell: "cd /tmp/paru && makepkg -si"
+    # makepkg cannot be run as root
+    become: false
 
