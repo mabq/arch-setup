@@ -25,5 +25,8 @@
   - name: base | software | paru | build paru
     # makepkg cannot be run as root
     become: false
-    ansible.builtin.shell: "cd /tmp/paru && makepkg -si"
+    # `-s` installs dependencies automatilly
+    # `-i` install the package after successfully building it
+    # `--noconfirm` answers "yes" to all prompts without asking questions
+    ansible.builtin.shell: "cd /tmp/paru && makepkg -si --noconfirm"
 
