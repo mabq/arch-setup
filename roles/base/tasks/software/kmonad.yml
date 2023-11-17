@@ -1,4 +1,6 @@
 - name: base | software | kmonad | install
   tags: software,kmonad
+  # paru must be executed as non-root
+  become: false
   ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'
 
