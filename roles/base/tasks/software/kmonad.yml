@@ -1,3 +1,16 @@
+# Notes:
+#
+#   Advantanges of QMK or ZMK:
+#     - Ergonomics --- splitted, ortholineas, increased pinlu column stagger
+#     - This would not be necessary, the configurations live on the keyboard
+#     - More options. Probably better performance. No CPU consumption.
+#
+#   Advantages of Kmonad:
+#     - Any keyboard, event the builtin keyboard on laptops
+
+
+# --- install packages
+
 - name: base | software | kmonad | check if kmonad is already installed
   tags: software,kmonad
   ansible.builtin.command: "kmonad --version"
@@ -20,4 +33,17 @@
     state: latest
     name: evtest  # Input device event monitor and query tool
 
+
+# --- load the `uinput` kernel module
+#     https://github.com/kmonad/kmonad/blob/cec7d4ac3644c96737da23124e473e13ace5156c/keymap/tutorial.kbd#L111
+
+- name: base | software | kmonad | check loaded kernel modules
+  tags: software,kmonad
+  ansible.builtin.command: 'lsmod'
+  register: loaded_modules
+
+- name: base | software | kmonad | load the `uinput` kernel module (if not already loaded)
+  tags: software,kmonad
+  ansible.builtin.command: 'modprobe uinput'
+  when: "'uinput' not in loaded_modules.stdout_lines"
 
