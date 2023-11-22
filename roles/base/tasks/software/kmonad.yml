@@ -46,7 +46,7 @@
   tags: software,kmonad
   ansible.builtin.user:
     name: "{{ user }}"
-    group: input,uinput
+    groups: input,uinput
     append: true
 
 - name: base | software | kmonad | create udev rule with right permissions (if necessary)
