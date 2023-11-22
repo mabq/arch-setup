@@ -78,6 +78,15 @@
 
 
 # --- link config files
+#
+- name: base | software | kmonad | `~/.config/kmonad`
+  tags: software,kmonad
+  ansible.builtin.file:
+    path: "{{ home }}/.config/kmonad"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0777
+    state: directory
 
 - name: base | software | kmonad | link config files
   tags: software,kmonad
