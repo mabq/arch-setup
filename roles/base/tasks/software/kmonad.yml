@@ -27,11 +27,40 @@
   ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'  # An advanced keyboard manager - static binary version
 
 - name: base | software | kmonad | install evtest
-  # required to check the input device-file name for the keyboard (see config)
+  # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-know-which-event-file-corresponds-to-my-keyboard
   tags: software,kmonad
   ansible.builtin.package:
     state: latest
     name: evtest  # Input device event monitor and query tool
+
+
+# --- get uinput permissions for user
+#     https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
+
+- name: base | software | kmonad | make sure the "uinput" group exists
+  tags: software,kmonad
+  ansible.builtin.group:
+    name: uinput
+
+- name: base | software | kmonad | add user to the "input" and "uinput" groups
+  tags: software,kmonad
+  ansible.builtin.user:
+    name: "{{ user }}"
+    group: input,uinput
+    append: true
+
+- name: base | software | kmonad | create udev rule with right permissions (if necessary)
+  tags: software,kmonad
+  ansible.builtin.copy:
+    dest: "/etc/udev/rules.d/99-kmonad.rules"
+    content: KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+    mode: 0644
+  register: dev_rule
+
+- name: base | software | kmonad | reload udev rules if necessary
+  tags: software,kmonad
+  ansible.builtin.shell: 'udevadm control --reload-rules && udevadm trigger'
+  when: dev_rule.changed
 
 
 # --- load the `uinput` kernel module
@@ -42,8 +71,24 @@
   ansible.builtin.command: 'lsmod'
   register: loaded_modules
 
-- name: base | software | kmonad | load the `uinput` kernel module (if not already loaded)
+- name: base | software | kmonad | load "uinput" drivers (if necessary)
   tags: software,kmonad
   ansible.builtin.command: 'modprobe uinput'
   when: "'uinput' not in loaded_modules.stdout_lines"
+
+
+# --- link config files
+
+- name: base | software | kmonad | link config files
+  tags: software,kmonad
+  ansible.builtin.file:
+    src: "{{ srcdir }}/roles/base/links/kmonad/{{ item.src }}"
+    path: "{{ home }}/.config/kmonad/{{ item.path }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+    state: "link"
+  with_items:
+    - { src: 'mxkeys.kbd', path: 'mxkeys.kbd' }
+    # - { src: 'magic-keyboard.kbd', path: 'magic-keyboard.kbd' }
 

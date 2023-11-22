@@ -65,4 +65,3 @@ You will be prompted for the user's password. If no erros occur the machine shou
 
 - https://github.com/LearnLinuxTV/personal_ansible_desktop_configs/blob/main/README.md --- for providing the ansible structure
 - https://github.com/ThePrimeagen/ansible --- for initially showing what Ansible is capable of.
-
