@@ -1,0 +1,22 @@
+# default config file:
+#   https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi.toml
+
+# possible values:
+#   https://yazi-rs.github.io/docs/configuration/yazi
+
+[plugins]
+preload = [
+	"~/.config/yazi/disable-status-line.lua"
+]
+
+# [manager]
+# # if you like to sort alphabetically enable the following lines
+# sort_by        = "natural"
+# sort_reverse   = false
+
+[opener]
+# use handlr instead of xdg-open
+open = [
+	{ exec = 'handlr open "$@"',          desc = "Open", for = "linux" },
+]
+

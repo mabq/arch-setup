@@ -67,3 +67,17 @@
       - wget                # Network utility to retrieve files from the Web
       - wavemon             # Ncurses-based monitoring application for wireless network devices
 
+- name: CPU updates
+  tags: software,noconfig
+  block:
+  - name: workstation | software | install | Intel microcode
+    ansible.builtin.package:
+      name: intel-ucode
+      state: latest
+    when: is_intel
+  - name: workstation | software | install | AMD microcode
+    ansible.builtin.package:
+      name: amd-ucode
+      state: latest
+    when: not is_intel
+

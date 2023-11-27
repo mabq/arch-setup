@@ -27,20 +27,20 @@
 )
 
 (defalias
-    lalt (tap-hold 160 e lalt)
-    sym (tap-hold 160 r (layer-toggle symbols))
+    lalt (tap-hold-next-release 160 e lalt)
+    sym (tap-hold-next-release 160 r (layer-toggle symbols))
 
-    lsft (tap-hold 160 a lsft)
-    lctl (tap-hold 160 s lctl)
-    nav (tap-hold 160 d (layer-toggle navigation))
-    lmet (tap-hold 160 f lmet) 
+    lsft (tap-hold-next-release 160 a lsft)
+    lctl (tap-hold-next-release 160 s lctl)
+    nav (tap-hold-next-release 160 d (layer-toggle navigation))
+    lmet (tap-hold-next-release 160 f lmet) 
 
-    ralt (tap-hold 160 i lalt)
+    ralt (tap-hold-next-release 160 i lalt)
 
-    rmet (tap-hold 160 j lmet)
-    num (tap-hold 160 k (layer-toggle numbers))
-    rctl (tap-hold 160 l lctl)
-    rsft (tap-hold 160 ; lsft)
+    rmet (tap-hold-next-release 160 j lmet)
+    num (tap-hold-next-release 160 k (layer-toggle numbers))
+    rctl (tap-hold-next-release 160 l lctl)
+    rsft (tap-hold-next-release 160 ; lsft)
 
     lbkt {
     rbkt }

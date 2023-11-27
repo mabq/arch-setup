@@ -18,7 +18,7 @@
   ignore_errors: true
 
 # Note: Once installed this will never run again, update manually with paru
-- name: install kmonad (if not already installed)
+- name: base | software | kmonad | install kmonad (if not already installed)
   tags: software,kmonad
   when: kmonad_version.rc != 0
   # paru must be executed as non-root
@@ -79,7 +79,7 @@
 
 # --- link config files
 #
-- name: base | software | kmonad | `~/.config/kmonad`
+- name: base | software | kmonad | ensure `~/.config/kmonad` directory
   tags: software,kmonad
   ansible.builtin.file:
     path: "{{ home }}/.config/kmonad"
