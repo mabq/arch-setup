@@ -7,7 +7,6 @@
     state: latest
     name: 
       - yazi  # Blazing fast terminal file manager written in Rust, based on async I/O
-      # optional dependencies ---
       - ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers
       - unarchiver  # unar and lsar: Objective-C tools for uncompressing archive files
       - jq  # Command-line JSON processor
