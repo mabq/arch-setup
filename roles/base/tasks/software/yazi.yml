@@ -16,7 +16,6 @@
       - fzf  # Command-line fuzzy finder
       - zoxide  # A smarter cd command for your terminal
 
-
 # --- config files
 
 - name: base | software | yazi | ensure `~/.config/yazi` directory
