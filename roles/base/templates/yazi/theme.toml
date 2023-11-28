@@ -86,12 +86,12 @@ hovered = { underline = true }
 
 [which]
 
-mask            = { bg = "{{ color_cyan }}" }
-cand            = { fg = "{{ color_blue }}" }
-rest            = { fg = "{{ color_white }}" }
-desc            = { fg = "{{ color_white }}" }
+mask            = { bg = "{{ color_black }}" }
+cand            = { fg = "{{ color_cyan }}" }
+rest            = { fg = "{{ color_white_high }}" }
+desc            = { fg = "{{ color_white_high }}" }
 separator       = "  "
-separator_style = { fg = "{{ color_highlight_high }}" }
+separator_style = { fg = "{{ color_white_low }}" }
 
 
 [help]
