@@ -10,7 +10,7 @@
 
 cwd = { fg = "{{ color_blue }}" }
 
-hovered = { fg = "{{ color_white_high }}", bg = "{{ color_black }}" }
+hovered = { fg = "{{ color_white_high }}", bg = "{{ color_highlight }}" }
 preview_hovered = { fg = "{{ color_white_high }}" }
 
 find_keyword = { fg = "{{ color_yellow }}", italic = true }
