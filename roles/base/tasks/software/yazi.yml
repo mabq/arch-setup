@@ -8,7 +8,7 @@
     name: 
       - yazi                # Blazing fast terminal file manager written in Rust, based on async I/O
       - ffmpegthumbnailer   # Lightweight video thumbnailer that can be used by file managers
-      # - unarchiver          # unar and lsar: Objective-C tools for uncompressing archive files
+      - unarchiver          # unar and lsar: Objective-C tools for uncompressing archive files
       - jq                  # Command-line JSON processor
       - poppler             # PDF rendering library based on xpdf 3.0
       - fd                  # Simple, fast and user-friendly alternative to find
