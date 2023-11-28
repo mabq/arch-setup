@@ -8,24 +8,24 @@
 
 [manager]
 
-cwd = { fg = "#9ccfd8" }
+cwd = { fg = "{{ color_blue }}" }
 
-hovered = { fg = "#e0def4", bg = "#1f1d2e" }
-preview_hovered = { fg = "#e0def4" }
+hovered = { fg = "{{ color_white_high }}", bg = "{{ color_black }}" }
+preview_hovered = { fg = "{{ color_white_high }}" }
 
-find_keyword = { fg = "#f6c177", italic = true }
-find_position = { fg = "#f6c177", italic = true }
+find_keyword = { fg = "{{ color_yellow }}", italic = true }
+find_position = { fg = "{{ color_yellow }}", italic = true }
 
-marker_selected = { fg = "#9ccfd8", bg = "#9ccfd8" }
-marker_copied = { fg = "#f6c177", bg = "#f6c177" }
-marker_cut  = { fg = "#eb6f92", bg = "#eb6f92" }
+marker_selected = { fg = "{{ color_blue }}", bg = "{{ color_blue }}" }
+marker_copied = { fg = "{{ color_yellow }}", bg = "{{ color_yellow }}" }
+marker_cut  = { fg = "{{ color_cyan }}", bg = "{{ color_cyan }}" }
 
-tab_active = { fg = "#e0def4", bg = "#191724", bold = true }
-tab_inactive = { fg = "#6e6a86", bg = "#191724" }
+tab_active = { fg = "{{ color_white_high }}", bg = "{{ color_black_low }}", bold = true }
+tab_inactive = { fg = "{{ color_white_low }}", bg = "{{ color_black_low }}" }
 tab_width = 2
 
 border_symbol = "│"
-border_style = { fg = "#21202e" }
+border_style = { fg = "{{ color_highlight_low }}" }
 
 folder_offset  = [ 1, 0, 1, 0 ]
 preview_offset = [ 1, 1, 1, 1 ]
@@ -38,33 +38,33 @@ syntect_theme = ""
 
 # separator_open  = ""
 # separator_close = ""
-# separator_style = { fg = "#403d52", bg = "#403d52" }
+# separator_style = { fg = "{{ color_highlight }}", bg = "{{ color_highlight }}" }
 #
-# mode_normal = { fg = "#191724", bg = "#c4a7e7", bold = true }
-# mode_select = { fg = "#191724", bg = "#9ccfd8", bold = true }
-# mode_unset  = { fg = "#191724", bg = "#ebbcba", bold = true }
+# mode_normal = { fg = "{{ color_black_low }}", bg = "", bold = true }
+# mode_select = { fg = "{{ color_black_low }}", bg = "{{ color_blue }}", bold = true }
+# mode_unset  = { fg = "{{ color_black_low }}", bg = "{{ color_cyan }}", bold = true }
 #
-# progress_label  = { fg = "#e0def4", bold = true }
-# progress_normal = { fg = "#e0def4", bg = "#403d52" }
-# progress_error  = { fg = "#191724", bg = "#f38ba8" }
+# progress_label  = { fg = "{{ color_white_high }}", bold = true }
+# progress_normal = { fg = "{{ color_white_high }}", bg = "{{ color_highlight }}" }
+# progress_error  = { fg = "{{ color_black_low }}", bg = "" }
 #
-# permissions_t = { fg = "#9ccfd8" }
-# permissions_r = { fg = "#f6c177" }
-# permissions_w = { fg = "#eb6f92" }
-# permissions_x = { fg = "#31748f" }
-# permissions_s = { fg = "#403d52" }
+# permissions_t = { fg = "{{ color_blue }}" }
+# permissions_r = { fg = "{{ color_yellow }}" }
+# permissions_w = { fg = "{{ color_cyan }}" }
+# permissions_x = { fg = "" }
+# permissions_s = { fg = "{{ color_highlight }}" }
 
 
 [select]
 
-border   = { fg = "#9ccfd8" }
-active   = { fg = "#ebbcba" }
+border   = { fg = "{{ color_blue }}" }
+active   = { fg = "{{ color_cyan }}" }
 inactive = {}
 
 
 [input]
 
-border   = { fg = "#9ccfd8" }
+border   = { fg = "{{ color_blue }}" }
 title    = {}
 value    = {}
 selected = { reversed = true }
@@ -72,54 +72,54 @@ selected = { reversed = true }
 
 [completion]
 
-border   = { fg = "#9ccfd8" }
-active   = { bg = "#403d52" }
+border   = { fg = "{{ color_blue }}" }
+active   = { bg = "{{ color_highlight }}" }
 inactive = {}
 
 
 [tasks]
 
-border  = { fg = "#9ccfd8" }
+border  = { fg = "{{ color_blue }}" }
 title   = {}
 hovered = { underline = true }
 
 
 [which]
 
-mask            = { bg = "#313244" }
-cand            = { fg = "#94e2d5" }
-rest            = { fg = "#9399b2" }
-desc            = { fg = "#f5c2e7" }
+mask            = { bg = "{{ color_cyan }}" }
+cand            = { fg = "{{ color_blue }}" }
+rest            = { fg = "{{ color_white }}" }
+desc            = { fg = "{{ color_white }}" }
 separator       = "  "
-separator_style = { fg = "#585b70" }
+separator_style = { fg = "{{ color_highlight_high }}" }
 
 
 [help]
 
-on      = { fg = "#ebbdba" }
-exec    = { fg = "#9ccfd8" }
-desc    = { fg = "#908caa" }
-hovered = { bg = "#403d52", bold = true }
-footer  = { fg = "#e0def4", bg = "#524f67" }
+on      = { fg = "{{ color_cyan }}" }
+exec    = { fg = "{{ color_blue }}" }
+desc    = { fg = "{{ color_white }}" }
+hovered = { bg = "{{ color_highlight }}", bold = true }
+footer  = { fg = "{{ color_white_high }}", bg = "{{ color_highlight_high }}" }
 
 
 [filetype]
 
 rules = [
-	# { mime = "image/*", fg = "#e0def4" },
+	# { mime = "image/*", fg = "{{ color_white_high }}" },
 	#
-	# { mime = "video/*", fg = "#e0def4" },
-	# { mime = "audio/*", fg = "#e0def4" },
+	# { mime = "video/*", fg = "{{ color_white_high }}" },
+	# { mime = "audio/*", fg = "{{ color_white_high }}" },
 	#
-	# { mime = "application/zip",             fg = "#ebbcba" },
-	# { mime = "application/gzip",            fg = "#ebbcba" },
-	# { mime = "application/x-tar",           fg = "#ebbcba" },
-	# { mime = "application/x-bzip",          fg = "#ebbcba" },
-	# { mime = "application/x-bzip2",         fg = "#ebbcba" },
-	# { mime = "application/x-7z-compressed", fg = "#ebbcba" },
-	# { mime = "application/x-rar",           fg = "#ebbcba" },
+	# { mime = "application/zip",             fg = "{{ color_cyan }}" },
+	# { mime = "application/gzip",            fg = "{{ color_cyan }}" },
+	# { mime = "application/x-tar",           fg = "{{ color_cyan }}" },
+	# { mime = "application/x-bzip",          fg = "{{ color_cyan }}" },
+	# { mime = "application/x-bzip2",         fg = "{{ color_cyan }}" },
+	# { mime = "application/x-7z-compressed", fg = "{{ color_cyan }}" },
+	# { mime = "application/x-rar",           fg = "{{ color_cyan }}" },
 
-	{ name = "*", fg = "#908caa" },
-	{ name = "*/", fg = "#6e6a86" }
+	{ name = "*", fg = "{{ color_white }}" },
+	{ name = "*/", fg = "{{ color_white_low }}" }
 ]
 
