@@ -5,6 +5,9 @@ vim.g.mapleader = ' ' -- must be in this file since it must be set before callin
 
 -- netrw
 vim.g.netrw_keepdir = 0 -- avoid issue when moving files with netrw
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
 
 -- general preferences
 -- vim.opt.clipboard = 'unnamedplus'

@@ -53,6 +53,13 @@ local plugins = {
     { 'hrsh7th/cmp-buffer' },
     { 'L3MON4D3/LuaSnip' },
 
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- https://github.com/folke/trouble.nvim#setup
+        },
+    },
 
     -- Others --
     { 'godlygeek/tabular' },
@@ -70,4 +77,3 @@ local opts = {} -- empty table for default options, you can check those in https
 
 -- Run `:checkhealth lazy` to verify everything is working properly.
 require("lazy").setup(plugins, opts)
-
