@@ -33,6 +33,8 @@
     state: "link"
   with_items:
     # main
+    - { src: 'init.lua', path: 'init.lua' }
+    # lua
     - { src: 'lua/init.lua', path: 'lua/mabq/init.lua' }
     - { src: 'lua/lazy.lua', path: 'lua/mabq/lazy.lua' }
     - { src: 'lua/remap.lua', path: 'lua/mabq/remap.lua' }
