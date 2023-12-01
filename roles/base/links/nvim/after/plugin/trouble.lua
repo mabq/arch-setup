@@ -1,2 +1,2 @@
-vim.keymap.set("n", "<leader>t", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<leader>t", function() require("trouble").toggle() end, {silent = true, noremap = true})
 

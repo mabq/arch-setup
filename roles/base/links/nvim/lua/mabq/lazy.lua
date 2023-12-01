@@ -39,7 +39,15 @@ local plugins = {
     },
     { 'ThePrimeagen/harpoon' },
     { 'mbbill/undotree' },
-
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- https://github.com/folke/trouble.nvim#setup
+        },
+    },
+    { "tpope/vim-fugitive" },
+    { "folke/zen-mode.nvim" },
 
     -- LSP --
     --   https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/you-might-not-need-lsp-zero.md#you-might-not-need-lsp-zero
@@ -52,14 +60,6 @@ local plugins = {
     { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-buffer' },
     { 'L3MON4D3/LuaSnip' },
-
-    {
-        "folke/trouble.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        opts = {
-            -- https://github.com/folke/trouble.nvim#setup
-        },
-    },
 
     {
         "folke/trouble.nvim",
