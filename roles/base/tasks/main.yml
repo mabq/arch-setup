@@ -11,7 +11,7 @@
 - import_tasks: software/git.yml
 - import_tasks: software/zsh.yml  # must go after `no_config`, requires `which`
 - import_tasks: software/tmux.yml
-- import_tasks: software/neovim.yml
+- import_tasks: software/nvim.yml
 - import_tasks: software/yazi.yml
 
 
