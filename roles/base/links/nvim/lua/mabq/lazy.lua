@@ -61,6 +61,14 @@ local plugins = {
         },
     },
 
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- https://github.com/folke/trouble.nvim#setup
+        },
+    },
+
     -- Others --
     { 'godlygeek/tabular' },
     { 'kmonad/kmonad-vim' }, -- support for kbd files

@@ -1,0 +1,6 @@
+-- -- see https://github.com/jremmen/vim-ripgrep
+--
+-- -- for `rg` regex syntax see https://docs.rs/regex/1.7.1/regex/#syntax
+--
+-- -- add the `--smart-case` and `--follow` options
+-- rg_command = 'rg --vimgrep --smart-case --follow'

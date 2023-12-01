@@ -47,6 +47,7 @@
     - { src: 'after/plugin/rose-pine.lua', path: 'after/plugin/rose-pine.lua' }
     - { src: 'after/plugin/telescope.lua', path: 'after/plugin/telescope.lua' }
     - { src: 'after/plugin/treesitter.lua', path: 'after/plugin/treesitter.lua' }
+    - { src: 'after/plugin/trouble.lua', path: 'after/plugin/trouble.lua' }
     - { src: 'after/plugin/undotree.lua', path: 'after/plugin/undotree.lua' }
     # spell
     - { src: 'spell/en.utf-8.add', path: 'spell/en.utf-8.add' }

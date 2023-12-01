@@ -1,0 +1,20 @@
+-- -- See options: https://github.com/ziontee113/color-picker.nvim#set-things-up
+--
+-- vim.keymap.set("n", "<leader>c", "<cmd>PickColor<cr>", { noremap = true, silent = true })
+--
+-- require("color-picker").setup({
+--     ["icons"] = { "", " "},
+--     ["border"] = "rounded",
+--     ["keymap"] = {
+-- 		-- only when the picker is open
+--         ["H"] = "<Plug>ColorPickerSlider10Decrease",
+--         ["L"] = "<Plug>ColorPickerSlider10Increase",
+--         ["f"] = "<Plug>ColorPickerChangeColorMode",
+--     },
+--     ["background_highlight_group"] = "Normal", -- default
+--     ["border_highlight_group"] = "FloatBorder", -- default
+--     ["text_highlight_group"] = "Normal", --default
+-- })
+--
+-- -- if you don't want weird border background colors around the popup.
+-- vim.cmd([[hi FloatBorder guibg=NONE]])
