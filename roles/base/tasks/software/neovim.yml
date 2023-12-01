@@ -12,7 +12,7 @@
 - name: base | software | neovim | ensure directories
   tags: software,neovim
   ansible.builtin.file:
-    path: "{{ path }}"
+    path: "{{ item.path }}"
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0755
