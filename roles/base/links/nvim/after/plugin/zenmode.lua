@@ -1,13 +1,15 @@
 vim.keymap.set("n", "<leader>zz", function()
     require("zen-mode").setup {
+        -- https://github.com/folke/zen-mode.nvim#%EF%B8%8F-configuration
         window = {
-            width = 80,
-            options = {}
+            backdrop = 0.95,
+            width = 120,
+            options = {
+                number = false,
+                relativenumber = false,
+                cursorcolumn = false,
+            }
         },
     }
     require("zen-mode").toggle()
-    vim.wo.wrap = false
-    vim.wo.number = false
-    vim.wo.rnu = false
-    vim.opt.colorcolumn = "0"
 end)

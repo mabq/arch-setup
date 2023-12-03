@@ -52,6 +52,9 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- make it rain
+vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+
 -- disable capital Q
 vim.keymap.set("n", "Q", "<nop>")
 

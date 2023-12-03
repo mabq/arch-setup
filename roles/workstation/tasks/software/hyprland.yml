@@ -1,0 +1,18 @@
+- name: workstation | software | hyprland | install packages
+  tags: software,hyprland
+  ansible.builtin.package:
+    state: latest
+    name: 
+      - hyprland  # a highly customizable dynamic tiling Wayland compositor
+      - hyprpaper  #  a blazing fast wayland wallpaper utility with IPC controls
+
+# - name: workstation | software | hyprland | link config files
+#   tags: software,hyprland
+#   ansible.builtin.file:
+#     src: "{{ srcdir }}/roles/workstation/links/handlr/mimeapps.list"
+#     path: "{{ home }}/.config/mimeapps.list"
+#     owner: "{{ user }}"
+#     group: "{{ user }}"
+#     mode: 0600
+#     state: "link"
+

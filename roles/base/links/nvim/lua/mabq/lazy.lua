@@ -72,6 +72,7 @@ local plugins = {
     -- Others --
     { 'godlygeek/tabular' },
     { 'kmonad/kmonad-vim' }, -- support for kbd files
+    { 'eandrju/cellular-automaton.nvim' },
     -- 'nvim-lualine/lualine.nvim',
     -- 'TimUntersberger/neogit', -- possible alternative to vim-fugitive (written in lua)
 }
@@ -85,3 +86,4 @@ local opts = {} -- empty table for default options, you can check those in https
 
 -- Run `:checkhealth lazy` to verify everything is working properly.
 require("lazy").setup(plugins, opts)
+
