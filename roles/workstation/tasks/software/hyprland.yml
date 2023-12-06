@@ -3,8 +3,26 @@
   ansible.builtin.package:
     state: latest
     name: 
-      - hyprland  # a highly customizable dynamic tiling Wayland compositor
-      - hyprpaper  #  a blazing fast wayland wallpaper utility with IPC controls
+      - hyprland  # A highly customizable dynamic tiling Wayland compositor
+      - swaybg  # Wallpaper tool for Wayland compositors
+      - swaylock  # Screen locker for Wayland
+      - wev  # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
+      - wl-clipboard  # Command-line copy/paste utilities for Wayland
+      # Must-have software (https://wiki.hyprland.org/Useful-Utilities/Must-have/)
+      - dunst  # Customizable and lightweight notification-daemon
+      - pipewire  # Low-latency audio/video router and processor
+      - wireplumber  # Session / policy manager implementation for PipeWire
+      - xdg-desktop-portal-hyprland  # xdg-desktop-portal backend for hyprland
+      - xdg-desktop-portal-gtk  # A backend implementation for xdg-desktop-portal using GTK
+      - polkit-kde-agent  # Daemon providing a polkit authentication UI for KDE
+      - qt5-wayland  # Provides APIs for Wayland
+      - qt6-wayland  # Provides APIs for Wayland
+
+
+  # - paru:
+  #   - hyprpicker  # A wlroots-compatible Wayland color picker that does not uck
+  #   - tofi  # Tiny rofi / dmenu replacement for wlroots-based Wayland compositors
+  #   - wlogout  # Logout menu for wayland
 
 # - name: workstation | software | hyprland | link config files
 #   tags: software,hyprland
