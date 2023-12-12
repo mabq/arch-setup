@@ -1,14 +1,16 @@
 - hosts: localhost
   tasks:
-    - name: pre-tasks
-      tags: always
+    - tags: always
       block:
-      - import_tasks: pre/exit_if_not_arch.yml
-      - import_tasks: pre/update_all_packages.yml
-      - import_tasks: pre/load_theme_variables.yml
-      - import_tasks: pre/change_remote_url_protocol.yml
+        - import_tasks: pre/exit_if_not_arch.yml
+        - import_tasks: pre/update_all_packages.yml
+        - import_tasks: pre/load_theme_variables.yml
+        - import_tasks: pre/change_remote_url_protocol.yml
     
-    # - name: create user
+    - tags: user
+      block:
+        - import_tasks: user/create_user.yml
+        
 
 
     # no-config ---

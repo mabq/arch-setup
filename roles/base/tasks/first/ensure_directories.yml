@@ -1,3 +1,5 @@
+# this should not be needed, parent directories are automatically created
+
 - name: base | first | ensure directories | `~/.config`
   tags: always
   ansible.builtin.file:
