@@ -1,9 +1,0 @@
-- name: base | first | change remote url (from https) to ssh
-  # `ansible-pull` uses the http protocol to pull the repository,
-  # we need to change the remote url from https to ssh in order to
-  # be able to push changes made to linked files.
-  tags: always
-  ansible.builtin.replace:
-    path: "{{ srcdir }}/.git/config"
-    regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
-    replace: \1git@\2:\3

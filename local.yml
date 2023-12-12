@@ -1,9 +1,10 @@
 - hosts: localhost
   tasks:
     # pre ---
-    - import_tasks: pre/exit_if_not_arch.yml
-    - import_tasks: pre/update_all_packages.yml
-    - import_tasks: pre/load_theme_variables.yml
+    # - import_tasks: pre/exit_if_not_arch.yml
+    # - import_tasks: pre/update_all_packages.yml
+    # - import_tasks: pre/load_theme_variables.yml
+    - import_tasks: pre/change_repository_remote_url.yml
     # - include_tasks: common_tasks.yml 
     
     # no-config ---
