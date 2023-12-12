@@ -1,0 +1,4 @@
+- name: Load theme variables
+  tags: always
+  ansible.builtin.include_vars: 
+    file: "themes/{{ theme }}.yml"

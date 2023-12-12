@@ -37,7 +37,13 @@ local plugins = {
             'nvim-lua/plenary.nvim',
         }
     },
-    { 'ThePrimeagen/harpoon' },
+    {
+        'ThePrimeagen/harpoon',
+        branch = "harpoon2",
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        }
+    },
     { 'mbbill/undotree' },
     {
         "folke/trouble.nvim",

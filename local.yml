@@ -1,43 +1,15 @@
-# --- Pre-tasks
+- hosts: localhost
+  tasks:
+    # pre ---
+    - import_tasks: pre/exit_if_not_arch.yml
+    - import_tasks: pre/update_all_packages.yml
+    - import_tasks: pre/load_theme_variables.yml
+    # - include_tasks: common_tasks.yml 
+    
+    # no-config ---
+    -
 
-- hosts: all
-  pre_tasks:
+    # config ---
+    -
 
-  - name: pre_tasks | exit if not running archlinux
-    tags: always
-    ansible.builtin.fail:
-      msg: This host is not running Archlinux
-    when: ansible_distribution != "Archlinux"
-
-  # - name: pre_tasks | synchronize and update all packages
-  #   tags: always
-  #   community.general.pacman:
-  #     update_cache: true
-  #     upgrade: true
   
-  - name: pre_tasks | load theme variables
-    tags: always
-    ansible.builtin.include_vars: 
-      file: "themes/{{ theme }}.yml"
-
-# ------------------------------------------------------------------------------
-
-
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - base
-
-- hosts: workstation
-  tags: workstation
-  become: true
-  roles:
-    - workstation
-
-# - hosts: server
-#   tags: server
-#   become: true
-#   roles:
-#     - server
-
