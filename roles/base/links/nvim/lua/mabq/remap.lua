@@ -40,6 +40,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 --   literal substitution in the current buffer, use lsp to rename symbols across files
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- toggle wrap
+vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>")
+
 -- quickfix navigation
 vim.keymap.set("n", "<C-Up>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-Down>", "<cmd>cprev<CR>zz")
