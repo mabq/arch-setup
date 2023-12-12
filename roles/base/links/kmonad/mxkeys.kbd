@@ -5,7 +5,7 @@
 (defcfg
     ;; ---- Use the `evtest` package to identify the keyboard event number
     input (device-file "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse")
-    output (uinput-sink "KMonad" "sleep 1 && xset r rate 160 32 && setxkbmap -option compose:ralt")
+    output (uinput-sink "KMonad")
     cmp-seq ralt    ;; Set the compose key to `RightAlt'
     cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
     

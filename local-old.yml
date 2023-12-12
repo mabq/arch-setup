@@ -1,27 +1,27 @@
 # --- Pre-tasks
 
 - hosts: all
+  become: true
+  tags: always
   pre_tasks:
 
   - name: pre_tasks | exit if not running archlinux
-    tags: always
     ansible.builtin.fail:
       msg: This host is not running Archlinux
     when: ansible_distribution != "Archlinux"
 
   # - name: pre_tasks | synchronize and update all packages
-  #   tags: always
   #   community.general.pacman:
   #     update_cache: true
   #     upgrade: true
   
   - name: pre_tasks | load theme variables
-    tags: always
     ansible.builtin.include_vars: 
       file: "themes/{{ theme }}.yml"
 
 # ------------------------------------------------------------------------------
 
+# --- Roles
 
 - hosts: all
   tags: base

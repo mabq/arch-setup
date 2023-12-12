@@ -8,6 +8,7 @@
       - swaylock  # Screen locker for Wayland
       - wev  # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
       - wl-clipboard  # Command-line copy/paste utilities for Wayland
+      - waybar  # Highly customizable Wayland bar for Sway and Wlroots based compositors
       # Must-have software (https://wiki.hyprland.org/Useful-Utilities/Must-have/)
       - dunst  # Customizable and lightweight notification-daemon
       - pipewire  # Low-latency audio/video router and processor

@@ -7,8 +7,8 @@ Two Ansible scripts automate my setup:
 
 If you used any other method to complete the base Archlinux installation, make sure the following requirements are met before running this script (review the first script):
 
-   - The `ansible` and `git` packages must be already installed. This script must be executed with `ansible-pull`.
-   - You must be logged in as the user for which you want to create all the configuration files, `sudo` must be installed and the sudoer file must be already configured.
+   - `ansible` and `git` must be already installed (no configuration required).
+   - `sudo` must be installed and the sudoer file (for the user XXXXXXXXX must be already configured. You must be logged in as the user for which you want to create all the configuration files.
    - The encryption password must be stored in a file called `/home/{user}/.vault_key`.
 
 
@@ -65,3 +65,4 @@ You will be prompted for the user's password. If no erros occur the machine shou
 
 - https://github.com/LearnLinuxTV/personal_ansible_desktop_configs/blob/main/README.md --- for providing the ansible structure
 - https://github.com/ThePrimeagen/ansible --- for initially showing what Ansible is capable of.
+
