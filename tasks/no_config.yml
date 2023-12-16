@@ -2,7 +2,7 @@
   tags: noconfig
   block:
 
-    - name: From official repositories
+    - name: From Archlinux official repositories
       become: true
       community.general.pacman:
         state: latest
@@ -168,10 +168,16 @@
           # ------------------------------------------------------------------------
 
 
-    # - name: From the Archlinux User Repository (AUR)
-    #   community.general.pacman:
-    #     state: latest
-    #     name:
+    - name: From AUR (Archlinux User Repository)
+      community.general.pacman:
+        state: latest
+        executable: "paru"
+        name:
+          # ------------------------------------------------------------------------
+          #
+          - fontpreview-ueberzug-git # Preview system fonts in the terminal
+          #
+          # ------------------------------------------------------------------------
 
 
 # - name: Install cpu updates

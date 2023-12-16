@@ -33,6 +33,8 @@ All configuration files that do not require templating are created as links, tha
 
 To run the script execute the following command:
 
+> First time will take longer than usual because of package installation and builds
+
 ```sh 
 # `--directory` is the path where the repo will be cloned
 ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory {~/projects/arch-setup}
