@@ -2,7 +2,9 @@
   tags: software,ssh
   ansible.builtin.package:
     state: latest
-    name: openssh  # https://archlinux.org/packages/?sort=&q=openssh&maintainer=&flagged=
+    name: 
+      - openssh  # SSH protocol implementation for remote login, command execution and file transfer
+      - sshpass  # Fool ssh into accepting an interactive password non-interactively
   register: openssh_update
 
 - name: base | software | openssh | restart on update

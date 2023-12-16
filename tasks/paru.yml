@@ -1,0 +1,33 @@
+- name: Paru setup
+  tags: paru
+  block:
+
+    - name: Check if paru is already installed
+      ansible.builtin.command: "paru --version"
+      register: paru_version
+      ignore_errors: true
+
+    - name: Install paru (if not already installed)
+      # https://github.com/Morganamilo/paru?tab=readme-ov-file#installation
+      # Once installed this will never run again, update paru with paru itself
+      when: paru_version.rc != 0
+      block: 
+
+      - name: Make sure `base-devel` is installed
+        # Should be already installed, but just in case someone does not read the README.md file
+        become: true
+        community.general.pacman:
+          state: latest
+          name: base-devel
+
+      - name: Clone the `paru` repo
+        ansible.builtin.git:
+          repo: https://aur.archlinux.org/paru.git
+          dest: "/tmp/paru/"
+
+      - name: Build paru
+        # `-s` installs dependencies automatilly
+        # `-i` install the package after successfully building it
+        # `--noconfirm` answers `yes` to all prompts without asking questions
+        ansible.builtin.shell: "cd /tmp/paru && makepkg -si --noconfirm"
+

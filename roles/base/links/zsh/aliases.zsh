@@ -12,7 +12,7 @@ alias rm='rm -iv --preserve-root'
 
 # Renames ---
 alias trash='trash-put'
-alias e='nvim'
+alias e='nvim .'
 alias wifi='nmtui'
 
 # Shortcuts ---

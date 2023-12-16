@@ -1,4 +1,0 @@
-- name: Exit if not running archlinux
-  ansible.builtin.fail:
-    msg: This host is not running Archlinux
-  when: ansible_distribution != "Archlinux"
