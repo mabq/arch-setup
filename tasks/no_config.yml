@@ -155,7 +155,7 @@
           # ------------------------------------------------------------------------
           #
           # Required by Ansible:
-          - ssh-pass            # Fool ssh into accepting an interactive password non-interactively (required to run a playbook remotely)
+          - sshpass             # Fool ssh into accepting an interactive password non-interactively (required to run a playbook remotely)
           #
           # ------------------------------------------------------------------------
           #

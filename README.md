@@ -35,7 +35,7 @@ To run the script execute the following command:
 
 ```sh 
 # `--directory` is the path where the repo will be cloned
-ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory {~/projects/ansible-post-installation}
+ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory {~/projects/arch-setup}
 ```
 
 You will be prompted for the user's password. If no erros occur the machine should automatically reboot after install.
