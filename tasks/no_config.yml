@@ -169,16 +169,14 @@
 
 
     - name: From AUR (Archlinux User Repository)
-      community.general.pacman:
-        state: latest
-        executable: "paru"
-        name: hyprpicker
-          # ------------------------------------------------------------------------
-          #
-          # - fontpreview-ueberzug-git # Preview system fonts in the terminal
-          # - hyprpicker # Preview system fonts in the terminal
-          #
-          # ------------------------------------------------------------------------
+      # dropbox                     # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
+      # fontpreview-ueberzug-git    # Preview system fonts in the terminal
+      # zoom                        # Video Conferencing and Web Conferencing Service
+      ansible.builtin.shell: 'paru -S --skipreview 
+        dropbox
+        fontpreview-ueberzug-git
+        zoom
+        '
 
 
 # - name: Install cpu updates
