@@ -172,11 +172,11 @@
       community.general.pacman:
         state: latest
         executable: "paru"
-        name:
+        name: hyprpicker
           # ------------------------------------------------------------------------
           #
           # - fontpreview-ueberzug-git # Preview system fonts in the terminal
-          - hyprpicker # Preview system fonts in the terminal
+          # - hyprpicker # Preview system fonts in the terminal
           #
           # ------------------------------------------------------------------------
 
