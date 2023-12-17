@@ -1,0 +1,43 @@
+- tags: alacritty
+  block:
+
+    - name: Alacritty - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - alacritty  # A cross-platform, GPU-accelerated terminal emulator
+
+
+    - name: Create config files
+      block:
+      - name: Alacritty - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/alacritty"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Alacritty - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/tasks/config/alacritty/link/{{ item.src }}"
+          path: "{{ home }}/.config/alacritty/{{ item.dest }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+          state: "link"
+        loop:
+          - { src: "alacritty.yml", dest: "alacritty.yml" }
+
+      - name: Alacritty - Process templates
+        tags: template
+        ansible.builtin.template:
+          src: "template/{{ item.src }}"
+          dest: "{{ home }}/.config/alacritty/"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+        loop:
+          - { src: "theme.yml" }
+

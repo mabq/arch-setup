@@ -2,14 +2,14 @@
   tasks:
     - import_tasks: tasks/pre_tasks.yml
 
-    - import_tasks: tasks/system-setup.yml
+    - import_tasks: tasks/system.yml
 
     - import_tasks: tasks/pacman.yml
     - import_tasks: tasks/paru.yml
 
     - import_tasks: tasks/no_config.yml
 
-    # - import_tasks: tasks/config/alacritty/main.yml
+    - import_tasks: tasks/config/alacritty/main.yml
 
     # - import_tasks: tasks/scripts/.yml
 

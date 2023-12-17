@@ -33,7 +33,7 @@ All configuration files that do not require templating are created as links, tha
 
 To run the script execute the following command:
 
-> First time will take longer than usual because of package installation and builds
+> The first time is going to take time, be patient
 
 ```sh 
 # `--directory` is the path where the repo will be cloned
