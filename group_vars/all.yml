@@ -5,9 +5,6 @@
 theme: "rose-pine"
 
 timezone: "America/Guayaquil"
-locales:  # the first one is the default one
-  - en_US
-  - es_EC
 
 git_user_email: "alejandro.banderas@me.com"
 # leave empty to use the logged in user name
