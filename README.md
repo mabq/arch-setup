@@ -9,7 +9,7 @@ This playbook assumes you installed Archlinux with the [arch-base](https://githu
       - `base-devel`
       - `ansible`
       - `git`
-   - This playbook will create configuration files for the user currently logged in when executing the playbook. Make sure the user has `sudo` privileges.
+   - This playbook will create configuration files for the user currently logged in when executing the playbook. Make sure the user has `sudo` privileges as some tasks in the playbook require elevated privileges.
    - The encryption key used to decrypt some of the variables of this playbook must be stored in `/home/{currently-logged-in-user}/.vault_key`.
 
 
