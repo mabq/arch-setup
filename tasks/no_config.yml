@@ -169,10 +169,12 @@
 
 
     - name: From AUR (Archlinux User Repository)
+      # brave-bin                   # Web browser that blocks ads and trackers by default (binary release)
       # dropbox                     # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
       # fontpreview-ueberzug-git    # Preview system fonts in the terminal
       # zoom                        # Video Conferencing and Web Conferencing Service
       ansible.builtin.shell: 'paru -S --skipreview 
+        brave-bin
         dropbox
         fontpreview-ueberzug-git
         zoom
