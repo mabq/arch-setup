@@ -22,6 +22,6 @@
       # need to change the remote url protocol, from https to ssh, in order 
       # to be able to push changes any changes made to linked files.
       ansible.builtin.replace:
-        path: "{{ srcdir }}/.git/config"
+        path: "{{ repo_dir }}/.git/config"
         regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
         replace: \1git@\2:\3
