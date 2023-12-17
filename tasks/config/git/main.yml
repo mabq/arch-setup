@@ -1,0 +1,25 @@
+- tags: git 
+  block:
+
+    - name: Git - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - git             # The fast distributed version control system
+          - git-delta       # Syntax-highlighting pager for git and diff output
+
+
+    - name: Create config files
+      block:
+      - name: Git - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/tasks/config/git/link/{{ item.src }}"
+          path: "{{ home }}/{{ item.dest }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0644
+          state: "link"
+        loop:
+          - { src: ".gitconfig", dest: ".gitconfig" }
+

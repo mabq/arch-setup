@@ -31,7 +31,7 @@
           - { src: "alacritty.yml", dest: "alacritty.yml" }
 
       - name: Alacritty - Process templates
-        tags: template
+        tags: theme
         ansible.builtin.template:
           src: "template/{{ item.src }}"
           dest: "{{ home }}/.config/alacritty/"
