@@ -41,11 +41,11 @@
             block:
               - name: hypr - Check if wlr-randr is already installed
                 ansible.builtin.command: "which wlr-randr"
-                register: which_wlr-randr
+                register: which_wlrrandr
                 ignore_errors: true
 
               - name: hypr - Install wlr-randr
-                when: which_wlr-randr.rc != 0
+                when: which_wlrrandr.rc != 0
                 # Utility to manage outputs of a Wayland compositor
                 ansible.builtin.shell: 'paru -S --skipreview wlr-randr'
 
