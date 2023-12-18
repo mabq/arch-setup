@@ -6,9 +6,6 @@ theme: "rose-pine"
 
 timezone: "America/Guayaquil"
 
-git_user_email: "alejandro.banderas@me.com"
-git_user_name: "mabq"
-
 ssh_disable_password_authentication_for_all_users: false
 
 # lookup env will get the given environment variable from the controller machine. This is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup

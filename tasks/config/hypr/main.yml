@@ -5,7 +5,7 @@
       # see https://wiki.hyprland.org/Useful-Utilities/Must-have/
       block:
 
-      - name: Hypr - Install packages from official repositories
+      - name: hypr - Install packages from official repositories
         become: true
         community.general.pacman:
           state: latest
@@ -22,18 +22,37 @@
             - xdg-desktop-portal-gtk        # A backend implementation for xdg-desktop-portal using GTK
             - xdg-desktop-portal-hyprland   # xdg-desktop-portal backend for hyprland
 
-      - name: Hypr - Install packages from AUR
-            # hyprpicker                    # A wlroots-compatible Wayland color picker that does not suck
-            # wlr-randr                     # Utility to manage outputs of a Wayland compositor
-        ansible.builtin.shell: 'paru -S --skipreview 
-              hyprpicker
-              wlr-randr
-          '
+      - name: hypr - Install packages from AUR
+        tags: aur
+        block:
+          - name: hyprpicker
+            block:
+              - name: hypr - Check if hyprpicker is already installed
+                ansible.builtin.command: "which hyprpicker"
+                register: which_hyprpicker
+                ignore_errors: true
+
+              - name: hypr - Install hyprpicker
+                when: which_hyprpicker.rc != 0
+                # A wlroots-compatible Wayland color picker that does not suck
+                ansible.builtin.shell: 'paru -S --skipreview hyprpicker'
+
+          - name: wlr-randr
+            block:
+              - name: hypr - Check if wlr-randr is already installed
+                ansible.builtin.command: "which wlr-randr"
+                register: which_wlr-randr
+                ignore_errors: true
+
+              - name: hypr - Install wlr-randr
+                when: which_wlr-randr.rc != 0
+                # Utility to manage outputs of a Wayland compositor
+                ansible.builtin.shell: 'paru -S --skipreview wlr-randr'
 
 
     - name: Create config files
       block:
-      - name: Hypr - Create directories
+      - name: hypr - Create directories
         ansible.builtin.file:
           path: "{{ home }}/.config/hypr/source"
           owner: "{{ user }}"
@@ -41,7 +60,7 @@
           mode: 0700
           state: directory
 
-      - name: Hypr - Create links
+      - name: hypr - Create links
         ansible.builtin.file:
           src: "{{ repo_dir }}/tasks/config/hypr/files/{{ item.name }}"
           path: "{{ home }}/.config/hypr/{{ item.name }}"
@@ -61,7 +80,7 @@
           - { name: "source/window-rules.conf" }
           - { name: "source/workspace-rules.conf" }
 
-      - name: Hypr - Process templates
+      - name: hypr - Process templates
         tags: theme
         ansible.builtin.template:
           src: "files/{{ item.name }}"

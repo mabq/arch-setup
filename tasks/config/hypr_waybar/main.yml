@@ -1,7 +1,7 @@
 - tags: hypr,waybar
   block:
 
-    - name: Hypr_waybar - Install packages
+    - name: hypr_waybar - Install packages
       become: true
       community.general.pacman:
         state: latest
@@ -11,7 +11,7 @@
 
     - name: Create config files
       block:
-      - name: Hypr_waybar - Create directories
+      - name: hypr_waybar - Create directories
         ansible.builtin.file:
           path: "{{ home }}/.config/waybar"
           owner: "{{ user }}"
@@ -19,7 +19,7 @@
           mode: 0700
           state: directory
 
-      - name: Hypr_waybar - Create links
+      - name: hypr_waybar - Create links
         ansible.builtin.file:
           src: "{{ repo_dir }}/tasks/config/hypr_waybar/files/{{ item.name }}"
           path: "{{ home }}/.config/waybar/{{ item.name }}"
@@ -30,7 +30,7 @@
         loop:
           - { name: "config" }
 
-      - name: Hypr_waybar - Process templates
+      - name: hypr_waybar - Process templates
         tags: theme
         ansible.builtin.template:
           src: "files/{{ item.name }}"

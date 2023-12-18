@@ -1,7 +1,7 @@
 - tags: alacritty
   block:
 
-    - name: Alacritty - Install packages
+    - name: alacritty - Install packages
       become: true
       community.general.pacman:
         state: latest
@@ -11,7 +11,7 @@
 
     - name: Create config files
       block:
-      - name: Alacritty - Create directories
+      - name: alacritty - Create directories
         ansible.builtin.file:
           path: "{{ home }}/.config/alacritty"
           owner: "{{ user }}"
@@ -19,7 +19,7 @@
           mode: 0700
           state: directory
 
-      - name: Alacritty - Create links
+      - name: alacritty - Create links
         ansible.builtin.file:
           src: "{{ repo_dir }}/tasks/config/alacritty/files/{{ item.name }}"
           path: "{{ home }}/.config/alacritty/{{ item.name }}"
@@ -30,7 +30,7 @@
         loop:
           - { name: "alacritty.yml" }
 
-      - name: Alacritty - Process templates
+      - name: alacritty - Process templates
         tags: theme
         ansible.builtin.template:
           src: "files/{{ item.name }}"

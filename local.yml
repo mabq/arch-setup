@@ -27,7 +27,6 @@
 
     - import_tasks: tasks/config/swappy/main.yml
 
-    - import_tasks: tasks/config/zsh/main.yml
 
     # - import_tasks: tasks/scripts/.yml
 

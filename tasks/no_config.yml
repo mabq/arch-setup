@@ -1,8 +1,7 @@
-- name: Install packages that do not require any configuration
-  tags: noconfig
+- tags: noconfig
   block:
 
-    - name: No-config - Install packages from official repositories
+    - name: no-config - Install packages from official repositories
       become: true
       community.general.pacman:
         state: latest
@@ -171,15 +170,55 @@
           # ------------------------------------------------------------------------
 
 
-    - name: No-config - Intall packages from AUR
-          # brave-bin                   # Web browser that blocks ads and trackers by default (binary release)
-          # dropbox                     # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
-          # fontpreview-ueberzug-git    # Preview system fonts in the terminal
-          # zoom                        # Video Conferencing and Web Conferencing Service
-      ansible.builtin.shell: 'paru -S --skipreview 
-            brave-bin
-            dropbox
-            fontpreview-ueberzug-git
-            zoom
-        '
+    - name: Intall packages from AUR
+      # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
+      tags: aur
+      block:
+        - name: Brave
+          block:
+            - name: no-config - Check if Brave is already installed
+              ansible.builtin.command: "which brave"
+              register: which_brave
+              ignore_errors: true
+
+            - name: no-config - Install Brave
+              when: which_brave.rc != 0
+              # Web browser that blocks ads and trackers by default (binary release)
+              ansible.builtin.shell: 'paru -S --skipreview brave-bin'
+
+        - name: Dropbox
+          block:
+            - name: no-config - Check if Dropbox is already installed
+              ansible.builtin.command: "which dropbox"
+              register: which_dropbox
+              ignore_errors: true
+
+            - name: no-config - Install Dropbox
+              when: which_dropbox.rc != 0
+              # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
+              ansible.builtin.shell: 'paru -S --skipreview dropbox'
+
+        - name: Fontpreview
+          block:
+            - name: no-config - Check if Fontpreview is already installed
+              ansible.builtin.command: "which fontpreview-ueberzug"
+              register: which_fontpreview
+              ignore_errors: true
+
+            - name: no-config - Install Fontpreview
+              when: which_fontpreview.rc != 0
+              # Preview system fonts in the terminal
+              ansible.builtin.shell: 'paru -S --skipreview fontpreview-ueberzug-git'
+
+        - name: Zoom
+          block:
+            - name: no-config - Check if Zoom is already installed
+              ansible.builtin.command: "which zoom"
+              register: which_zoom
+              ignore_errors: true
+
+            - name: no-config - Install Zoom
+              when: which_zoom.rc != 0
+              # Video Conferencing and Web Conferencing Service
+              ansible.builtin.shell: 'paru -S --skipreview zoom'
 

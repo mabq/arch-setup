@@ -26,7 +26,8 @@
 
       - name: Create links
         block:
-          - name: zsh - Create link for `.zshenv` (in user's home dir)
+          - name: zsh - Create link for `.zshenv`
+            # unlike the other links this link is placed directly under the user's home directory
             ansible.builtin.file:
               src: "{{ repo_dir }}/tasks/config/zsh/files/.zshenv"
               path: "{{ home }}/.config/.zshenv"
@@ -72,13 +73,9 @@
             state: touch
 
 
-    - name: zsh - Ensure as default shell
+    - name: zsh - Make it the user's default shell
       become: true
       ansible.builtin.user:
         - name: "{{ user }}"
         - shell: /usr/bin/zsh
-
-
-
-
 
