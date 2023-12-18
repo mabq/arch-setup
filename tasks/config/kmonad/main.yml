@@ -9,7 +9,7 @@
         block:
           - name: kmonad - Check if kmonad is already installed
             ansible.builtin.command: "which kmonad"
-
+            register: which_kmonad
             ignore_errors: true
 
           - name: kmonad - Install kmonad
