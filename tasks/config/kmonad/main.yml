@@ -41,7 +41,7 @@
           path: "{{ home }}/.config/kmonad/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0755
+          mode: 0700
           state: "link"
         loop:
           - { name: "mxkeys.kbd" }
