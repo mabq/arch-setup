@@ -43,11 +43,13 @@
       # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
       block:
         - name: Kmonad - Ensure the `uinput` group exists
+          become: true
           ansible.builtin.group:
             name: uinput
             state: present
 
         - name: Kmonad - Add your user to the `input` and the `uinput` group
+          become: true
           ansible.builtin.user:
             append: true
             groups: input,uinput
