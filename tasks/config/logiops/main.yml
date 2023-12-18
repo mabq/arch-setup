@@ -1,0 +1,29 @@
+- tags: logiops
+  block:
+
+    - name: Logiops - Install package from AUR
+      # logiops      # An unofficial driver for Logitech HID++>2.0 mice and keyboard
+      ansible.builtin.shell: 'paru -S --skipreview logiops'
+
+
+    - name: Create config files
+      block:
+      - name: Logiops - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/logiops"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Logiops - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/tasks/config/logiops/files/{{ item.name }}"
+          path: "{{ home }}/.config/logiops/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+          state: "link"
+        loop:
+          - { name: "logid.cfg" }
+
