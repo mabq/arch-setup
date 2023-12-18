@@ -22,7 +22,7 @@
           path: "{{ home }}/.config/logiops"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: logiops - Create links
@@ -31,7 +31,7 @@
           path: "{{ home }}/.config/logiops/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
           state: "link"
         loop:
           - { name: "logid.cfg" }

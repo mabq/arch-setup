@@ -17,7 +17,7 @@
           path: "{{ home }}/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0644
+          mode: '600'
           state: "link"
         loop:
           - { name: ".gitconfig" }

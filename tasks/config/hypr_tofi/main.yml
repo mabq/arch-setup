@@ -22,7 +22,7 @@
           path: "{{ home }}/.config/tofi"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: hypr_tofi - Process templates
@@ -32,7 +32,7 @@
           dest: "{{ home }}/.config/tofi/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
         loop:
           - { name: "config" }
 

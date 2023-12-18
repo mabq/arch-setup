@@ -16,7 +16,7 @@
           path: "{{ home }}/.config/waybar"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: hypr_waybar - Create links
@@ -25,7 +25,7 @@
           path: "{{ home }}/.config/waybar/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
           state: "link"
         loop:
           - { name: "config" }
@@ -37,7 +37,7 @@
           dest: "{{ home }}/.config/waybar/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
         loop:
           - { name: "styles.css" }
 

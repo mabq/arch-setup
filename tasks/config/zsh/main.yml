@@ -21,7 +21,7 @@
           path: "{{ home }}/.config/zsh/source"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: Create links
@@ -33,7 +33,7 @@
               path: "{{ home }}/.zshenv"
               owner: "{{ user }}"
               group: "{{ user }}"
-              mode: 0600
+              mode: '600'
               state: "link"
 
           - name: zsh - Create links
@@ -42,7 +42,7 @@
               path: "{{ home }}/.config/zsh/{{ item.name }}"
               owner: "{{ user }}"
               group: "{{ user }}"
-              mode: 0600
+              mode: '600'
               state: "link"
             loop:
               - { name: ".zshrc" }
@@ -61,7 +61,7 @@
             path: "{{ home }}/.cache/zsh"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: 0700
+            mode: '700'
             state: directory
 
         - name: zsh - Create history file
@@ -69,7 +69,7 @@
             path: "{{ home }}/.cache/zsh/history"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: 0600
+            mode: '600'
             state: touch
 
 

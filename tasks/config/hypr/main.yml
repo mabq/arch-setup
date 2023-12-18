@@ -57,7 +57,7 @@
           path: "{{ home }}/.config/hypr/source"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: hypr - Create links
@@ -66,7 +66,7 @@
           path: "{{ home }}/.config/hypr/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
           state: "link"
         loop:
           - { name: "hyprland.conf" }
@@ -87,7 +87,7 @@
           dest: "{{ home }}/.config/hypr/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
         loop:
           - { name: "source/colors.conf" }
 

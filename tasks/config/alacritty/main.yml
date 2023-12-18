@@ -16,7 +16,7 @@
           path: "{{ home }}/.config/alacritty"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: directory
 
       - name: alacritty - Create links
@@ -25,7 +25,7 @@
           path: "{{ home }}/.config/alacritty/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
           state: "link"
         loop:
           - { name: "alacritty.yml" }
@@ -37,7 +37,7 @@
           dest: "{{ home }}/.config/alacritty/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0600
+          mode: '600'
         loop:
           - { name: "theme.yml" }
 
