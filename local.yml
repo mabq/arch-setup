@@ -9,7 +9,7 @@
 
     - import_tasks: tasks/no_config.yml
 
-    - import_tasks: tasks/config/alacritty/_main.yml
+    - import_tasks: tasks/config/alacritty/main.yml
 
     - import_tasks: tasks/config/git/main.yml
 
