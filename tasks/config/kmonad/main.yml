@@ -1,0 +1,65 @@
+- tags: kmonad
+  block:
+
+    - name: Install required packages
+      block:
+
+      - name: Kmonad - Install packages from official repositories
+        become: true
+        community.general.pacman:
+          state: latest
+          name:
+            - evtest          # Input device event monitor and query tool (required to identify the keyboard address)
+
+      - name: Kmonad - Install packages from AUR
+            # kmonad-bin      # An advanced keyboard manager - static binary version
+        ansible.builtin.shell: 'paru -S --skipreview kmonad-bin'
+
+
+    - name: Create config files
+      block:
+      - name: Kmonad - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/kmonad"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Kmonad - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/tasks/config/kmonad/files/{{ item.name }}"
+          path: "{{ home }}/.config/kmonad/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0755
+          state: "link"
+        loop:
+          - { name: "mxkeys.kbd" }
+          - { name: "apple.kbd" }
+
+
+    - name: Get uinput permissions
+      # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
+      block:
+        - name: Kmonad - Ensure the `uinput` group exists
+          ansible.builtin.group:
+            name: uinput
+            state: present
+
+        - name: Kmonad - Add your user to the `input` and the `uinput` group
+          ansible.builtin.user:
+            append: true
+            groups: input,uinput
+            name: "{{ user }}"
+
+        - name: Kmonad - Ensure the `uinput` device file has the right permissions
+          become: true
+          ansible.builtin.copy:
+            content: 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'
+            dest: /etc/udev/rules.d/99-kmonad.rules
+
+        - name: Kmonad - Ensure the `uinput` drivers are loaded
+          become: true
+          ansible.builtin.command: modprobe uinput
+

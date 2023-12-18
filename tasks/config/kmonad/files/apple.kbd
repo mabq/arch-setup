@@ -1,0 +1,76 @@
+;; tutorial: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd
+
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-Apple_Inc._Magic_Keyboard_F0T610202MXG9KPAE-if01-event-kbd")
+  output (uinput-sink "My KMonad output" "sleep 1 && setxkbmap -option compose:ralt && xset r rate 250 50")
+
+  ;; This option tells KMonad to let non-configured keys act normal
+  fallthrough true
+
+  ;; log to `stdout` without ever running (log-level info)
+  allow-cmd false
+)
+
+
+(defsrc
+  esc     f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+  grv     1       2       3       4       5       6       7       8       9       0       -       =       bspc
+  tab     q       w       e       r       t       y       u       i       o       p       [       ]       \
+  caps    a       s       d       f       g       h       j       k       l       ;       '       ret
+  lsft    z       x       c       v       b       n       m       ,       .       /       rsft    up
+  lctl    lctl    lalt    lmet                    spc                     rmet    ralt    left    down    right
+)
+
+
+;; `defsrc` doesn't necessarily have to coincide with your actual input keyboard
+
+(defalias
+    nav (layer-toggle navigation)
+    num (layer-toggle numbers)
+
+    sft_a (tap-hold-next-release 100 a lsft)
+    ctl_s (tap-hold-next-release 100 s lctl)
+    nav_d (tap-hold-next-release 100 d @nav)
+    met_f (tap-hold-next-release 100 f lmet)
+    alt_g (tap-hold-next-release 100 g lalt)
+
+    alt_h (tap-hold-next-release 100 h lalt)
+    met_j (tap-hold-next-release 100 j lmet)
+    num_k (tap-hold-next-release 100 k @num)
+    ctl_l (tap-hold-next-release 100 l lctl)
+    sft_; (tap-hold-next-release 100 ; lsft)
+
+    ;; cc (tap-hold-next-release 0 caps lctl)
+)
+
+
+;; each `deflayer` has to match `defsrc`
+
+;; the first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up, the name is not important
+
+(deflayer default
+  _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _       _
+  -       @sft_a  @ctl_s  @nav_d  @met_f  @alt_g  @alt_h  @met_j  @num_k  @ctl_l  @sft_;  _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _               _               _       _       _       _       _
+)
+
+(deflayer navigation
+  _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _       _       _       _       tab     esc     -       bspc    _       _       _
+  _       _       _       _       _       _       left    down    up      rght    ret     _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _               _               _       _       _       _       _
+)
+
+(deflayer numbers
+  _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       _       _       _       _       _       _       _       _       _       _       _       _       _
+  _       /       7       8       9       -       _       _       _       _       _       _       _       _
+  _       *       1       2       3       +       _       _       _       _       _       _       _
+  _       0       4       5       6       =       _       _       _       _       _       _       _
+  _       _       _       _               _               _       _       _       _       _
+)
