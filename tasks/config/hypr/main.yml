@@ -64,7 +64,7 @@
       - name: Hypr - Process templates
         tags: theme
         ansible.builtin.template:
-          src: "{{ item.name }}"
+          src: "files/{{ item.name }}"
           dest: "{{ home }}/.config/hypr/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
