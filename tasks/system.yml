@@ -14,8 +14,8 @@
           become: true
           community.general.timezone:
             name: "{{ timezone }}"
-            # Whether the hardware clock is in UTC or in local timezone.
-            hwclock: "local"
+            # This options is recommended by the `timedatectl` command
+            hwclock: "UTC"
 
 
     - name: Locale setup
