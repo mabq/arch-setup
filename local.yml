@@ -29,7 +29,7 @@
 
     - import_tasks: tasks/config/zsh/main.yml
 
-    - import_tasks: tasks/config/nvim/main.yml
+    # - import_tasks: tasks/config/nvim/main.yml
 
     # - import_tasks: tasks/scripts/.yml
 
