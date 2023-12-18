@@ -1,0 +1,84 @@
+- tags: zsh
+  block:
+
+    - name: zsh - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - zsh                             # A very advanced and programmable command interpreter (shell) for UNIX
+          - starship                        # The cross-shell prompt for astronauts
+          - zoxide                          # A smarter cd command for your terminal
+          - zsh-autosuggestions             # Fish-like autosuggestions for zsh
+          - zsh-history-substring-search    # ZSH port of Fish history search (up arrow)
+          - zsh-syntax-highlighting         # Fish shell like syntax highlighting for Zsh
+
+
+    - name: Create config files
+      block:
+      - name: zsh - Create directory
+        ansible.builtin.file:
+          path: "{{ home }}/.config/zsh/source"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Create links
+        block:
+          - name: zsh - Create link for `.zshenv` (in user's home dir)
+            ansible.builtin.file:
+              src: "{{ repo_dir }}/tasks/config/zsh/files/.zshenv"
+              path: "{{ home }}/.config/.zshenv"
+              owner: "{{ user }}"
+              group: "{{ user }}"
+              mode: 0600
+              state: "link"
+
+          - name: zsh - Create links
+            ansible.builtin.file:
+              src: "{{ repo_dir }}/tasks/config/zsh/files/{{ item.name }}"
+              path: "{{ home }}/.config/zsh/{{ item.name }}"
+              owner: "{{ user }}"
+              group: "{{ user }}"
+              mode: 0600
+              state: "link"
+            loop:
+              - { name: ".zshrc" }
+              - { name: "source/aliases.zsh" }
+              - { name: "source/bindkey.zsh" }
+              - { name: "source/exports.zsh" }
+              - { name: "source/functions.zsh" }
+              - { name: "source/options.zsh" }
+              - { name: "source/plugins.zsh" }
+
+
+    - name: Create shared history file
+      block:
+        - name: zsh - Create `~/.cache/zsh` directory
+          ansible.builtin.file:
+            path: "{{ home }}/.cache/zsh"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: 0700
+            state: directory
+
+        - name: zsh - Create history file
+          ansible.builtin.file:
+            path: "{{ home }}/.cache/zsh/history"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: 0600
+            state: touch
+
+
+    - name: zsh - Ensure as default shell
+      become: true
+      ansible.builtin.user:
+        - name: "{{ user }}"
+        - shell: /usr/bin/zsh
+
+
+
+
+

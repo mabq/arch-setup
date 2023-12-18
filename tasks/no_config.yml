@@ -128,6 +128,7 @@
           # ------------------------------------------------------------------------
           #
           # Books:
+          - evince              # Document viewer (PDF, PostScript, XPS, djvu, dvi, tiff, cbr, cbz, cb7, cbt)
           - foliate             # A simple and modern GTK eBook reader
           - mdbook              # Create book from markdown files, like Gitbook but implemented in Rust
           #
@@ -150,6 +151,7 @@
           # Other utils:
           - figlet              # A program for making large letters out of ordinary text
           - pastel              # A command-line tool to generate, analyze, convert and manipulate colors
+          - translate-shell     # A command-line interface and interactive shell for Google Translate
           # - stow                # Manage installation of multiple softwares in the same directory tree
           #
           # ------------------------------------------------------------------------
@@ -164,6 +166,7 @@
           # - jq
           # - nodejs
           # - npm
+          # - shellcheck
           #
           # ------------------------------------------------------------------------
 

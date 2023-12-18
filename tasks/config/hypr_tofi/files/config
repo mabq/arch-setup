@@ -12,12 +12,11 @@
 # https://github.com/philj56/tofi/blob/master/doc/tofi.5.md
 
 # Tricky settings for height:
-# Hard code the font name for much better performance (do not user the font alias like `monospace`)
-font = /usr/local/share/fonts/Cartograph CF/CartographCF/CartographCF-Regular.ttf
-font-size = 11
+font = monospace
+font-size = 10
 clip-to-padding = false
-padding-top = 8
-selection-background-padding = 8, 8, 3
+padding-top = 4
+selection-background-padding = 8, 8, 8
 height = 30
 
 # Window style
