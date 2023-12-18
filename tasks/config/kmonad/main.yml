@@ -41,7 +41,7 @@
           path: "{{ home }}/.config/kmonad/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: 0700
+          mode: '700'
           state: "link"
         loop:
           - { name: "mxkeys.kbd" }
@@ -56,7 +56,7 @@
           ansible.builtin.group:
             name: uinput
             state: present
-
+ 
         - name: kmonad - Add your user to the `input` and the `uinput` group
           become: true
           ansible.builtin.user:
