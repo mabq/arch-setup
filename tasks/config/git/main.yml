@@ -12,14 +12,15 @@
 
     - name: Create config files
       block:
+
       - name: Git - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/git/link/{{ item.src }}"
-          path: "{{ home }}/{{ item.dest }}"
+          src: "{{ repo_dir }}/tasks/config/git/files/{{ item.name }}"
+          path: "{{ home }}/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: 0644
           state: "link"
         loop:
-          - { src: ".gitconfig", dest: ".gitconfig" }
+          - { name: ".gitconfig" }
 

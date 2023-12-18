@@ -2,22 +2,22 @@
   tags: always
   block:
 
-    - name: Check linux distribution
+    - name: Pre-tasks - Check linux distribution
       ansible.builtin.fail:
         msg: This playbook can only be executed on Archlinux distributions
       when: ansible_distribution != "Archlinux"
 
-    - name: Make sure all packages are up to date
+    - name: Pre-tasks - Make sure all packages are up to date
       become: true
       community.general.pacman:
         update_cache: true
         upgrade: true
 
-    - name: Load theme variables
+    - name: Pre-tasks - Load theme variables
       ansible.builtin.include_vars: 
         file: "themes/{{ theme }}.yml"
 
-    - name: Change the repository url protocol
+    - name: Pre-tasks - Change the repository url protocol
       # `ansible-pull` uses the http protocol to clone the repository, we 
       # need to change the remote url protocol, from https to ssh, in order 
       # to be able to push changes any changes made to linked files.

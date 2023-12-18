@@ -1,0 +1,74 @@
+- tags: hypr
+  block:
+
+    - name: Install required packages
+      # see https://wiki.hyprland.org/Useful-Utilities/Must-have/
+      block:
+
+      - name: Hypr - Install packages from official repositories
+        become: true
+        community.general.pacman:
+          state: latest
+          name:
+            - hyprland                      # A highly customizable dynamic tiling Wayland compositor
+            - playerctl                     # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
+            - polkit-kde-agent              # Daemon providing a polkit authentication UI for KDE
+            - qt5-wayland                   # Provides APIs for Wayland
+            - qt6-wayland                   # Provides APIs for Wayland
+            - swaybg                        # Wallpaper tool for Wayland compositors
+            - wev                           # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
+            - wireplumber                   # Session / policy manager implementation for PipeWire
+            - wl-clipboard                  # Command-line copy/paste utilities for Wayland
+            - xdg-desktop-portal-gtk        # A backend implementation for xdg-desktop-portal using GTK
+            - xdg-desktop-portal-hyprland   # xdg-desktop-portal backend for hyprland
+
+      - name: Hypr - Install packages from AUR
+            # hyprpicker                    # A wlroots-compatible Wayland color picker that does not suck
+            # wlr-randr                     # Utility to manage outputs of a Wayland compositor
+        ansible.builtin.shell: 'paru -S --skipreview 
+              hyprpicker
+              wlr-randr
+          '
+
+
+    - name: Create config files
+      block:
+      - name: Hypr - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/hypr/source"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Hypr - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/tasks/config/hypr/files/{{ item.name }}"
+          path: "{{ home }}/.config/hypr/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+          state: "link"
+        loop:
+          - { name: "hyprland.conf" }
+          - { name: "source/animations.conf" }
+          - { name: "source/binds.conf" }
+          - { name: "source/env.conf" }
+          - { name: "source/exec.conf" }
+          - { name: "source/layouts.conf" }
+          - { name: "source/monitors.conf" }
+          - { name: "source/variables.conf" }
+          - { name: "source/window-rules.conf" }
+          - { name: "source/workspace-rules.conf" }
+
+      - name: Hypr - Process templates
+        tags: theme
+        ansible.builtin.template:
+          src: "{{ item.name }}"
+          dest: "{{ home }}/.config/hypr/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+        loop:
+          - { name: "source/colors.conf" }
+

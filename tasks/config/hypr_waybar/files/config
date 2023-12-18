@@ -1,0 +1,52 @@
+// https://github.com/Alexays/Waybar/wiki/Configuration#bar-config
+
+{
+    "height": 30,
+    "modules-left": ["cpu", "memory", "disk"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["clock"],
+    "mode": "overlay",  // much faster (no redraw of all other windows)
+    "spacing": 12,
+
+    "cpu": {
+        "interval": 1,  // much quicker refresh rate (only there for a few seconds)
+        "format": "{usage}%",
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": "{used}"
+    },
+
+    "disk": {
+        "format": "{free}"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+    },
+
+    "clock": {
+        "format": "{:%A   %b. %d   %H:%M}"
+    },
+
+    // "battery": {
+    //     "states": {
+    //         // "good": 95,
+    //         "warning": 30,
+    //         "critical": 15
+    //     },
+    //     "format": "{capacity}% {icon}",
+    //     "format-charging": "{capacity}% ",
+    //     "format-plugged": "{capacity}% ",
+    //     "format-alt": "{time} {icon}",
+    //     // "format-good": "", // An empty format will hide the module
+    //     // "format-full": "",
+    //     "format-icons": ["", "", "", "", ""]
+    // },
+    //
+    // "battery#bat2": {
+    //     "bat": "BAT2"
+    // },
+}
+

@@ -1,43 +1,43 @@
-- tags: alacritty
+- tags: hypr,waybar
   block:
 
-    - name: Alacritty - Install packages
+    - name: Hypr_waybar - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - alacritty  # A cross-platform, GPU-accelerated terminal emulator
+          - waybar      # Highly customizable Wayland bar for Sway and Wlroots based compositors
 
 
     - name: Create config files
       block:
-      - name: Alacritty - Create directories
+      - name: Hypr_waybar - Create directories
         ansible.builtin.file:
-          path: "{{ home }}/.config/alacritty"
+          path: "{{ home }}/.config/waybar"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: 0700
           state: directory
 
-      - name: Alacritty - Create links
+      - name: Hypr_waybar - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/alacritty/files/{{ item.name }}"
-          path: "{{ home }}/.config/alacritty/{{ item.name }}"
+          src: "{{ repo_dir }}/tasks/config/hypr_waybar/files/{{ item.name }}"
+          path: "{{ home }}/.config/waybar/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: 0600
           state: "link"
         loop:
-          - { name: "alacritty.yml" }
+          - { name: "config" }
 
-      - name: Alacritty - Process templates
+      - name: Hypr_waybar - Process templates
         tags: theme
         ansible.builtin.template:
           src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/alacritty/{{ item.name }}"
+          dest: "{{ home }}/.config/waybar/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: 0600
         loop:
-          - { name: "theme.yml" }
+          - { name: "style.css" }
 

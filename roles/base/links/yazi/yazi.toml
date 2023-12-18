@@ -17,6 +17,6 @@ preload = [
 [opener]
 # use handlr instead of xdg-open
 open = [
-	{ exec = 'handlr open "$@"',          desc = "Open", for = "linux" },
+	{ exec = 'handlr open "$@"', desc = "Open", for = "linux" },
 ]
 

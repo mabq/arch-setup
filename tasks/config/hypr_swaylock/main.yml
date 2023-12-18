@@ -1,0 +1,32 @@
+- tags: hypr,swaylock
+  block:
+
+    - name: Hypr_swaylock - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - swaylock    # Screen locker for Wayland
+
+
+    - name: Create config files
+      block:
+      - name: Hypr_swaylock - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/swaylock"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Hypr_swaylock - Process templates
+        tags: theme
+        ansible.builtin.template:
+          src: "files/{{ item.name }}"
+          dest: "{{ home }}/.config/swaylock/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+        loop:
+          - { name: "config" }
+

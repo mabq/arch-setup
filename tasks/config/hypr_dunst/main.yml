@@ -1,0 +1,32 @@
+- tags: hypr,dunst
+  block:
+
+    - name: Hypr_dunst - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - dunst     # Customizable and lightweight notification-daemon
+
+
+    - name: Create config files
+      block:
+      - name: Hypr_dunst - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/dunst"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0700
+          state: directory
+
+      - name: Hypr_dunst - Process templates
+        tags: theme
+        ansible.builtin.template:
+          src: "files/{{ item.name }}"
+          dest: "{{ home }}/.config/dunst/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: 0600
+        loop:
+          - { name: "dunstrc" }
+

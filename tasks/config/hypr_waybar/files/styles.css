@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+#             
+#               _____                    _       _         _
+#              |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#                | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#                | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#                |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                 |_|
+#             
+# ------------------------------------------------------------------------------
+
+* {
+    font-family: monospace;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: {{ color_highlight_low }};
+    color: {{ color_white_high }};
+}
+
+#cpu,
+#memory,
+#disk,
+#clock,
+#battery {
+    background-color: {{ color_highlight }};
+    padding: 0 15px;
+}
+
+#workspaces button {
+    color: {{ color_highlight }};
+}
+
+#workspaces button.active {
+    color: {{ color_white_high }};
+}
+
