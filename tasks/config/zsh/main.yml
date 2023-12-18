@@ -30,7 +30,7 @@
             # unlike the other links this link is placed directly under the user's home directory
             ansible.builtin.file:
               src: "{{ repo_dir }}/tasks/config/zsh/files/.zshenv"
-              path: "{{ home }}/.config/.zshenv"
+              path: "{{ home }}/.zshenv"
               owner: "{{ user }}"
               group: "{{ user }}"
               mode: 0600
