@@ -9,42 +9,45 @@
           - fontconfig    # Library for configuring and customizing font access
 
 
-    - name: Get fonts
-      # I cannot include propietary fonts in a public repo, all fonts should 
-      # be stored in a private repository
-      block:
-        - name: Clone the private `arch-fonts` repository
-
-
     - name: Create config files
       block:
-      - name: alacritty - Create directories
+      - name: fontconfig - Create directories
         ansible.builtin.file:
-          path: "{{ home }}/.config/alacritty"
+          path: "{{ home }}/.config/fontconfig"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '700'
           state: directory
 
-      - name: alacritty - Create links
+      - name: fontconfig - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/alacritty/files/{{ item.name }}"
-          path: "{{ home }}/.config/alacritty/{{ item.name }}"
+          src: "{{ repo_dir }}/tasks/config/fontconfig/files/{{ item.name }}"
+          path: "{{ home }}/.config/fontconfig/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '600'
           state: "link"
         loop:
-          - { name: "alacritty.yml" }
+          - { name: "fonts.conf" }
 
-      - name: alacritty - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/alacritty/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "theme.yml" }
+
+    - name: Get fonts
+      # I cannot include propietary fonts in a public repo, all fonts should 
+      # be stored in a private repository
+      block:
+        - name: fontconfig - Clone the `arch-fonts` repository (private)
+          ansible.builtin.git:
+            repo: "git@github.com:mabq/arch-fonts.git"
+            dest: "{{ home }}/projects/"
+            # key_file: "{{ home }}/.ssh/id_ed25519"
+
+        - name: fontconfig - Create link to the `fonts` directory
+          become: true
+          ansible.builtin.file:
+            src: "{{ home }}/projects/arch-fonts/fonts"
+            path: "/usr/local/share/fonts"
+            owner: "root"
+            group: "root"
+            mode: '755'
+            state: "link"
 

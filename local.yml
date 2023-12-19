@@ -31,7 +31,7 @@
 
     - import_tasks: tasks/config/ssh/main.yml
 
-    # - import_tasks: tasks/config/fontconfig/main.yml  # must go after openssh
+    - import_tasks: tasks/config/fontconfig/main.yml  # must go after ssh (clone a private repo)
 
     # - import_tasks: tasks/scripts/.yml
 
