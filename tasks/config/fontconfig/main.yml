@@ -39,8 +39,8 @@
           ansible.builtin.git:
             repo: "git@github.com:mabq/arch-fonts.git"
             dest: "{{ home }}/projects/arch-fonts"
-            update: true
             clone: true
+            update: true
             key_file: "{{ home }}/.ssh/{{ ssh_keyname }}"
             # this is the first time connecting to github via ssh, we must 
             # accept it's key to be automatically added to the `known_hosts`
@@ -52,8 +52,8 @@
           ansible.builtin.file:
             src: "{{ home }}/projects/arch-fonts/fonts"
             path: "/usr/local/share/fonts"
-            owner: "root"
-            group: "root"
+            owner: "{{ user }}"
+            group: "{{ user }}"
             mode: '755'
             state: "link"
 
