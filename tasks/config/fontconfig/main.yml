@@ -43,7 +43,7 @@
             # this is the first time connecting to github via ssh, we must 
             # accept it's key to be automatically added to the `known_hosts`
             # file, otherwise the verification fails.
-            ssh_opts: StrictHostKeyChecking=accept-new
+            accept_hostkey: true
 
         - name: fontconfig - Create link to the `fonts` directory
           become: true
