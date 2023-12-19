@@ -39,7 +39,7 @@
           ansible.builtin.git:
             repo: "git@github.com:mabq/arch-fonts.git"
             dest: "{{ home }}/projects/"
-            key_file: "{{ home }}/.ssh/id_ed25519"
+            key_file: "{{ home }}/.ssh/{{ ssh_keyname }}"
 
         - name: fontconfig - Create link to the `fonts` directory
           become: true

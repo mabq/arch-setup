@@ -28,8 +28,8 @@
             group: "{{ user }}"
             mode: "{{ item.mode }}"
           with_items:
-            - { name: 'id_ed25519', mode: '600' }
-            - { name: 'id_ed25519.pub', mode: '644' }
+            - { name: "{{ ssh_keyname }}", mode: '600' }
+            - { name: "{{ ssh_keyname }}.pub", mode: '644' }
 
         - name: ssh - Create links
           ansible.builtin.file:
@@ -49,7 +49,7 @@
           ansible.posix.authorized_key:
             user: "{{ user }}"
             # must pass the content of the key, not the key path.
-            key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
+            key: "{{ lookup('file', '{{ home }}/.ssh/{{ ssh_keyname }}.pub') }}"
 
 
     - name: Server side configurations

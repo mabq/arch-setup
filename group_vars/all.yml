@@ -11,6 +11,7 @@ git_name: mabq
 # Password authentication is disabled by default for the root user. You can opt
 # to disable password authentication for all other users as well.
 ssh_disable_password_authentication: false
+ssh_keyname: "id_ed25519"
 
 # Lookup env will get the given environment variable from the controller machine. This is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup
 home: "{{ lookup('env', 'HOME') }}"
