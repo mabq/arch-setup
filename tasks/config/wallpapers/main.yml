@@ -1,0 +1,13 @@
+- tags: wallpapers
+  block:
+
+    - name: ssh - Create link to wallpapers
+      ansible.builtin.file:
+        # link the whole directory, not each file
+        src: "{{ repo_dir }}/tasks/config/wallpapers/files"
+        path: "{{ home }}/.local/share/wallpapers"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: '700'
+        state: "link"
+
