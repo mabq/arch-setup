@@ -41,3 +41,15 @@
         loop:
           - { name: "styles.css" }
 
+
+    - name: hypr_waybar - Create links (scripts)
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/tasks/config/hypr_waybar/scripts/{{ item.name }}"
+        path: "{{ home }}/.local/bin/{{ item.name }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: '700'
+        state: "link"
+      loop:
+        - { name: "toggle_waybar" }
+
