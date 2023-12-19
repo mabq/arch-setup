@@ -40,5 +40,5 @@
           group: "{{ user }}"
           mode: '600'
         loop:
-          - { name: "styles.css" }
+          - { name: "style.css" }
 
