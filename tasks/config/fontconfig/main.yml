@@ -38,7 +38,7 @@
         - name: fontconfig - Clone the `arch-fonts` repository (private)
           ansible.builtin.git:
             repo: "git@github.com:mabq/arch-fonts.git"
-            dest: "{{ home }}/projects/"
+            dest: "{{ home }}/projects/arch-fonts"
             key_file: "{{ home }}/.ssh/{{ ssh_keyname }}"
 
         - name: fontconfig - Create link to the `fonts` directory
