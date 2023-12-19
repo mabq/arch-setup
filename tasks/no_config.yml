@@ -155,11 +155,6 @@
           #
           # ------------------------------------------------------------------------
           #
-          # Required by Ansible:
-          - sshpass             # Fool ssh into accepting an interactive password non-interactively (required to run a playbook remotely)
-          #
-          # ------------------------------------------------------------------------
-          #
           # Programming:
           # - go
           # - jq

@@ -77,7 +77,7 @@ local plugins = {
 
     -- Others --
     { 'godlygeek/tabular' },
-    -- { 'kmonad/kmonad-vim' }, -- (causing problems with git, files seem modified right after performing `ansible-pull`)
+    { 'kmonad/kmonad-vim' }, -- syntax highlightlting for kmonad files
     { 'eandrju/cellular-automaton.nvim' },
     -- 'nvim-lualine/lualine.nvim',
     -- 'TimUntersberger/neogit', -- possible alternative to vim-fugitive (written in lua)

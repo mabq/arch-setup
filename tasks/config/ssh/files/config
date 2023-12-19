@@ -1,10 +1,10 @@
 # Instruct the SSH-agent to automatically add the keys for all connections
 AddKeysToAgent yes
 
+
 # Add details for frequently used remote servers:
-#
-# Syntax:
-#Host {SERVER_ALIAS}
+
+# Host {SERVER_ALIAS}
 #    Hostname {SERVER_IP}
 #    Port {PORT} # Optional, defaults to 22
 #    User {SERVER_USER} # Optional, in case the client and server use different users

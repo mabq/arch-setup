@@ -1,0 +1,90 @@
+- tags: ssh
+  block:
+
+    - name: ssh - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - openssh     # SSH protocol implementation for remote login, command execution and file transfer
+          - sshpass     # Fool ssh into accepting an interactive password non-interactively
+
+
+    - name: Client side configurations
+      block:
+        - name: ssh - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.ssh"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
+
+        - name: ssh - Copy ssh keys
+          ansible.builtin.template:
+            src: "files/{{ item.name }}"
+            dest: "{{ home }}/.ssh/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "{{ item.mode }}"
+          with_items:
+            - { name: 'id_ed25519', mode: '600' }
+            - { name: 'id_ed25519.pub', mode: '644' }
+
+        - name: ssh - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/tasks/config/ssh/files/{{ item.name }}"
+            path: "{{ home }}/.ssh/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '600'
+            state: "link"
+          loop:
+            - { name: "config" }
+
+        - name: ssh - Add public key to authorized keys
+          # This might seem like a ssh server configuration but it is not,
+          # it is tightly related to each user.
+          # Access any machine from any other machine (single pair of keys).
+          ansible.posix.authorized_key:
+            user: "{{ user }}"
+            # must pass the content of the key, not the key path.
+            key: "{{ lookup('file', '{{ home }}/.ssh/id_ed25519.pub') }}"
+
+
+    - name: Server side configurations
+      block:
+        - name: ssh - Start and enable ssh daemon
+          become: true
+          ansible.builtin.systemd_service:
+            name: "sshd.service"
+            enabled: true
+            state: "started"
+
+        - name: ssh - Start and enable ssh-agent (as a user service)
+          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+          environment:
+            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+          # User services do not require super user privileges.
+          ansible.builtin.systemd_service:
+            name: "ssh-agent.service"
+            enabled: true
+            state: "started"
+            scope: "user"
+
+        - name: ssh - Disable password authentication for the root user by default
+          become: true
+          ansible.builtin.lineinfile:
+            dest: /etc/ssh/sshd_config
+            regexp: "^#PermitRootLogin"
+            line: "PermitRootLogin prohibit-password" 
+
+        - name: ssh - Disable password authentication for all users (if instructed)
+          ansible.builtin.lineinfile:
+            dest: /etc/ssh/sshd_config
+            regexp: "^#PasswordAuthentication"
+            line: "PasswordAuthentication no" 
+          when: ssh_disable_password_authentication
+

@@ -7,7 +7,7 @@
     - import_tasks: tasks/pacman.yml
     - import_tasks: tasks/paru.yml
 
-    - import_tasks: tasks/no_config.yml
+    - import_tasks: tasks/no_config.yml  # must go after paru
 
     - import_tasks: tasks/config/alacritty/main.yml
 
@@ -29,7 +29,9 @@
 
     - import_tasks: tasks/config/zsh/main.yml
 
-    # - import_tasks: tasks/config/nvim/main.yml
+    - import_tasks: tasks/config/ssh/main.yml
+
+    # - import_tasks: tasks/config/fontconfig/main.yml  # must go after openssh
 
     # - import_tasks: tasks/scripts/.yml
 
