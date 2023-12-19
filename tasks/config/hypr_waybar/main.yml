@@ -25,10 +25,11 @@
           path: "{{ home }}/.config/waybar/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: '600'
+          mode: "{{ item.mode }}"
           state: "link"
         loop:
-          - { name: "config" }
+          - { name: "config", mode: '600' }
+          - { name: "toggle.sh", mode: '700' }
 
       - name: hypr_waybar - Process templates
         tags: theme
@@ -40,16 +41,4 @@
           mode: '600'
         loop:
           - { name: "styles.css" }
-
-
-    - name: hypr_waybar - Create links (scripts)
-      ansible.builtin.file:
-        src: "{{ repo_dir }}/tasks/config/hypr_waybar/scripts/{{ item.name }}"
-        path: "{{ home }}/.local/bin/{{ item.name }}"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: '700'
-        state: "link"
-      loop:
-        - { name: "toggle_waybar" }
 
