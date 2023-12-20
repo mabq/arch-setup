@@ -7,7 +7,7 @@
     - import_tasks: tasks/pacman.yml
     - import_tasks: tasks/paru.yml
 
-    - import_tasks: tasks/no_config.yml  # must go after paru
+    - import_tasks: tasks/no_config.yml                   # must go after paru
 
     - import_tasks: tasks/config/alacritty/main.yml
 
@@ -19,9 +19,9 @@
     - import_tasks: tasks/config/hypr_tofi/main.yml
     - import_tasks: tasks/config/hypr_waybar/main.yml
 
-    - import_tasks: tasks/config/kmonad/main.yml
+    - import_tasks: tasks/config/kmonad/main.yml          # not working on xsp (id path)
 
-    - import_tasks: tasks/config/logiops/main.yml
+    - import_tasks: tasks/config/logiops/main.yml         # not working on xps
 
     - import_tasks: tasks/config/ncspot/main.yml
 
@@ -31,7 +31,8 @@
 
     - import_tasks: tasks/config/ssh/main.yml
 
-    - import_tasks: tasks/config/fontconfig/main.yml  # must go after ssh (clone a private repo)
+    - import_tasks: tasks/config/fontconfig/main.yml      # problem cloning the fonts repo the first time due to ssh key encryption
+                                                          # image not working
 
     - import_tasks: tasks/config/wallpapers/main.yml
 
