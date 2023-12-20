@@ -52,38 +52,38 @@
           - { name: "fontpreview-ueberzug.sh", mode: '700' }
 
 
-    - name: Get fonts
-      # I cannot include propietary fonts in a public repo, all fonts should 
-      # be stored in a private repository
-      block:
-        - name: Add ssh key passphrase to ssh-agent
-          # Otherwise the cloning will fail
-          block:
-            - name: fontconfig - Start ssh-agent
-              ansible.builtin.shell: "eval $(ssh-agent)"
-                
-            - name: fontconfig - Start ssh-agent
-              ansible.builtin.shell: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-
-        - name: fontconfig - Clone the `arch-fonts` repository (private)
-          ansible.builtin.git:
-            repo: "git@github.com:mabq/arch-fonts.git"
-            dest: "{{ home }}/projects/arch-fonts"
-            clone: true
-            update: true
-            key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
-            # this is the first time connecting to github via ssh, we must 
-            # accept it's key to be automatically added to the `known_hosts`
-            # file, otherwise the verification fails.
-            accept_hostkey: true
-
-        - name: fontconfig - Create link to the `fonts` directory
-          become: true
-          ansible.builtin.file:
-            src: "{{ home }}/projects/arch-fonts/fonts"
-            path: "/usr/local/share/fonts"
-            owner: "{{ user }}"
-            group: "{{ user }}"
-            mode: '755'
-            state: "link"
+    # - name: Get fonts
+    #   # I cannot include propietary fonts in a public repo, all fonts should 
+    #   # be stored in a private repository
+    #   block:
+    #     - name: Add ssh key passphrase to ssh-agent
+    #       # Otherwise the cloning will fail
+    #       block:
+    #         - name: fontconfig - Start ssh-agent
+    #           ansible.builtin.shell: "eval $(ssh-agent)"
+    #             
+    #         - name: fontconfig - Start ssh-agent
+    #           ansible.builtin.shell: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+    #
+    #     - name: fontconfig - Clone the `arch-fonts` repository (private)
+    #       ansible.builtin.git:
+    #         repo: "git@github.com:mabq/arch-fonts.git"
+    #         dest: "{{ home }}/projects/arch-fonts"
+    #         clone: true
+    #         update: true
+    #         key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
+    #         # this is the first time connecting to github via ssh, we must 
+    #         # accept it's key to be automatically added to the `known_hosts`
+    #         # file, otherwise the verification fails.
+    #         accept_hostkey: true
+    #
+    #     - name: fontconfig - Create link to the `fonts` directory
+    #       become: true
+    #       ansible.builtin.file:
+    #         src: "{{ home }}/projects/arch-fonts/fonts"
+    #         path: "/usr/local/share/fonts"
+    #         owner: "{{ user }}"
+    #         group: "{{ user }}"
+    #         mode: '755'
+    #         state: "link"
 
