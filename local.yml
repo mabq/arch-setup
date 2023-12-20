@@ -31,7 +31,8 @@
 
     - import_tasks: tasks/config/ssh/main.yml
 
-    - import_tasks: tasks/config/fontconfig/main.yml      # problem cloning the fonts repo the first time due to ssh key encryption
+    - import_tasks: tasks/config/fontconfig/main.yml      # must go after ssh
+                                                          # problem cloning the fonts repo the first time due to ssh key encryption
                                                           # image not working
 
     - import_tasks: tasks/config/wallpapers/main.yml

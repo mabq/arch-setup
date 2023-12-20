@@ -1,13 +1,12 @@
 - tags: ssh
   block:
-
     - name: ssh - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
           - openssh     # SSH protocol implementation for remote login, command execution and file transfer
-          - sshpass     # Fool ssh into accepting an interactive password non-interactively
+          - sshpass     # Fool ssh into accepting an interactive password non-interactively (required by Ansible to run playbooks on managed nodes)
 
 
     - name: Client side configurations
@@ -58,21 +57,8 @@
           become: true
           ansible.builtin.systemd_service:
             name: "sshd.service"
-            enabled: true
             state: "started"
-
-        - name: ssh - Start and enable ssh-agent (as a user service)
-          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
-          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
-          environment:
-            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
-            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
-          # User services do not require super user privileges.
-          ansible.builtin.systemd_service:
-            name: "ssh-agent.service"
             enabled: true
-            state: "started"
-            scope: "user"
 
         - name: ssh - Disable password authentication for the root user by default
           become: true
@@ -87,4 +73,26 @@
             regexp: "^#PasswordAuthentication"
             line: "PasswordAuthentication no" 
           when: ssh_disable_password_authentication
+
+
+    - name: Start ssh-agent and add passphrase for private key
+      # This step is required by all other tasks that clone private repositories
+      tags: fontconfig
+      block:
+        - name: ssh - Start and enable ssh-agent (as a user service)
+          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+          environment:
+            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+          # User services do not require super user privileges.
+          ansible.builtin.systemd_service:
+            name: "ssh-agent.service"
+            state: "started"
+            enabled: true
+            scope: "user"
+
+        - name: ssh - Add passphrase for the private key
+          ansible.builtin.shell: "SSH_PASSPHRASE={{ ssh_key_passphrase }} ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+
 

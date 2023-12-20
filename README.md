@@ -15,10 +15,11 @@ This playbook assumes you installed Archlinux with the [arch-base](https://githu
 
 ## About this script
 
-Its important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine. Ansible evaluates the value of variables on the controller (`lookup('env', '{variable}')`).
+It's important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine. Ansible evaluates the value of variables on the controller (look for `lookup('env', '{variable}')` to see where this matters).
 
 All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result inmediatly. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and the re-run `ansible-pull`.
 
+> If a file with the same name already exists the creating of the link will through an error. I could force the creating of the link but I prefer the error in order to avoid loosing any data that might be important.
 > Using `stow` is simpler but does not allow to apply a the same theme to all packages.
 
 
