@@ -63,7 +63,7 @@
               ansible.builtin.shell: "eval $(ssh-agent)"
                 
             - name: fontconfig - Start ssh-agent
-              ansible.builtin.shell: "echo {{ ssh_key_passphrase }} | ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+              ansible.builtin.shell: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
 
         - name: fontconfig - Clone the `arch-fonts` repository (private)
           ansible.builtin.git:
