@@ -37,7 +37,7 @@
     },
 
     "battery": {
-    	"interval": 5,
+    	"interval": 30,
         "format": "{capacity}%",
     },
 }

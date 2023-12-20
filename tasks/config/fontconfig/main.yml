@@ -1,12 +1,32 @@
 - tags: fontconfig
   block:
 
-    - name: fontconfig - Install packages
-      become: true
-      community.general.pacman:
-        state: latest
-        name:
-          - fontconfig    # Library for configuring and customizing font access
+    - name: Install required packages
+      block:
+        - name: fontconfig - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - fontconfig        # Library for configuring and customizing font access
+              - fzf               # Command-line fuzzy finder (required for fontpreview)
+              - imagemagick       # An image viewing/manipulation program (required for fontpreview)
+
+        - name: fontconfig - Install packages from AUR
+          tags: aur
+          block:
+            - name: ueberzugpp
+              # required for fontpreview
+              block:
+                - name: fontconfig - Check if ueberzugpp is already installed
+                  ansible.builtin.command: "which ueberzugpp"
+                  register: which_ueberzugpp
+                  ignore_errors: true
+
+                - name: fontconfig - Install ueberzugpp 
+                  when: which_ueberzugpp.rc != 0
+                  # Command line util which allows to display images in combination with X11 written in C++
+                  ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
 
 
     - name: Create config files
@@ -25,10 +45,11 @@
           path: "{{ home }}/.config/fontconfig/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: '600'
+          mode: "{{ item.mode }}"
           state: "link"
         loop:
-          - { name: "fonts.conf" }
+          - { name: "fonts.conf", mode: '600' }
+          - { name: "fontpreview-ueberzug.sh", mode: '700' }
 
 
     - name: Get fonts
