@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["cpu", "memory", "disk#root", "disk#home"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["clock"],
+    "modules-right": ["battery", "clock"],
     "mode": "overlay",  // much faster (no redraw of all other windows)
     "spacing": 12,
 
@@ -36,23 +36,9 @@
         "format": "{:%A   %b. %d   %H:%M}"
     },
 
-    // "battery": {
-    //     "states": {
-    //         // "good": 95,
-    //         "warning": 30,
-    //         "critical": 15
-    //     },
-    //     "format": "{capacity}% {icon}",
-    //     "format-charging": "{capacity}% ",
-    //     "format-plugged": "{capacity}% ",
-    //     "format-alt": "{time} {icon}",
-    //     // "format-good": "", // An empty format will hide the module
-    //     // "format-full": "",
-    //     "format-icons": ["", "", "", "", ""]
-    // },
-    //
-    // "battery#bat2": {
-    //     "bat": "BAT2"
-    // },
+    "battery": {
+    	"interval": 5,
+        "format": "{capacity}%",
+    },
 }
 
