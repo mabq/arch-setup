@@ -7,7 +7,7 @@
         name:
           - openssh           # SSH protocol implementation for remote login, command execution and file transfer
           # - expect          # A tool for automating interactive applications (used to add the private key passphrase, see below)
-          # - python-pexpect    # For controlling and automating applications
+          - python-pexpect    # For controlling and automating applications
 
 
     - name: Client side configurations
@@ -94,20 +94,20 @@
             enabled: true
             scope: "user"
 
-        - name: ssh - Add passphrase for the private key
-          ansible.builtin.shell: expect -c "spawn ssh-add {{ home }}/.ssh/{{ ssh_key_name }}; expect -re ".*"; send \"{{ ssh_key_passphrase }}\r\"; interact"
+        # - name: ssh - Add passphrase for the private key
+        #   ansible.builtin.shell: expect -c "spawn ssh-add {{ home }}/.ssh/{{ ssh_key_name }}; expect -re ".*"; send \"{{ ssh_key_passphrase }}\r\"; interact"
 
-        # - name: ssh - Add passphrase of private key
-        #   # `ssh-add` does not accept the passphrase as an argument, the command
-        #   # is meant to be used interactively. We need the help of the `expect` 
-        #   # module to do it programmatically.
-        #   ansible.builtin.expect:
-        #     command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-        #     responses:
-        #       # Use generic question since it is the only one.
-        #       Question: 
-        #         - "{{ ssh_key_passphrase }}"
+        - name: ssh - Add passphrase of private key
+          # `ssh-add` does not accept the passphrase as an argument, the command
+          # is meant to be used interactively. We need the help of the `expect` 
+          # module to do it programmatically.
+          ansible.builtin.expect:
+            command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+            responses:
+              # Use generic question since it is the only one.
+              Question: 
+                - "{{ ssh_key_passphrase }}"
           # Don't show passphrase in logs
-          # no_log: true
+          #no_log: true
 
 
