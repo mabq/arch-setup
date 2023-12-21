@@ -98,8 +98,8 @@
 
         - name: ssh - Add passphrase of private key
           # `ssh-add` does not accept the passphrase as an argument, the command
-          # is meant to be used interactively. We need the help of `expect` to 
-          # do it programmatically.
+          # is meant to be used interactively. We need the help of the `expect` 
+          # module to do it programmatically.
           ansible.builtin.expect:
             command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
             responses:
