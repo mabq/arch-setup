@@ -107,6 +107,6 @@
               Question: 
                 - "{{ ssh_key_passphrase }}"
           # Don't show passphrase in logs
-          no_log: true
+          # no_log: true
 
 
