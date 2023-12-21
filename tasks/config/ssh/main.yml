@@ -76,7 +76,7 @@
 
     - name: Add private key passphrase to ssh-agent
       # Required to clone private repositories later in this playbook, add the 
-      # tags of all tags that clone a private repository
+      # tags of all tasks that clone a private repository
       tags: fontconfig
       block:
         - name: ssh - Start and enable ssh-agent (as a user service) with systemd
@@ -93,8 +93,18 @@
             scope: "user"
 
         - name: ssh - Add the private key passphrase to the ssh-agent
+              # The `ssh-add` command does not accept the passphrase as an 
+              # argument, the command is meant to be used interactively.
+              #
+              # In order to add the passphrase we need to use the `expect`
+              # module, which is based on the `expect` command (a tool for 
+              # automating interactive applications).
+              #
+              # The `expect` module requires the `pexpect` package to be 
+              # installed in order to evaluate regex patterns in the question,
+              # I prefer to install it with pacman rather than pip.
           block:
-            - name: ssh - Install `pexpect` (momentarily)
+            - name: ssh - Install `pexpect`
               become: true
               community.general.pacman:
                 state: latest
@@ -102,21 +112,10 @@
                   - python-pexpect    # For controlling and automating applications
 
             - name: ssh - Add the private key passphrase to the ssh-agent
-              # `ssh-add` does not accept the passphrase as an argument, the command
-              # is meant to be used interactively. We need the help of the `expect` 
-              # module to do it programmatically.
               ansible.builtin.expect:
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
-                  # Use generic question since it is the only one.
                   '(?i)Enter passphrase (.*):': "{{ ssh_key_passphrase }}"
-              # Don't show passphrase in logs
-              #no_log: true
-
-            - name: ssh - Uninstall `pexpect`
-              become: true
-              community.general.pacman:
-                state: absent
-                name:
-                  - python-pexpect    # For controlling and automating applications
+              # Do not show passphrase in logs
+              no_log: true
 
