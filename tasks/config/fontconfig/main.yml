@@ -53,7 +53,7 @@
 
 
     - name: Add fonts
-      # I cannot include propietary fonts in a public repo, all fonts should 
+      # I cannot include proprietary fonts in a public repo, all fonts should 
       # be stored in a private repository
       block:
         - name: fontconfig - Clone the fonts private repository

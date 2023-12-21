@@ -21,6 +21,11 @@
           #
           # ------------------------------------------------------------------------
           #
+          # Ansible:
+          - sshpass             # Fool ssh into accepting an interactive password non-interactively (required by Ansible to run playbooks on remote managed nodes, in case you ever use this computer to run the `arch-base` playbook on another computer)
+          #
+          # ------------------------------------------------------------------------
+          #
           # Help utilities:
           - man-db              # A utility for reading man pages 
           - man-pages           # Linux man pages

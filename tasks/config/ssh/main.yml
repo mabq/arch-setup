@@ -5,8 +5,8 @@
       community.general.pacman:
         state: latest
         name:
-          - openssh     # SSH protocol implementation for remote login, command execution and file transfer
-          - sshpass     # Fool ssh into accepting an interactive password non-interactively (required by Ansible to run playbooks on managed nodes)
+          - openssh       # SSH protocol implementation for remote login, command execution and file transfer
+          - expect        # A tool for automating interactive applications (used to add the private key passphrase, see below)
 
 
     - name: Client side configurations
@@ -75,11 +75,14 @@
           when: ssh_disable_password_authentication
 
 
-    - name: Start ssh-agent and add passphrase for private key
-      # This step is required by all other tasks that clone private repositories
+    - name: Add private key passphrase to ssh-agent
+      # Required to clone private repositories later in this playbook, add the 
+      # tags of all tags that clone a private repository
       tags: fontconfig
       block:
-        - name: ssh - Start and enable ssh-agent (as a user service)
+        - vars:
+            private_key_path: "{{ home }}/.ssh/{{ ssh_key_name }}"
+        - name: ssh - Start and enable ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
           # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
           environment:
@@ -93,6 +96,9 @@
             scope: "user"
 
         - name: ssh - Add passphrase for the private key
-          ansible.builtin.shell: "SSH_PASSPHRASE={{ ssh_key_passphrase }} ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+          # `ssh-add` does not accept the passphrase as an argument, the command
+          # is meant to be used interactively. We need the help of `expect` to 
+          # do it programatically.
+          ansible.builtin.shell: "expect -c 'spawn ssh-add {{ private_key_path }}; expect \"Enter passphrase for {{ private_key_path }}:\"; send \"{{ ssh_key_passphrase }}\r\"; interact'"
 
 
