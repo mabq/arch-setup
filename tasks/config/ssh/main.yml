@@ -80,8 +80,6 @@
       # tags of all tags that clone a private repository
       tags: fontconfig
       block:
-        - vars:
-            private_key_path: "{{ home }}/.ssh/{{ ssh_key_name }}"
         - name: ssh - Start and enable ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
           # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
@@ -99,6 +97,6 @@
           # `ssh-add` does not accept the passphrase as an argument, the command
           # is meant to be used interactively. We need the help of `expect` to 
           # do it programatically.
-          ansible.builtin.shell: "expect -c 'spawn ssh-add {{ private_key_path }}; expect \"Enter passphrase for {{ private_key_path }}:\"; send \"{{ ssh_key_passphrase }}\r\"; interact'"
+          ansible.builtin.shell: "expect -c 'spawn ssh-add {{ home }}/.ssh/{{ ssh_key_name }}; expect \"Enter passphrase for {{ home }}/.ssh/{{ ssh_key_name }}:\"; send \"{{ ssh_key_passphrase }}\r\"; interact'"
 
 
