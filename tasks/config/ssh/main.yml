@@ -109,7 +109,7 @@
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
                   # Use generic question since it is the only one.
-                  '(?i)Enter passphrase for key (.*):': "{{ ssh_key_passphrase }}"
+                  '(.*)': "{{ ssh_key_passphrase }}"
               # Don't show passphrase in logs
               #no_log: true
 
