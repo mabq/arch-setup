@@ -4,8 +4,8 @@
     # be stored in a private repository.
     - name: fonts - Clone the fonts private repository
       ansible.builtin.git:
-        repo: "git@github.com:mabq/arch-fonts.git"
-        dest: "{{ home }}/projects/arch-fonts"
+        repo: "git@github.com:mabq/fonts.git"
+        dest: "{{ home }}/projects/fonts"
         clone: true
         update: true
         key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
@@ -17,7 +17,7 @@
     - name: fonts - Create link to the `fonts` directory
       become: true
       ansible.builtin.file:
-        src: "{{ home }}/projects/arch-fonts/fonts"
+        src: "{{ home }}/projects/fonts/fonts"
         path: "/usr/local/share/fonts"
         owner: "{{ user }}"
         group: "{{ user }}"
