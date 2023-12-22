@@ -1,79 +1,40 @@
 - tags: fontpreview
+  # Install a modified version of `fontpreview-ueberzug`
   block:
 
     - name: Install required packages
       block:
-        - name: fontpreview - Install packages from official repositoriepreview
+        - name: fontpreview - Install packages from official repositories
           become: true
           community.general.pacman:
             state: latest
             name:
-              # - fzf               # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
-              # - imagemagick       # An image viewing/manipulation program (required for fontpreview, installed as dependency of ueberzugpp)
+              - fzf               # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
+              - imagemagick       # An image viewing/manipulation program (the image is generated with the `convert` command)
 
         - name: fontpreview - Install packages from AUR
           tags: aur
           block:
-            - name: fontpreview
-              # required for fontpreview
-              block:
-                - name: fontpreview - Check if ueberzugpp is already installed
-                  ansible.builtin.command: "which ueberzugpp"
-                  register: which_ueberzugpp
-                  ignore_errors: true
+            - name: fontpreview - Check if ueberzugpp is already installed
+              ansible.builtin.command: "which ueberzugpp"
+              register: which_ueberzugpp
+              ignore_errors: true
 
-                - name: fontpreview - Install ueberzugpp 
-                  when: which_ueberzugpp.rc != 0
-                  # Command line util which allows to display images in combination with X11 written in C++
-                  ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
+            - name: fontpreview - Install ueberzugpp 
+              when: which_ueberzugpp.rc != 0
+              # Command line util which allows to display images in combination with X11 written in C++
+              ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
 
 
-    - name: Create config files
-      block:
-      - name: fontpreview - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/fontconfig"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: fontpreview - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/fontconfig/files/{{ item.name }}"
-          path: "{{ home }}/.config/fontconfig/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "{{ item.mode }}"
-          state: "link"
-        loop:
-          - { name: "fonts.conf", mode: '600' }
-          - { name: "fontpreview-ueberzug.sh", mode: '700' }
-
-
-    - name: Add fonts
-      # I cannot include proprietary fonts in a public repo, all fonts should 
-      # be stored in a private repository
-      block:
-        - name: fontpreview - Clone the fonts private repository
-          ansible.builtin.git:
-            repo: "git@github.com:mabq/arch-fonts.git"
-            dest: "{{ home }}/projects/arch-fonts"
-            clone: true
-            update: true
-            key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
-            # this is the first time connecting to github via ssh, we must 
-            # accept it's key to be automatically added to the `known_hosts`
-            # file, otherwise the verification fails.
-            accept_hostkey: true
-
-        - name: fontpreview - Create link to the `fonts` directory
-          become: true
-          ansible.builtin.file:
-            src: "{{ home }}/projects/arch-fonts/fonts"
-            path: "/usr/local/share/fonts"
-            owner: "{{ user }}"
-            group: "{{ user }}"
-            mode: '755'
-            state: "link"
+    - name: fontpreview - Create link
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/tasks/config/fontpreview/scripts/{{ item.name }}"
+        # Link to `~/.local.bin` so that we can call the script from anywhere
+        path: "{{ home }}/.local/bin/{{ item.name }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: '700'
+        state: "link"
+      loop:
+        - { name: "fontpreview" }
 
