@@ -31,8 +31,9 @@
 
     - import_tasks: tasks/config/ssh/main.yml
 
-    - import_tasks: tasks/config/fontconfig/main.yml      # must go after ssh
-                                                          # image not working
+    - import_tasks: tasks/config/fonts/main.yml           # must go after ssh
+    - import_tasks: tasks/config/fontconfig/main.yml
+    - import_tasks: tasks/config/fontpreview/main.yml     # fontpreview not working
 
     - import_tasks: tasks/config/wallpapers/main.yml
 

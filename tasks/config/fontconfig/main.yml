@@ -8,25 +8,7 @@
           community.general.pacman:
             state: latest
             name:
-              - fontconfig        # Library for configuring and customizing font access
-              # - fzf               # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
-              # - imagemagick       # An image viewing/manipulation program (required for fontpreview, installed as dependency of ueberzugpp)
-
-        - name: fontconfig - Install packages from AUR
-          tags: aur
-          block:
-            - name: ueberzugpp
-              # required for fontpreview
-              block:
-                - name: fontconfig - Check if ueberzugpp is already installed
-                  ansible.builtin.command: "which ueberzugpp"
-                  register: which_ueberzugpp
-                  ignore_errors: true
-
-                - name: fontconfig - Install ueberzugpp 
-                  when: which_ueberzugpp.rc != 0
-                  # Command line util which allows to display images in combination with X11 written in C++
-                  ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
+              - fontconfig          # Library for configuring and customizing font access
 
 
     - name: Create config files
@@ -45,36 +27,8 @@
           path: "{{ home }}/.config/fontconfig/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: "{{ item.mode }}"
+          mode: '600'
           state: "link"
         loop:
-          - { name: "fonts.conf", mode: '600' }
-          - { name: "fontpreview-ueberzug.sh", mode: '700' }
-
-
-    - name: Add fonts
-      # I cannot include proprietary fonts in a public repo, all fonts should 
-      # be stored in a private repository
-      block:
-        - name: fontconfig - Clone the fonts private repository
-          ansible.builtin.git:
-            repo: "git@github.com:mabq/arch-fonts.git"
-            dest: "{{ home }}/projects/arch-fonts"
-            clone: true
-            update: true
-            key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
-            # this is the first time connecting to github via ssh, we must 
-            # accept it's key to be automatically added to the `known_hosts`
-            # file, otherwise the verification fails.
-            accept_hostkey: true
-
-        - name: fontconfig - Create link to the `fonts` directory
-          become: true
-          ansible.builtin.file:
-            src: "{{ home }}/projects/arch-fonts/fonts"
-            path: "/usr/local/share/fonts"
-            owner: "{{ user }}"
-            group: "{{ user }}"
-            mode: '755'
-            state: "link"
+          - { name: "fonts.conf" }
 
