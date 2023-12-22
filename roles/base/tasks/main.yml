@@ -1,5 +1,4 @@
 # Software ---
-- import_tasks: software/openssh.yml
 - import_tasks: software/tmux.yml
 - import_tasks: software/nvim.yml
 - import_tasks: software/yazi.yml

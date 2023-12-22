@@ -1,2 +1,1 @@
 - import_tasks: software/handlr.yml
-- import_tasks: software/hyprland.yml
