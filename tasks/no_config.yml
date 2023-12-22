@@ -198,18 +198,6 @@
               # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
               ansible.builtin.shell: 'paru -S --skipreview dropbox'
 
-        - name: Fontpreview
-          block:
-            - name: no-config - Check if Fontpreview is already installed
-              ansible.builtin.command: "which fontpreview-ueberzug"
-              register: which_fontpreview
-              ignore_errors: true
-
-            - name: no-config - Install Fontpreview
-              when: which_fontpreview.rc != 0
-              # Preview system fonts in the terminal
-              ansible.builtin.shell: 'paru -S --skipreview fontpreview-ueberzug-git'
-
         - name: Zoom
           block:
             - name: no-config - Check if Zoom is already installed
