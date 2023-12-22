@@ -26,15 +26,25 @@
               ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
 
 
-    - name: fontpreview - Create link
-      ansible.builtin.file:
-        src: "{{ repo_dir }}/tasks/config/fontpreview/scripts/{{ item.name }}"
-        # Link to `~/.local.bin` so that we can call the script from anywhere
-        path: "{{ home }}/.local/bin/{{ item.name }}"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: '700'
-        state: "link"
-      loop:
-        - { name: "fontpreview" }
+    - name: Link script
+      block:
+        - name: fontpreview - Create directory
+          ansible.builtin.file:
+            path: "{{ home }}/.local/bin"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
+
+        - name: fontpreview - Create link
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/tasks/config/fontpreview/scripts/{{ item.name }}"
+            # Link to `~/.local.bin` so that we can call the script from anywhere
+            path: "{{ home }}/.local/bin/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: "link"
+          loop:
+            - { name: "fontpreview" }
 
