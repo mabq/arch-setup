@@ -1,0 +1,53 @@
+- tags: spotifyd
+  # Spotifyd is a spotify daemon that implements the "Spotify Connect" 
+  # protocol, meaning that you can control the music from any spotify 
+  # client on the same network.
+  #
+  # You don't need to install a spotify client, but sometimes it can be 
+  # useful. The interesting thing is that you can completely close the 
+  # client liberating all its resources and the music will continue playing.
+  #
+  # It's like tmux for music, you can close the client and reattach later.
+  block:
+    - name: spotifyd - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - spotifyd          # Lightweight spotify streaming daemon with spotify connect support
+          - spotify-launcher  # Client for spotify's apt repository in Rust for Arch Linux
+
+
+    - name: Config files
+      block:
+        - name: spotifyd - Create directory
+          ansible.builtin.file:
+            path: "{{ home }}/.config/spotifyd"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
+
+        - name: spotifyd - Process config file template (encrypted account details)
+          ansible.builtin.template:
+            src: "files/spotifyd.conf"
+            dest: "{{ home }}/.spotifyd/spotifyd.conf"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            # make sure only you have access to this file
+            mode: "600"
+
+
+    - name: spotifyd - Start and enable it as a user service
+      # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+      # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+      environment:
+        # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+        XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+      # User services do not require super user privileges.
+      ansible.builtin.systemd_service:
+        name: "spotifyd.service"
+        state: "started"
+        enabled: true
+        scope: "user"
+
