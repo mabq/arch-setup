@@ -16,8 +16,8 @@
             - qt5-wayland                   # Provides APIs for Wayland
             - qt6-wayland                   # Provides APIs for Wayland
             - swaybg                        # Wallpaper tool for Wayland compositors
-            - wev                           # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
-            # - wireplumber                 # Session / policy manager implementation for PipeWire (intalled as dependency of `pipewire-pulse`)
+            - wev                           # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
+            # - wireplumber                 # Session / policy manager implementation for PipeWire (installed as dependency of `pipewire-pulse`)
             - wl-clipboard                  # Command-line copy/paste utilities for Wayland
             - xdg-desktop-portal-gtk        # A backend implementation for xdg-desktop-portal using GTK
             - xdg-desktop-portal-hyprland   # xdg-desktop-portal backend for hyprland

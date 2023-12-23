@@ -24,8 +24,8 @@
 
     - import_tasks: tasks/config/logiops/main.yml         # not working on xps
 
-    # - import_tasks: tasks/config/ncspot/main.yml        # replaced with spotifyd and the official client
-    - import_tasks: tasks/config/spotifyd/main.yml
+    # - import_tasks: tasks/config/ncspot/main.yml
+    - import_tasks: tasks/config/spotify/main.yml
 
     - import_tasks: tasks/config/swappy/main.yml
 

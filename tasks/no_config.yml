@@ -156,7 +156,7 @@
           - figlet              # A program for making large letters out of ordinary text
           - pastel              # A command-line tool to generate, analyze, convert and manipulate colors
           - translate-shell     # A command-line interface and interactive shell for Google Translate
-          # - stow                # Manage installation of multiple softwares in the same directory tree
+          # - stow                # Manage installation of multiple software in the same directory tree
           #
           # ------------------------------------------------------------------------
           #
@@ -170,7 +170,7 @@
           # ------------------------------------------------------------------------
 
 
-    - name: Intall packages from AUR
+    - name: Install packages from AUR
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
@@ -197,6 +197,18 @@
               when: which_dropbox.rc != 0
               # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
               ansible.builtin.shell: 'paru -S --skipreview dropbox'
+
+        - name: Plex media server
+          block:
+            - name: no-config - Check if Plex Media Server is already installed
+              ansible.builtin.shell: "pacman -Q | rg plex-media-server"
+              register: which_plex
+              ignore_errors: true
+
+            - name: no-config - Install plex-media-server
+              when: which_plex.rc != 0
+              # The back-end media server component of Plex.
+              ansible.builtin.shell: 'paru -S --skipreview plex-media-server'
 
         - name: Zoom
           block:

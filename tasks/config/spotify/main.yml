@@ -1,4 +1,4 @@
-- tags: spotifyd
+- tags: spotify
   # Spotifyd is a spotify daemon that implements the "Spotify Connect" 
   # protocol, meaning that you can control the music from any spotify 
   # client on the same network.
@@ -9,7 +9,7 @@
   #
   # It's like tmux for music, you can close the client and reattach later.
   block:
-    - name: spotifyd - Install packages
+    - name: spotify - Install packages
       become: true
       community.general.pacman:
         state: latest
@@ -20,7 +20,7 @@
 
     - name: Config files
       block:
-        - name: spotifyd - Create directory
+        - name: spotify - Create directory
           ansible.builtin.file:
             path: "{{ home }}/.config/spotifyd"
             owner: "{{ user }}"
@@ -28,7 +28,7 @@
             mode: '700'
             state: directory
 
-        - name: spotifyd - Process config file template (encrypted account details)
+        - name: spotify - Process config file template (encrypted account details)
           ansible.builtin.template:
             src: "files/spotifyd.conf"
             dest: "{{ home }}/.config/spotifyd/spotifyd.conf"
@@ -38,7 +38,7 @@
             mode: "600"
 
 
-    - name: spotifyd - Start and enable it as a user service
+    - name: spotify - Start and enable it as a user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
       # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
       environment:
