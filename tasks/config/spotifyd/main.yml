@@ -31,7 +31,7 @@
         - name: spotifyd - Process config file template (encrypted account details)
           ansible.builtin.template:
             src: "files/spotifyd.conf"
-            dest: "{{ home }}/spotifyd/spotifyd.conf"
+            dest: "{{ home }}/.config/spotifyd/spotifyd.conf"
             owner: "{{ user }}"
             group: "{{ user }}"
             # make sure only you have access to this file
