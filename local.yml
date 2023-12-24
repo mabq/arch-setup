@@ -6,14 +6,14 @@
     - import_tasks: tasks/system.yml
 
     - import_tasks: tasks/config/pacman/main.yml
-    - import_tasks: tasks/config/bluetooth/main.yml
-
     - import_tasks: tasks/paru.yml
 
     - import_tasks: tasks/no_config.yml
 
-    - import_tasks: tasks/config/alacritty/main.yml
+    - import_tasks: tasks/config/bluetooth/main.yml
 
+    - import_tasks: tasks/config/zsh/main.yml
+    - import_tasks: tasks/config/ssh/main.yml
     - import_tasks: tasks/config/git/main.yml
 
     - import_tasks: tasks/config/hypr/main.yml
@@ -22,24 +22,20 @@
     - import_tasks: tasks/config/hypr_tofi/main.yml
     - import_tasks: tasks/config/hypr_waybar/main.yml
 
-    - import_tasks: tasks/config/kmonad/main.yml          # not working on xsp (id path)
+    - import_tasks: tasks/config/wallpapers/main.yml
 
+    - import_tasks: tasks/config/kmonad/main.yml          # not working on xsp (id path)
     - import_tasks: tasks/config/logiops/main.yml         # not working on xps
 
-    - import_tasks: tasks/config/mpv/main.yml
+    - import_tasks: tasks/config/alacritty/main.yml
 
     # - import_tasks: tasks/config/ncspot/main.yml
     - import_tasks: tasks/config/spotify/main.yml
+    - import_tasks: tasks/config/mpv/main.yml
 
     - import_tasks: tasks/config/swappy/main.yml
-
-    - import_tasks: tasks/config/zsh/main.yml
-
-    - import_tasks: tasks/config/ssh/main.yml
 
     - import_tasks: tasks/config/fonts/main.yml           # must go after ssh
     - import_tasks: tasks/config/fontconfig/main.yml
     - import_tasks: tasks/config/fontpreview/main.yml
-
-    - import_tasks: tasks/config/wallpapers/main.yml
 
