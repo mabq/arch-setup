@@ -85,12 +85,6 @@
           #
           # ------------------------------------------------------------------------
           #
-          # Bluetooth:
-          - bluez               # Daemons for the bluetooth protocol stack
-          - bluez-utils         # Development and debugging utilities for the bluetooth protocol stack
-          #
-          # ------------------------------------------------------------------------
-          #
           # Audio:
           - pipewire-alsa       # Low-latency audio/video router and processor - ALSA configuration
           - pipewire-jack       # Low-latency audio/video router and processor - JACK replacement

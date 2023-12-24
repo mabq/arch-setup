@@ -6,6 +6,8 @@
     - import_tasks: tasks/system.yml
 
     - import_tasks: tasks/config/pacman/main.yml
+    - import_tasks: tasks/config/bluetooth/main.yml
+
     - import_tasks: tasks/paru.yml
 
     - import_tasks: tasks/no_config.yml

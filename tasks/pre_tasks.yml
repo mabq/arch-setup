@@ -12,10 +12,6 @@
         update_cache: true
         upgrade: true
 
-    - name: pre-tasks - Load theme variables
-      ansible.builtin.include_vars: 
-        file: "themes/{{ theme }}.yml"
-
     - name: pre-tasks - Change the repository url protocol
       # `ansible-pull` uses the http protocol to clone the repository, we 
       # need to change the remote url protocol, from https to ssh, in order 
@@ -24,3 +20,7 @@
         path: "{{ repo_dir }}/.git/config"
         regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
         replace: \1git@\2:\3
+
+    - name: pre-tasks - Load theme variables
+      ansible.builtin.include_vars: 
+        file: "themes/{{ theme }}/vars.yml"

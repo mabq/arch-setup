@@ -42,5 +42,4 @@
             mode: '700'
             state: "link"
           loop:
-            - { name: "check-packages" }
-
+            - { name: "pacman-explicit" }

@@ -20,6 +20,8 @@
           state: directory
 
       - name: hypr_waybar - Create links
+        # The `toggle` script is always called via shortcut, no need to create 
+        # a link.
         ansible.builtin.file:
           src: "{{ repo_dir }}/tasks/config/hypr_waybar/files/{{ item.name }}"
           path: "{{ home }}/.config/waybar/{{ item.name }}"
@@ -29,7 +31,6 @@
           state: "link"
         loop:
           - { name: "config", mode: '600' }
-          - { name: "toggle.sh", mode: '700' }
 
       - name: hypr_waybar - Process templates
         tags: theme

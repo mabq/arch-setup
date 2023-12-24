@@ -29,5 +29,5 @@
             mode: '700'
             state: "link"
           loop:
-            - { name: "free-code-camp-radio" }
+            - { name: "mpv-freecodecampradio" }
 
