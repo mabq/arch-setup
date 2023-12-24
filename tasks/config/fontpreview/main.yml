@@ -40,7 +40,7 @@
           # This script has colors and is always executed from the terminal
           tags: theme
           ansible.builtin.template:
-            src: "files/{{ item.name }}"
+            src: "scripts/{{ item.name }}"
             dest: "{{ home }}/.local/bin/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"
