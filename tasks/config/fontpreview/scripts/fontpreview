@@ -1,4 +1,16 @@
 #!/bin/sh
+#
+# -----------------------------------------------------------------------------
+#
+#              _____                    _       _         _
+#             |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#               | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#               | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#               |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                |_|
+#             
+# -----------------------------------------------------------------------------
+
 # Font preview with ueberzug and fzf
 
 # Modifies version of https://github.com/xlucn/fontpreview-ueberzug.
@@ -7,13 +19,13 @@
 
 # Checking for environment variables if available.
 # These are compatible with original fontpreview.
-SIZE=${FONTPREVIEW_SIZE:-800x800}
-FONT_SIZE=${FONTPREVIEW_FONT_SIZE:-72}
-BG_COLOR=${FONTPREVIEW_BG_COLOR:-#21202e}
-FG_COLOR=${FONTPREVIEW_FG_COLOR:-#ffffff}
-TEXT_ALIGN=${FONTPREVIEW_TEXT_ALIGN:-center}
-PREVIEW_TEXT=${FONTPREVIEW_PREVIEW_TEXT:-"ABCDEFGHIJKLM\nNOPQRSTUVWXYZ\n\
-    abcdefghijklm\nnopqrstuvwxyz\n1234567890\n!@#$\%^&*,.;:\n_-=+'\"|\\(){}[]"}
+SIZE=800x800
+FONT_SIZE=72
+BG_COLOR={{ color_highlight_low }}
+FG_COLOR={{ color_white_high }}
+TEXT_ALIGN=center
+PREVIEW_TEXT="ABCDEFGHIJKLM\nNOPQRSTUVWXYZ\n\
+    abcdefghijklm\nnopqrstuvwxyz\n1234567890\n!@#$\%^&*,.;:\n_-=+'\"|\\(){}[]"
 
 # Ueberzug related variables
 FIFO="/tmp/fontpreview-ueberzug-fifo"
