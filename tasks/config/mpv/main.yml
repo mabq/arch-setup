@@ -1,0 +1,33 @@
+- tags: mpv
+  block:
+
+    - name: mpv - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - mpv           # A free, open source, and cross-platform media player
+          - mpv-mpris     # MPRIS plugin for mpv (media keys)
+
+    - name: Link script
+      block:
+        - name: mpv - Create directory
+          ansible.builtin.file:
+            path: "{{ home }}/.local/bin"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
+
+        - name: mpv - Create link
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/tasks/config/mpv/scripts/{{ item.name }}"
+            # Link to `~/.local.bin` so that we can call the script from anywhere
+            path: "{{ home }}/.local/bin/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: "link"
+          loop:
+            - { name: "free-code-camp-radio" }
+

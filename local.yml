@@ -24,6 +24,8 @@
 
     - import_tasks: tasks/config/logiops/main.yml         # not working on xps
 
+    - import_tasks: tasks/config/mpv/main.yml
+
     # - import_tasks: tasks/config/ncspot/main.yml
     - import_tasks: tasks/config/spotify/main.yml
 
