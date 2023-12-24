@@ -5,7 +5,7 @@
 
     - import_tasks: tasks/system.yml
 
-    - import_tasks: tasks/pacman.yml
+    - import_tasks: tasks/config/pacman/main.yml
     - import_tasks: tasks/paru.yml
 
     - import_tasks: tasks/no_config.yml

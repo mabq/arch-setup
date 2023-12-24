@@ -207,7 +207,7 @@
 
             - name: no-config - Install plex-media-server
               when: which_plex.rc != 0
-              # The back-end media server component of Plex.
+              # The back-end media server component of Plex (server sources must be configured manually)
               ansible.builtin.shell: 'paru -S --skipreview plex-media-server'
 
         - name: Zoom
