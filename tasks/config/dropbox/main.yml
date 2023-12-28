@@ -1,0 +1,31 @@
+- tags: dropbox
+  block:
+
+    - name: Install Dropbox
+      # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
+      tags: aur
+      block:
+        - name: dropbox - Check if Dropbox is already installed
+          ansible.builtin.command: "which dropbox"
+          register: which_dropbox
+          ignore_errors: true
+
+        - name: dropbox - Install Dropbox
+          when: which_dropbox.rc != 0
+          # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
+          ansible.builtin.shell: 'paru -S --skipreview dropbox'
+
+
+    - name: dropbox - Start and enable as a user service
+      # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+      # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+      environment:
+        # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+        XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+      # User services do not require super user privileges.
+      ansible.builtin.systemd_service:
+        name: "dropbox.service"
+        state: "started"
+        enabled: true
+        scope: "user"
+

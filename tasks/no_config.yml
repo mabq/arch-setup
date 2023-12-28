@@ -174,18 +174,6 @@
               # Web browser that blocks ads and trackers by default (binary release)
               ansible.builtin.shell: 'paru -S --skipreview brave-bin'
 
-        - name: Dropbox
-          block:
-            - name: no-config - Check if Dropbox is already installed
-              ansible.builtin.command: "which dropbox"
-              register: which_dropbox
-              ignore_errors: true
-
-            - name: no-config - Install Dropbox
-              when: which_dropbox.rc != 0
-              # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
-              ansible.builtin.shell: 'paru -S --skipreview dropbox'
-
         - name: Plex media server
           block:
             - name: no-config - Check if Plex Media Server is already installed

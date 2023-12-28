@@ -11,22 +11,36 @@
 
     - name: Create config files
       block:
-      - name: hypr_dunst - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/dunst"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
+        - name: hypr_dunst - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.config/dunst"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
 
-      - name: hypr_dunst - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/dunst/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "dunstrc" }
+        - name: hypr_dunst - Process templates
+          tags: theme
+          ansible.builtin.template:
+            src: "files/{{ item.name }}"
+            dest: "{{ home }}/.config/dunst/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '600'
+          loop:
+            - { name: "dunstrc" }
+
+
+    - name: dunst - Start and enable as a user service
+      # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+      # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+      environment:
+        # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+        XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+      # User services do not require super user privileges.
+      ansible.builtin.systemd_service:
+        name: "dunst.service"
+        state: "started"
+        enabled: true
+        scope: "user"
 

@@ -22,6 +22,8 @@
     - import_tasks: tasks/config/hypr_tofi/main.yml
     - import_tasks: tasks/config/hypr_waybar/main.yml
 
+    - import_tasks: tasks/config/dropbox/main.yml
+
     - import_tasks: tasks/config/wallpapers/main.yml
 
     - import_tasks: tasks/config/kmonad/main.yml          # not working on xsp (id path)

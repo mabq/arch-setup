@@ -39,6 +39,3 @@ export PAGER="less -R --use-color -Dd+r -Du+b"
 
 export GTK_THEME="Adwaita:dark"
 
-# nnn variables
-# export NNN_BMS="h:$HOME;p:$HOME/projects;d:$HOME/Dropbox;a:$HOME/Alejandro;c:$HOME/.config;b:$HOME/.local/bin;w:$HOME/.local/share/wallpapers" # bookmarks
-# export NNN_OPENER=/usr/bin/handlr
