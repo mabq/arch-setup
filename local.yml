@@ -33,7 +33,7 @@
     - import_tasks: tasks/config/spotify/main.yml
     - import_tasks: tasks/config/mpv/main.yml
 
-    - import_tasks: tasks/config/swappy/main.yml
+    - import_tasks: tasks/config/screenshot/main.yml
 
     - import_tasks: tasks/config/fonts/main.yml           # must go after ssh
     - import_tasks: tasks/config/fontconfig/main.yml
