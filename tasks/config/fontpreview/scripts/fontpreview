@@ -21,7 +21,7 @@
 # These are compatible with original fontpreview.
 SIZE=800x800
 FONT_SIZE=72
-BG_COLOR={{ color_highlight_low }}
+BG_COLOR={{ color_black_low }}
 FG_COLOR={{ color_white_high }}
 TEXT_ALIGN=center
 PREVIEW_TEXT="ABCDEFGHIJKLM\nNOPQRSTUVWXYZ\n\

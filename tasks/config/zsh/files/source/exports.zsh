@@ -9,7 +9,7 @@ appendToPATH_fn "$HOME/.local/bin"
 #   (no need to export, child processes don't need these variables)
 HISTSIZE=10000
 SAVEHIST="${HISTSIZE}"
-HISTFILE=~/.cache/zsh/history  # be carefull not to include this file on any git repo
+HISTFILE=~/.cache/zsh/history  # be careful not to include this file on any git repo
 
 # XDG Base Directory ---
 #   Only XDG_RUNTIME_DIR is set by default through pam_systemd(8). It is up to the user to explicitly define the other variables according to the specification.
@@ -22,15 +22,15 @@ export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
 # SSH-agent ---
-#   (required for the ssh-agent to work accross terminals)
+#   (required for the ssh-agent to work across terminals)
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
 
 # Defaults ---
 #   These variables define default applications when executing commands from the terminal
 #   Do not set the `TERM` variable, it is set by each terminal emulator
-export BROWSER="brave"  # when openning links
-export VISUAL="nvim"  # when openning a GUI editor
-export EDITOR="nvim"  # when openning a terminal editor
+export BROWSER="brave"  # when opening links
+export VISUAL="nvim"  # when opening a GUI editor (nnn `-e` option will respect this variable)
+export EDITOR="nvim"  # when opening a terminal editor
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"  # https://wiki.archlinux.org/title/Color_output_in_console#Using_less
 export PAGER="less -R --use-color -Dd+r -Du+b"
@@ -39,3 +39,6 @@ export PAGER="less -R --use-color -Dd+r -Du+b"
 
 export GTK_THEME="Adwaita:dark"
 
+# nnn variables
+# export NNN_BMS="h:$HOME;p:$HOME/projects;d:$HOME/Dropbox;a:$HOME/Alejandro;c:$HOME/.config;b:$HOME/.local/bin;w:$HOME/.local/share/wallpapers" # bookmarks
+# export NNN_OPENER=/usr/bin/handlr
