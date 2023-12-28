@@ -1,70 +1,81 @@
+# ------------------------------------------------------------------------------
+#             
+#               _____                    _       _         _
+#              |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#                | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#                | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#                |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                 |_|
+#             
+# ------------------------------------------------------------------------------
+
 [colors.bright]
-black = "#524f67"
-blue = "#9ccfd8"
-cyan = "#ebbcba"
-green = "#31748f"
-magenta = "#c4a7e7"
-red = "#eb6f92"
-white = "#e0def4"
-yellow = "#f6c177"
+black = "{{ color_highlight_high }}"
+blue = "{{ color_blue }}"
+cyan = "{{ color_cyan }}"
+green = "{{ color_green }}"
+magenta = "{{ color_magenta }}"
+red = "{{ color_red }}"
+white = "{{ color_white_high }}"
+yellow = "{{ color_yellow }}"
 
 [colors.cursor]
 cursor = "CellForeground"
 text = "CellBackground"
 
 [colors.dim]
-black = "#21202e"
-blue = "#9ccfd8"
-cyan = "#ebbcba"
-green = "#31748f"
-magenta = "#c4a7e7"
-red = "#eb6f92"
-white = "#6e6a86"
-yellow = "#f6c177"
+black = "{{ color_highlight_low }}"
+blue = "{{ color_blue }}"
+cyan = "{{ color_cyan }}"
+green = "{{ color_green }}"
+magenta = "{{ color_magenta }}"
+red = "{{ color_red }}"
+white = "{{ color_white_low }}"
+yellow = "{{ color_yellow }}"
 
 [colors.footer_bar]
-background = "#403d52"
-foreground = "#e0def4"
+background = "{{ color_highlight }}"
+foreground = "{{ color_white_high }}"
 
 [colors.hints.end]
-background = "#403d52"
-foreground = "#908caa"
+background = "{{ color_highlight }}"
+foreground = "{{ color_white }}"
 
 [colors.hints.start]
-background = "#524f67"
-foreground = "#e0def4"
+background = "{{ color_highlight_high }}"
+foreground = "{{ color_white_high }}"
 
 [colors.line_indicator]
 background = "None"
 foreground = "None"
 
 [colors.normal]
-black = "#403d52"
-blue = "#9ccfd8"
-cyan = "#ebbcba"
-green = "#31748f"
-magenta = "#c4a7e7"
-red = "#eb6f92"
-white = "#908caa"
-yellow = "#f6c177"
+black = "{{ color_highlight }}"
+blue = "{{ color_blue }}"
+cyan = "{{ color_cyan }}"
+green = "{{ color_green }}"
+magenta = "{{ color_magenta }}"
+red = "{{ color_red }}"
+white = "{{ color_white }}"
+yellow = "{{ color_yellow }}"
 
 [colors.primary]
-background = "#191724"
-bright_foreground = "#e0def4"
-dim_foreground = "#908caa"
-foreground = "#e0def4"
+background = "{{ color_black_low }}"
+bright_foreground = "{{ color_white_high }}"
+dim_foreground = "{{ color_white }}"
+foreground = "{{ color_white_high }}"
 
 [colors.search.focused_match]
-background = "#524f67"
-foreground = "#e0def4"
+background = "{{ color_highlight_high }}"
+foreground = "{{ color_white_high }}"
 
 [colors.search.matches]
-background = "#403d52"
-foreground = "#908caa"
+background = "{{ color_highlight }}"
+foreground = "{{ color_white }}"
 
 [colors.selection]
-background = "#f6c177"
-text = "#191724"
+background = "{{ color_yellow }}"
+text = "{{ color_black_low }}"
 
 [colors.vi_mode_cursor]
 cursor = "CellForeground"
