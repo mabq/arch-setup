@@ -61,8 +61,5 @@
             dest: /etc/udev/rules.d/46-logiops-hidraw.rules
           register: rule
 
-        - name: logiops - Ensure the `hidraw` drivers are loaded
-          become: true
-          ansible.builtin.command: modprobe hidraw
-          when: rule.changed
-
+        # restart required (only happens once, during the first run)
+ 
