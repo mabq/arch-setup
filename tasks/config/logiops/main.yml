@@ -56,11 +56,11 @@
         - name: logiops - Create udev rule
           become: true
           ansible.builtin.copy:
-            # Assigns the hidraw devices to group hidraw, and gives that group RW access:
-            content: 'KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"\nSUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", MODE="0660", GROUP="input"'
+            src: "files/46-logiops-hidraw.rules"
             dest: /etc/udev/rules.d/46-logiops-hidraw.rules
-            dest: /etc/udev/rules.d/99-kmonad.rules
-          register: rule
+            mode: '644'
+            owner: "root"
+            group: "root"
 
         # (restart required - this only happens once)
  
