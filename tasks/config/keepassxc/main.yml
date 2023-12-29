@@ -1,0 +1,18 @@
+- tags: keepassxc
+  block:
+    
+      # Passwords are stored in an encrypted database in Dropbox.
+      #
+      # Once Dropbox has synced and the database is locally available open it 
+      # with [KeePassXC](https://keepassxc.org/) using the main encryption password.
+      # For IOS use [Keepassium](https://keepassium.com/).
+      #
+      # Changes made to the database will be automatically synced to Dropbox.
+
+    - name: keepassxc - Install package
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - keepassxc   # Cross-platform community-driven port of Keepass password manager
+

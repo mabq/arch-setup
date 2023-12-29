@@ -109,11 +109,6 @@
           #
           # ------------------------------------------------------------------------
           #
-          # Passwords:
-          - keepassxc           # Cross-platform community-driven port of Keepass password manager
-          #
-          # ------------------------------------------------------------------------
-          #
           # Torrents:
           - qbittorrent         # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
           #

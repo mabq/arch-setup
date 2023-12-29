@@ -1,0 +1,48 @@
+- tags: flameshot
+  block:
+
+    - name: Install packages
+      block:
+      - name: Install package from AUR
+        tags: aur
+        block:
+          - name: flameshot - Check if flameshot is already installed
+            ansible.builtin.command: "which flameshot"
+            register: which_flameshot
+            ignore_errors: true
+
+          - name: flameshot - Install flameshot
+            when: which_flameshot.rc != 0
+            # Powerful yet simple to use screenshot software
+            ansible.builtin.shell: 'paru -S --skipreview flameshot-git'
+
+      - name: flameshot - Install grim
+        #`flameshot` won't work without this package
+        become: true
+        community.general.pacman:
+          state: latest
+          name:
+            - grim    # Screenshot utility for Wayland
+
+
+    - name: Create config files
+      block:
+      - name: flameshot - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/flameshot"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+
+      - name: flameshot - Process templates
+        tags: theme
+        ansible.builtin.template:
+          src: "files/{{ item.name }}"
+          dest: "{{ home }}/.config/flameshot/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '600'
+        loop:
+          - { name: "flameshot.ini" }
+

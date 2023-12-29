@@ -1,3 +1,9 @@
+# ==============================================================================
+# IMPORTANT!
+# This has been replaced with `flameshot`.
+# Do not delete in case it stop working for any reason.
+# ==============================================================================
+
 - tags: screenshot
   block:
 

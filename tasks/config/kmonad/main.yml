@@ -47,7 +47,7 @@
           - { name: "mxkeys.kbd" }
 
 
-    - name: Get uinput permissions
+    - name: Avoid running kmonad with sudo
       # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
       block:
         - name: kmonad - Ensure the `uinput` group exists
@@ -86,3 +86,4 @@
     #     - name: kmonad - Load `uinput` drivers (if necessary)
     #       ansible.builtin.command: modprobe uinput
     #       when: "'uinput' not in loaded_modules.stdout_lines"
+

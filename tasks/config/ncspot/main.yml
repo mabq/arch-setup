@@ -1,3 +1,8 @@
+# ==============================================================================
+# Important!
+# Replaced with `spotifyd` and the official client.
+# Do not remove just in case.
+# ==============================================================================
 - tags: ncspot
   block:
 

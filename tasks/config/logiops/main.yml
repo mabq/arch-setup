@@ -36,3 +36,33 @@
         loop:
           - { name: "logid.cfg" }
 
+
+    - name: Avoid running logid with sudo
+      # https://github.com/PixlOne/logiops/issues/32#issuecomment-715887184
+      block:
+        - name: logiops - Ensure the `hidraw` group exists
+          become: true
+          ansible.builtin.group:
+            name: hidraw
+            state: present
+ 
+        - name: logiops - Add your user to the `hidraw` group
+          become: true
+          ansible.builtin.user:
+            append: true
+            groups: hidraw
+            name: "{{ user }}"
+
+        - name: logiops - Create udev rule
+          become: true
+          ansible.builtin.copy:
+            # Assigns the hidraw devices to group hidraw, and gives that group RW access:
+            content: 'KERNEL=="hidraw[0-9]*", GROUP="hidraw", MODE="0660"'
+            dest: /etc/udev/rules.d/46-logiops-hidraw.rules
+          register: rule
+
+        - name: logiops - Ensure the `hidraw` drivers are loaded
+          become: true
+          ansible.builtin.command: modprobe hidraw
+          when: rule.changed
+
