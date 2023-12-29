@@ -32,18 +32,12 @@
 
     - name: Enable it as a service
       block:
-        - name: logiops - Start and enable it as a service
-          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
-          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
-          environment:
-            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
-            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+        - name: logiops - Start and enable service
           become: true
           ansible.builtin.systemd_service:
             name: "logid.service"
             state: "started"
             enabled: true
-            scope: "system"
 
 
  #    - name: Avoid running logid with sudo
