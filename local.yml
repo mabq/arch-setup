@@ -27,8 +27,8 @@
 
     - import_tasks: tasks/config/wallpapers/main.yml
 
-    - import_tasks: tasks/config/kmonad/main.yml          # not working on xsp (id path)
-    - import_tasks: tasks/config/logiops/main.yml         # not working on xps
+    - import_tasks: tasks/config/kmonad/main.yml          # keyboard
+    - import_tasks: tasks/config/logiops/main.yml         # mouse
 
     - import_tasks: tasks/config/alacritty/main.yml
 

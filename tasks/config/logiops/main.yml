@@ -57,9 +57,10 @@
           become: true
           ansible.builtin.copy:
             # Assigns the hidraw devices to group hidraw, and gives that group RW access:
-            content: 'KERNEL=="hidraw[0-9]*", GROUP="hidraw", MODE="0660"'
+            content: 'KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"\nSUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", MODE="0660", GROUP="input"'
             dest: /etc/udev/rules.d/46-logiops-hidraw.rules
+            dest: /etc/udev/rules.d/99-kmonad.rules
           register: rule
 
-        # restart required (only happens once, during the first run)
+        # (restart required - this only happens once)
  

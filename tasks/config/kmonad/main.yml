@@ -51,6 +51,7 @@
       # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
       block:
         - name: kmonad - Ensure the `uinput` group exists
+          # The uinput driver allows user-space programs to create and interact with virtual input devices.
           become: true
           ansible.builtin.group:
             name: uinput
@@ -68,22 +69,12 @@
           ansible.builtin.copy:
             content: 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'
             dest: /etc/udev/rules.d/99-kmonad.rules
-          register: rule
+          # register: rule
 
-        - name: kmonad - Ensure the `uinput` drivers are loaded
-          become: true
-          ansible.builtin.command: modprobe uinput
-          when: rule.changed
+          # (restart required - this only happens once)
 
-
-    # - name: Load the `uinput` kernel module
-    #   # https://github.com/kmonad/kmonad/blob/cec7d4ac3644c96737da23124e473e13ace5156c/keymap/tutorial.kbd#L111
-    #   block:
-    #     - name: kmonad - Check loaded kernel modules
-    #       ansible.builtin.command: 'lsmod'
-    #       register: loaded_modules
-    #
-    #     - name: kmonad - Load `uinput` drivers (if necessary)
-    #       ansible.builtin.command: modprobe uinput
-    #       when: "'uinput' not in loaded_modules.stdout_lines"
+        # - name: kmonad - Ensure the `uinput` drivers are loaded
+        #   become: true
+        #   ansible.builtin.command: modprobe uinput
+        #   when: rule.changed
 
