@@ -14,6 +14,6 @@
 
 hyprctl dispatch workspace 2
 if ! pgrep --full --exact "/opt/brave-bin/brave" ; then
-    brave 
+    brave
 fi
 

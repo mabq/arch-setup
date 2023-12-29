@@ -17,50 +17,59 @@
 
     - name: Create config files
       block:
-      - name: logiops - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/logiops"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: logiops - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/logiops/files/{{ item.name }}"
-          path: "{{ home }}/.config/logiops/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-          state: "link"
-        loop:
-          - { name: "logid.cfg" }
-
-
-    - name: Avoid running logid with sudo
-      # https://github.com/PixlOne/logiops/issues/32#issuecomment-715887184
-      block:
-        - name: logiops - Ensure the `hidraw` group exists
-          become: true
-          ansible.builtin.group:
-            name: hidraw
-            state: present
- 
-        - name: logiops - Add your user to the `hidraw` group
-          become: true
-          ansible.builtin.user:
-            append: true
-            groups: hidraw
-            name: "{{ user }}"
-
-        - name: logiops - Create udev rule
-          become: true
-          ansible.builtin.copy:
-            src: "files/46-logiops-hidraw.rules"
-            dest: /etc/udev/rules.d/46-logiops-hidraw.rules
-            mode: '644'
+          # Put the config file in the `/etc` directory, not in the home
+          # directory, otherwise you won't be able to manage the service
+          # through systed.
+        - name: logiops - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/tasks/config/logiops/files/logid.cfg"
+            path: "/etc/logid.cfg"
             owner: "root"
             group: "root"
+            mode: '644'
+            state: "link"
 
-        # (restart required - this only happens once)
+
+    - name: Enable it as a service
+      block:
+        - name: logiops - Start and enable it as a service
+          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+          environment:
+            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+          become: true
+          ansible.builtin.systemd_service:
+            name: "logid.service"
+            state: "started"
+            enabled: true
+            scope: "system"
+
+
+ #    - name: Avoid running logid with sudo
+ #      # https://github.com/PixlOne/logiops/issues/32#issuecomment-715887184
+ #      block:
+ #        - name: logiops - Ensure the `hidraw` group exists
+ #          become: true
+ #          ansible.builtin.group:
+ #            name: hidraw
+ #            state: present
+ # 
+ #        - name: logiops - Add your user to the `hidraw` group
+ #          become: true
+ #          ansible.builtin.user:
+ #            append: true
+ #            groups: hidraw
+ #            name: "{{ user }}"
+ #
+ #        - name: logiops - Create udev rule
+ #          become: true
+ #          ansible.builtin.copy:
+ #            src: "files/46-logiops-hidraw.rules"
+ #            dest: /etc/udev/rules.d/46-logiops-hidraw.rules
+ #            mode: '644'
+ #            owner: "root"
+ #            group: "root"
+ #
+ #        # (restart required - this only happens once)
  

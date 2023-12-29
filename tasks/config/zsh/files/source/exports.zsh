@@ -1,6 +1,6 @@
 # Edit the PATH variable ---
 #   (use functions to avoid duplicates)
-appendToPATH_fn "$HOME/go/bin"
+# appendToPATH_fn "$HOME/go/bin"
 appendToPATH_fn "$HOME/.local/bin"
 # appendToPATH_fn "$HOME/.cargo/bin"
 #prependToPATH_fn "$HOME/.volta/bin"
@@ -26,8 +26,8 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
 
 # Defaults ---
-#   These variables define default applications when executing commands from the terminal
-#   Do not set the `TERM` variable, it is set by each terminal emulator
+#   These variables define default applications when executing commands from the terminal.
+#   Do not set the `TERM` variable!, it is set by each terminal emulator.
 export BROWSER="brave"  # when opening links
 export VISUAL="nvim"  # when opening a GUI editor (nnn `-e` option will respect this variable)
 export EDITOR="nvim"  # when opening a terminal editor

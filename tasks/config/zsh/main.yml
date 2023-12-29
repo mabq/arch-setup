@@ -7,11 +7,11 @@
         state: latest
         name:
           - zsh                             # A very advanced and programmable command interpreter (shell) for UNIX
-          - starship                        # The cross-shell prompt for astronauts
-          - zoxide                          # A smarter cd command for your terminal
           - zsh-autosuggestions             # Fish-like autosuggestions for zsh
           - zsh-history-substring-search    # ZSH port of Fish history search (up arrow)
           - zsh-syntax-highlighting         # Fish shell like syntax highlighting for Zsh
+          - zoxide                          # A smarter cd command for your terminal
+          - starship                        # The cross-shell prompt for astronauts
 
 
     - name: Create config files
