@@ -31,7 +31,7 @@
             - { name: "dunstrc" }
 
 
-    - name: dunst - Start and enable as a user service
+    - name: dunst - Enable user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
       # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
       environment:
@@ -40,7 +40,8 @@
       # User services do not require super user privileges.
       ansible.builtin.systemd_service:
         name: "dunst.service"
-        state: "started"
+        # (do not start the service yet, the first time we run this command we do it from a TTY without any window manager started, it will throw an error)
+        # state: "started"
         enabled: true
         scope: "user"
 

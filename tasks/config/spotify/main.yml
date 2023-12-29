@@ -47,7 +47,8 @@
       # User services do not require super user privileges.
       ansible.builtin.systemd_service:
         name: "spotifyd.service"
-        state: "started"
+        # (do not start the service yet, the first time we run this command we do it from a TTY without any window manager started, it will throw an error)
+        # state: "started"
         enabled: true
         scope: "user"
 

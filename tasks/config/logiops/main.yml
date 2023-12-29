@@ -40,31 +40,3 @@
             state: "started"
             enabled: true
 
-
- #    - name: Avoid running logid with sudo
- #      # https://github.com/PixlOne/logiops/issues/32#issuecomment-715887184
- #      block:
- #        - name: logiops - Ensure the `hidraw` group exists
- #          become: true
- #          ansible.builtin.group:
- #            name: hidraw
- #            state: present
- # 
- #        - name: logiops - Add your user to the `hidraw` group
- #          become: true
- #          ansible.builtin.user:
- #            append: true
- #            groups: hidraw
- #            name: "{{ user }}"
- #
- #        - name: logiops - Create udev rule
- #          become: true
- #          ansible.builtin.copy:
- #            src: "files/46-logiops-hidraw.rules"
- #            dest: /etc/udev/rules.d/46-logiops-hidraw.rules
- #            mode: '644'
- #            owner: "root"
- #            group: "root"
- #
- #        # (restart required - this only happens once)
- 
