@@ -21,6 +21,7 @@
           # directory, otherwise you won't be able to manage the service
           # through systed.
         - name: logiops - Create links
+          become: true
           ansible.builtin.file:
             src: "{{ repo_dir }}/tasks/config/logiops/files/logid.cfg"
             path: "/etc/logid.cfg"
