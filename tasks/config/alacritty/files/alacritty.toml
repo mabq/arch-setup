@@ -1,6 +1,7 @@
 import = ["/home/mabq/.config/alacritty/theme.toml"]
 
 [env]
+# (this is required in order to correctly display the colors in tmux)
 TERM = "xterm-256color"
 
 [font]

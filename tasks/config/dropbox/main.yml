@@ -17,6 +17,9 @@
 
 
     - name: dropbox - Copy dropbox key
+      # In order to unlock everything else you need the passwords database
+      # stored in dropbox. If you want you can remove the unencrypted file 
+      # from your local directory after login in.
       ansible.builtin.template:
         src: "files/.dropbox_key"
         dest: "{{ home }}/.dropbox_key"

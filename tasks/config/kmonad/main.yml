@@ -1,3 +1,4 @@
+# Sometimes the event number at which the `/dev/input/by-id/{name}` points changes. This is normally solved by reconnecting the usb reveiver.
 - tags: kmonad
   block:
 
