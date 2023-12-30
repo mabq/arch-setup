@@ -181,3 +181,15 @@
               # Video Conferencing and Web Conferencing Service
               ansible.builtin.shell: 'paru -S --skipreview zoom'
 
+        - name: Kalker
+          block:
+            - name: no-config - Check if Kalker is already installed
+              ansible.builtin.command: "which kalker"
+              register: which_kalker
+              ignore_errors: true
+
+            - name: no-config - Install Kalker
+              when: which_kalker.rc != 0
+              # A calculator program that supports user-defined variables, functions, derivation, and integration.
+              ansible.builtin.shell: 'paru -S --skipreview kalker-bin'
+

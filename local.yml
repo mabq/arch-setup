@@ -10,7 +10,7 @@
 
     - import_tasks: tasks/no_config.yml
 
-    - import_tasks: tasks/config/bluetooth/main.yml
+    - import_tasks: tasks/config/bluetooth/main.yml       # bluetooth not working on mac
 
     - import_tasks: tasks/config/zsh/main.yml
     - import_tasks: tasks/config/ssh/main.yml
