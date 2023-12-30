@@ -84,7 +84,7 @@
       # need to "pre-open" the key by adding its passphrase to the ssh-agent,
       # otherwise the cloning will fail.
       # Add the tags of all tasks that clone a private repository to this tasks.
-      tags: fonts
+      tags: fonts, wallpapers
       block:
         - name: ssh - Start and enable ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
