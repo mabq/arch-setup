@@ -29,6 +29,11 @@
     lalt (tap-hold-next-release 160 e lalt)
     sym (tap-hold-next-release 160 r (layer-toggle symbols))
 
+    metalt #(lmet lalt :delay 10)
+
+    lmat (tap-hold-next-release 160 r @metalt)
+    rmat (tap-hold-next-release 160 u @metalt)
+
     lsft (tap-hold-next-release 160 a lsft)
     lctl (tap-hold-next-release 160 s lctl)
     nav (tap-hold-next-release 160 d (layer-toggle navigation))
@@ -50,23 +55,28 @@
 ;; the first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important)
 
 (deflayer default
-    _       _       _       @lalt   @sym    _       _       _       @ralt   _       _
+    _       _       _       @lalt   @lmat   _       _       @rmat   @ralt   _       _
     _       @lsft   @lctl   @nav    @lmet   _       _       @rmet   @num    @rctl   @rsft
     _       _       _       _       _       _       _       _       _       _       _
     _       _       _                       _                               _       _ 
 )
+
 (deflayer navigation
+arrows
+pgup, pgdn,KeyHome,KeyEnd 
     _       _       _       _       _       _       _       tab     esc     _       bspc
     _       _       _       _       _       _       left    down    up      rght    ret
     _       _       _       _       _       _       _       _       _       _       _
     _       _       _                       _                               _       _ 
 )
+
 (deflayer numbers
     _       /       7       8       9       -       _       rprn    _       _       _
     _       *       4       5       6       +       _       lprn    XX      F2      _
     _       0       1       2       3       .       _       _       _       _       _ 
     _       _       _                       =                               _       _
 )
+
 (deflayer symbols
     _       _       _       _       _       _       _       @lbkt   @rbkt   _       _
     _       _       _       _       _       _       _       lprn    rprn    _       caps
