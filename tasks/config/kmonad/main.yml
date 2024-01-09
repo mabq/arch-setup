@@ -26,26 +26,27 @@
             - evtest    # Input device event monitor and query tool (required to identify the keyboard address)
 
 
-    - name: Create config files
-      block:
-      - name: kmonad - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/kmonad"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: kmonad - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/tasks/config/kmonad/files/{{ item.name }}"
-          path: "{{ home }}/.config/kmonad/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-          state: "link"
-        loop:
-          - { name: "mxkeys.kbd" }
+    # (no need to link the files, just point to the command to the file in this repo)
+    # - name: Create config files
+    #   block:
+    #   - name: kmonad - Create directories
+    #     ansible.builtin.file:
+    #       path: "{{ home }}/.config/kmonad"
+    #       owner: "{{ user }}"
+    #       group: "{{ user }}"
+    #       mode: '700'
+    #       state: directory
+    #
+    #   - name: kmonad - Create links
+    #     ansible.builtin.file:
+    #       src: "{{ repo_dir }}/tasks/config/kmonad/files/{{ item.name }}"
+    #       path: "{{ home }}/.config/kmonad/{{ item.name }}"
+    #       owner: "{{ user }}"
+    #       group: "{{ user }}"
+    #       mode: '600'
+    #       state: "link"
+    #     loop:
+    #       - { name: "mxkeys.kbd" }
 
 
     - name: Avoid running kmonad with sudo

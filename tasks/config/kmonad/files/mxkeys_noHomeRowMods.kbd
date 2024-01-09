@@ -1,6 +1,18 @@
-;; See:
-;;   - tutorial --- https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd#L111 
-;;   - keycodes --- https://github.com/kmonad/kmonad/blob/master/src/KMonad/Keyboard/Keycode.hs 
+;; Documentation:
+;;   - tutorial: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd#L111 
+;;   - keycodes: https://github.com/kmonad/kmonad/blob/master/src/KMonad/Keyboard/Keycode.hs 
+
+;; Condiderations:
+;;   - Do not assign `tap-hold` modifiers to keys that use vim repetitions, 
+;;     for example, `h`, `j`, `k`, `l`, `e`, `w`, `u`, `b`, etc.
+;;     Home row mods are awesome but we loose movility in vim. There is also
+;;     The fact that there is a small delay while typing that is really annoying.
+;;   - A keyboard with a number row is a must. While it is easy to access a 
+;;     number layer alone, it is not easy to press a number with modifiers
+;;     like `Super + Shift + 1` (4 keys pressed at the same time).
+;;   - More keys are actually better as long as they are easy to reach.
+;;     Columnar keyboards should offer much better orientation. Concave
+;;     keyboards should make keys easier to reach.
 
 ;; -----------------------------------------------------------------------------
 
@@ -20,8 +32,7 @@
 
 ;; -----------------------------------------------------------------------------
 
-;; Definition of a default querty layout
-;; `defsrc` doesn't necessarily have to coincide with your actual input Keyboard (only specify the parts that you plan to overwrite) 
+;; Default Qwerty layout definition:
 (defsrc
     esc     f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12     volu
     grv     1       2       3       4       5       6       7       8       9       0       -       =       bspc
@@ -34,22 +45,23 @@
 ;; -----------------------------------------------------------------------------
 
 (defalias
-    lctl (tap-hold-next-release 160 grv lctl)
-    rctl (tap-hold-next-release 160 ret rctl)
-    nav  (tap-hold-next-release 160 d (layer-toggle nav))
-    brkt (tap-hold-next-release 160 ; (layer-toggle brkt))
-
-    bnav (layer-toggle bnav)
+    lctl (tap-hold-next-release 200 grv lctl)
+    rctl (tap-hold-next-release 200 ret rctl)
+    met  (tap-hold-next-release 200 spc lmet)
+    nav  (tap-hold-next-release 200 d (layer-toggle nav))
+    _nav (layer-toggle _nav)
+    brkt (tap-hold-next-release 200 f (layer-toggle brkt))
 
     next C-tab
     prev C-S-tab
     back A-left
     fwrd A-right
-
-    last C-6
+    last C-^
 )
 
 ;; -----------------------------------------------------------------------------
+
+;; The first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important).
 
 ;; (querty
 ;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
@@ -59,40 +71,39 @@
 ;;     _       _       _                       _                               _       _       _
 ;; )
 
-;; - The first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important).
-(deflayer querty
+(deflayer default
     _       _       _       _       _       _       _       _       _       _       _       _       _       _ 
     _       _       _       _       _       _       _       _       _       _       _       _       _       _ 
     _       _       _       _       _       _       _       _       _       _       _       \\      _       _ 
-    @lctl   _       _       @nav    _       _       _       _       _       _       @brkt   _       @rctl
+    @lctl   _       _       @nav    @brkt   _       _       _       _       _       _       _       @rctl
     _       _       _       _       _       _       _       _       _       _       _       _ 
-    _       lalt    lmet                    _                               lmet    _       _ 
+    _       _       _                       @met                            _       _       _ 
 )
 
 (deflayer nav
-    _       _       _       _       _       _       _       _       @last   _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       tab     esc     bspc    _       _       _       _
-    _       _       _       XX      _       _       left    down    up      rght    del     _       _
-    _       _       _       _       _       _       ret     pgdn    pgup    _       _       _
-    _       _       _                       @bnav                           _       _       _ 
+    _       _       _       XX      @_nav   _       left    down    up      rght    _       _       caps
+    _       _       _       _       _       _       ret     _       _       _       _       _
+    _       _       _                       spc                             _       _       _ 
 )
 
-(deflayer bnav
+(deflayer _nav
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       @back   @prev   @next   @fwrd   _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       @last   del     @prev   _       _       _
+    _       _       _       XX      XX      _       @back   pgdn    pgup    @fwrd   _       _       _
+    _       _       _       _       _       _       @next   end     home    _       _       _
     _       _       _                       _                               _       _       _ 
 )
 
 (deflayer brkt
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       -       {       }       +       _       _       _       _       _       _       _       _
-    _       _       \_      \(      \)      =       _       _       _       _       _       _       _
-    _       _       _       [       ]       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       -       +       _       _       _
+    _       _       _       _       XX      _       =       \(      \)      {       }       _       _
+    _       _       _       _       _       _       \_      _       _       [       ]       _
     _       _       _                       _                               _       _       _ 
 )
 
