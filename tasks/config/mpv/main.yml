@@ -1,3 +1,0 @@
-# The `mpv-freecodecampradio` script is never called by running the command 
-# from a terminal, it is always called via a shortcut so there is no need to 
-# create a link to the `~/.local/bin/` directory.

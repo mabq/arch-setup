@@ -23,7 +23,7 @@
         - name: logiops - Create links
           become: true
           ansible.builtin.file:
-            src: "{{ repo_dir }}/tasks/config/logiops/files/logid.cfg"
+            src: "{{ repo_dir }}/config/logiops/files/logid.cfg"
             path: "/etc/logid.cfg"
             owner: "root"
             group: "root"

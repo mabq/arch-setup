@@ -29,7 +29,7 @@
           - name: zsh - Create link for `.zshenv`
             # unlike the other links this link is placed directly under the user's home directory
             ansible.builtin.file:
-              src: "{{ repo_dir }}/tasks/config/zsh/files/.zshenv"
+              src: "{{ repo_dir }}/config/zsh/files/.zshenv"
               path: "{{ home }}/.zshenv"
               owner: "{{ user }}"
               group: "{{ user }}"
@@ -38,7 +38,7 @@
 
           - name: zsh - Create links
             ansible.builtin.file:
-              src: "{{ repo_dir }}/tasks/config/zsh/files/{{ item.name }}"
+              src: "{{ repo_dir }}/config/zsh/files/{{ item.name }}"
               path: "{{ home }}/.config/zsh/{{ item.name }}"
               owner: "{{ user }}"
               group: "{{ user }}"

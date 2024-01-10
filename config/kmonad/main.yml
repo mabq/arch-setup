@@ -39,7 +39,7 @@
     #
     #   - name: kmonad - Create links
     #     ansible.builtin.file:
-    #       src: "{{ repo_dir }}/tasks/config/kmonad/files/{{ item.name }}"
+    #       src: "{{ repo_dir }}/config/kmonad/files/{{ item.name }}"
     #       path: "{{ home }}/.config/kmonad/{{ item.name }}"
     #       owner: "{{ user }}"
     #       group: "{{ user }}"

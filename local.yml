@@ -1,47 +1,41 @@
 - hosts: all
   # must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
   tasks:
-    - import_tasks: tasks/pre_tasks.yml
+    - import_tasks: config/pre_tasks/main.yml
 
-    - import_tasks: tasks/system.yml
+    - import_tasks: config/system/main.yml
 
-    - import_tasks: tasks/config/pacman/main.yml
-    - import_tasks: tasks/paru.yml
+    - import_tasks: config/pacman/main.yml
+    - import_tasks: config/paru/main.yml
 
-    - import_tasks: tasks/no_config.yml
+    - import_tasks: config/no_config/main.yml       # must go after pacman and paru
 
-    # - import_tasks: tasks/config/bluetooth/main.yml       # bluetooth not working on mac
+    - import_tasks: config/zsh/main.yml
+    - import_tasks: config/ssh/main.yml
+    - import_tasks: config/git/main.yml
 
-    - import_tasks: tasks/config/zsh/main.yml
-    - import_tasks: tasks/config/ssh/main.yml
-    - import_tasks: tasks/config/git/main.yml
+    - import_tasks: config/hypr/main.yml
+    - import_tasks: config/hypr_dunst/main.yml
+    - import_tasks: config/hypr_swaylock/main.yml
+    - import_tasks: config/hypr_tofi/main.yml
+    - import_tasks: config/hypr_waybar/main.yml
 
-    - import_tasks: tasks/config/hypr/main.yml
-    - import_tasks: tasks/config/hypr_dunst/main.yml
-    - import_tasks: tasks/config/hypr_swaylock/main.yml
-    - import_tasks: tasks/config/hypr_tofi/main.yml
-    - import_tasks: tasks/config/hypr_waybar/main.yml
+    - import_tasks: config/wallpaper/main.yml       # must go after ssh
 
-    - import_tasks: tasks/config/wallpapers/main.yml      # must go after ssh
+    - import_tasks: config/fonts/main.yml           # must go after ssh
+    - import_tasks: config/fontconfig/main.yml
+    - import_tasks: config/fontpreview/main.yml
 
-    - import_tasks: tasks/config/brave/main.yml
+    - import_tasks: config/alacritty/main.yml
 
-    - import_tasks: tasks/config/dropbox/main.yml
+    - import_tasks: config/brave/main.yml
 
-    - import_tasks: tasks/config/kmonad/main.yml
-    - import_tasks: tasks/config/logiops/main.yml
+    - import_tasks: config/dropbox/main.yml
 
-    - import_tasks: tasks/config/alacritty/main.yml
+    - import_tasks: config/kmonad/main.yml
+    - import_tasks: config/logiops/main.yml
 
-    # - import_tasks: tasks/config/ncspot/main.yml
-    - import_tasks: tasks/config/spotify/main.yml
+    - import_tasks: config/flameshot/main.yml
 
-    # - import_tasks: tasks/config/mpv/main.yml
-
-    # - import_tasks: tasks/config/screenshot/main.yml    # replaced with flameshot
-    - import_tasks: tasks/config/flameshot/main.yml
-
-    - import_tasks: tasks/config/fonts/main.yml           # must go after ssh
-    - import_tasks: tasks/config/fontconfig/main.yml
-    - import_tasks: tasks/config/fontpreview/main.yml
+    - import_tasks: config/spotify/main.yml
 
