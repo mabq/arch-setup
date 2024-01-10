@@ -334,8 +334,8 @@
     #default_icon = comment
 
 [urgency_critical]
-    background = "{{ color_red }}"
-    foreground = "{{ color_black_low }}"
+    background = "{{ color_highlight_low }}"
+    foreground = "{{ color_white_high }}"
     frame_color = "{{ color_red }}"
     timeout = 8
     #default_icon = comment

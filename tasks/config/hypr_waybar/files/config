@@ -1,44 +1,47 @@
 // https://github.com/Alexays/Waybar/wiki/Configuration#bar-config
-
-{
-    "height": 30,
-    "modules-left": ["cpu", "memory", "disk#root", "disk#home"],
-    "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["battery", "clock"],
-    "mode": "overlay",  // much faster (no redraw of all other windows)
-    "spacing": 12,
-
-    "cpu": {
-        "interval": 1,  // much quicker refresh rate (only there for a few seconds)
-        "format": "{usage}%",
+[
+    { 
+        "name": "topbar", 
+        // "height": 30,
+        "modules-left": ["clock"],
+        "modules-center": ["hyprland/workspaces"],
+        "mode": "overlay",  // much faster (no redraw of all other windows)
+        "clock": {
+            "format": "{:%H:%M    %b. %d    %A}"
+        },
+        "hyprland/workspaces": {
+            "format": "{name}",
+        },
     },
-
-    "memory": {
-        "interval": 10,
-        "format": "{used}"
-    },
-
-    "disk#root": {
-        "format": "{free}",
-        "path": "/",
-    },
-
-    "disk#home": {
-        "format": "{free}",
-        "path": "/home",
-    },
-
-    "hyprland/workspaces": {
-        "format": "{name}",
-    },
-
-    "clock": {
-        "format": "{:%A   %b. %d   %H:%M}"
-    },
-
-    "battery": {
-    	"interval": 30,
-        "format": "{capacity}%",
-    },
-}
+    {
+        "name": "bottombar", 
+        "position": "bottom",
+        // "height": 36,
+        "modules-center": ["battery", "cpu", "memory", "disk#root", "disk#home"],
+        "mode": "overlay",  // much faster (no redraw of all other windows)
+        "spacing": 60,
+        "battery": {
+            "interval": 60,
+            "format": "bat {capacity}%",
+        },
+        "cpu": {
+            "interval": 1,  // much quicker refresh rate (only there for a few seconds)
+            "format": "cpu {usage}%",
+        },
+        "memory": {
+            "interval": 5,
+            "format": "mem {used}"
+        },
+        "disk#root": {
+            "interval": 30,
+            "format": "/ {free}",
+            "path": "/",
+        },
+        "disk#home": {
+            "interval": 30,
+            "format": "~ {free}",
+            "path": "/home",
+        },
+    }
+] 
 

@@ -1,12 +1,1 @@
-- tags: bluetooth
-  block:
-    - name: bluetooth - Install packages
-      become: true
-      community.general.pacman:
-        state: latest
-        name:
-          - bluez               # Daemons for the bluetooth protocol stack
-          - bluez-utils         # Development and debugging utilities for the bluetooth protocol stack
-
-    # The script `bluetooth-wh1000XM3` is called by a keyboard shortcut, no 
-    # need to create a link.
+# The script `bluetooth-wh1000XM3` is called by a keyboard shortcut, no need to create a link.

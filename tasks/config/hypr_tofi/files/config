@@ -38,6 +38,6 @@ selection-background-corner-radius = 0
 # Colors
 background-color = {{ color_highlight_low }}
 text-color = {{ color_white_high }}
-selection-color = {{ color_white_high }}
-selection-background = {{ color_highlight }}
+selection-color = {{ color_black_low }}
+selection-background = {{ color_blue }}
 

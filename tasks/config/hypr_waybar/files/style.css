@@ -10,8 +10,11 @@
  * ---------------------------------------------------------------------------*/
 
 * {
+    border: none;
+    border-radius: 0;
     font-family: monospace;
     font-size: 13px;
+    min-height: 0;
 }
 
 window#waybar {
@@ -19,20 +22,39 @@ window#waybar {
     color: {{ color_white_high }};
 }
 
-#cpu,
-#memory,
-#disk,
-#clock,
-#battery {
-    background-color: {{ color_highlight }};
-    padding: 0 15px;
+.topbar {
+    border-bottom: 2px solid;
+    border-color: {{ color_blue }};
+}
+.bottombar {
+    border-top: 1px solid;
+    border-color: {{ color_highlight }};
 }
 
+
+/* topbar modules*/
+
+#clock,
+#workspaces {
+    padding: 0 0 5px 0;
+}
+#clock {
+    padding-left: 12px;
+}
 #workspaces button {
     color: {{ color_highlight }};
 }
-
 #workspaces button.active {
     color: {{ color_white_high }};
+}
+
+
+/* bottom bar modules */
+
+#battery,
+#cpu,
+#memory,
+#disk {
+    padding: 8px 0 7px 0;
 }
 

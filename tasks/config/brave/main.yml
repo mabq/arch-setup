@@ -1,4 +1,5 @@
 - tags: brave
+  # Brave sync code is stored in the passwords database.
   block:
     - name: Install Brave
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
@@ -14,6 +15,4 @@
           # Web browser that blocks ads and trackers by default (binary release)
           ansible.builtin.shell: 'paru -S --skipreview brave-bin'
 
-      # Brave sync code is stored in the passwords database.
-      
       # No need to link the script, its only called with a shortcut.
