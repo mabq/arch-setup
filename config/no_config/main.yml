@@ -169,8 +169,8 @@
           # ------------------------------------------------------------------------
           #
           # Programming:
+          # - jq                  # Command-line JSON processor
           # - go
-          # - jq
           # - nodejs
           # - npm
           # - shellcheck
