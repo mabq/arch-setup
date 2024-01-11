@@ -5,7 +5,7 @@ bindkey -v
 bindkey '^?' backward-delete-char 
 
 # Launch tmux-sessionizer with Ctrl-f
-bindkey -s '^f' "$HOME/.config/tmux/tmux-sessionizer.sh\n"
+bindkey -s '^f' "$HOME/projects/arch-setup/config/tmux/scripts/tmux-sessionizer.sh\n"
 
 # Move to start/end of line quickly (without entering vim mode)
 #   (disabled to use those keybindings with Harpoon)

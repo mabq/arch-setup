@@ -17,7 +17,7 @@ preload = [
 
 [manager]
 
-layout         = [ 2 ,5 ,6 ]
+layout         = [ 2 ,4 ,5 ]
 sort_by        = "natural"
 sort_sensitive = true
 sort_reverse   = false
@@ -39,19 +39,20 @@ show_symlink   = true
 
 # ------------------------------------------------------------------------------
 
-# [opener]
+# (use `handlr` rules to open files)
+
+[opener]
 #
 # edit = [
 # 	{ exec = '$EDITOR "$@"', block = true, for = "unix" },
 # 	# { exec = 'code "%*"',    orphan = true, for = "windows" },
 # ]
-# open = [
-#     # (use `handlr` instead of xdg-open)
-#   	{ exec = 'handlr open "$@"',          desc = "Open", for = "linux" },
-# 	# { exec = 'xdg-open "$@"',             desc = "Open", for = "linux" },
-# 	# { exec = 'open "$@"',                 desc = "Open", for = "macos" },
-# 	# { exec = 'start "%1"', orphan = true, desc = "Open", for = "windows" }
-# ]
+open = [
+  	{ exec = 'handlr open "$@"',          desc = "Open", for = "linux" },
+	# { exec = 'xdg-open "$@"',             desc = "Open", for = "linux" },
+	# { exec = 'open "$@"',                 desc = "Open", for = "macos" },
+	# { exec = 'start "%1"', orphan = true, desc = "Open", for = "windows" }
+]
 # reveal = [
 # 	{ exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF", for = "unix" },
 # 	# { exec = 'open -R "$1"',                       desc = "Reveal", for = "macos" },

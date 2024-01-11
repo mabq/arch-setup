@@ -36,9 +36,11 @@ To run the script execute the following command:
 
 > The first time is going to take time, be patient
 
+> Important!
+> `~/projects/arch-setup/` is hardcoded into some configuration files, if you ever change the destination directory use `rg --hidden --fixed-strings projects/arch-setup` to check all the files that you will need to update.
+
 ```sh 
-# `--directory` is the path where the repo will be cloned
-ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory {~/projects/arch-setup}
+ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory ~/projects/arch-setup
 ```
 
 You will be prompted for the user's password. If no erros occur the machine should automatically reboot after install.

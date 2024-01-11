@@ -27,6 +27,7 @@
     - import_tasks: config/fontpreview/main.yml
 
     - import_tasks: config/alacritty/main.yml
+    - import_tasks: config/tmux/main.yml
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml

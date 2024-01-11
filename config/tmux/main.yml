@@ -1,0 +1,42 @@
+- tags: tmux
+  block:
+
+    - name: tmux - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - tmux  # Terminal multiplexer
+
+    - name: tmux - Create config files
+      block:
+      - name: tmux - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/tmux"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+
+      - name: tmux - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/config/tmux/files/{{ item.name }}"
+          path: "{{ home }}/.config/tmux/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '600'
+          state: "link"
+        loop:
+          - { name: "tmux.conf" }
+
+      - name: tmux - Process templates
+        tags: theme
+        ansible.builtin.template:
+          src: "files/{{ item.name }}"
+          dest: "{{ home }}/.config/tmux/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '600'
+        loop:
+          - { name: "theme.toml" }
+
