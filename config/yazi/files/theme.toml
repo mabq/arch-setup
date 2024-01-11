@@ -1,23 +1,33 @@
 # ------------------------------------------------------------------------------
-# IMPORTANT!                             THIS FILE WAS GENERATED FROM A TEMPLATE
+#             
+#               _____                    _       _         _
+#              |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#                | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#                | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#                |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                 |_|
+#             
 # ------------------------------------------------------------------------------
-
-# default theme:
-#   https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/theme.toml
-
+#
+# Default config files available at:
+#   https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
+#
+# ------------------------------------------------------------------------------
 
 [manager]
 
 cwd = { fg = "{{ color_blue }}" }
 
-hovered = { fg = "{{ color_white_high }}", bg = "{{ color_highlight }}" }
-preview_hovered = { fg = "{{ color_white_high }}" }
+# (reversed does not work as intended)
+# hovered = { fg = "{{ color_white_high }}", bg = "{{ color_highlight_low }}" }
+hovered = { fg = "{{ color_white_high }}", bg = "{{ color_highlight_low }}" }
+preview_hovered = { bg = "{{ color_highlight_low }}", fg = "{{ color_white }}" }
 
-find_keyword = { fg = "{{ color_yellow }}", italic = true }
-find_position = { fg = "{{ color_yellow }}", italic = true }
+find_keyword = { fg = "{{ color_cyan }}", italic = true }
+find_position = { fg = "{{ color_cyan }}", italic = true }
 
-marker_selected = { fg = "{{ color_blue }}", bg = "{{ color_blue }}" }
-marker_copied = { fg = "{{ color_yellow }}", bg = "{{ color_yellow }}" }
+marker_selected = { fg = "{{ color_magenta }}", bg = "{{ color_magenta }}" }
+marker_copied = { fg = "{{ color_blue }}", bg = "{{ color_blue }}" }
 marker_cut  = { fg = "{{ color_cyan }}", bg = "{{ color_cyan }}" }
 
 tab_active = { fg = "{{ color_white_high }}", bg = "{{ color_black_low }}", bold = true }
@@ -27,62 +37,46 @@ tab_width = 2
 border_symbol = "│"
 border_style = { fg = "{{ color_highlight_low }}" }
 
-folder_offset  = [ 1, 0, 1, 0 ]
-preview_offset = [ 1, 1, 1, 1 ]
+folder_offset  = [ 0, 1, 0, 1 ]
+preview_offset = [ 1, 2, 1, 2 ]
 
 syntect_theme = ""
 
-
-[status]
-# (disabled, useless)
-
-# separator_open  = ""
-# separator_close = ""
-# separator_style = { fg = "{{ color_highlight }}", bg = "{{ color_highlight }}" }
-#
-# mode_normal = { fg = "{{ color_black_low }}", bg = "", bold = true }
-# mode_select = { fg = "{{ color_black_low }}", bg = "{{ color_blue }}", bold = true }
-# mode_unset  = { fg = "{{ color_black_low }}", bg = "{{ color_cyan }}", bold = true }
-#
-# progress_label  = { fg = "{{ color_white_high }}", bold = true }
-# progress_normal = { fg = "{{ color_white_high }}", bg = "{{ color_highlight }}" }
-# progress_error  = { fg = "{{ color_black_low }}", bg = "" }
-#
-# permissions_t = { fg = "{{ color_blue }}" }
-# permissions_r = { fg = "{{ color_yellow }}" }
-# permissions_w = { fg = "{{ color_cyan }}" }
-# permissions_x = { fg = "" }
-# permissions_s = { fg = "{{ color_highlight }}" }
+# ------------------------------------------------------------------------------
 
 
 [select]
 
-border   = { fg = "{{ color_blue }}" }
+border   = { fg = "{{ color_cyan }}" }
 active   = { fg = "{{ color_cyan }}" }
 inactive = {}
 
+# ------------------------------------------------------------------------------
 
 [input]
 
-border   = { fg = "{{ color_blue }}" }
+border   = { fg = "{{ color_cyan }}" }
 title    = {}
-value    = {}
+value    = { fg = "{{ color_white_high }}"}
 selected = { reversed = true }
 
+# ------------------------------------------------------------------------------
 
 [completion]
 
-border   = { fg = "{{ color_blue }}" }
-active   = { bg = "{{ color_highlight }}" }
+border   = { fg = "{{ color_cyan }}" }
+active   = { bg = "{{ color_white }}" }
 inactive = {}
 
+# ------------------------------------------------------------------------------
 
 [tasks]
 
-border  = { fg = "{{ color_blue }}" }
+border  = { fg = "{{ color_cyan }}" }
 title   = {}
 hovered = { underline = true }
 
+# ------------------------------------------------------------------------------
 
 [which]
 
@@ -91,35 +85,37 @@ cand            = { fg = "{{ color_cyan }}" }
 rest            = { fg = "{{ color_white_high }}" }
 desc            = { fg = "{{ color_white_high }}" }
 separator       = "  "
-separator_style = { fg = "{{ color_white_low }}" }
+separator_style = { fg = "{{ color_white }}" }
 
+# ------------------------------------------------------------------------------
 
 [help]
 
 on      = { fg = "{{ color_cyan }}" }
-exec    = { fg = "{{ color_blue }}" }
-desc    = { fg = "{{ color_white }}" }
-hovered = { bg = "{{ color_highlight }}", bold = true }
-footer  = { fg = "{{ color_white_high }}", bg = "{{ color_highlight_high }}" }
+exec    = { fg = "{{ color_white_high }}" }
+desc    = { fg = "{{ color_white_high }}" }
+hovered = { bg = "{{ color_highlight_low }}" }
+footer  = { fg = "{{ color_white_high }}", bg = "{{ color_black_low }}" }
 
+# ------------------------------------------------------------------------------
 
 [filetype]
 
 rules = [
-	# { mime = "image/*", fg = "{{ color_white_high }}" },
-	#
-	# { mime = "video/*", fg = "{{ color_white_high }}" },
-	# { mime = "audio/*", fg = "{{ color_white_high }}" },
-	#
-	# { mime = "application/zip",             fg = "{{ color_cyan }}" },
-	# { mime = "application/gzip",            fg = "{{ color_cyan }}" },
-	# { mime = "application/x-tar",           fg = "{{ color_cyan }}" },
-	# { mime = "application/x-bzip",          fg = "{{ color_cyan }}" },
-	# { mime = "application/x-bzip2",         fg = "{{ color_cyan }}" },
-	# { mime = "application/x-7z-compressed", fg = "{{ color_cyan }}" },
-	# { mime = "application/x-rar",           fg = "{{ color_cyan }}" },
-
+    # Since `reversed` color does not work, it makes no sense to assign colors
+    # to file types.
+    # Version 1.6 will allow custom colors for symbolic links (see https://github.com/sxyazi/yazi/issues/287#issuecomment-1769794925)
+	{ name = "*/", fg = "{{ color_white_low }}" },
 	{ name = "*", fg = "{{ color_white }}" },
-	{ name = "*/", fg = "{{ color_white_low }}" }
 ]
+
+# ------------------------------------------------------------------------------
+
+[icons]
+
+# Disable all custom icons, just folders and documents.
+"*/" = " "
+"*"  = " "
+
+# ------------------------------------------------------------------------------
 
