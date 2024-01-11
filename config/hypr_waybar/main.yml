@@ -8,7 +8,6 @@
         name:
           - waybar      # Highly customizable Wayland bar for Sway and Wlroots based compositors
 
-
     - name: Create config files
       block:
       - name: hypr_waybar - Create directories

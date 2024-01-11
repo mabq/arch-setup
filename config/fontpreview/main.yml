@@ -25,7 +25,6 @@
               # Command line util which allows to display images in combination with X11 written in C++
               ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
 
-
     - name: Link script
       block:
         - name: fontpreview - Create directory

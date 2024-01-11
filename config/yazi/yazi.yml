@@ -1,6 +1,0 @@
-
-      # - yazi                # Blazing fast terminal file manager written in Rust, based on async I/O
-      # - ffmpegthumbnailer   # (optional, for video thumbnails) Lightweight video thumbnailer that can be used by file managers
-      # - jq                  # (optional, for JSON preview) Command-line JSON processor
-      # - poppler             # (optional, for PDF preview) PDF rendering library based on xpdf 3.0
-      # - ueberzugpp          # (AUR - required on X11) Command line util which allows to display images in combination with X11 written in C++

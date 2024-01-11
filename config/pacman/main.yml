@@ -22,7 +22,7 @@
         name: pacman-contrib      
 
 
-    - name: Link script
+    - name: pacman - Link script
       block:
         - name: pacman - Create directory
           ansible.builtin.file:

@@ -13,7 +13,6 @@
           - zoxide                          # A smarter cd command for your terminal
           - starship                        # The cross-shell prompt for astronauts
 
-
     - name: Create config files
       block:
       - name: zsh - Create directory
@@ -53,7 +52,6 @@
               - { name: "source/options.zsh" }
               - { name: "source/plugins.zsh" }
 
-
     - name: Create shared history file
       block:
         - name: zsh - Create `~/.cache/zsh` directory
@@ -71,7 +69,6 @@
             group: "{{ user }}"
             mode: '600'
             state: touch
-
 
     - name: zsh - Make it the user's default shell
       become: true

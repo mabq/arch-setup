@@ -17,7 +17,6 @@
           - spotifyd          # Lightweight spotify streaming daemon with spotify connect support
           - spotify-launcher  # Client for spotify's apt repository in Rust for Arch Linux
 
-
     - name: Config files
       block:
         - name: spotify - Create directory
@@ -36,7 +35,6 @@
             group: "{{ user }}"
             # make sure only you have access to this file
             mode: "600"
-
 
     - name: spotify - Start and enable it as a user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user

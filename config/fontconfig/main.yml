@@ -10,7 +10,6 @@
             name:
               - fontconfig          # Library for configuring and customizing font access
 
-
     - name: Create config files
       block:
       - name: fontconfig - Create directories

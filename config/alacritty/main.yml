@@ -8,7 +8,6 @@
         name:
           - alacritty  # A cross-platform, GPU-accelerated terminal emulator
 
-
     - name: Create config files
       block:
       - name: alacritty - Create directories

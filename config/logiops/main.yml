@@ -14,7 +14,6 @@
           # An unofficial driver for Logitech HID++>2.0 mice and keyboard
           ansible.builtin.shell: 'paru -S --skipreview logiops'
 
-
     - name: Create config files
       block:
           # Put the config file in the `/etc` directory, not in the home
@@ -29,7 +28,6 @@
             group: "root"
             mode: '644'
             state: "link"
-
 
     - name: Enable it as a service
       block:

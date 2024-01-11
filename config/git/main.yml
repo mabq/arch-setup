@@ -9,7 +9,6 @@
           - git             # The fast distributed version control system
           - git-delta       # Syntax-highlighting pager for git and diff output
 
-
     - name: git - Process templates
       ansible.builtin.template:
         src: "files/{{ item.name }}"

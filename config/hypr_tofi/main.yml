@@ -14,7 +14,6 @@
           # Tiny rofi / dmenu replacement for wlroots-based Wayland compositors
           ansible.builtin.shell: 'paru -S --skipreview tofi'
 
-
     - name: Create config files
       block:
       - name: hypr_tofi - Create directories

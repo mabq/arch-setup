@@ -182,6 +182,20 @@
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
+
+        - name: Install Brave
+          # Note: Brave sync code is stored in the passwords database (enter it manually after installation)
+          block:
+            - name: no-config - Check if Brave is already installed
+              ansible.builtin.command: "which brave"
+              register: which_brave
+              ignore_errors: true
+
+            - name: no-config - Install Brave
+              when: which_brave.rc != 0
+              # Web browser that blocks ads and trackers by default (binary release)
+              ansible.builtin.shell: 'paru -S --skipreview brave-bin'
+
         - name: Plex media server
           block:
             - name: no-config - Check if Plex Media Server is already installed

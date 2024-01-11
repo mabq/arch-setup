@@ -1,3 +1,8 @@
+# Wallpapers are stored in a separate repo because it is really hard to find 
+# nice wallpapers, once I find them I don't want to remove them. I don't want 
+# to download all those images everytime I run this ansible playbook to update 
+# minor details.
+
 - tags: wallpapers
   block:
     - name: fonts - Clone the wallpaper repository
@@ -13,7 +18,3 @@
         # file, otherwise the verification fails.
         accept_hostkey: true
 
-# I put wallpapers in a separate repo because it is really hard to find cool 
-# wallpapers, once I find them I don't want to remove them. I don't want to 
-# download all those images everytime I run this ansible playbook to update 
-# minor details.

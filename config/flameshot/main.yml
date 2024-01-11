@@ -24,7 +24,6 @@
           name:
             - grim    # Screenshot utility for Wayland
 
-
     - name: Create config files
       block:
       - name: flameshot - Create directories
