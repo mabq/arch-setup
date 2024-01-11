@@ -99,19 +99,6 @@
           #
           # ------------------------------------------------------------------------
           #
-          # Password manager:
-          #   Passwords are stored in an encrypted database in Dropbox.
-          #
-          #   Once Dropbox has synced and the database is locally available open it 
-          #   with [KeePassXC](https://keepassxc.org/) using the main encryption password.
-          #   For IOS use [Keepassium](https://keepassium.com/).
-          #
-          #   Changes made to the database will be automatically synced to Dropbox.
-          #
-          - keepassxc   # Cross-platform community-driven port of Keepass password manager
-          #
-          # ------------------------------------------------------------------------
-          #
           # Images:
           - nsxiv               # Neo (or New or Not) Simple (or Small or Suckless) X Image Viewer
           #

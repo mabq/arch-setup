@@ -17,10 +17,9 @@ This playbook assumes you installed Archlinux with the [arch-base](https://githu
 
 It's important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine. Ansible evaluates the value of variables on the controller (look for `lookup('env', '{variable}')` to see where this matters).
 
-All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result inmediatly. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and the re-run `ansible-pull`.
+All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and then re-run `ansible-pull`.
 
-> If a file with the same name already exists the creating of the link will through an error. I could force the creating of the link but I prefer the error in order to avoid loosing any data that might be important.
-> Using `stow` is simpler but does not allow to apply a the same theme to all packages.
+> If a file with the same name already exists the creatiion of the link/file will through an error. I could force the creatiion but I prefer the error in order to avoid loosing any data that might be important.
 
 
 ## Before running this script
@@ -43,5 +42,5 @@ To run the script execute the following command:
 ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory ~/projects/arch-setup
 ```
 
-You will be prompted for the user's password. If no erros occur the machine should automatically reboot after install.
+You will be prompted for the user's password. If no errors occur the machine should automatically reboot after installation completes.
 
