@@ -60,3 +60,27 @@
         #   ansible.builtin.command: modprobe uinput
         #   when: rule.changed
 
+
+    - name: kmonad - Create config files
+      block:
+      - name: kmonad - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/kmonad"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+
+      - name: kmonad - Create links
+        # These links are created only to avoid hard-coding the path of the repository in other configuration files.
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/config/kmonad/files/{{ item.name }}"
+          path: "{{ home }}/.config/kmonad/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: "0600"
+          state: "link"
+        loop:
+          - { name: "mxkeys_homeRowMods.kbd" }
+          - { name: "mxkeys_noHomeRowMods.kbd" }
+

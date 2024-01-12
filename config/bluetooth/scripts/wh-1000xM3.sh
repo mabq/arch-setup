@@ -15,6 +15,7 @@
 macaddress="94:DB:56:18:82:5D"
 
 if bluetoothctl devices Connected | rg --quiet "$macaddress"; then
+    # `bluetoothctl` command is provided by the `bluez-utils` package
     bluetoothctl disconnect "$macaddress"
 else
     bluetoothctl connect "$macaddress"

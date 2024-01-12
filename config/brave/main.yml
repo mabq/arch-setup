@@ -1,0 +1,41 @@
+- tags: brave
+  block:
+
+    - name: Install Brave
+      tags: aur
+      # Note: Brave sync code is stored in the passwords database (enter it manually after installation)
+      block:
+        - name: brave - Check if Brave is already installed
+          ansible.builtin.command: "which brave"
+          register: which_brave
+          ignore_errors: true
+
+        - name: brave - Install Brave
+          when: which_brave.rc != 0
+          # Web browser that blocks ads and trackers by default (binary release)
+          ansible.builtin.shell: 'paru -S --skipreview brave-bin'
+
+
+    - name: brave - Create config files
+      block:
+      - name: brave - Create directories
+        # All brave files are in `~/.config/BraveSoftware/`, put the script in another directory to avoid messing around with those files.
+        ansible.builtin.file:
+          path: "{{ home }}/.config/brave/scripts"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+
+      - name: brave - Create links
+        # These links are created only to avoid hard-coding the path of the repository in configuration files.
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/config/brave/scripts/{{ item.name }}"
+          path: "{{ home }}/.config/brave/scripts/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: "0700"
+          state: "link"
+        loop:
+          - { name: "toggle.sh" }
+

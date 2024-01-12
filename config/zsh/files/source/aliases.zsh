@@ -1,23 +1,20 @@
-# Add options to core utils ---
-alias chgrp='chgrp --preserve-root'
-alias chmod='chmod -c --preserve-root'
-alias chown='chown -c --preserve-root'
-alias cp='cp -iv'
+# Add options to core utils:
+# alias chgrp='chgrp --preserve-root'
+# alias chmod='chmod -c --preserve-root'
+# alias chown='chown -c --preserve-root'
+# alias cp='cp -iv'
 alias la='eza -al'
 # alias ln='ln -iv'
-alias mkdir='mkdir -pv'
-alias mv='mv -iv'
-alias rm='rm -iv --preserve-root'
+alias mkdir='mkdir -p'
+# alias mv='mv -iv'
+# alias rm='rm -iv --preserve-root'
 # alias tmux='tmux -2' # force tmux to assume that the terminal support 256 colors https://wiki.archlinux.org/title/tmux#256_colors
 
-# Renames ---
-alias trash='trash-put'
-alias e='nvim .'
-alias wifi='nmtui'
 
-# Shortcuts ---
+# Shortcuts/renames:
 alias cpuinfo='bat /proc/cpuinfo'
 alias drivers='lspci -k'
+alias e='nvim .'
 alias fat32='sudo mkfs.fat -F 32' # format external disk to work on any OS
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
 alias fonts='fc-list : family | sort | uniq | fzf'
@@ -42,15 +39,18 @@ alias suspend='swaylock; systemctl suspend'
 alias ta='tmux attach'
 alias toen='trans es:en'
 alias toes='trans en:es'
+alias trash='trash-put'
 alias tree='eza --tree'
-# alias update='cd ~/projects/ansible-post-installation/ && ga . && gc -m "all" ; gp && sleep 3 && sudo ansible-pull -U https://github.cm/mabq/ansible-post-installation --vault-password-file ~/.vault_key'
+alias wifi='nmtui'
 
-# Requests ---
+
+# Requests:
 alias extip='curl icanhazip.com'
 alias extipjson='curl https://ipapi.co/json/'
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 alias weather='curl wttr.in'
 
-# Safety nets ---
+
+# Safety nets:
 alias fsck='echo "Never use file system repair software such as fsck directly on an encrypted volume, or it will destroy any means to recover the key used to decrypt your files. Such tools must be used on the decrypted (opened) device instead"'
 

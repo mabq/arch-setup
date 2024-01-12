@@ -1,7 +1,7 @@
 - tags: noconfig
   block:
 
-    - name: no-config - Install packages from official repositories
+    - name: no-config - Install packages that do not require configuration files from official repositories
       become: true
       community.general.pacman:
         state: latest
@@ -66,12 +66,6 @@
           #
           # ------------------------------------------------------------------------
           #
-          # Bluetooth utilities:
-          - bluez               # Daemons for the bluetooth protocol stack
-          - bluez-utils         # Development and debugging utilities for the bluetooth protocol stack
-          #
-          # ------------------------------------------------------------------------
-          #
           # Network utilities:
           # - bind-tools          # A complete, highly portable implementation of the DNS protocol
           # - nfs-utils           # Support programs for Network File Systems
@@ -101,12 +95,6 @@
           #
           # Images:
           - nsxiv               # Neo (or New or Not) Simple (or Small or Suckless) X Image Viewer
-          #
-          # ------------------------------------------------------------------------
-          #
-          # Video:
-          - mpv                 # A free, open source, and cross-platform media player
-          - mpv-mpris           # MPRIS plugin for mpv (media keys)
           #
           # ------------------------------------------------------------------------
           #
@@ -170,20 +158,8 @@
       tags: aur
       block:
 
-        - name: Install Brave
-          # Note: Brave sync code is stored in the passwords database (enter it manually after installation)
-          block:
-            - name: no-config - Check if Brave is already installed
-              ansible.builtin.command: "which brave"
-              register: which_brave
-              ignore_errors: true
-
-            - name: no-config - Install Brave
-              when: which_brave.rc != 0
-              # Web browser that blocks ads and trackers by default (binary release)
-              ansible.builtin.shell: 'paru -S --skipreview brave-bin'
-
         - name: Plex media server
+          # (start the service manually when required to avoid consumming resources)
           block:
             - name: no-config - Check if Plex Media Server is already installed
               ansible.builtin.shell: "pacman -Q | rg plex-media-server"

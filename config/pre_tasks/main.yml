@@ -15,7 +15,7 @@
     - name: pre-tasks - Change the repository url protocol
       # `ansible-pull` uses the http protocol to clone the repository, we 
       # need to change the remote url protocol, from https to ssh, in order 
-      # to be able to push changes any changes made to linked files.
+      # to be able to push any changes made to linked files.
       ansible.builtin.replace:
         path: "{{ repo_dir }}/.git/config"
         regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)

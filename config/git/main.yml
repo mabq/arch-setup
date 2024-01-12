@@ -9,14 +9,13 @@
           - git             # The fast distributed version control system
           - git-delta       # Syntax-highlighting pager for git and diff output
 
-    - name: git - Process templates
-      ansible.builtin.template:
-        src: "files/{{ item.name }}"
-        dest: "{{ home }}/{{ item.name }}"
+    - name: git - Create links
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/git/files/{{ item.name }}"
+        path: "{{ home }}/{{ item.name }}"
         owner: "{{ user }}"
         group: "{{ user }}"
         mode: '600'
+        state: "link"
       loop:
         - { name: ".gitconfig" }
-
-

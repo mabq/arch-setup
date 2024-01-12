@@ -1,5 +1,5 @@
-- hosts: all
   # must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
+- hosts: all
   tasks:
     - import_tasks: config/pre_tasks/main.yml
 
@@ -10,9 +10,17 @@
 
     - import_tasks: config/no_config/main.yml       # must go after pacman and paru
 
+    - import_tasks: config/bluetooth/main.yml
+
     - import_tasks: config/zsh/main.yml
     - import_tasks: config/ssh/main.yml
     - import_tasks: config/git/main.yml
+    - import_tasks: config/tmux/main.yml
+
+    - import_tasks: config/handlr/main.yml
+    - import_tasks: config/yazi/main.yml
+
+    - import_tasks: config/dropbox/main.yml
 
     - import_tasks: config/hypr/main.yml
     - import_tasks: config/hypr_dunst/main.yml
@@ -26,19 +34,17 @@
     - import_tasks: config/fontconfig/main.yml
     - import_tasks: config/fontpreview/main.yml
 
-    - import_tasks: config/tmux/main.yml
     - import_tasks: config/alacritty/main.yml
 
-    - import_tasks: config/handlr/main.yml
-    - import_tasks: config/yazi/main.yml
-
-    - import_tasks: config/dropbox/main.yml
+    - import_tasks: config/brave/main.yml
     - import_tasks: config/keepassxc/main.yml
 
     - import_tasks: config/kmonad/main.yml
     - import_tasks: config/logiops/main.yml
 
     - import_tasks: config/flameshot/main.yml
+
+    - import_tasks: config/mpv/main.yml
 
     - import_tasks: config/spotify/main.yml
 

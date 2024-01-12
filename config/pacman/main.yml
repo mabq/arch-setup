@@ -26,7 +26,6 @@
       block:
         - name: pacman - Create directory
           ansible.builtin.file:
-            # Always called from the terminal (must be in the $PATH)
             path: "{{ home }}/.local/bin"
             owner: "{{ user }}"
             group: "{{ user }}"
@@ -34,6 +33,7 @@
             state: directory
 
         - name: pacman - Create link
+          # This script is always called from the terminal, must be in the $PATH
           ansible.builtin.file:
             src: "{{ repo_dir }}/config/pacman/scripts/{{ item.name }}"
             path: "{{ home }}/.local/bin/{{ item.name }}"
