@@ -1,2 +1,55 @@
+- tags: nvim
+  block:
 
-- neovim              # Fork of Vim aiming to improve user experience, plugins, and GUIs
+    - name: nvim - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - neovim    # Fork of Vim aiming to improve user experience, plugins, and GUIs
+
+
+    - name: nvim - Create config files
+      block:
+      - name: nvim - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/.config/nvim/"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+        loop:
+          - { path: 'lua/mabq' }
+          - { path: 'after/plugin' }
+          - { path: 'spell' }
+
+      - name: nvim - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/config/nvim/files/{{ item.name }}"
+          path: "{{ home }}/.config/nvim/{{ item.name }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '600'
+          state: "link"
+        loop:
+          - { name: 'init.lua' }
+          # lua/mabq
+          - { name: 'lua/mabq/init.lua' }
+          - { name: 'lua/mabq/lazy.lua' }
+          - { name: 'lua/mabq/remap.lua' }
+          - { name: 'lua/mabq/set.lua' }
+          # after/plugin
+          - { name: 'after/plugin/comment.lua' }
+          - { name: 'after/plugin/harpoon.lua' }
+          - { name: 'after/plugin/highlight-yank.lua' }
+          - { name: 'after/plugin/lsp.lua' }
+          - { name: 'after/plugin/rose-pine.lua' }
+          - { name: 'after/plugin/telescope.lua' }
+          - { name: 'after/plugin/treesitter.lua' }
+          - { name: 'after/plugin/trouble.lua' }
+          - { name: 'after/plugin/undotree.lua' }
+          - { name: 'after/plugin/yazi.lua' }
+          - { name: 'after/plugin/zenmode.lua' }
+          # spell
+          - { name: 'spell/en.utf-8.add' }
+

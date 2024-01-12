@@ -34,9 +34,7 @@ All configuration files that do not require templating are created as links, tha
 To run the script execute the following command:
 
 > The first time is going to take time, be patient
-
-> Important!
-> `~/projects/arch-setup/` is hardcoded into some configuration files, if you ever change the destination directory use `rg --hidden --fixed-strings projects/arch-setup` to check all the files that you will need to update.
+> You should be able to change the destination directory without any problems
 
 ```sh 
 ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory ~/projects/arch-setup

@@ -15,7 +15,9 @@
     - import_tasks: config/zsh/main.yml
     - import_tasks: config/ssh/main.yml
     - import_tasks: config/git/main.yml
+
     - import_tasks: config/tmux/main.yml
+    - import_tasks: config/nvim/main.yml
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
