@@ -1,7 +1,9 @@
-----------------------------------------------------------------------
--- Auto-install lazy.nvim if not present
---   https://github.com/folke/lazy.nvim#-installation
----------------------------------------------------------------------
+-- Documentation:
+--   https://github.com/folke/lazy.nvim
+
+-------------------------------------------------------------------------------
+-- Install lazy.nvim (if not already installled):
+-------------------------------------------------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -19,24 +21,29 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-----------------------------------------------------------------------
--- Plugins to install
---   https://github.com/folke/lazy.nvim#-plugin-spec
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Define plugins to install:
+--   Plugins are stored in `~/.local/share/nvim/lazy/`
+-------------------------------------------------------------------------------
 
 local plugins = {
 
-    -- Basics --
-    { 'numToStr/Comment.nvim' },
+    -- treesitter is all about parsing code as fast as possible (create an abstract syntax tree)
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+
+    -- themes map colors to parsed syntax tree items
     { 'rose-pine/neovim',                name = 'rose-pine' },
+    { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
+
+    -- fuzzy find
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.4',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-        }
+        branch = '0.1.x',
+        dependencies = { 'nvim-lua/plenary.nvim' }
     },
+
+
+    { 'numToStr/Comment.nvim' },
     {
         'ThePrimeagen/harpoon',
         branch = "harpoon2",
@@ -85,11 +92,16 @@ local plugins = {
 }
 
 
-----------------------------------------------------------------------
--- Launch lazy
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Define options:
+-------------------------------------------------------------------------------
 
 local opts = {} -- empty table for default options, you can check those in https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 
--- Run `:checkhealth lazy` to verify everything is working properly.
+
+-------------------------------------------------------------------------------
+-- Let lazy do it's magic:
+--   Run `:checkhealth lazy` to verify everything is working properly
+-------------------------------------------------------------------------------
+
 require("lazy").setup(plugins, opts)

@@ -10,14 +10,13 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 -- general preferences
--- vim.opt.clipboard = 'unnamedplus'
-vim.opt.hidden = true
-vim.opt.updatetime = 50
-vim.opt.nrformats = '' --treat numbers with a leading 0 as decimal (page 22, practical vim)
+vim.opt.nrformats = 'alpha' -- use `C-a/x` or `g Ctrl-a/x` to increment numbers and letters
 vim.opt.mouse = 'nv' -- resize a split buffer with the mouse
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.nrformats = 'alpha' -- use `C-a/x` or `g Ctrl-a/x` to increment numbers and letters
+vim.opt.hidden = true
+-- vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.updatetime = 50
 
 -- search options
 vim.opt.hlsearch = true
@@ -44,10 +43,10 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'line'
 
 -- indenting/wrapping
+vim.opt.expandtab = true -- replace tabs with spaces
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.shiftround = true
 

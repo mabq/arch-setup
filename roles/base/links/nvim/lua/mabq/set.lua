@@ -11,10 +11,11 @@ vim.g.netrw_winsize = 25
 
 -- general preferences
 -- vim.opt.clipboard = 'unnamedplus'
+vim.opt.statusline = " %F %m %= %l:%c "
 vim.opt.hidden = true
 vim.opt.updatetime = 50
 vim.opt.nrformats = '' --treat numbers with a leading 0 as decimal (page 22, practical vim)
-vim.opt.mouse = 'nv' -- resize a splitted buffer with the mouse
+vim.opt.mouse = 'nv' -- resize a split buffer with the mouse
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.nrformats = 'alpha' -- use `C-a/x` or `g Ctrl-a/x` to increment numbers and letters

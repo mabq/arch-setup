@@ -1,9 +1,9 @@
 require('rose-pine').setup({
     highlight_groups = {
-        ColorColumn = { bg = 'surface' },
+        -- ColorColumn = { bg = 'surface' },
         -- CursorLine = { bg = 'highlight_low' },
-        StatusLine = { bg = 'highlight_high', fg = 'text' },
-        StatusLineNC = { bg = 'highlight_med', fg = 'subtle' },
+        StatusLine = { bg = 'highlight_med', fg = 'text' },
+        StatusLineNC = { bg = 'highlight_med', fg = 'muted' },
     }
 })
 
