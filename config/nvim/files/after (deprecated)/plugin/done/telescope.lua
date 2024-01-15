@@ -1,0 +1,20 @@
+-- -- Load extensions ------------------------------------------------------------
+--
+-- require('telescope').load_extension('fzf')
+-- require("telescope").load_extension("emoji")
+--
+--
+-- -- Keybindings ----------------------------------------------------------------
+--
+-- local builtin = require("telescope.builtin")
+--
+-- vim.keymap.set('n', '<leader>fg', builtin.git_files, {})     -- find between git files only
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})    -- find in all files
+-- vim.keymap.set('n', '<leader>fs', function()                 -- find between files that contain the given string
+--     builtin.grep_string({ search = vim.fn.input("Project search: ") });
+-- end)
+-- -- vim.keymap.set('n', '<leader>fs', builtin.spell_suggest, {}) -- show spell suggestions for the word under cursor
+-- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})       -- find between buffers
+-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})     -- find help tags
+-- vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})       -- find help tags
+-- vim.keymap.set('n', '<leader>fj', "<cmd>Telescope emoji<CR>", {}) -- find emoji

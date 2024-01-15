@@ -1,4 +1,4 @@
-  # must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
+# must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
 - hosts: all
   tasks:
     - import_tasks: config/pre_tasks/main.yml

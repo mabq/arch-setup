@@ -3,7 +3,7 @@
 --   mapleader is defined in options since it must be set before calling lazy.
 
 -- netrw
-vim.keymap.set("n", "<leader>fe", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>fe", vim.cmd.Ex)
 
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>")

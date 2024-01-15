@@ -1,0 +1,12 @@
+-- require('rose-pine').setup({
+--     highlight_groups = {
+--         -- (use `:Telescope highlights` to check highlight groups)
+--         ColorColumn = { bg = 'highlight_low', blend = 30 },
+--         CursorLine = { bg = 'highlight_low', blend = 40 },
+--         StatusLine = { fg = "text", bg = "highlight_med", blend = 60 },
+--         StatusLineNC = { fg = "muted", bg = "highlight_med", blend = 60 },
+--         -- markdownH1 = { fg = "text", bg = "love", blend = 50 },
+--     }
+-- })
+--
+-- vim.cmd.colorscheme('rose-pine')

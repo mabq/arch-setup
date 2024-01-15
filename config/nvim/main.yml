@@ -11,17 +11,13 @@
 
     - name: nvim - Create config files
       block:
-      - name: nvim - Create directories
+      - name: nvim - Create directory
         ansible.builtin.file:
-          path: "{{ home }}/.config/nvim/{{ item.path }}"
+          path: "{{ home }}/.config/nvim"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '700'
           state: directory
-        loop:
-          - { path: 'lua/mabq' }
-          - { path: 'after/plugin' }
-          - { path: 'spell' }
 
       - name: nvim - Create links
         ansible.builtin.file:
@@ -29,27 +25,30 @@
           path: "{{ home }}/.config/nvim/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: '600'
+          mode: "{{ item.mode }}"
           state: "link"
         loop:
-          - { name: 'init.lua' }
-          # lua/mabq
-          - { name: 'lua/mabq/init.lua' }
-          - { name: 'lua/mabq/lazy.lua' }
-          - { name: 'lua/mabq/remap.lua' }
-          - { name: 'lua/mabq/set.lua' }
-          # after/plugin
-          - { name: 'after/plugin/comment.lua' }
-          - { name: 'after/plugin/harpoon.lua' }
-          - { name: 'after/plugin/highlight-yank.lua' }
-          - { name: 'after/plugin/lsp.lua' }
-          - { name: 'after/plugin/rose-pine.lua' }
-          - { name: 'after/plugin/telescope.lua' }
-          - { name: 'after/plugin/treesitter.lua' }
-          - { name: 'after/plugin/trouble.lua' }
-          - { name: 'after/plugin/undotree.lua' }
-          - { name: 'after/plugin/yazi.lua' }
-          - { name: 'after/plugin/zenmode.lua' }
+          - { name: 'init.lua', mode: '600' }
+          # link the directories, that way any plugin that you add will be added to the repo as well
+          - { name: 'lua', mode: '700' }
+          - { name: 'spell', mode: '700' }
+          # # lua/mabq
+          # - { name: 'lua/mabq/', mode: '700' }
+          # - { name: 'lua/mabq/lazy.lua' }
+          # - { name: 'lua/mabq/remap.lua' }
+          # - { name: 'lua/mabq/set.lua' }
+          # lua/plugins
+          # - { name: 'lua/plugins/', mode: '700' }
+          # - { name: 'after/plugin/harpoon.lua' }
+          # - { name: 'after/plugin/highlight-yank.lua' }
+          # - { name: 'after/plugin/lsp.lua' }
+          # - { name: 'after/plugin/rose-pine.lua' }
+          # - { name: 'after/plugin/telescope.lua' }
+          # - { name: 'after/plugin/treesitter.lua' }
+          # - { name: 'after/plugin/trouble.lua' }
+          # - { name: 'after/plugin/undotree.lua' }
+          # - { name: 'after/plugin/yazi.lua' }
+          # - { name: 'after/plugin/zenmode.lua' }
           # spell
-          - { name: 'spell/en.utf-8.add' }
+          # - { name: 'spell/en.utf-8.add' }
 
