@@ -1,5 +1,5 @@
 local toggle = function()
-    require("zen-mode").setup {
+    require("zen-mode").toggle({
         -- https://github.com/folke/zen-mode.nvim#%EF%B8%8F-configuration
         window = {
             backdrop = 0.95,
@@ -10,8 +10,7 @@ local toggle = function()
                 cursorcolumn = false,
             }
         },
-    }
-    require("zen-mode").toggle()
+    })
 end
 
 return {

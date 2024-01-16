@@ -6,7 +6,9 @@
       community.general.pacman:
         state: latest
         name:
-          - neovim    # Fork of Vim aiming to improve user experience, plugins, and GUIs
+          - neovim      # Fork of Vim aiming to improve user experience, plugins, and GUIs
+          - ripgrep     # A search tool that combines the usability of ag with the raw speed of grep (required by telescope)
+          - fd          # Simple, fast and user-friendly alternative to find (required by telescope)
 
 
     - name: nvim - Create config files
