@@ -1,10 +1,6 @@
 # must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
 - hosts: all
   tasks:
-    - name: pre-tasks - Check linux distribution
-      ansible.builtin.fail:
-        msg: "{{ repo_dir }}"
-
     - import_tasks: config/pre_tasks/main.yml
 
     - import_tasks: config/system/main.yml

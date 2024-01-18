@@ -23,7 +23,7 @@
 
       - name: nvim - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/nvim/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/nvim/files/{{ item.name }}"
           path: "{{ home }}/.config/nvim/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
