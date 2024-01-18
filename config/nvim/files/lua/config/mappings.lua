@@ -1,4 +1,6 @@
--- Notes:
+-- For more information see:
+--
+--   https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings
 --   help: `:h lua-guide-mappings` 
 
 local map = vim.keymap.set
@@ -8,11 +10,21 @@ local map = vim.keymap.set
 -- Default lazyvim keymaps: 
 -- see https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
--- Better up/down
+-- Better up/down in editor
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Use up/down to move through popupmenus (pum)
+map('c', '<down>', function()
+    if vim.fn.pumvisible() == 1 then return '<c-n>' end
+    return '<down>'
+end, { expr = true })
+map('c', '<up>', function()
+    if vim.fn.pumvisible() == 1 then return '<c-p>' end
+    return '<up>'
+end, { expr = true })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
@@ -112,7 +124,7 @@ vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- select all
-vim.keymap.set("n", "<C-a>", "ggVG", { noremap = true })
+vim.keymap.set("n", "<C-a>", "ggVG")
 
 -- copy and delete to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])

@@ -21,6 +21,7 @@ return {
                 end
             },
         },
+        cmd = "Telescope",
         keys = {
             { "<leader>fg", ":Telescope git_files<CR>", mode = { "n" }, desc = "Telescope git_files", },
             { "<leader>ff", ":Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find_files", },
