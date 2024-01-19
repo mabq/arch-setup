@@ -21,7 +21,7 @@
 
       - name: tmux - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/tmux/{{ item.src }}"
+          src: "{{ repo_dir }}config/tmux/{{ item.src }}"
           path: "{{ home }}/.config/tmux/{{ item.path }}"
           owner: "{{ user }}"
           group: "{{ user }}"

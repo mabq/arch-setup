@@ -20,7 +20,7 @@
 
       - name: alacritty - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/alacritty/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/alacritty/files/{{ item.name }}"
           path: "{{ home }}/.config/alacritty/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

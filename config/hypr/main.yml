@@ -62,7 +62,7 @@
 
       - name: hypr - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/hypr/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/hypr/files/{{ item.name }}"
           path: "{{ home }}/.config/hypr/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

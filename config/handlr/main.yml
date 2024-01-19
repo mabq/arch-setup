@@ -45,7 +45,7 @@
 
       - name: handlr - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/handlr/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/handlr/files/{{ item.name }}"
           path: "{{ home }}/.config/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

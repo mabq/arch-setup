@@ -35,7 +35,7 @@
         - name: pacman - Create link
           # This script is always called from the terminal, must be in the $PATH
           ansible.builtin.file:
-            src: "{{ repo_dir }}/config/pacman/scripts/{{ item.name }}"
+            src: "{{ repo_dir }}config/pacman/scripts/{{ item.name }}"
             path: "{{ home }}/.local/bin/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"

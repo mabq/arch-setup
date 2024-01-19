@@ -29,7 +29,7 @@
 
       - name: keepassxc - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/keepassxc/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/keepassxc/files/{{ item.name }}"
           path: "{{ home }}/.config/keepassxc/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

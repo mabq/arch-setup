@@ -44,7 +44,7 @@
 
       - name: yazi - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/yazi/files/{{ item.name }}"
+          src: "{{ repo_dir }}config/yazi/files/{{ item.name }}"
           path: "{{ home }}/.config/yazi/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

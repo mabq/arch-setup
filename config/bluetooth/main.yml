@@ -23,7 +23,7 @@
       - name: bluetooth - Create links
         # These links are created only to avoid hard-coding the path of the repository in configuration files.
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/bluetooth/scripts/{{ item.name }}"
+          src: "{{ repo_dir }}config/bluetooth/scripts/{{ item.name }}"
           path: "{{ home }}/.config/bluetooth/scripts/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

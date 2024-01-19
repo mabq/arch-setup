@@ -27,7 +27,7 @@
       - name: hypr_tofi - Create links
         # These links are created only to avoid hard-coding the path of the repository in configuration files.
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/hypr_tofi/scripts/{{ item.name }}"
+          src: "{{ repo_dir }}config/hypr_tofi/scripts/{{ item.name }}"
           path: "{{ home }}/.config/tofi/scripts/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"

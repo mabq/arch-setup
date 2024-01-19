@@ -11,7 +11,7 @@
 
     - name: git - Create links
       ansible.builtin.file:
-        src: "{{ repo_dir }}/config/git/files/{{ item.name }}"
+        src: "{{ repo_dir }}config/git/files/{{ item.name }}"
         path: "{{ home }}/{{ item.name }}"
         owner: "{{ user }}"
         group: "{{ user }}"
