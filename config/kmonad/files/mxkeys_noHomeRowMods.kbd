@@ -85,8 +85,8 @@
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       tab     esc     bspc    @paste  _       _       _
-    _       _       _       XX      @_nav   _       left    down    up      rght    _       _       caps
-    _       _       _       _       _       _       ret     _       _       _       _       _
+    _       _       _       XX      @_nav   _       left    down    up      rght    _       _       ret
+    _       _       _       _       _       _       ret     _       _       _       _       caps
     _       _       _                       spc                             _       _       _ 
 )
 

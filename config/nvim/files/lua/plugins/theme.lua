@@ -1,6 +1,6 @@
 return {
     {
-        enabled = true,
+        enabled = false,
         'rose-pine/neovim', 
         name = "rose-pine",  -- otherwise shown as `neovim`
         priority = 1000,  -- recommended by lazy docs
@@ -19,7 +19,7 @@ return {
     },
 
     {
-        enabled = false,
+        enabled = true,
         'catppuccin/nvim', 
         name = "catpuccin",  -- otherwise shown as `nvim`
         priority = 1000,  -- recommended by lazy docs
