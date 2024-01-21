@@ -42,7 +42,7 @@ opt.hlsearch = true -- highlight matches with last search pattern
 opt.termguicolors = true -- use GUI colors for the terminal
 opt.cursorline = true -- highlight the screen line of the cursor
 opt.cursorlineopt = 'line' -- settings for 'cursorline'
-opt.colorcolumn = "80" -- columns to highlight
+opt.colorcolumn = "" -- columns to highlight
 opt.spelllang = {'en', 'es'} -- language(s) to do spell checking for
 
 -- 6. Multiple windows:
