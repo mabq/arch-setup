@@ -120,7 +120,7 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- tmux-sessionizer
 vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>")
 
--- append next line without moving the cursor
+-- join lines without changing cursor position (using marks)
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- select all
@@ -150,5 +150,5 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 -- disable capital Q
-vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "Q", "<nop>") -- in Neovim, "Q" replays the last recorded macro which can be fired accidentally causing confussion
 

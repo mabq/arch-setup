@@ -28,6 +28,21 @@ function ya() {
 	rm -f -- "$tmp"
 }
 
+# function br {
+#     # broot wrapper for changing directory on exit, see https://github.com/Canop/broot
+#     local cmd cmd_file code
+#     cmd_file=$(mktemp)
+#     if broot --outcmd "$cmd_file" "$@"; then
+#         cmd=$(<"$cmd_file")
+#         command rm -f "$cmd_file"
+#         eval "$cmd"
+#     else
+#         code=$?
+#         command rm -f "$cmd_file"
+#         return "$code"
+#     fi
+# }
+
 function extract () {
     # Easily extract archives
     if [ -f $1 ] ; then

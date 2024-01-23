@@ -1,5 +1,6 @@
 -- For more information see:
 --   https://neovim.io/doc/user/lua-guide.html#lua-guide-autocommands
+--   See all possible events with `:h events`
 
 -- The following autocommands where copied from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua#L84
 
