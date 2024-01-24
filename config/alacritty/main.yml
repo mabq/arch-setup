@@ -24,20 +24,10 @@
           path: "{{ home }}/.config/alacritty/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: '600'
+          mode: '{{ item.mode }}'
           state: "link"
         loop:
           - { name: "alacritty.toml", mode: "600" }
-          - { name: "themes", mode: "700" } # link the entire theme directory
-
-      # - name: alacritty - Process templates
-      #   tags: theme
-      #   ansible.builtin.template:
-      #     src: "files/{{ item.name }}"
-      #     dest: "{{ home }}/.config/alacritty/{{ item.name }}"
-      #     owner: "{{ user }}"
-      #     group: "{{ user }}"
-      #     mode: '600'
-      #   loop:
-      #     - { name: "alacritty.toml" }
+          # link the entire theme directory, that way you can add and delete themes whenever you want without the need to edit this file
+          - { name: "themes", mode: "700" }
 
