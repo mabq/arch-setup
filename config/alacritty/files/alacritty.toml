@@ -1,4 +1,16 @@
-import = ["/home/mabq/.config/alacritty/theme.toml"]
+# ------------------------------------------------------------------------------
+#
+#               _____                    _       _         _
+#              |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#                | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#                | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#                |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                 |_|
+#
+# ------------------------------------------------------------------------------
+
+# pick your theme and re-run ansible
+import = [{{ repo_dir }}config/alacritty/files/themes/catppuccin-mocha.toml]
 
 [env]
 # (this is required in order to correctly display the colors in tmux)

@@ -2,6 +2,7 @@
 --
 --   https://neovim.io/doc/user/lua-guide.html#lua-guide-mappings
 --   help: `:h lua-guide-mappings` 
+--   Possible modes are described in `:h map-modes`
 
 local map = vim.keymap.set
 
@@ -75,8 +76,9 @@ map("n", "N", "'Nzzzv'", { expr = true, desc = "Prev search result" })
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
+map("i", "<CR>", "<CR><c-g>u")
 
--- Better indenting (keep selection)
+-- Keep selection while indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
@@ -130,7 +132,7 @@ vim.keymap.set("n", "<C-a>", "ggVG")
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["+d]])
 
--- paste without losing the content of the register
+-- paste (in visual mode) without replacing the content of the register with the deleted text
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- change all occurrences
