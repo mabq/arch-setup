@@ -18,26 +18,26 @@
           mode: '700'
           state: directory
 
-      # - name: alacritty - Create links
-      #   ansible.builtin.file:
-      #     src: "{{ repo_dir }}config/alacritty/files/{{ item.name }}"
-      #     path: "{{ home }}/.config/alacritty/{{ item.name }}"
-      #     owner: "{{ user }}"
-      #     group: "{{ user }}"
-      #     mode: '600'
-      #     state: "link"
-      #   loop:
-      #     - { name: "alacritty.toml" }
-
-      - name: alacritty - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/alacritty/{{ item.name }}"
+      - name: alacritty - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}config/alacritty/files/{{ item.name }}"
+          path: "{{ home }}/.config/alacritty/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '600'
+          state: "link"
         loop:
-          - { name: "alacritty.toml" }
+          - { name: "alacritty.toml", mode: "600" }
+          - { name: "themes", mode: "700" } # link the entire theme directory
 
-        # No need to link theme files
+      # - name: alacritty - Process templates
+      #   tags: theme
+      #   ansible.builtin.template:
+      #     src: "files/{{ item.name }}"
+      #     dest: "{{ home }}/.config/alacritty/{{ item.name }}"
+      #     owner: "{{ user }}"
+      #     group: "{{ user }}"
+      #     mode: '600'
+      #   loop:
+      #     - { name: "alacritty.toml" }
+
