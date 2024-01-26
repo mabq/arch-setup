@@ -1,8 +1,9 @@
 --  Notes:
---      Use `:options` to launch an interactive option setter, it shows current options divided into categories
---      Use `:h {option}` to get complete information about the given option
---      Use `:option-list` for a quickref alphabetically sorted
+--      Use `:options` to list options with a one-line explanation grouped by subject
+--      Use `:option-list` for a list with a one-line explanation alphabetically sorted
 --      Use `:h options` for the full options man page (how to set, get options)
+--      Use `:h '{option}'` to get complete information about the given option
+--      Use `:set {option}&` to set the given option value back to its original default, default values are also described on each option documentation
 --      Use `:h lua-guide-options` for information about how to set options with lua
 --      See ':h nvim-defaults` to see all the options that are enabled by default in Neovim (compared to Vim)
 
@@ -105,15 +106,15 @@ vim.opt.foldmarker = {"{{{", "}}}"} -- markers used when `foldmethod` is `marker
 opt.timeoutlen = 500 -- time out time (mappings and key codes) in milliseconds
 
 -- 17. Reading and writtin files:
--- opt.backup = false -- keep backup file after overwriting a file
--- opt.autowrite = true -- automatically write a file when leaving a modified buffer
+-- opt.backup = false -- keep a backup file after overwriting a file, backup file names have a `~` at the end
+-- opt.autowrite = true -- automatically write a file when changing buffers
 
 -- 18. The swap file:
 opt.swapfile = false -- whether to use a swapfile for a buffer
 opt.updatetime = 200 -- after this many milliseconds flush swap file and trigger CursorHold
 
 -- 19. Command line editing:
--- opt.history = 10000 -- number of command-lines that are remembered (defaults to 10000 in Neovim)
+opt.history = 10000 -- number of commands and search patterns that are remembered (10000 is the maximun)
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 
 -- 20. Executing external commands:
@@ -123,6 +124,7 @@ opt.grepformat = "%f:%l:%c:%m" -- format of 'grepprg' output
 opt.grepprg = "rg --vimgrep" -- program to use for ":grep" command
 
 -- 22. Language specifig:
+opt.iskeyword:append({"-"}) -- specifies what characters are considered part of a word (add `-`, so that `hello-world` for example is considered a single word)
 
 -- 23. Multi-byte characters:
 
