@@ -31,9 +31,9 @@
         loop:
           - { src: "files/config", path: "config", mode: "600" }
           - { src: "files/style.css", path: "style.css", mode: "600" }
-          - { src: "scripts/toggle.sh", path: "scripts/toggle.sh", mode: "700" }
-          # link the whole themes directory, that way you can add or remove themes without having to change this playbook
-          - { src: "files/themes", path: "themes", mode: "700" }
+          # link the whole directories, that way you can add/remove scripts and themes without having to update this file
+          - { src: "scripts", path: "scripts", mode: "700" }
+          - { src: "themes", path: "themes", mode: "700" }
 
       # - name: hypr_waybar - Process templates
       #   tags: theme
