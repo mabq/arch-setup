@@ -1,0 +1,96 @@
+# Uncomment the color theme you want to use, swaylock does not support imports
+
+ignore-empty-password
+show-failed-attempts
+daemonize
+
+show-keyboard-layout
+indicator-caps-lock
+
+indicator-radius=58
+indicator-thickness=11
+
+font=monospace
+font-size=14
+
+
+# Rose-pine -------------------------------------------------------------------
+#
+# color=191724
+#
+# key-hl-color=e0def4
+# caps-lock-key-hl-color=e0def4
+# bs-hl-color=908caa
+# caps-lock-bs-hl-color=908caa
+#
+# layout-bg-color=191724
+# layout-border-color=191724
+# layout-text-color=e0def4
+#
+# separator-color=191724
+#
+# inside-color=191724
+# line-color=191724
+# ring-color=26233a
+#
+# inside-clear-color=191724
+# line-clear-color=191724
+# ring-clear-color=908caa
+# text-clear-color=e0def4
+#
+# inside-caps-lock-color=191724
+# line-caps-lock-color=191724
+# ring-caps-lock-color=26233a
+# text-caps-lock-color=e0def4
+#
+# inside-ver-color=ebbcba
+# line-ver-color=191724
+# ring-ver-color=ebbcba
+# text-ver-color=191724
+#
+# inside-wrong-color=eb6f92
+# line-wrong-color=191724
+# ring-wrong-color=eb6f92
+# text-wrong-color=191724
+
+
+# Catppuccin-mocha ------------------------------------------------------------
+
+color=1e1e2e
+text-color=cdd6f4
+
+key-hl-color=a6e3a1
+caps-lock-key-hl-color=a6e3a1
+bs-hl-color=f5e0dc
+caps-lock-bs-hl-color=f5e0dc
+
+layout-bg-color=00000000
+layout-border-color=00000000
+layout-text-color=cdd6f4
+
+separator-color=00000000
+
+inside-color=00000000
+line-color=00000000
+ring-color=b4befe
+
+inside-clear-color=00000000
+line-clear-color=00000000
+ring-clear-color=f5e0dc
+text-clear-color=f5e0dc
+
+inside-caps-lock-color=00000000
+line-caps-lock-color=00000000
+ring-caps-lock-color=fab387
+text-caps-lock-color=fab387
+
+inside-ver-color=00000000
+line-ver-color=00000000
+ring-ver-color=89b4fa
+text-ver-color=89b4fa
+
+inside-wrong-color=00000000
+line-wrong-color=00000000
+ring-wrong-color=eba0ac
+text-wrong-color=eba0ac
+

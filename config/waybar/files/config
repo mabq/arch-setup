@@ -2,7 +2,7 @@
 [
     { 
         "name": "topbar", 
-        // "height": 30,
+        "height": 44,
         "modules-left": ["clock"],
         "modules-center": ["hyprland/workspaces"],
         "mode": "overlay",  // much faster (no redraw of all other windows)
@@ -16,7 +16,7 @@
     {
         "name": "bottombar", 
         "position": "bottom",
-        // "height": 36,
+        "height": 44,
         "modules-center": ["battery", "cpu", "memory", "disk#root", "disk#home"],
         "mode": "overlay",  // much faster (no redraw of all other windows)
         "spacing": 60,

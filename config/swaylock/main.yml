@@ -1,18 +1,19 @@
-- tags: waybar
+- tags: swaylock
   block:
 
-    - name: waybar - Install packages
+    - name: swaylock - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - waybar # highly customizable Wayland bar for Sway and Wlroots based compositors
+          - swaylock    # Screen locker for Wayland
 
-    - name: waybar - Link the whole directory
+
+    - name: swaylock - Link the whole directory
       # link the whole directory, there is nothing sensible here
       ansible.builtin.file:
-        src: "{{ repo_dir }}/config/waybar/files"
-        path: "{{ home }}/.config/waybar"
+        src: "{{ repo_dir }}/config/swaylock/files"
+        path: "{{ home }}/.config/swaylock"
         owner: "{{ user }}"
         group: "{{ user }}"
         mode: "0700"

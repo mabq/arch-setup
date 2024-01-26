@@ -14,16 +14,14 @@
           # Tiny rofi / dmenu replacement for wlroots-based Wayland compositors
           ansible.builtin.shell: 'paru -S --skipreview tofi'
 
-    - name: Create config files
-      block:
 
-      - name: tofi - Create links
-        # Link the entire directory, there is nothing sensible here
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/config/tofi/files"
-          path: "{{ home }}/.config/tofi"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "0700"
-          state: "link"
+    - name: tofi - Link the whole directory
+      # Link the entire directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/tofi/files"
+        path: "{{ home }}/.config/tofi"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
 

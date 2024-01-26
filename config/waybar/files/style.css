@@ -1,3 +1,4 @@
+
 /* Unline other programs, here we only import named colors, not a configuration theme. If you change the theme, you must also change the color names to match those of the new theme. */
 @import "./themes/catppuccin-mocha.css";
 
@@ -11,17 +12,17 @@
 
 window#waybar {
     background-color: @mantle;
-    color: @text;
+    color: @subtext1;
 }
 
-.topbar {
-    border-bottom: 1px solid;
-    border-color: @surface1;
-}
-.bottombar {
-    border-top: 1px solid;
-    border-color: @surface0;
-}
+/* .topbar { */
+/*     border-bottom: 1px solid; */
+/*     border-color: @surface0; */
+/* } */
+/* .bottombar { */
+/*     border-top: 1px solid; */
+/*     border-color: @surface0; */
+/* } */
 
 
 /* topbar modules*/
@@ -34,10 +35,10 @@ window#waybar {
     padding-left: 12px;
 }
 #workspaces button {
-    color: @surface0;
+    color: @overlay0;
 }
 #workspaces button.active {
-    color: @text;
+    color: @peach;
     font-weight: bold;
 }
 

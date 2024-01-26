@@ -4,9 +4,9 @@
 font = monospace
 font-size = 10
 clip-to-padding = false
-padding-top = 4
+padding-top = 11
 selection-background-padding = 8, 8, 8
-height = 30
+height = 44
 
 # Window style
 horizontal = true
@@ -26,17 +26,15 @@ selection-background-corner-radius = 0
 
 # -----------------------------------------------------------------------------
 
-# Themes (uncomment the one you want):
+# Themes (uncomment the one you want, tofi does not allow imports):
 
 # catppuccin-mocha
-text-color = #cdd6f4
-prompt-color = #f38ba8
-selection-color = #f9e2af
-background-color = #1e1e2e
+background-color = #181825
+text-color = #45475a
+selection-color = #fab387
 
 # rose-pine
-# background-color = #21202e
-# text-color = #e0def4
-# selection-color = #191724
-# selection-background = #9ccfd8
+# background-color = #1f1d2e
+# text-color = #6e6a86
+# selection-color = #9ccfd8
 
