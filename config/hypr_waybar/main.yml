@@ -30,16 +30,19 @@
           state: "link"
         loop:
           - { src: "files/config", path: "config", mode: "600" }
+          - { src: "files/style.css", path: "style.css", mode: "600" }
           - { src: "scripts/toggle.sh", path: "scripts/toggle.sh", mode: "700" }
+          # link the whole themes directory, that way you can add or remove themes without having to change this playbook
+          - { src: "files/themes", path: "themes", mode: "700" }
 
-      - name: hypr_waybar - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/waybar/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "style.css" }
+      # - name: hypr_waybar - Process templates
+      #   tags: theme
+      #   ansible.builtin.template:
+      #     src: "files/{{ item.name }}"
+      #     dest: "{{ home }}/.config/waybar/{{ item.name }}"
+      #     owner: "{{ user }}"
+      #     group: "{{ user }}"
+      #     mode: '600'
+      #   loop:
+      #     - { name: "style.css" }
 

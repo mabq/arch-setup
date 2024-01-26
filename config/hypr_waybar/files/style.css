@@ -1,13 +1,4 @@
-/* -----------------------------------------------------------------------------
- *
- *              _____                    _       _         _
- *             |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
- *               | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
- *               | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
- *               |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
- *                                |_|
- *             
- * ---------------------------------------------------------------------------*/
+@import "./themes/catppuccin-mocha.css";
 
 * {
     border: none;
@@ -18,17 +9,17 @@
 }
 
 window#waybar {
-    background-color: {{ color_highlight_low }};
-    color: {{ color_white_high }};
+    background-color: @crust;
+    color: @text;
 }
 
 .topbar {
     border-bottom: 2px solid;
-    border-color: {{ color_blue }};
+    border-color: @lavender;
 }
 .bottombar {
     border-top: 1px solid;
-    border-color: {{ color_highlight }};
+    border-color: @lavender;
 }
 
 
@@ -42,10 +33,10 @@ window#waybar {
     padding-left: 12px;
 }
 #workspaces button {
-    color: {{ color_highlight }};
+    color: @surface1;
 }
 #workspaces button.active {
-    color: {{ color_white_high }};
+    color: @text;
 }
 
 
