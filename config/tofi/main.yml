@@ -20,7 +20,7 @@
       - name: tofi - Create links
         # Link the entire directory, there is nothing sensible here
         ansible.builtin.file:
-          src: "{{ repo_dir }}config/tofi/files"
+          src: "{{ repo_dir }}/config/tofi/files"
           path: "{{ home }}/.config/tofi"
           owner: "{{ user }}"
           group: "{{ user }}"
