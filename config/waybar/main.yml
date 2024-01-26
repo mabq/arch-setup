@@ -1,7 +1,7 @@
-- tags: hypr,waybar
+- tags: waybar
   block:
 
-    - name: hypr_waybar - Install packages
+    - name: waybar - Install packages
       become: true
       community.general.pacman:
         state: latest
@@ -10,19 +10,18 @@
 
     - name: Create config files
       block:
-      - name: hypr_waybar - Create directories
+      - name: waybar - Create directories
         ansible.builtin.file:
-          path: "{{ home }}/.config/waybar/scripts"
+          path: "{{ home }}/.config/waybar"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '700'
           state: directory
 
-      - name: hypr_waybar - Create links
-        # The `toggle` script is always called via shortcut, no need to create 
-        # a link.
+      - name: waybar - Create links
+        # The `toggle` script is always called via shortcut, no need to create a link.
         ansible.builtin.file:
-          src: "{{ repo_dir }}/config/hypr_waybar/{{ item.src }}"
+          src: "{{ repo_dir }}/config/waybar/{{ item.src }}"
           path: "{{ home }}/.config/waybar/{{ item.path }}"
           owner: "{{ user }}"
           group: "{{ user }}"
@@ -35,7 +34,7 @@
           - { src: "scripts", path: "scripts", mode: "700" }
           - { src: "themes", path: "themes", mode: "700" }
 
-      # - name: hypr_waybar - Process templates
+      # - name: waybar - Process templates
       #   tags: theme
       #   ansible.builtin.template:
       #     src: "files/{{ item.name }}"

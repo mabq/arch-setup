@@ -28,7 +28,7 @@
     - import_tasks: config/hypr_dunst/main.yml
     - import_tasks: config/hypr_swaylock/main.yml
     - import_tasks: config/hypr_tofi/main.yml
-    - import_tasks: config/hypr_waybar/main.yml
+    - import_tasks: config/waybar/main.yml
 
     - import_tasks: config/wallpaper/main.yml       # must go after ssh
 
