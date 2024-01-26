@@ -10,29 +10,23 @@
 
     - name: Create config files
       block:
-      - name: waybar - Create directories
+      # - name: waybar - Create directories
+      #   ansible.builtin.file:
+      #     path: "{{ home }}/.config/waybar"
+      #     owner: "{{ user }}"
+      #     group: "{{ user }}"
+      #     mode: '700'
+      #     state: directory
+
+      - name: waybar - Create link
+        # link the whole directory, nothing sensible will ever be stored here
         ansible.builtin.file:
+          src: "{{ repo_dir }}/config/waybar/files"
           path: "{{ home }}/.config/waybar"
           owner: "{{ user }}"
           group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: waybar - Create links
-        # The `toggle` script is always called via shortcut, no need to create a link.
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/config/waybar/{{ item.src }}"
-          path: "{{ home }}/.config/waybar/{{ item.path }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "{{ item.mode }}"
+          mode: "0700"
           state: "link"
-        loop:
-          - { src: "files/config", path: "config", mode: "600" }
-          - { src: "files/style.css", path: "style.css", mode: "600" }
-          # link the whole directories, that way you can add/remove scripts and themes without having to update this file
-          - { src: "scripts", path: "scripts", mode: "700" }
-          - { src: "themes", path: "themes", mode: "700" }
 
       # - name: waybar - Process templates
       #   tags: theme

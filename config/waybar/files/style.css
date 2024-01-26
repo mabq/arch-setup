@@ -1,4 +1,6 @@
-@import "../themes/catppuccin-mocha.css";
+/* Important! If you change the theme you must change the color names as well; different themes have different color names */
+@import "./themes/catppuccin-mocha.css";
+
 
 * {
     border: none;
@@ -9,17 +11,17 @@
 }
 
 window#waybar {
-    background-color: @crust;
+    background-color: @base;
     color: @text;
 }
 
 .topbar {
-    border-bottom: 2px solid;
-    border-color: @lavender;
+    border-bottom: 1px solid;
+    border-color: @surface1;
 }
 .bottombar {
     border-top: 1px solid;
-    border-color: @lavender;
+    border-color: @surface0;
 }
 
 
@@ -33,10 +35,11 @@ window#waybar {
     padding-left: 12px;
 }
 #workspaces button {
-    color: @surface1;
+    color: @surface0;
 }
 #workspaces button.active {
     color: @text;
+    font-weight: bold;
 }
 
 
