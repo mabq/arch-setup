@@ -1,6 +1,5 @@
-/* Important! If you change the theme you must change the color names as well; different themes have different color names */
+/* Unline other programs, here we only import named colors, not a configuration theme. If you change the theme, you must also change the color names to match those of the new theme. */
 @import "./themes/catppuccin-mocha.css";
-
 
 * {
     border: none;
@@ -11,7 +10,7 @@
 }
 
 window#waybar {
-    background-color: @base;
+    background-color: @mantle;
     color: @text;
 }
 

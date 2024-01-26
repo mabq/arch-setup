@@ -1,0 +1,42 @@
+# https://github.com/philj56/tofi/blob/master/doc/tofi.5.md
+
+# Tricky settings for height:
+font = monospace
+font-size = 10
+clip-to-padding = false
+padding-top = 4
+selection-background-padding = 8, 8, 8
+height = 30
+
+# Window style
+horizontal = true
+anchor = top
+width = 100%
+outline-width = 0
+border-width = 0
+min-input-width = 250
+result-spacing = 22
+padding-bottom = 0
+padding-left = 0
+padding-right = 0
+prompt-text = ""
+prompt-padding = 16
+placeholder-text = ""
+selection-background-corner-radius = 0
+
+# -----------------------------------------------------------------------------
+
+# Themes (uncomment the one you want):
+
+# catppuccin-mocha
+text-color = #cdd6f4
+prompt-color = #f38ba8
+selection-color = #f9e2af
+background-color = #1e1e2e
+
+# rose-pine
+# background-color = #21202e
+# text-color = #e0def4
+# selection-color = #191724
+# selection-background = #9ccfd8
+
