@@ -38,7 +38,7 @@ window#waybar {
     color: @overlay0;
 }
 #workspaces button.active {
-    color: @peach;
+    color: @blue;
     font-weight: bold;
 }
 

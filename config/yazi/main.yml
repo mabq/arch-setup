@@ -1,6 +1,6 @@
 - tags: yazi
   block:
-    
+
     - name: yazi - Install packages
       block:
       - name: yazi - Install packages from official repositories
@@ -32,36 +32,13 @@
             ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
 
 
-    - name: Create config files
-      block:
-      - name: yazi - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/yazi"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: yazi - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}config/yazi/files/{{ item.name }}"
-          path: "{{ home }}/.config/yazi/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "{{ item.mode }}"
-          state: "link"
-        loop:
-          - { name: "disable-status-line.lua", mode: '600' }
-          - { name: "yazi.toml", mode: '600' }
-
-      - name: yazi - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/yazi/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "theme.toml" }
+    - name: yazi - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/yazi/files"
+        path: "{{ home }}/.config/yazi"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
 
