@@ -10,25 +10,13 @@
           - bluez-utils     # Development and debugging utilities for the bluetooth protocol stack
 
 
-    - name: bluetooth - Create config files
-      block:
-      - name: bluetooth - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/bluetooth/scripts"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: bluetooth - Create links
-        # These links are created only to avoid hard-coding the path of the repository in configuration files.
-        ansible.builtin.file:
-          src: "{{ repo_dir }}config/bluetooth/scripts/{{ item.name }}"
-          path: "{{ home }}/.config/bluetooth/scripts/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "0700"
-          state: "link"
-        loop:
-          - { name: "wh-1000xM3.sh" }
+    - name: bluetooth - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/bluetooth/files"
+        path: "{{ home }}/.config/bluetooth"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
 
