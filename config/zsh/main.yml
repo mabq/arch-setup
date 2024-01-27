@@ -41,16 +41,12 @@
               path: "{{ home }}/.config/zsh/{{ item.name }}"
               owner: "{{ user }}"
               group: "{{ user }}"
-              mode: '600'
+              mode: "{{ item.mode }}"
               state: "link"
             loop:
-              - { name: ".zshrc" }
-              - { name: "source/aliases.zsh" }
-              - { name: "source/bindkey.zsh" }
-              - { name: "source/exports.zsh" }
-              - { name: "source/functions.zsh" }
-              - { name: "source/options.zsh" }
-              - { name: "source/plugins.zsh" }
+              - { name: ".zshrc", mode: "600" }
+              # I created the source directory, not zsh, so zsh won't put any risky files (like history) on it. It is safe to link the whole directory
+              - { name: "source", mode: "700" }
 
     - name: Create shared history file
       block:
