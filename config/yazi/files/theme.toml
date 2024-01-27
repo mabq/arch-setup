@@ -4,19 +4,19 @@
 
 [manager]
 
-cwd = { fg = "#a6e3a1" }
+cwd = { fg = "#89b4fa" }
 
 # (reversed does not work as intended)
 # hovered = { fg = "{{ color_white_high }}", bg = "#313244" }
-hovered = { fg = "#313244", bg = "#cdd6f4" }
-preview_hovered = { bg = "#313244", fg = "#a6adc8" }
+hovered = { fg = "#cdd6f4", bg = "#313244" }
+preview_hovered = { fg = "#cdd6f4", bg = "#313244" }
 
 find_keyword = { fg = "#fab387", italic = true }
 find_position = { fg = "#fab387", italic = true }
 
-marker_selected = { fg = "#b4befe", bg = "#b4befe" }
+marker_selected = { fg = "#89b4fa", bg = "#89b4fa" }
 marker_copied = { fg = "#a6e3a1", bg = "#a6e3a1" }
-marker_cut  = { fg = "#f9e2af", bg = "#f9e2af" }
+marker_cut  = { fg = "#fab387", bg = "#fab387" }
 
 tab_active = { fg = "#89b4fa", bg = "#1e1e2e", bold = true }
 tab_inactive = { fg = "#585b70", bg = "#1e1e2e" }
@@ -32,18 +32,17 @@ syntect_theme = ""
 
 # ------------------------------------------------------------------------------
 
-
 [select]
 
-border   = { fg = "#fab387" }
-active   = { fg = "#fab387" }
+border   = { fg = "#89b4fa" }
+active   = { fg = "#89b4fa" }
 inactive = {}
 
 # ------------------------------------------------------------------------------
 
 [input]
 
-border   = { fg = "#fab387" }
+border   = { fg = "#89b4fa" }
 title    = {}
 value    = { fg = "#cdd6f4"}
 selected = { reversed = true }
@@ -52,7 +51,7 @@ selected = { reversed = true }
 
 [completion]
 
-border   = { fg = "#fab387" }
+border   = { fg = "#89b4fa" }
 active   = { bg = "#a6adc8" }
 inactive = {}
 
@@ -60,7 +59,7 @@ inactive = {}
 
 [tasks]
 
-border  = { fg = "#fab387" }
+border  = { fg = "#89b4fa" }
 title   = {}
 hovered = { underline = true }
 
@@ -68,10 +67,10 @@ hovered = { underline = true }
 
 [which]
 
-mask            = { bg = "#181825" }
-cand            = { fg = "#fab387" }
-rest            = { fg = "#cdd6f4" }
-desc            = { fg = "#cdd6f4" }
+mask            = { bg = "#1e1e2e" }
+cand            = { fg = "#89b4fa" }
+rest            = { fg = "#a6adc8" }
+desc            = { fg = "#7f849c" }
 separator       = "  "
 separator_style = { fg = "#a6adc8" }
 
@@ -79,7 +78,7 @@ separator_style = { fg = "#a6adc8" }
 
 [help]
 
-on      = { fg = "#fab387" }
+on      = { fg = "#89b4fa" }
 exec    = { fg = "#cdd6f4" }
 desc    = { fg = "#cdd6f4" }
 hovered = { bg = "#313244" }
@@ -93,8 +92,8 @@ rules = [
     # Since `reversed` color does not work, it makes no sense to assign colors
     # to file types.
     # Version 1.6 will allow custom colors for symbolic links (see https://github.com/sxyazi/yazi/issues/287#issuecomment-1769794925)
-	{ name = "*/", fg = "#7f849c" },
-	{ name = "*", fg = "#a6adc8" },
+    { name = "*/", fg = "#9399b2" },
+    { name = "*", fg = "#a6adc8" },
 ]
 
 # ------------------------------------------------------------------------------
