@@ -10,13 +10,26 @@
           - bluez-utils     # Development and debugging utilities for the bluetooth protocol stack
 
 
-    - name: bluetooth - Link the whole directory
-      # link the whole directory, there is nothing sensible here
-      ansible.builtin.file:
-        src: "{{ repo_dir }}/config/bluetooth/files"
-        path: "{{ home }}/.config/bluetooth"
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        mode: "0700"
-        state: "link"
+    - name : bluetooth - Link script
+      block:
+        - name: bluetooth - Ensure directory
+          ansible.builtin.file:
+            path: "{{ home }}/.local/bin"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: directory
+
+        - name: pacman - Link script
+          # I create a link so that the hyprland configuration file does not need to be a template.
+          # Although this script is almost always called with a keybinding, the scripts folder is the best place for it.
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/bluetooth/scripts/{{ item.name }}"
+            path: "{{ home }}/.local/bin/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: '700'
+            state: "link"
+          loop:
+            - { name: "bt-wh1000xM3.sh" }
 
