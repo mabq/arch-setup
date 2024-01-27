@@ -9,12 +9,11 @@
           - starship # The cross-shell prompt for astronauts
 
     - name: starship - Link the whole directory
-      # link the whole directory, there is nothing sensible here
       ansible.builtin.file:
-        src: "{{ repo_dir }}/config/starship/files"
-        path: "{{ home }}/.config/starship"
+        src: "{{ repo_dir }}/config/starship/files/starship.toml"
+        path: "{{ home }}/.config/starship.toml"
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: "0700"
+        mode: "0600"
         state: "link"
 
