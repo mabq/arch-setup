@@ -23,10 +23,10 @@ color=1e1e2e
 text-color=cdd6f4
 
 # highlight color on keypress, same for all keys
-key-hl-color=f5e0dc
-bs-hl-color=f5e0dc
-caps-lock-key-hl-color=f5e0dc
-caps-lock-bs-hl-color=f5e0dc
+key-hl-color=cdd6f4
+bs-hl-color=cdd6f4
+caps-lock-key-hl-color=cdd6f4
+caps-lock-bs-hl-color=cdd6f4
 
 # remove border between highlight color and circle
 separator-color=00000000

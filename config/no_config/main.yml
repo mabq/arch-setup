@@ -75,6 +75,7 @@
           - traceroute          # Tracks the route taken by packets over an IP network
           - wavemon             # Ncurses-based monitoring application for wireless network devices
           - wget                # Network utility to retrieve files from the Web
+          - speedtest-cli       # Command line interface for testing internet bandwidth using speedtest.net
           #
           # ------------------------------------------------------------------------
           #
@@ -139,12 +140,14 @@
           - figlet              # A program for making large letters out of ordinary text
           - pastel              # A command-line tool to generate, analyze, convert and manipulate colors
           - translate-shell     # A command-line interface and interactive shell for Google Translate
+          - hyperfine           # A command-line benchmarking tool
           # - stow                # Manage installation of multiple software in the same directory tree
           #
           # ------------------------------------------------------------------------
           #
           # Programming:
-          # - jq                  # Command-line JSON processor
+          - hyperfine           # A command-line benchmarking tool
+          - jq                  # Command-line JSON processor
           # - go
           # - nodejs
           # - npm

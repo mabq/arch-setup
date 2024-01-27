@@ -1,7 +1,7 @@
 # Sets user-defined palette
 palette = "catppuccin_mocha"
 
-# format = '$all'
+# use default format, just do minor changes to colors
 
 [character]
 success_symbol = "[❯](green)"
@@ -9,8 +9,7 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
 [directory]
-# truncation_length = 4
-style = "bold italic blue"
+style = "bold lavender"
 
 # -----------------------------------------------------------------------------
 

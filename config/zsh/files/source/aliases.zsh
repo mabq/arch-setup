@@ -47,7 +47,7 @@ alias wifi='nmtui'
 # Requests:
 alias extip='curl icanhazip.com'
 alias extipjson='curl https://ipapi.co/json/'
-alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
+# alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 alias weather='curl wttr.in'
 
 
