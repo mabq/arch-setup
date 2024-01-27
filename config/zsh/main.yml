@@ -10,7 +10,6 @@
           - zsh-autosuggestions             # Fish-like autosuggestions for zsh
           - zsh-history-substring-search    # ZSH port of Fish history search (up arrow)
           - zsh-syntax-highlighting         # Fish shell like syntax highlighting for Zsh
-          - zoxide                          # A smarter cd command for your terminal
 
     - name: Create config files
       block:
