@@ -25,7 +25,7 @@
     - import_tasks: config/dropbox/main.yml
 
     - import_tasks: config/hypr/main.yml
-    - import_tasks: config/hypr_dunst/main.yml
+    - import_tasks: config/dunst/main.yml
     - import_tasks: config/swaylock/main.yml
     - import_tasks: config/tofi/main.yml
     - import_tasks: config/waybar/main.yml

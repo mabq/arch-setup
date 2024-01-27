@@ -8,7 +8,6 @@
         name:
           - swaylock    # Screen locker for Wayland
 
-
     - name: swaylock - Link the whole directory
       # link the whole directory, there is nothing sensible here
       ansible.builtin.file:
