@@ -1,9 +1,78 @@
-# See dunst(5) for all configuration options (defaults are fine for now)
+# See dunst(5) for all configuration options
+
+[global]
+title = Dunst
+class = Dunst
+monitor = 0
+follow = mouse
+indicate_hidden = yes
+shrink = yes
+
+width = (0, 800)
+height = 700
+origin = top-right
+offset = 44x44
+
+progress_bar = true
+progress_bar_height = 11
+progress_bar_frame_width = 2
+progress_bar_min_width = 120
+
+transparency = 0
+gap_size = 5
+# separator_height = 2
+padding = 12
+horizontal_padding = 16
+text_icon_padding = 0
+frame_width = 3
+separator_color = frame
+corner_radius = 4
+
+sort = no
+idle_threshold = 120
+
+font = "Monospace 10"
+
+line_height = 0
+markup = full
+format = "<b>%s</b>\n%b"
+alignment = left
+# vertical_alignment = center
+
+show_age_threshold = 60
+word_wrap = yes
+ellipsize = middle
+ignore_newline = no
+stack_duplicates = true
+hide_duplicate_count = true
+show_indicators = no
+icon_position = left
+min_icon_size = 16
+max_icon_size = 48
+
+# icon_path = /usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/legacy/
+
+sticky_history = no
+history_length = 20
+
+# browser = brave
+
+always_run_script = true
+
+# startup_notification = false
+# verbosity = mesg
+# ignore_dbusclose = false
+# force_xwayland = false
+# force_xinerama = false
+
+mouse_left_click = do_action, close_current
+mouse_middle_click = close_current
+mouse_right_click = close_all
+
 
 #------------------------------------------------------------------------------
 
 # Uncomment the theme that you like to use:
-
 
 # Catpucchin mocha:
 
@@ -22,4 +91,4 @@ foreground = "#CDD6F4"
 [urgency_critical]
 background = "#1E1E2E"
 foreground = "#CDD6F4"
-
+frame_color = "#FAB387"

@@ -50,44 +50,14 @@
                 ansible.builtin.shell: 'paru -S --skipreview wlr-randr'
 
 
-    - name: Create config files
-      block:
-      - name: hypr - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/hypr/source"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
+    - name: hypr - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/hypr/files"
+        path: "{{ home }}/.config/hypr"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
 
-      - name: hypr - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}config/hypr/files/{{ item.name }}"
-          path: "{{ home }}/.config/hypr/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-          state: "link"
-        loop:
-          - { name: "hyprland.conf" }
-          - { name: "source/animations.conf" }
-          - { name: "source/binds.conf" }
-          - { name: "source/env.conf" }
-          - { name: "source/exec.conf" }
-          - { name: "source/layouts.conf" }
-          - { name: "source/monitors.conf" }
-          - { name: "source/variables.conf" }
-          - { name: "source/window-rules.conf" }
-          - { name: "source/workspace-rules.conf" }
-
-      - name: hypr - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/hypr/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "source/colors.conf" }
 
