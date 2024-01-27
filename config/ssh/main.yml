@@ -31,7 +31,7 @@
 
         - name: ssh - Create links
           ansible.builtin.file:
-            src: "{{ repo_dir }}config/ssh/files/{{ item.name }}"
+            src: "{{ repo_dir }}/config/ssh/files/{{ item.name }}"
             path: "{{ home }}/.ssh/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"

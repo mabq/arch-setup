@@ -19,7 +19,7 @@
       become: true
       community.general.pacman:
         state: latest
-        name: pacman-contrib      
+        name: pacman-contrib
 
 
     - name: pacman - Link script
