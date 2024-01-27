@@ -45,7 +45,7 @@
 
       - name: screenshot - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}config/screenshot/{{ item.src }}"
+          src: "{{ repo_dir }}/config/screenshot/{{ item.src }}"
           path: "{{ home }}/.config/{{ item.path }}"
           owner: "{{ user }}"
           group: "{{ user }}"

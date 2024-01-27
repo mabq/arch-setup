@@ -22,7 +22,7 @@
 
       - name: fontconfig - Create links
         ansible.builtin.file:
-          src: "{{ repo_dir }}config/fontconfig/files/{{ item.name }}"
+          src: "{{ repo_dir }}/config/fontconfig/files/{{ item.name }}"
           path: "{{ home }}/.config/fontconfig/{{ item.name }}"
           owner: "{{ user }}"
           group: "{{ user }}"
