@@ -23,16 +23,16 @@ color=1e1e2e
 text-color=cdd6f4
 
 # highlight color on keypress, same for all keys
-key-hl-color=fab387
-bs-hl-color=fab387
-caps-lock-key-hl-color=fab387
-caps-lock-bs-hl-color=fab387
+key-hl-color=f5e0dc
+bs-hl-color=f5e0dc
+caps-lock-key-hl-color=f5e0dc
+caps-lock-bs-hl-color=f5e0dc
 
 # remove border between highlight color and circle
 separator-color=00000000
 
 # match ring and inner circle text
-ring-color=b4befe
+ring-color=89b4fa
 
 ring-caps-lock-color=b4befe
 text-caps-lock-color=b4befe

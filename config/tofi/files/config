@@ -30,8 +30,8 @@ selection-background-corner-radius = 0
 
 # catppuccin-mocha
 background-color = #181825
-text-color = #45475a
-selection-color = #89b4fa
+text-color = #6c7086
+selection-color = #a6e3a1
 
 # rose-pine
 # background-color = #1f1d2e

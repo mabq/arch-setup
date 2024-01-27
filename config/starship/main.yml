@@ -1,0 +1,20 @@
+- tags: starship
+  block:
+
+    - name: starship - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - starship # The cross-shell prompt for astronauts
+
+    - name: starship - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/starship/files"
+        path: "{{ home }}/.config/starship"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
+

@@ -11,7 +11,6 @@
           - zsh-history-substring-search    # ZSH port of Fish history search (up arrow)
           - zsh-syntax-highlighting         # Fish shell like syntax highlighting for Zsh
           - zoxide                          # A smarter cd command for your terminal
-          - starship                        # The cross-shell prompt for astronauts
 
     - name: Create config files
       block:
@@ -23,7 +22,7 @@
           mode: '700'
           state: directory
 
-      - name: Create links
+      - name: zsh - Config files
         block:
           - name: zsh - Create link for `.zshenv`
             # Unlike the other links, this link is placed directly under the user's home directory

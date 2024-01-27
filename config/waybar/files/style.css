@@ -35,10 +35,10 @@ window#waybar {
     padding-left: 12px;
 }
 #workspaces button {
-    color: @overlay0;
+    color: @surface2;
 }
 #workspaces button.active {
-    color: @blue;
+    color: @green;
     font-weight: bold;
 }
 
