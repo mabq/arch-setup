@@ -17,7 +17,7 @@
       block:
       - name: zsh - Create directory
         ansible.builtin.file:
-          path: "{{ home }}/.config/zsh/source"
+          path: "{{ home }}/.config/zsh"
           owner: "{{ user }}"
           group: "{{ user }}"
           mode: '700'
