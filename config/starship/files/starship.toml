@@ -1,47 +1,16 @@
 # Sets user-defined palette
 palette = "catppuccin_mocha"
 
-format = """
-$username\
-$hostname\
-$directory\
-$git_branch\
-$git_state\
-$git_status\
-$cmd_duration\
-$line_break\
-$character"""
+# format = '$all'
 
 [character]
-success_symbol = "[[❯](blue)"
+success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](blue)"
+vimcmd_symbol = "[❮](green)"
 
 [directory]
-style = "bold lavender"
-
-[git_branch]
-format = "[$branch]($style)"
-style = "peach"
-
-[git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "flamingo"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
-
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "sky"
-
-[cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
+# truncation_length = 4
+style = "bold italic blue"
 
 # -----------------------------------------------------------------------------
 
