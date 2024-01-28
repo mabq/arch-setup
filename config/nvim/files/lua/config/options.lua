@@ -111,7 +111,7 @@ opt.timeoutlen = 500 -- time out time (mappings and key codes) in milliseconds
 
 -- 18. The swap file:
 opt.swapfile = false -- whether to use a swapfile for a buffer
-opt.updatetime = 200 -- after this many milliseconds flush swap file and trigger CursorHold
+-- opt.updatetime = 200 -- after this many milliseconds flush swap file and trigger CursorHold
 
 -- 19. Command line editing:
 opt.history = 10000 -- number of commands and search patterns that are remembered (10000 is the maximun)
