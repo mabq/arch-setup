@@ -1,0 +1,180 @@
+;; Documentation:
+;;   - tutorial: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd#L111 
+;;   - keycodes: https://github.com/kmonad/kmonad/blob/master/src/KMonad/Keyboard/Keycode.hs 
+
+;; Condiderations:
+;;   - Do not assign `tap-hold` modifiers to keys that use vim repetitions, 
+;;     for example, `h`, `j`, `k`, `l`, `e`, `w`, `u`, `b`, etc.
+;;     Home row mods are awesome but we loose movility in vim. There is also
+;;     The fact that there is a small delay while typing that is really annoying.
+;;   - A keyboard with a number row is a must. While it is easy to access a 
+;;     number layer alone, it is not easy to press a number with modifiers
+;;     like `Super + Shift + 1` (4 keys pressed at the same time).
+;;   - More keys are actually better as long as they are easy to reach.
+;;     Columnar keyboards should offer much better orientation. Concave
+;;     keyboards should make keys easier to reach.
+
+;; -----------------------------------------------------------------------------
+
+(defcfg
+    ;; Use the `evtest` package to identify the keyboard event number 
+    input (device-file "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse")
+    output (uinput-sink "KMonad")
+    cmp-seq ralt    ;; Set the compose key to `RightAlt' (meant for international special characters, like á)
+    cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
+
+    ;; let non-configured keys act normal 
+    fallthrough true
+
+    ;; do not run commands for security reasons 
+    allow-cmd false 
+)
+
+;; -----------------------------------------------------------------------------
+
+(defalias
+    met   (tap-hold-next-release 200 spc lmet)
+
+    _1  (tap-hold-next-release 200 d (layer-toggle _1))
+    _1x (layer-toggle _1x)
+    _2  (tap-hold-next-release 200 a (layer-toggle _2))
+    _3  (tap-hold-next-release 200 ; (layer-toggle _3))
+    _4  (layer-toggle _4)
+
+    next C-tab
+    prev C-S-tab
+    back A-left
+    frwd A-right
+    copy C-c
+    paste C-S-v
+)
+
+;; -----------------------------------------------------------------------------
+
+;; Default Qwerty layout definition:
+(defsrc
+    esc     f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12     volu
+    grv     1       2       3       4       5       6       7       8       9       0       -       =       bspc
+    tab     q       w       e       r       t       y       u       i       o       p       [       ]       bksl
+    caps    a       s       d       f       g       h       j       k       l       ;       '       ret
+    lsft    z       x       c       v       b       n       m       ,       .       /       shft
+    lctl    lmet    lalt                    spc                             ralt    shft    rctl
+)
+
+;; -----------------------------------------------------------------------------
+
+;; The first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important).
+
+(deflayer default
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    XX      _       _       _       _       _       _       _       _       _       _       XX      XX      XX
+    @_4     _       _       _       _       _       _       _       _       _       _       XX      XX      XX
+    lctrl   @_2     _       @_1     _       _       _       _       _       _       @_3     rctrl   XX
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       @met                            _       _       _
+)
+
+(deflayer _1
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       esc     bspc    _       _       _       _
+    _       _       _       XX      @_1x    _       left    down    up      rght    _       _       _
+    _       _       _       _       _       _       ret     tab     bspc    del     _       _
+    _       _       _                       spc                             _       _       _
+)
+
+(deflayer _1x
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       XX      XX      _       home    pgdn    pgup    end     _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       _                               _       _       _
+)
+
+(deflayer _2
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       [       ]       -       =       _       _       _
+    _       XX      _       _       _       _       _       \(      \)      `       '       _       _
+    _       _       _       _       _       _       _       _       _       _       \\      _
+    _       _       _                       lshft                           _       _       _
+)
+
+(deflayer _3
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       `       @back   @prev   @next   @frwd   _       _       _       _       XX      _       _
+    _       _       _       @copy   @paste  _       _       _       _       _       _       _
+    _       _       _                       lshft                           _       _       _
+)
+
+(deflayer _4
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    XX      _       _       _       _       _       _       7       8       9       _       _       _       _
+    _       _       _       _       _       _       _       4       5       6       _       _       _
+    _       _       _       _       _       _       0       1       2       3       _       _
+    _       _       _                       lshft                           _       _       _
+)
+
+;; -----------------------------------------------------------------------------
+
+;; (black template
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _                       _                               _       _       _
+;; )
+
+;; -----------------------------------------------------------------------------
+
+;;(deflayer lay1
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       esc     ret     _       _       _       _
+;;    _       _       _       XX      @lay2   _       left    down    up      rght    '       _       _
+;;    _       _       _       _       _       _       _       _       bspc    del     \       _
+;;    _       _       _                       spc                             _       _       _
+;;)
+;;
+;;
+;;(deflayer lay2
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       XX      XX      _       _       pgdn    pgup    _       "       _       _
+;;    _       _       _       _       _       _       _       _       _       _       |       _
+;;    _       _       _                       _                               _       _       _
+;;)
+;;
+;;(deflayer lay3
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       -       {       }       _       _       _       _       _       _       _       _
+;;    _       `       _       =       \(      \)      _       @lay4   XX      _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _                       @lay5                           _       _       _
+;;)
+;;
+;;(deflayer lay4
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       -       _       _       _       _       _       _       _       _       _       _
+;;    caps    ~       _       +       [       ]       _       XX      XX      _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _                       _                               _       _       _
+;;)
+;;
+;;(deflayer lay5
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;    _       _       _       \_      @back   @frwd   _       _       _       _       _       _       _       _
+;;    caps    ~       _       +       @prev   @next   _       XX      XX      _       _       _       _
+;;    _       _       _       _       @copy   @paste  _       _       _       _       _       _
+;;    _       _       _                       _                               _       _       _
+;;)
+
