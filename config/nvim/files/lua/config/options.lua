@@ -26,7 +26,7 @@ end
 -- 3. Tags:
 
 -- 4. Displaying text:
-opt.scrolloff = 8 -- minimum nr. of lines above and below cursor
+opt.scrolloff = 5 -- minimum nr. of lines above and below cursor
 opt.wrap = false -- long lines wrap and continue on the next line
 opt.linebreak = true -- wrap long lines at a blank
 opt.breakindent = true -- wrapped line repeats indent
@@ -116,6 +116,7 @@ opt.swapfile = false -- whether to use a swapfile for a buffer
 -- 19. Command line editing:
 opt.history = 10000 -- number of commands and search patterns that are remembered (10000 is the maximun)
 opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.wildmenu = true -- command-line completion shows a list of matches
 
 -- 20. Executing external commands:
 
