@@ -47,68 +47,72 @@
 ;; -----------------------------------------------------------------------------
 
 (defalias
-    met   (tap-hold-next-release 200 spc lmet)
+    smet  (tap-hold-next-release 200 spc lmet)
 
-    lctrl (tap-hold-next-release 200 w lctrl)
-    rctrl (tap-hold-next-release 200 o rctrl)
+    wctrl (tap-hold-next-release 200 w lctrl)
+    octrl (tap-hold-next-release 200 o rctrl)
 
-    lshft (tap-hold-next-release 200 a lshft)
-    rshft (tap-hold-next-release 200 ; rshft)
+    ashft (tap-hold-next-release 200 a lshft)
+    ;shft (tap-hold-next-release 200 ; rshft)
 
-    1     (tap-hold-next-release 200 d (layer-toggle 1))
-    1x    (layer-toggle 1x)
+    d1    (tap-hold-next-release 200 d (layer-toggle 1))
+    f1x   (layer-toggle 1x)
 
-    2     (layer-toggle 2)
-    2x    (layer-toggle 2)
+    `2    (tap-hold-next-release 200 ` (layer-toggle 2))
+    '2    (tap-hold-next-release 200 ' (layer-toggle 2))
+    ret2  (tap-hold-next-release 200 ret (layer-toggle 2))
 
-    3     (tap-hold-next-release 200 ` (layer-toggle 3))
-
-    ;;next C-tab
-    ;;prev C-S-tab
-    ;;back A-left
-    ;;frwd A-right
-    ;;copy C-c
-    ;;paste C-S-v
+    f3    (tap-hold-next-release 200 f (layer-toggle 3))
+    s3x   (layer-toggle 3x)
 )
 
 ;; -----------------------------------------------------------------------------
+;; The first `deflayer` statement in a KMonad config will be the layer that is 
+;; active when KMonad starts up (the name is not important).
+;; -----------------------------------------------------------------------------
 
-;; The first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important).
+;; Why this layout:
+;; - met is super easy to reach and combine with all other keys.
+;; - most important vim motion keys are not affected. Instead of 'w' use 'e'. Lets see if 'n' repetition is not really need it.
+;; - easy access to "ctrl + shift"
+;; - easy access to "alt + arrows"
+;; - easy access to numbers
+;; - shift works normally
 
 (deflayer default
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       @lctrl  _       _       _       _       _       _       @rctrl  _       _       _       _
-    @3      @lshft  _       @1      _       _       _       _       _       _       @rshft  _       _
-    @2      _       _       _       _       _       _       _       _       _       _       @2
-    _       _       _                       @met                            _       _       _
+    esc     _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       @wctrl  _       _       _       _       _       _       @octrl  _       _       _       _
+    @`2     @ashft  _       @d1     @f3     _       _       _       _       _       @;shft  @'2     @ret2
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       @smet                           _       _       _
 )
 
 (deflayer 1
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       esc     bspc    _       _       _       _
-    caps    _       _       XX      @1x     _       left    down    up      rght    tab     _       _
-    _       _       _       _       _       _       ret     -       _       _       _       _
+    _       _       _       _       _       _       _       _       esc     ret     _       _       _       _
+    caps    _       lalt    XX      @f1x    _       left    down    up      rght    _       _       _
+    _       _       _       _       _       _       bspc    _       _       tab     _       _
     _       _       _                       spc                             _       _       _
 )
 
 (deflayer 1x
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       del     _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       XX      XX      _       home    pgdn    pgup    end     _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       del     _       _       _       _       _
     _       _       _                       _                               _       _       _
 )
 
 (deflayer 2
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       !       @       #       $       %       ^       &       *       \(      \)      \_      _       _
-    ~       [       ]       +       -       |       \\      =       {       }       :       "       _
-    XX      _       _       _       _       _       _       _       <       >       ?      XX
-    _       _       _                       -                               _       _       _
+    _       !       @       #       $       %       ^       &       *       \(      \)      _       _       _
+    _       _       _       _       _       _       =       [       ]       {       }       _       _
+    _       _       _       _       _       _       \_      |       -       +       \\      _
+    _       _       _                       _                               _       _       _
 )
 
 (deflayer 3
@@ -116,8 +120,17 @@
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       7       8       9       _       _       _       _
     _       _       _       _       _       _       _       4       5       6       _       _       _
-    XX      _       _       _       _       _       0       1       2       3       _       _
-    _       _       _                       -                               _       _       _
+    _       _       _       _       _       _       0       1       2       3       _       _
+    _       _       _                       @s3x                            _       _       _
+)
+
+(deflayer 3x
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _     f12      f7      f8      f9       _       _       _       _
+    _       _       _       _       _       _     f11      f4      f5      f6       _       _       _
+    _       _       _       _       XX      _     f10      f1      f2      f3       _       _
+    _       _       _                       XX                              _       _       _
 )
 
 ;; -----------------------------------------------------------------------------

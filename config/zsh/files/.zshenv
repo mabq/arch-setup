@@ -13,3 +13,4 @@
 # No need to export since this variable is only needed to start zsh.
 
 ZDOTDIR="$HOME/.config/zsh"
+. "$HOME/.cargo/env"

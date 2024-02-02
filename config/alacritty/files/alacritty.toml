@@ -8,22 +8,13 @@ TERM = "xterm-256color"
 
 [font]
 size = 10
-
-[font.bold]
-family = "monospace-double"
-style = "Bold"
-
-[font.bold_italic]
-family = "monospace-double"
-style = "Bold Italic"
-
-[font.italic]
-family = "monospace-double"
-style = "Italic"
-
-[font.normal]
-family = "monospace-double"
-style = "Regular"
+normal = { family = "monospace-double", style = "Regular" }
+bold = { style = "Bold" }
+bold_italic = { style = "Bold Italic" }
+italic = { style = "Italic" }
 
 [scrolling]
 multiplier = 1
+
+[window]
+dynamic_padding = true
