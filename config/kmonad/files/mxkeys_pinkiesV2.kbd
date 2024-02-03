@@ -91,18 +91,18 @@
 (deflayer 1
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       esc     ret     _       _       _       _
+    _       _       _       _       _       _       _       _       esc     bspc    _       _       _       _
     caps    _       lalt    XX      @f1x    _       left    down    up      rght    _       _       _
-    _       _       _       _       _       _       bspc    _       _       tab     _       _
+    _       _       _       _       _       _       ret     _       _       tab     _       _
     _       _       _                       spc                             _       _       _
 )
 
 (deflayer 1x
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       del     _       _       _       _
     _       _       _       XX      XX      _       home    pgdn    pgup    end     _       _       _
-    _       _       _       _       _       _       del     _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _                       _                               _       _       _
 )
 

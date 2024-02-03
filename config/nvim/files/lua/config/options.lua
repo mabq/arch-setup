@@ -51,7 +51,7 @@ opt.spelllang = {'en', 'es'} -- language(s) to do spell checking for
 -- opt.laststatus = 2 -- tells when last window has status lines (defaults to 2 in Neovim)
 opt.statusline = " %f %m %= %l:%c  %p%%  " -- custom format for the status line
 opt.winminwidth = 5 -- Minimum window width
--- opt.hidden = true -- don't unload buffer when it is |abandon|ed (enabled by default in Neovim)
+opt.hidden = true -- don't unload buffer when it is |abandon|ed (enabled by default in Neovim)
 opt.splitbelow = true -- new window from split is below the current one
 opt.splitright = true -- new window is put right of the current one
 opt.splitkeep = "screen" -- determines scroll behavior for split windows
@@ -86,12 +86,12 @@ opt.completeopt = "menu,menuone,noselect" -- options for Insert mode completion
 -- vim.o.formatexpr = "" -- expression used with "gq" command
 
 -- 13. Tabs and indenting:
-opt.tabstop = 4 -- number of spaces that <Tab> uses while editing
-opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
-opt.softtabstop = 4 -- number of spaces that <Tab> uses while editing
-opt.shiftround = true -- round indent to multiple of shiftwidth
 opt.expandtab = true -- use spaces when <Tab> is inserted
--- opt.autoindent = true -- take indent for new line from previous line (enabled by default in neovim)
+opt.tabstop = 4 -- number of spaces that a <Tab> in the file counts for
+opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
+opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
+opt.shiftround = true -- round indent to multiple of shiftwidth
+opt.autoindent = true -- take indent for new line from previous line (enabled by default in neovim)
 opt.smartindent = true -- smart autoindenting for C programs
 
 -- 14. Folding:
