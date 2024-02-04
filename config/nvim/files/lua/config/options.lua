@@ -40,7 +40,7 @@ opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " "
 
 -- 5. Syntax, highlighting and spellin:
 opt.bg = "dark" -- "dark" or "light", used for highlight colors
--- opt.hlsearch = true -- highlight matches with last search pattern (enabled by default in Neovim)
+opt.hlsearch = true -- highlight matches with last search pattern (enabled by default in Neovim)
 opt.termguicolors = true -- use GUI colors for the terminal
 opt.cursorline = true -- highlight the screen line of the cursor
 opt.cursorlineopt = 'line' -- settings for 'cursorline'

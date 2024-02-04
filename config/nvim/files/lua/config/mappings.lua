@@ -126,7 +126,7 @@ vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- select all
-vim.keymap.set("n", "<C-a>", "ggVG")
+-- vim.keymap.set("n", "<C-a>", "ggVG")
 
 -- copy and delete to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
