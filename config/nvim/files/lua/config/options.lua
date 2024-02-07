@@ -86,52 +86,45 @@ opt.undodir = os.getenv("HOME") .. '/.vim/undodir' -- where to store undo files
 -- vim.o.formatexpr = "" -- expression used with "gq" command
 
 -- 13. Tabs and indenting:
-opt.expandtab = true -- use spaces when <Tab> is inserted 🧑
-opt.tabstop = 4 -- number of spaces that a <Tab> in the file counts for 🧑
-opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS> 🧑
-opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step 🧑
--- opt.shiftround = true -- round indent to multiple of `shiftwidth`
--- opt.autoindent = true -- take indent for new line from previous line (enabled by default in neovim)
-opt.smartindent = true -- smart auto indenting for C programs 🧑
- 
+opt.tabstop = 4 -- number of spaces that a <Tab> in the file counts for
+opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
+opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
+opt.expandtab = true -- use spaces when <Tab> is inserted
+opt.smartindent = true -- smart auto indenting for C programs
+opt.shiftround = true -- round to 'shiftwidth' for "<<" and ">>"
+     
 -- 14. Folding:
--- vim.opt.foldlevel = 99 -- close folds with a level higher than this
--- vim.opt.foldtext = "" -- expression used to display for a closed fold
--- vim.opt.foldmethod = "marker" -- folding type
--- vim.opt.foldmarker = {"{{{", "}}}"} -- markers used when `foldmethod` is `marker`
+--     (all defaults are fine)
 
 -- 15. Diff mode:
+--     (all defaults are fine)
 
 -- 16. Mapping:
--- opt.timeoutlen = 500 -- time out time (mappings and key codes) in milliseconds
+--     (all defaults are fine)
 
 -- 17. Reading and writtin files:
-opt.backup = false -- keep a backup file after overwriting a file, backup file names have a `~` at the end 🧑
--- opt.autowrite = true -- automatically write a file when changing buffers
+opt.backup = false -- keep a backup after overwriting a file
 
 -- 18. The swap file:
-opt.swapfile = false -- whether to use a swapfile for a buffer 🧑
-opt.updatetime = 200 -- after this many milliseconds flush swap file and trigger CursorHold 🧑
+opt.swapfile = false -- use a swap file for this buffer
 
 -- 19. Command line editing:
--- opt.history = 10000 -- number of commands and search patterns that are remembered (10000 is the maximun)
--- opt.wildmode = "longest:full,full" -- Command-line completion mode
--- opt.wildmenu = true -- command-line completion shows a list of matches
+--     (all defaults are fine)
 
 -- 20. Executing external commands:
+--     (all defaults are fine)
 
 -- 21. Running make and jumping to errors (quickfix):
--- opt.grepformat = "%f:%l:%c:%m" -- format of 'grepprg' output
--- opt.grepprg = "rg --vimgrep" -- program to use for ":grep" command
+--     (all defaults are fine)
 
 -- 22. Language specifig:
--- opt.iskeyword:append({"-"}) -- specifies what characters are considered part of a word (add `-`, so that `hello-world` for example is considered a single word)
-opt.isfname:append({"-"}) -- specifies the characters in a filename (include "@") 🧑
+-- opt.iskeyword:append({"-"}) -- specifies what characters are considered part of a word (add `-`)
+-- opt.isfname:append({"@-@"}) -- specifies the characters in a filename (include "@")
 
 -- 23. Multi-byte characters:
+--     (all defaults are fine)
 
 -- 24. Various:
 -- opt.virtualedit = "block" -- allow virtual editing in Visual block mode
-opt.signcolumn = 'yes' -- when and how to display the sign column 🧑
--- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" } -- list of words that specifies what to put in a session file
+opt.signcolumn = 'yes' -- when and how to display the sign column
 
