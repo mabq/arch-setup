@@ -1,10 +1,8 @@
--- Documentation: https://github.com/folke/lazy.nvim
+-- https://github.com/folke/lazy.nvim
 
-
--- 1. Install `lazy.nvim` plugin manager:
+-- Install
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    -- clone the repo into `~/.local/share/nvim/lazy/lazy.nvim/`
     vim.fn.system({
         "git",
         "clone",
@@ -14,12 +12,13 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
--- add the path to the runtimepath so that we can require lazy
 vim.opt.rtp:prepend(lazypath)
--- there is also a `package.path` which lists all of the paths searched by `require()`, for more information see https://neovim.io/doc/user/luaref.html#package.path
 
 
--- 2. Load lazy:
--- Passing `plugins` instead of a spec instructs lazyvim to source every file in the `~/.config/nvim/lua/plugins` directory
+-- Load - passing the string "plugins" instead of a spec instructs lazyvim to source every file in the `~/.config/nvim/lua/plugins` directory
 require("lazy").setup("plugins")
 
+
+-- See:
+--  [Plugin spec](https://github.com/folke/lazy.nvim#-plugin-spec) -- brief description about spec properties
+--  [Plugin configuration](https://dev.to/vonheikemen/lazynvim-plugin-configuration-3opi) -- comprenhensive explanation of when to use each property

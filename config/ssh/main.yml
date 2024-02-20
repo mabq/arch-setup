@@ -59,28 +59,28 @@
             enabled: true
 
         - name: ssh - Disable password authentication for the root user
-          # Hackers will always try to hack a system with root user, it's 
+          # Hackers will always try to hack a system with root user, it's
           # harder if they don't know the user and the password.
           become: true
           ansible.builtin.lineinfile:
             dest: /etc/ssh/sshd_config
             regexp: "^#PermitRootLogin"
-            line: "PermitRootLogin prohibit-password" 
+            line: "PermitRootLogin prohibit-password"
 
         - name: ssh - Disable password authentication for all users (if instructed)
           # If ssh keys are already configured in any other machine you can
-          # disable password access for major security. Sometimes it can be 
+          # disable password access for major security. Sometimes it can be
           # useful to access with a password though.
           ansible.builtin.lineinfile:
             dest: /etc/ssh/sshd_config
             regexp: "^#PasswordAuthentication"
-            line: "PasswordAuthentication no" 
+            line: "PasswordAuthentication no"
           when: ssh_disable_password_authentication
 
 
     - name: ssh-agent setup
       # The private key is protected with a passphrase for major security.
-      # Some tasks of this playbook will clone private repositories, so we 
+      # Some tasks of this playbook will clone private repositories, so we
       # need to "pre-open" the key by adding its passphrase to the ssh-agent,
       # otherwise the cloning will fail.
       # Add the tags of all tasks that clone a private repository to this tasks.
@@ -100,15 +100,15 @@
             scope: "user"
 
         - name: ssh - Add the private key passphrase to the ssh-agent
-          # The `ssh-add` command does not accept the passphrase as an 
+          # The `ssh-add` command does not accept the passphrase as an
           # argument, the command is meant to be used interactively.
           #
           # In order to add the passphrase we need to use the `expect`
-          # module, which is based on the `expect` command (a tool for 
+          # module, which is based on the `expect` command (a tool for
           # automating interactive applications).
           #
-          # The `expect` module requires the `pexpect` package to be 
-          # installed in order to evaluate regex patterns in the promped 
+          # The `expect` module requires the `pexpect` package to be
+          # installed in order to evaluate regex patterns in the promped
           # questions.
           block:
             - name: ssh - Install `pexpect`
@@ -122,7 +122,7 @@
               ansible.builtin.expect:
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
-                  # This is the only question asked, use a regular expression 
+                  # This is the only question asked, use a regular expression
                   # to match it.
                   '(?i)Enter passphrase (.*):': "{{ ssh_key_passphrase }}"
               # Do not show passphrase in logs

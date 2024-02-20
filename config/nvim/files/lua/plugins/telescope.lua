@@ -23,19 +23,18 @@ return {
         },
         cmd = "Telescope",
         keys = {
-            { "<leader>fg", ":Telescope git_files<CR>", mode = { "n" }, desc = "Telescope git_files", },
-            { "<leader>ff", ":Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find_files", },
-            { "<leader>fs", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope grep_string", },
-            { "<leader>fb", ":Telescope buffers<CR>", mode = { "n" }, desc = "Telescope buffers", },
-            { "<leader>fh", ":Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope help_tags", },
+            { "<leader>ff", ":Telescope git_files<CR>", mode = { "n" }, desc = "Telescope find git", },
+            { "<leader>fa", ":Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find all", },
+            { "<leader>fg", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope find grep", },
+            { "<leader>fb", ":Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers", },
+            { "<leader>fh", ":Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope find help", },
         },
     },
-
     {
         enabled = true,
-        'xiyaowong/telescope-emoji.nvim',
+        'xiyaowong/telescope-emoji.nvim', -- (replaced with emote, system level)
         keys = {
-            { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope emoji", },
+            { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope find emoji", },
         },
         config = function ()
             -- when launching emoji before running telescope

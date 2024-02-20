@@ -1,8 +1,8 @@
 return {
     {
         enabled = true,
-        'numToStr/Comment.nvim', 
+        'numToStr/Comment.nvim',
         name = 'comment',
-        config = true,  -- default implementation without opts
+        config = true, -- default implementation without opts
     },
 }

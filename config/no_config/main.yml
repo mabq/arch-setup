@@ -27,7 +27,7 @@
           # ------------------------------------------------------------------------
           #
           # Help utilities:
-          - man-db              # A utility for reading man pages 
+          - man-db              # A utility for reading man pages
           - man-pages           # Linux man pages
           - tldr                # Command line client for tldr, a collection of simplified and community-driven man pages
           #
@@ -59,7 +59,7 @@
           #
           # Compression/Uncompression utilities (used by zsh custom function `extract`):
           - p7zip               # Command-line file archiver with high compression ratio
-          - unarchiver          # unar and lsar: Objective-C tools for uncompressing archive files 
+          - unarchiver          # unar and lsar: Objective-C tools for uncompressing archive files
           - unrar               # The RAR uncompression program
           - unzip               # For extracting and viewing files in .zip archives
           - zip                 # Compressor/archiver for creating and modifying zipfiles
@@ -197,4 +197,16 @@
               when: which_kalker.rc != 0
               # A calculator program that supports user-defined variables, functions, derivation, and integration.
               ansible.builtin.shell: 'paru -S --skipreview kalker-bin'
+
+        - name: Emote
+          block:
+            - name: no-config - Check if Emote is already installed
+              ansible.builtin.command: "which emote"
+              register: which_emote
+              ignore_errors: true
+
+            - name: no-config - Install Emote
+              when: which_emote.rc != 0
+              # Emoji Picker for Linux written in GTK3
+              ansible.builtin.shell: 'paru -S --skipreview emote'
 
