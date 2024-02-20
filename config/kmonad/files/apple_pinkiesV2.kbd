@@ -20,7 +20,7 @@
 
 (defcfg
     ;; Use the `evtest` package to identify the keyboard event number
-    input (device-file "/dev/input/event14")
+    input (device-file "/dev/input/event15")
     output (uinput-sink "KMonad")
     cmp-seq ralt    ;; Set the compose key to `RightAlt' (meant for international special characters, like á)
     cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
