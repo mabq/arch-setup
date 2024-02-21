@@ -6,12 +6,7 @@
 
 vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "Open netrw" })
 
-vim.keymap.set("n", "<leader>l", vim.cmd.Lazy, { desc = "Open lazy" })
-
 vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>", { desc = "tmux-sessionizer" })
-
-vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Quickfix next and center" })
-vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz", { desc = "Quickfix prev and center" })
 
 
 -- Cursor position:
@@ -49,8 +44,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Behaviour:
 
-vim.keymap.set("n", "<C-.>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item and center" })
-vim.keymap.set("n", "<C-,>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item and center" })
+vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item and center" })
+vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item and center" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Ctrl-c as Esc" }) -- there are a few cases where they don't work the same
 

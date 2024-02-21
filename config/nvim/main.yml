@@ -31,7 +31,6 @@
           state: "link"
         loop:
           - { name: 'init.lua', mode: '600' }
-          - { name: '.luarc.json', mode: '600' }
           # Link the entire `lua` and `spell` directories, that way you won't
           # need to edit this file everytime you create a new plugin file.
           - { name: 'lua', mode: '700' }
