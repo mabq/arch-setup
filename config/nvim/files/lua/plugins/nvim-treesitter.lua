@@ -1,6 +1,7 @@
 return {
     {
         --  Treesitter is a new parser generator tool that we can use in Neovim to power faster and more accurate syntax highlighting.
+        --  See https://vonheikemen.github.io/devlog/es/tools/neovim-plugins-to-get-started/#treesitter
         enabled = true,
         'nvim-treesitter/nvim-treesitter',
         name = 'treesitter',
@@ -8,7 +9,7 @@ return {
         event = 'VeryLazy',
         config = function ()
             require('nvim-treesitter.configs').setup({
-                ensure_installed = { 
+                ensure_installed = {
                     -- A list of parser names, or "all" (the first five listed parsers should always be installed)
                     "c",
                     "lua",

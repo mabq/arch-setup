@@ -1,6 +1,6 @@
 -- Read `:h lsp-zero`
 return {
-    'VonHeikemen/lsp-zero.nvim', -- boiler-plate code to integrate `nvim-cmp` and `lspconfig`
+    'VonHeikemen/lsp-zero.nvim', -- integrate `nvim-cmp` and `lspconfig` (https://lsp-zero.netlify.app/v3.x/introduction.html#what-is-lsp-zero)
     branch = 'v3.x',
     lazy = false,
     dependencies = {
@@ -39,13 +39,13 @@ return {
         end)
 
         -- associate a language server with a list of filetypes, so {key} can format the buffer using only one LSP server
-        lsp_zero.format_mapping('gq', {
-            servers = {
-                -- ['rust_analyzer'] = { 'rust' },
-                -- ['tsserver'] = { 'javascript', 'typescript' },
-                ['lua_ls'] = { 'lua' },
-            }
-        })
+        -- lsp_zero.format_mapping('gq', {
+        --     servers = {
+        --         -- ['rust_analyzer'] = { 'rust' },
+        --         -- ['tsserver'] = { 'javascript', 'typescript' },
+        --         ['lua_ls'] = { 'lua' },
+        --     }
+        -- })
 
         -- customize `nvim-cmp` (`:h lsp-zero-guide:customize-nvim-cmp`)
         local cmp = require('cmp')
@@ -72,6 +72,7 @@ return {
                 lsp_zero.default_setup,
                 -- customize lsp behavior, see `:h lsp-zero-guide:integrate-with-mason-nvim`
                 lua_ls = function()
+                    -- fix Undefined global 'vim'
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end

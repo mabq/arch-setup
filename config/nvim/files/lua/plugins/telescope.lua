@@ -23,22 +23,23 @@ return {
         },
         cmd = "Telescope",
         keys = {
-            { "<leader>ff", ":Telescope git_files<CR>", mode = { "n" }, desc = "Telescope find git", },
-            { "<leader>fa", ":Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find all", },
-            { "<leader>fg", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope find grep", },
-            { "<leader>fb", ":Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers", },
-            { "<leader>fh", ":Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope find help", },
+            { "<leader>fg", "<cmd>Telescope git_files<CR>", mode = { "n" }, desc = "Telescope git files", },
+            { "<leader>ff", "<cmd>Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find files", },
+            { "<leader>f/", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope find grep", },
+            { "<leader>fb", "<cmd>Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers", },
+            { "<leader>fh", "<cmd>Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope find help", },
         },
     },
-    {
-        enabled = true,
-        'xiyaowong/telescope-emoji.nvim', -- (replaced with emote, system level)
-        keys = {
-            { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope find emoji", },
-        },
-        config = function ()
-            -- when launching emoji before running telescope
-            require('telescope')
-        end
-    },
+    -- {
+    --     (replaced with a system-level tool)
+    --     enabled = true,
+    --     'xiyaowong/telescope-emoji.nvim', -- (replaced with emote, system level)
+    --     keys = {
+    --         { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope find emoji", },
+    --     },
+    --     config = function ()
+    --         -- when launching emoji before running telescope
+    --         require('telescope')
+    --     end
+    -- },
 }
