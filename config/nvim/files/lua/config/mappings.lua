@@ -44,8 +44,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Behaviour:
 
-vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item and center" })
-vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item and center" })
+-- vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item and center" })
+-- vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item and center" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Ctrl-c as Esc" }) -- there are a few cases where they don't work the same
 

@@ -23,23 +23,23 @@ return {
         },
         cmd = "Telescope",
         keys = {
-            { "<leader>fg", "<cmd>Telescope git_files<CR>", mode = { "n" }, desc = "Telescope git files", },
-            { "<leader>ff", "<cmd>Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find files", },
-            { "<leader>f/", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope find grep", },
-            { "<leader>fb", "<cmd>Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers", },
-            { "<leader>fh", "<cmd>Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope find help", },
+            { "<C-p>", "<cmd>Telescope git_files<CR>", mode = { "n" }, desc = "Telescope git files", },
+            { "<leader>pf", "<cmd>Telescope find_files<CR>", mode = { "n" }, desc = "Telescope find files", },
+            { "<leader>ps", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Project search: ")}); end, mode = { "n" }, desc = "Telescope project search", },
+            -- { "<leader>vb", "<cmd>Telescope buffers<CR>", mode = { "n" }, desc = "Telescope find buffers", },
+            { "<leader>vh", "<cmd>Telescope help_tags<CR>", mode = { "n" }, desc = "Telescope find help", },
         },
     },
-    -- {
-    --     (replaced with a system-level tool)
-    --     enabled = true,
-    --     'xiyaowong/telescope-emoji.nvim', -- (replaced with emote, system level)
-    --     keys = {
-    --         { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope find emoji", },
-    --     },
-    --     config = function ()
-    --         -- when launching emoji before running telescope
-    --         require('telescope')
-    --     end
-    -- },
+    {
+        -- (replaced with a system-level tool)
+        enabled = false,
+        'xiyaowong/telescope-emoji.nvim', -- (replaced with emote, system level)
+        keys = {
+            { "<leader>fj", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "Telescope find emoji", },
+        },
+        config = function ()
+            -- when launching emoji before running telescope
+            require('telescope')
+        end
+    },
 }
