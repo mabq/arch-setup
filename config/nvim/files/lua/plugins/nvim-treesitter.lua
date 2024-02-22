@@ -12,10 +12,12 @@ return {
                 ensure_installed = {
                     -- A list of parser names, or "all" (the first five listed parsers should always be installed)
                     "c",
+                    "javascript",
                     "lua",
+                    "rust",
+                    "typescript",
                     "vim",
                     "vimdoc",
-                    "query",
                 },
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
