@@ -22,15 +22,15 @@ return {
     -- Autocomplete
     {
         -- https://lsp-zero.netlify.app/v3.x/autocomplete.html
+        -- https://lsp-zero.netlify.app/v3.x/template/opinionated.html
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
             { 'L3MON4D3/LuaSnip' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'rafamadriz/friendly-snippets' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-path' },
-            { 'hrsh7th/cmp-nvim-lua' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'rafamadriz/friendly-snippets' },
         },
         config = function()
             -- Here is where you configure the autocompletion settings.
@@ -41,16 +41,20 @@ return {
             local cmp = require('cmp')
             local cmp_action = lsp_zero.cmp_action()
 
+            -- This is the function that loads the extra snippets from rafamadriz/friendly-snippets
             require('luasnip.loaders.from_vscode').lazy_load()
 
             cmp.setup({
                 formatting = lsp_zero.cmp_format(), -- show completion source
                 sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' },
-                    { name = 'buffer' },
                     { name = 'path' },
-                    { name = 'nvim_lua' },
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip', keyword_length = 2 },
+                    { name = 'buffer', keyword_length = 3 },
+                },
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
@@ -84,13 +88,20 @@ return {
                 lsp_zero.default_keymaps({ buffer = bufnr }) -- `:h lsp-zero-keybindings`
             end)
 
+            lsp_zero.set_sign_icons({
+                error = 'e',
+                warn = 'w',
+                hint = 'h',
+                info = 'i'
+            })
+
             require('mason-lspconfig').setup({
-                ensure_installed = {},
+                ensure_installed = {}, -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
                 handlers = {
                     lsp_zero.default_setup,
+                    -- Configure a language server -- https://lsp-zero.netlify.app/v3.x/guide/integrate-with-mason-nvim.html#configure-a-language-server
                     lua_ls = function()
-                        -- (Optional) Configure lua language server for neovim
-                        local lua_opts = lsp_zero.nvim_lua_ls()
+                        local lua_opts = lsp_zero.nvim_lua_ls() -- disable warning for `vim` global variable in lua
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,
                 }
@@ -98,4 +109,3 @@ return {
         end
     }
 }
-
