@@ -100,7 +100,7 @@
           # ------------------------------------------------------------------------
           #
           # Fonts:
-          - noto-fonts-emoji    # Google Noto emoji fonts
+          # - noto-fonts-emoji    # Google Noto emoji fonts
           #
           # ------------------------------------------------------------------------
           #
@@ -197,6 +197,18 @@
               when: which_kalker.rc != 0
               # A calculator program that supports user-defined variables, functions, derivation, and integration.
               ansible.builtin.shell: 'paru -S --skipreview kalker-bin'
+
+        - name: ttf-apple-emoji
+          block:
+            - name: no-config - Check if ttf-apple-emoji is already installed
+              ansible.builtin.command: "paru -Q ttf-apple-emoji"
+              register: which_ttfappleemoji
+              ignore_errors: true
+
+            - name: no-config - Install ttf-apple-emoji
+              when: which_ttfappleemoji.rc != 0
+              # Emoji font
+              ansible.builtin.shell: 'paru -S --skipreview ttf-apple-emoji'
 
         - name: Emote
           block:
