@@ -24,24 +24,13 @@
           name:
             - grim    # Screenshot utility for Wayland
 
-    - name: Create config files
-      block:
-      - name: flameshot - Create directories
-        ansible.builtin.file:
-          path: "{{ home }}/.config/flameshot"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
-
-      - name: flameshot - Process templates
-        tags: theme
-        ansible.builtin.template:
-          src: "files/{{ item.name }}"
-          dest: "{{ home }}/.config/flameshot/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '600'
-        loop:
-          - { name: "flameshot.ini" }
+    - name: flameshot - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/flameshot/files"
+        path: "{{ home }}/.config/flameshot"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
 
