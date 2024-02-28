@@ -55,6 +55,8 @@ vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>", { desc = "Toggle wrap" })
 
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Screen line down" }) -- gj only when no counter is provided
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Screen line up" }) -- gk only when no counter is provided
+vim.keymap.set({ "n", "x" }, "<down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Screen line down" }) -- gj only when no counter is provided
+vim.keymap.set({ "n", "x" }, "<up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Screen line up" }) -- gk only when no counter is provided
 
 -- Use up/down to move through popupmenus (pum):
 vim.keymap.set('c', '<down>', function()

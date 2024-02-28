@@ -1,7 +1,7 @@
 // https://github.com/Alexays/Waybar/wiki/Configuration#bar-config
 [
-    { 
-        "name": "topbar", 
+    {
+        "name": "topbar",
         "height": 44,
         "modules-left": ["clock"],
         "modules-center": ["hyprland/workspaces"],
@@ -14,7 +14,7 @@
         },
     },
     {
-        "name": "bottombar", 
+        "name": "bottombar",
         "position": "bottom",
         "height": 44,
         "modules-center": ["battery", "cpu", "memory", "disk#root", "disk#home"],
@@ -43,5 +43,5 @@
             "path": "/home",
         },
     }
-] 
+]
 
