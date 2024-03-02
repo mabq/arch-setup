@@ -3,7 +3,7 @@ local toggle = function()
         -- https://github.com/folke/zen-mode.nvim#%EF%B8%8F-configuration
         window = {
             backdrop = 0.95,
-            width = 120,
+            width = 110,
             options = {
                 number = false,
                 relativenumber = false,
