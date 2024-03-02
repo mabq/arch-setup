@@ -43,6 +43,10 @@ export PAGER="less -R --use-color -Dd+r -Du+b"
 # export VOLTA_HOME="$XDG_CONFIG_HOME/.volta" # The hassle-free JavaScript Tools Manager
 
 
+# n Node Manager (see http://git.io/n-install-repo)
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
+
 # Colors:
 export GTK_THEME="Adwaita:dark"
 

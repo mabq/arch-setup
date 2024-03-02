@@ -149,8 +149,6 @@
           - hyperfine           # A command-line benchmarking tool
           - jq                  # Command-line JSON processor
           # - go
-          # - nodejs
-          # - npm
           # - shellcheck
           #
           # ------------------------------------------------------------------------
