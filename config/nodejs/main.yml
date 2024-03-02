@@ -4,16 +4,18 @@
     # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n)
     # I use the `n-install` script to install and update `n` (https://github.com/mklement0/n-install)
 
-    - name: nodejs - Check if `n` is already installed
-      ansible.builtin.stat:
-        path: "{{ home }}/n"
-      register: n
+    - name: Install `n` node version manage
+      block:
+        - name: nodejs - Check if `n` is already installed
+          ansible.builtin.stat:
+            path: "{{ home }}/n"
+          register: n
 
-    - name: nodejs - Install `n` (if not already installed)
-      when: n.stat.isdir is not defined or n.stat.isdir == False
-      # `-s` is for silent
-      # everything after `--` are arguments passed to the script
-      # `-y` assumes yes as the reply to all prompts (run unattended)
-      # `-n` suppresses updating of the relevant shell initialization file
-      ansible.builtin.shell: 'curl -L https://bit.ly/n-install | bash -s -- -y -n'
+        - name: nodejs - Install `n` (if not already installed)
+          when: n.stat.isdir is not defined or n.stat.isdir == False
+          # `-s` is for silent
+          # everything after `--` are arguments passed to the script
+          # `-y` assumes yes as the reply to all prompts (run unattended)
+          # `-n` suppresses updating of the relevant shell initialization file
+          ansible.builtin.shell: 'curl -L https://bit.ly/n-install | bash -s -- -y -n'
 
