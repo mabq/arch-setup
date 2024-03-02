@@ -10,6 +10,8 @@
 
     - import_tasks: config/no_config/main.yml       # must go after pacman and paru
 
+    - import_tasks: config/nodejs/main.yml
+
     - import_tasks: config/bluetooth/main.yml
 
     - import_tasks: config/zsh/main.yml
