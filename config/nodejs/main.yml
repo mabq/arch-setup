@@ -5,12 +5,12 @@
     # I use the `n-install` script to install and update `n` (https://github.com/mklement0/n-install)
 
     - name: nodejs - Check if `n` is already installed
-      ansible.builtin.stat: "{{ home }}/n"
-      register: ndir
-      ignore_errors: true
+      ansible.builtin.stat:
+        path: "{{ home }}/n"
+      register: n
 
     - name: nodejs - Install `n` (if not already installed)
-      when: ndir.stat.isdir == false
+      when: n.stat.isdir is not defined or n.stat.isdir == False
       # `-s` is for silent
       # everything after `--` are arguments passed to the script
       # `-y` assumes yes as the reply to all prompts (run unattended)
