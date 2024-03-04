@@ -1,8 +1,7 @@
 - tags: nodejs
   block:
 
-    # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n)
-    # I use the `n-install` script to install and update `n` (https://github.com/mklement0/n-install)
+    # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n?tab=readme-ov-file#installing-nodejs-versions)
 
     - name: Install `n` node version manage
       block:
