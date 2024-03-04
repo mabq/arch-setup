@@ -38,7 +38,7 @@
           ansible.builtin.group:
             name: uinput
             state: present
- 
+
         - name: kmonad - Add your user to the `input` and the `uinput` group
           become: true
           ansible.builtin.user:
@@ -59,6 +59,14 @@
         #   become: true
         #   ansible.builtin.command: modprobe uinput
         #   when: rule.changed
+
+
+    - name: kmonad - Create a static link to address dynamic event number for magic keyboard
+      become: true
+      ansible.builtin.copy:
+        # use `sudo udevadm info --attribute-walk /dev/input/event{NUMBER}` to check device info to create the rule
+        content: 'ACTION=="add", SUBSYSTEM=="input", ATTRS{uniq}=="0c:d7:46:e8:46:63", SYMLINK+="applekeyboard"'
+        dest: /etc/udev/rules.d/99-magickeyboard.rules
 
 
     - name: kmonad - Link the whole directory
