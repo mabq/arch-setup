@@ -14,11 +14,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 -- Load - passing the string "plugins" instead of a spec instructs lazyvim to source every file in the `~/.config/nvim/lua/plugins` directory
 require("lazy").setup("plugins")
-
-vim.keymap.set("n", "<leader>z", vim.cmd.Lazy, { desc = "Open lazy" })
+vim.keymap.set("n", "<leader>la", vim.cmd.Lazy, { desc = "Open lazy" })
 
 -- See:
 --  [Plugin spec](https://github.com/folke/lazy.nvim#-plugin-spec) -- brief description about spec properties

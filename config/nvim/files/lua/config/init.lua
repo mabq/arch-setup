@@ -1,5 +1,4 @@
-require("config.vars") -- must go before lazy
-require("config.options")
-require("config.lazy")
-require("config.mappings")
-require("config.autocmds")
+require("config.mabq.options") -- must go before loading lazy
+require("config.mabq.keymaps")
+require("config.mabq.autocommands")
+require("config.mabq.lazy")

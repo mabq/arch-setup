@@ -1,6 +1,6 @@
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide-autocommands
--- `:h events`
--- `:h autocmd-events` -- list of possible events
+--   `:h events` -- possible events you can hook to
+--   `:h autocmd-events` -- list of possible events
 
 -- The following autocommands where copied from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua#L84
 
