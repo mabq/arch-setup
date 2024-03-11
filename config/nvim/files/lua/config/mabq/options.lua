@@ -12,7 +12,7 @@
 -- `:set {option}?` - print current value
 -- `:set {option}&` - go back to default value
 
-vim.g.mapleader = ' ' -- must happen before plugins are loaded (otherwise wrong leader key will be used)
+vim.g.mapleader = " " -- must happen before plugins are loaded (otherwise wrong leader key will be used)
 
 --
 
@@ -36,16 +36,16 @@ vim.opt.breakindent = true -- preserve indentation in wrapped text
 vim.opt.scrolloff = 3 -- number of lines to show around the cursor
 vim.opt.sidescrolloff = 8 -- minimum number of columns to scroll horizontal (defaults to 1 in Neovim)
 vim.opt.list = true -- show tabs and end-of-lines
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- list of strings used for list mode
+vim.opt.listchars = { tab = " ", trail = "·", nbsp = "␣" } -- list of strings used for list mode
 
 -- 05. Syntax, highlighting and spelling:
 vim.opt.hlsearch = false -- highlight all matches for the last used search pattern
-vim.opt.inccommand = 'split' -- -- preview substitutions live, as you type
+vim.opt.inccommand = "split" -- -- preview substitutions live, as you type
 vim.opt.termguicolors = true -- use GUI colors for the terminal
 vim.opt.cursorline = false -- highlight the screen line of the cursor
 -- vim.opt.colorcolumn = "80,120" -- columns to highlight
 -- vim.opt.spell = false -- highlight spelling mistakes
-vim.opt.spelllang = {'en', 'es'} -- list of accepted languages (when enabled)
+vim.opt.spelllang = { "en", "es" } -- list of accepted languages (when enabled)
 
 -- 06. Multiple windows:
 -- vim.opt.statusline = " %f %m %= %l:%c  %p%%  " -- custom format for the status line
@@ -68,7 +68,7 @@ vim.opt.splitright = true -- new window is put right of the current one
 -- 12. Editing text:
 vim.opt.undolevels = 10000 -- maximum number of changes that can be undone
 vim.opt.undofile = true -- save undo information in a file
-vim.opt.undodir = os.getenv("HOME") .. '/.vim/undodir' -- where to store undo files
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- where to store undo files
 -- vim.opt.textwidth = 80 -- line length above which to break a line
 -- vim.opt.pumheight = 10 -- maximum number of items to show in the pop up menu
 -- vim.opt.pumblend = 10 -- popup blend (transparency)
@@ -81,7 +81,7 @@ vim.opt.undodir = os.getenv("HOME") .. '/.vim/undodir' -- where to store undo fi
 vim.opt.tabstop = 4 -- number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
 vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
-vim.opt.expandtab = true -- use spaces when <Tab> is inserted
+vim.opt.expandtab = false -- use spaces when <Tab> is inserted
 vim.opt.smartindent = true -- smart auto indenting for C programs
 vim.opt.shiftround = true -- round to 'shiftwidth' for "<<" and ">>"
 
@@ -114,5 +114,4 @@ vim.opt.updatetime = 250 -- decrease time for the 'CursorHold' autocommand event
 
 -- 24. Various:
 -- vim.opt.virtualedit = "block" -- allow virtual editing in Visual block mode
-vim.opt.signcolumn = 'yes' -- when and how to display the sign column
-
+vim.opt.signcolumn = "yes" -- when and how to display the sign column

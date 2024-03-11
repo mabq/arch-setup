@@ -1,8 +1,12 @@
 return {
-    enabled = true,
-    "eandrju/cellular-automaton.nvim",
-    lazy = true,
-    keys = {
-      { "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "Make it rain" },
-    },
+	enabled = true,
+	"eandrju/cellular-automaton.nvim",
+	keys = {
+		-- Category: other
+		{
+			"<leader>-r",
+			"<cmd>CellularAutomaton make_it_rain<CR>",
+			desc = "Make it rain",
+		},
+	},
 }

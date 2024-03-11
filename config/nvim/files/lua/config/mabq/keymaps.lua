@@ -3,12 +3,9 @@
 --  `:h map-modes`
 --  https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
-
 -- Clear search with <esc>
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Better up/down
-vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -27,19 +24,22 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Better yanking and pasting
-vim.keymap.set("x", "<leader>p", [["_c<Esc>p]], { desc = "Paste without affecting register" }) -- [["_dP]] was sometimes problematic
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
-vim.keymap.set({"n"}, "<leader>Y", [["+Y]], { desc = "Yank to clipboard til end of line" })
-vim.keymap.set({"n", "v"}, "<leader>d", [["+d]], { desc = "Delete to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>Y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set("x", "<leader>P", [["_c<Esc>p]], { desc = "Paste without affecting register" }) -- [["_dP]] was sometimes problematic
+vim.keymap.set({ "n", "v" }, "<leader>D", [["+d]], { desc = "Delete to clipboard" })
 
 -- Better up/down pop up menu
-vim.keymap.set('c', '<down>', function()
-    if vim.fn.pumvisible() == 1 then return '<c-n>' end
-    return '<down>'
+vim.keymap.set("c", "<down>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<c-n>"
+	end
+	return "<down>"
 end, { expr = true })
-vim.keymap.set('c', '<up>', function()
-    if vim.fn.pumvisible() == 1 then return '<c-p>' end
-    return '<up>'
+vim.keymap.set("c", "<up>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<c-p>"
+	end
+	return "<up>"
 end, { expr = true })
 
 -- Toggle options
@@ -85,11 +85,11 @@ vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- Diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
 end
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -111,7 +111,7 @@ vim.keymap.set("i", ";", ";<c-g>u")
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Ctrl-c as Esc" })
 
 -- Easier exit from terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Disable replay last recorded macro, to easy to trigger accidentally
 vim.keymap.set("n", "Q", "<nop>")
@@ -119,7 +119,12 @@ vim.keymap.set("n", "Q", "<nop>")
 --
 
 -- Tmux-sessioninzer
-vim.keymap.set("n", "<C-f>", ":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>", { desc = "Tmux-sessionizer" }) -- same shortcut in Neovim and Zsh
+vim.keymap.set(
+	"n",
+	"<C-f>",
+	":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>",
+	{ desc = "Tmux-sessionizer" }
+) -- same shortcut in Neovim and Zsh
 
 --
 
@@ -128,7 +133,7 @@ vim.g.netrw_browse_split = 0 -- always re-use the same window when opening files
 vim.g.netrw_banner = 0 -- suppress the banner
 vim.g.netrw_winsize = 25 -- initial size of new windows
 
-vim.keymap.set("n", "<leader>fE", vim.cmd.Ex, { desc = "Open NetRW" })
+vim.keymap.set("n", "<leader>fE", vim.cmd.Ex, { desc = "File explorer (NetRW)" })
 
 --
 
