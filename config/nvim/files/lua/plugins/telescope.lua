@@ -72,17 +72,17 @@ return {
 			-- See `:help telescope.builtin`
 			-- NOTE: Some
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
-			vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "[S]earch [S]tring" })
-			vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "[S]earch [L]ive grep" })
-			vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[S]earch [G]it files" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" }) -- use `Ctrl-q` to send the list to  quickfix
-			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "[S]earch [O]ld files" })
-			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search help" })
+			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
+			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
+			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Search telescope builtins" })
+			vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "Search string" })
+			vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "Search live (grep)" })
+			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search diagnostics" }) -- use `Ctrl-q` to send the list to  quickfix
+			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search resume" })
+			vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search old files" })
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search buffers" })
+			vim.keymap.set("n", "<leader><leader>", builtin.git_files, { desc = "Search git files" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>s/", function()
@@ -91,7 +91,7 @@ return {
 					winblend = 10,
 					previewer = false,
 				}))
-			end, { desc = "[/] Fuzzily search in current buffer" })
+			end, { desc = "Fuzzy search in current buffer" })
 
 			-- -- Also possible to pass additional configuration options.
 			-- --  See `:help telescope.builtin.live_grep()` for information about particular keys

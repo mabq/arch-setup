@@ -9,37 +9,37 @@ return {
 			{
 				"<leader>xx",
 				"<cmd>TroubleToggle<cr>",
-				desc = "Trouble: Toogle",
+				desc = "Trouble toggle",
 			},
 			{
 				"<leader>xw",
 				"<cmd>TroubleToggle workspace_diagnostics<cr>", -- workspace diagnostics from the builtin LSP client
-				desc = "Trouble: [W]orkspace",
+				desc = "Trouble workspace",
 			},
 			{
 				"<leader>xb",
 				"<cmd>TroubleToggle document_diagnostics<cr>", -- document diagnostics from the builtin LSP client
-				desc = "Trouble: [B]uffer",
+				desc = "Trouble buffer",
 			},
 			{
 				"<leader>xr",
 				"<cmd>TroubleToggle lsp_references<cr>", -- references of the word under the cursor from the builtin LSP client
-				desc = "Trouble: [R]eferences",
+				desc = "Trouble references",
 			},
 			{
 				"<leader>xd",
 				"<cmd>TroubleToggle lsp_definitions<cr>", -- definitions of the word under the cursor from the builtin LSP client
-				desc = "Trouble: [D]efinitions",
+				desc = "Trouble definitions",
 			},
 			{
 				"<leader>xq",
 				"<cmd>TroubleToggle quickfix<cr>", -- quickfix items
-				desc = "Trouble: [Q]uickfix",
+				desc = "Trouble quickfix",
 			},
 			{
 				"<leader>xl",
 				"<cmd>TroubleToggle loclist<cr>", -- items from the window's location list
-				desc = "Trouble: [L]oclist",
+				desc = "Trouble loclist",
 			},
 		},
 	},

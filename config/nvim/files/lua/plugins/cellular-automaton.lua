@@ -5,7 +5,7 @@ return {
 		{
 			"<leader>tr",
 			"<cmd>CellularAutomaton make_it_rain<CR>",
-			desc = "Toggle: [R]ain",
+			desc = "Toggle rain",
 		},
 	},
 }

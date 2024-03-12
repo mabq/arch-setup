@@ -24,10 +24,11 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Yank/Delete to clipboard
-vim.keymap.set({ "n", "v" }, "<leader>cy", [["+y]], { desc = "[Y]ank to clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>cd", [["+d]], { desc = "[D]elete to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>d", [["+d]], { desc = "Delete to clipboard" })
 
-vim.keymap.set("x", "<leader>cp", [["_c<Esc>p]], { desc = "[P]aste (without yanking)" })
+-- Paste without yanking
+vim.keymap.set("x", "<leader>p", [["_c<Esc>p]], { desc = "Paste without yanking" }) -- [["_dP]]
 
 -- Better up/down pop up menu
 vim.keymap.set("c", "<down>", function()
@@ -44,11 +45,11 @@ vim.keymap.set("c", "<up>", function()
 end, { expr = true })
 
 -- Toggle options
-vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle Word Wrap" })
-vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<CR>", { desc = "Toggle Spelling" })
-vim.keymap.set("n", "<leader>tL", "<cmd>set relativenumber!<CR>", { desc = "Toggle Relative Line Numbers" })
-vim.keymap.set("n", "<leader>tl", "<cmd>set number!<CR>", { desc = "Toggle Line Numbers" })
-vim.keymap.set("n", "<leader>ti", vim.show_pos, { desc = "Highlight symbol under cursor" })
+vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
+vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<CR>", { desc = "Toggle spelling" })
+vim.keymap.set("n", "<leader>tL", "<cmd>set relativenumber!<CR>", { desc = "Toggle relative line numbers" })
+vim.keymap.set("n", "<leader>tl", "<cmd>set number!<CR>", { desc = "Toggle line numbers" })
+vim.keymap.set("n", "<leader>ti", vim.show_pos, { desc = "Toggle highlight symbol under cursor" })
 
 -- Move to window using the <ctrl> hjkl keys (use default keybindings, these are now used by Harpoon)
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
@@ -76,11 +77,11 @@ vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 -- Keywordprg
-vim.keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- vim.keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- Quickfix
-vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+-- vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+-- vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
@@ -101,7 +102,7 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning"
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- Substitute word under cursor
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word" }) -- for symbols use LSP
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Rename word (raw)" }) -- for symbols use LSP
 
 -- Add undo break-points
 vim.keymap.set("i", ",", ",<c-g>u")
@@ -134,7 +135,7 @@ vim.g.netrw_browse_split = 0 -- always re-use the same window when opening files
 vim.g.netrw_banner = 0 -- suppress the banner
 vim.g.netrw_winsize = 25 -- initial size of new windows
 
-vim.keymap.set("n", "<leader>fE", vim.cmd.Ex, { desc = "File explorer (NetRW)" })
+vim.keymap.set("n", "<leader>oe", vim.cmd.Ex, { desc = "Open NetRW" })
 
 --
 

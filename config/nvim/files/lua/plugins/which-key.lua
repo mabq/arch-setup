@@ -10,7 +10,6 @@ return {
 
 			-- Document existing key chains
 			require("which-key").register({
-				["<leader>c"] = { name = "Clipboard", _ = "which_key_ignore" },
 				["<leader>h"] = { name = "Harpoon", _ = "which_key_ignore" },
 				["<leader>l"] = { name = "LSP", _ = "which_key_ignore" },
 				["<leader>o"] = { name = "Open", _ = "which_key_ignore" },

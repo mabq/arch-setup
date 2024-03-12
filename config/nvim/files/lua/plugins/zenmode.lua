@@ -9,7 +9,7 @@ return {
 					require("zen-mode").toggle()
 				end,
 				mode = { "n" },
-				desc = "Toggle: [Z]en-mode",
+				desc = "Toggle zenmode",
 			},
 		},
 		config = function()

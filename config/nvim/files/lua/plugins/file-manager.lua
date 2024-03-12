@@ -31,9 +31,9 @@ return {
 			-- Make sure to change these keybindings to your preference,
 			-- and remove the ones you won't use
 			{
-				"<leader>oe",
+				"<leader>e",
 				"<cmd>Tfm<cr>",
-				desc = "Open [E]xplorer (Yazi)",
+				desc = "Explore (yazi)",
 			},
 		},
 	},
