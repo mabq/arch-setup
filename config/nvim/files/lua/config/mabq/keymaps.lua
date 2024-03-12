@@ -23,10 +23,11 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Better yanking and pasting
-vim.keymap.set({ "n", "v" }, "<leader>cy", [["+y]], { desc = "Clipboard [y]ank" })
-vim.keymap.set("x", "<leader>cp", [["_c<Esc>p]], { desc = "Clipboard [p]aste" })
-vim.keymap.set({ "n", "v" }, "<leader>cd", [["+d]], { desc = "Clipboard [d]elete" })
+-- Yank/Delete to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>cy", [["+y]], { desc = "[Y]ank to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>cd", [["+d]], { desc = "[D]elete to clipboard" })
+
+vim.keymap.set("x", "<leader>cp", [["_c<Esc>p]], { desc = "[P]aste (without yanking)" })
 
 -- Better up/down pop up menu
 vim.keymap.set("c", "<down>", function()
@@ -70,7 +71,7 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+-- vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
@@ -91,7 +92,7 @@ local diagnostic_goto = function(next, severity)
 		go({ severity = severity })
 	end
 end
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+-- vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })

@@ -100,11 +100,11 @@ return {
 
 					-- Rename the variable under your cursor
 					--  Most Language Servers support renaming across files, etc.
-					map("<leader>ln", vim.lsp.buf.rename, "LSP: re[n]ame")
+					map("<leader>lR", vim.lsp.buf.rename, "LSP: [R]ename")
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					map("<leader>la", vim.lsp.buf.code_action, "LSP: [c]ode [a]ction")
+					map("<leader>la", vim.lsp.buf.code_action, "LSP: code [a]ction")
 
 					--  WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header
@@ -206,7 +206,7 @@ return {
 					require("conform").format({ async = true, lsp_fallback = true })
 				end,
 				mode = "",
-				desc = "LSP: [f]ormat",
+				desc = "LSP: [f]ormat buffer",
 			},
 		},
 		opts = {
