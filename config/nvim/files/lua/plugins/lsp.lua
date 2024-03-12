@@ -93,9 +93,9 @@ return {
 					-- Fuzzy find all the symbols in your current workspace
 					--  Similar to document symbols, except searches over your whole project.
 					map(
-						"<leader>lws",
+						"<leader>lS",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"LSP: [w]orkspace [s]ymbols"
+						"LSP: workspace [S]ymbols"
 					)
 
 					-- Rename the variable under your cursor
@@ -104,7 +104,7 @@ return {
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					map("<leader>lca", vim.lsp.buf.code_action, "LSP: [c]ode [a]ction")
+					map("<leader>la", vim.lsp.buf.code_action, "LSP: [c]ode [a]ction")
 
 					--  WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header

@@ -1,13 +1,5 @@
 return {
 	{
-		enabled = false,
-		"DreamMaoMao/yazi.nvim",
-		cmd = "Yazi",
-		keys = {
-			{ "<leader>oe", "<cmd>Yazi<CR>", mode = { "n" }, desc = "Open [E]xplorer (Yazi)" },
-		},
-	},
-	{
 		"rolv-apneseth/tfm.nvim",
 		lazy = false,
 		opts = {
@@ -29,8 +21,8 @@ return {
 			-- Customise UI. The below options are the default
 			ui = {
 				border = "rounded",
-				height = 0.8,
-				width = 0.9,
+				height = 0.85,
+				width = 0.95,
 				x = 0.5,
 				y = 0.5,
 			},
@@ -39,7 +31,7 @@ return {
 			-- Make sure to change these keybindings to your preference,
 			-- and remove the ones you won't use
 			{
-				"<leader>e",
+				"<leader>oe",
 				"<cmd>Tfm<cr>",
 				desc = "Open [E]xplorer (Yazi)",
 			},
