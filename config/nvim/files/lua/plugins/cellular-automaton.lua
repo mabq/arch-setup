@@ -2,11 +2,10 @@ return {
 	enabled = true,
 	"eandrju/cellular-automaton.nvim",
 	keys = {
-		-- Category: other
 		{
-			"<leader>-r",
+			"<leader>tr",
 			"<cmd>CellularAutomaton make_it_rain<CR>",
-			desc = "Make it rain",
+			desc = "Toggle: [R]ain",
 		},
 	},
 }

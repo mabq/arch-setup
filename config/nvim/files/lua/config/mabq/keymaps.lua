@@ -24,9 +24,9 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Better yanking and pasting
-vim.keymap.set({ "n", "v" }, "<leader>Y", [["+y]], { desc = "Yank to clipboard" })
-vim.keymap.set("x", "<leader>P", [["_c<Esc>p]], { desc = "Paste without affecting register" }) -- [["_dP]] was sometimes problematic
-vim.keymap.set({ "n", "v" }, "<leader>D", [["+d]], { desc = "Delete to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>cy", [["+y]], { desc = "Clipboard [y]ank" })
+vim.keymap.set("x", "<leader>cp", [["_c<Esc>p]], { desc = "Clipboard [p]aste" })
+vim.keymap.set({ "n", "v" }, "<leader>cd", [["+d]], { desc = "Clipboard [d]elete" })
 
 -- Better up/down pop up menu
 vim.keymap.set("c", "<down>", function()

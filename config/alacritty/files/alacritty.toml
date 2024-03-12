@@ -1,6 +1,6 @@
 # Configuration docs: https://alacritty.org/config-alacritty.html
 
-import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/themes/tokyonight_night.toml"]
 
 [env]
 # (this is required in order to correctly display the colors in tmux)

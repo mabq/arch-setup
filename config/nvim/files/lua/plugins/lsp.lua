@@ -1,23 +1,33 @@
--- If you experience any errors, run `:checkhealth` for more info.
+-- NOTE:
+-- Use `opts = {}` to force loading a plugin on startup.
+-- Use `:checkhealth` to check for errors
+
 return {
-	{ -- LSP
+	{
+		-- LSP
 		enabled = true,
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for neovim
-			"williamboman/mason.nvim",
+			{
+				"williamboman/mason.nvim",
+				config = function()
+					vim.keymap.set("n", "<leader>om", "<cmd>Mason<cr>", { desc = "Open [M]ason" })
+				end,
+			},
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
-			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			-- LSP status updates
 			{ "j-hui/fidget.nvim", opts = {} },
-			-- { "folke/neodev.nvim", opts = {} },
+
+			-- Automatically configures lua-language-server for your Neovim config, Neovim runtime and plugin directories
+			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
 			-- Brief Aside: **What is LSP?**
 			--
-			-- LSP is an acronym you've probably heard, but might not understand what it is.
+			-- LSP is an acronym you've probably heard, but might not understand 'what it is.
 			--
 			-- LSP stands for Language Server Protocol. It's a protocol that helps editors
 			-- and language tooling communicate in a standardized fashion.
@@ -45,8 +55,9 @@ return {
 			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`)
 			--    this function will be executed to configure the current buffer.
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+				group = vim.api.nvim_create_augroup("mabq-lsp-attach", { clear = true }),
 				callback = function(event)
+					--
 					-- NOTE: Remember that lua is a real programming language, and as such it is possible
 					-- to define small helper and utility functions so you don't have to repeat yourself
 					-- many times.
@@ -54,53 +65,54 @@ return {
 					-- In this case, we create a function that lets us more easily define mappings specific
 					-- for LSP related items. It sets the mode, buffer and description for us each time.
 					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
 					end
 
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-T>.
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					map("<leader>ld", require("telescope.builtin").lsp_definitions, "LSP: go to [d]efinition")
 
 					-- Find references for the word under your cursor.
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+					map("<leader>lr", require("telescope.builtin").lsp_references, "LSP: go to [r]eferences")
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+					map("<leader>li", require("telescope.builtin").lsp_implementations, "LSP: go to [i]mplementation")
 
 					-- Jump to the type of the word under your cursor.
 					--  Useful when you're not sure what type a variable is and you want to see
 					--  the definition of its *type*, not where it was *defined*.
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+					-- map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+					map("<leader>lt", require("telescope.builtin").lsp_type_definitions, "LSP: go to [t]ype definition")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "LSP: document [s]ymbols")
 
 					-- Fuzzy find all the symbols in your current workspace
 					--  Similar to document symbols, except searches over your whole project.
 					map(
-						"<leader>ws",
+						"<leader>lws",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
+						"LSP: [w]orkspace [s]ymbols"
 					)
 
 					-- Rename the variable under your cursor
 					--  Most Language Servers support renaming across files, etc.
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("<leader>ln", vim.lsp.buf.rename, "LSP: re[n]ame")
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-					-- Opens a popup that displays documentation about the word under your cursor
-					--  See `:help K` for why this keymap
-					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					map("<leader>lca", vim.lsp.buf.code_action, "LSP: [c]ode [a]ction")
 
 					--  WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("<leader>lD", vim.lsp.buf.declaration, "LSP: go to [D]eclaration")
+
+					-- Opens a popup that displays documentation about the word under your cursor
+					--  See `:help K` for why this keymap
+					map("K", vim.lsp.buf.hover, "LSP: Hover Documentation")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -139,45 +151,16 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
+				lua_ls = {},
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				-- tsserver = {},
-				--
 
-				lua_ls = {
-					-- cmd = {...},
-					-- filetypes { ...},
-					-- capabilities = {},
-					settings = {
-						Lua = {
-							runtime = { version = "LuaJIT" },
-							workspace = {
-								checkThirdParty = false,
-								-- Tells lua_ls where to find all the Lua files that you have loaded
-								-- for your neovim configuration.
-								library = {
-									"${3rd}/luv/library",
-									unpack(vim.api.nvim_get_runtime_file("", true)),
-								},
-								-- If lua_ls is really slow on your computer, you can try this instead:
-								-- library = { vim.env.VIMRUNTIME },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
-						},
-					},
-				},
+				-- Some languages (like typescript) have entire language plugins that can be useful: https://github.com/pmizio/typescript-tools.nvim
+				-- But for many setups, the LSP (`tsserver`) will work just fine
+				tsserver = {},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -193,6 +176,7 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
+				"prettierd", -- used to format js, json, css, html
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -217,12 +201,12 @@ return {
 		cmd = { "ConformInfo" },
 		keys = {
 			{
-				"<leader>fb",
+				"<leader>lf",
 				function()
 					require("conform").format({ async = true, lsp_fallback = true })
 				end,
 				mode = "",
-				desc = "Format buffer",
+				desc = "LSP: [f]ormat",
 			},
 		},
 		opts = {
@@ -232,9 +216,11 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
+				-- lsp formatting capabilities will only be used when these tools are not found
 				lua = { "stylua" },
 				-- python = { "isort", "black" },
-				-- javascript = { { "prettierd", "prettier" } },
+				html = { "prettierd" },
+				css = { "prettierd" },
 				javascript = { "prettierd" },
 				json = { "prettierd" },
 			},
@@ -255,32 +241,36 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
+			-- Snippet engine and its associated nvim-cmp source
 			{
 				"L3MON4D3/LuaSnip",
 				build = (function()
 					-- Build Step is needed for regex support in snippets
-					-- This step is not supported in many windows environments
-					-- Remove the below condition to re-enable on windows
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
 					return "make install_jsregexp"
 				end)(),
 			},
 			"saadparwaiz1/cmp_luasnip",
 
-			-- Adds other completion capabilities.
-			--  nvim-cmp does not ship with all sources by default. They are split
-			--  into multiple repos for maintenance purposes.
+			-- Other completion capabilities.
+			--  nvim-cmp does not ship with all sources by default. They are split into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
 
-			-- If you want to add a bunch of pre-configured snippets,
-			--    you can use this plugin to help you. It even has snippets
-			--    for various frameworks/libraries/etc. but you will have to
-			--    set up the ones that are useful for you.
-			-- 'rafamadriz/friendly-snippets',
+			-- If you want to add a bunch of pre-configured snippets, you can use this plugin to help you.
+			--  It even has snippets for various frameworks/libraries/etc., but you will have to set up the ones that are useful for you.
+			{
+				"rafamadriz/friendly-snippets",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end,
+			},
+
+			-- formatting lsp completion items
+			"onsails/lspkind.nvim",
+
+			-- emojis
+			"hrsh7th/cmp-emoji",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -288,17 +278,12 @@ return {
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
 
+			local lspkind = require("lspkind")
+
 			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
 				completion = { completeopt = "menu,menuone,noinsert" },
 
-				-- For an understanding of why these mappings were
-				-- chosen, you will need to read `:help ins-completion`
-				--
+				-- For an understanding of why these mappings were chosen, you will need to read `:help ins-completion`
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
 				mapping = cmp.mapping.preset.insert({
 					-- Select the [n]ext item
@@ -315,14 +300,8 @@ return {
 					--  Generally you don't need this, because nvim-cmp will display
 					--  completions whenever it has completion options available.
 					-- ['<C-Space>'] = cmp.mapping.complete {},
-					["<C-.>"] = cmp.mapping.complete({}), -- TODO
+					-- ["<C-Space>"] = cmp.mapping.complete({}), -- TODO
 
-					-- Think of <c-l> as moving to the right of your snippet expansion.
-					--  So if you have a snippet that's like:
-					--  function $name($args)
-					--    $body
-					--  end
-					--
 					-- <c-l> will move you to the right of each of the expansion locations.
 					-- <c-h> is similar, except moving you backwards.
 					["<C-l>"] = cmp.mapping(function()
@@ -337,9 +316,33 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = {
+					-- In this same order completions will appear.
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "luasnip" },
+					{ name = "buffer", keyword_lenght = 5 }, -- start showing options only when X characters are typed
+					{ name = "emoji" },
+				},
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
+				formatting = {
+					-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
+					format = lspkind.cmp_format({
+						mode = "symbol", -- show only symbol annotations
+						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						-- can also be a function to dynamically calculate max width such as
+						-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+						-- The function below will be called before any actual modifications from lspkind
+						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+						-- before = function(entry, vim_item)
+						-- 	return vim_item
+						-- end,
+					}),
 				},
 			})
 		end,

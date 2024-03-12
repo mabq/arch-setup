@@ -10,7 +10,7 @@
 
 preload = [
     # disable status line
-	"~/.config/yazi/disable-status-line.lua",
+	"~/.config/yazi/init.lua",
 ]
 
 # ------------------------------------------------------------------------------

@@ -70,12 +70,13 @@ return {
 			pcall(require("telescope").load_extension, "ui-select")
 
 			-- See `:help telescope.builtin`
+			-- NOTE: Some
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [T]elescope" })
+			vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "[S]earch [S]tring" })
 			vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "[S]earch [L]ive grep" })
 			vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[S]earch [G]it files" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" }) -- use `Ctrl-q` to send the list to  quickfix
@@ -106,13 +107,5 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 		end,
-	},
-	{
-		-- Emoji (replaced with a system-level tool)
-		enabled = true,
-		"xiyaowong/telescope-emoji.nvim",
-		keys = {
-			{ "<leader>se", "<cmd>Telescope emoji<CR>", mode = { "n" }, desc = "[S]earch emoji" }, -- only load when required
-		},
 	},
 }

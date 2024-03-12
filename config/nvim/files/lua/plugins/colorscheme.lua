@@ -1,13 +1,38 @@
--- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+-- Use `:Telescope colorscheme` to fuzzy find colorschemes
 return {
 	{
 		enabled = true,
+		"folke/tokyonight.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			vim.cmd.colorscheme("tokyonight-night")
+		end,
+	},
+	{
+		enabled = false,
 		"catppuccin/nvim",
-		name = "catpuccin", -- otherwise shown as `nvim`
+		name = "catppuccin", -- otherwise shown as `nvim`
 		priority = 1000, -- recommended by lazy docs
-		-- config = function()
-		-- 	vim.cmd.colorscheme("catppuccin-mocha")
-		-- end,
+		config = function()
+			require("catppuccin").setup({
+				-- have to enable integrations manually, see https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					treesitter = true,
+					mini = {
+						enabled = true,
+						indentscope_color = "",
+					},
+					fidget = true,
+					mason = true,
+					lsp_trouble = true,
+					which_key = true,
+				},
+			})
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end,
 	},
 	{
 		enabled = false,
@@ -26,15 +51,6 @@ return {
 				},
 			})
 			vim.cmd.colorscheme("rose-pine")
-		end,
-	},
-	{
-		enabled = true,
-		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			vim.cmd.colorscheme("tokyonight-night")
 		end,
 	},
 }
