@@ -78,10 +78,12 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- where to store undo fi
 -- vim.opt.formatexpr = "" -- expression used with "gq" command
 
 -- 13. Tabs and indenting:
-vim.opt.tabstop = 4 -- number of spaces that a <Tab> in the file counts for
-vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
-vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
-vim.opt.expandtab = false -- use spaces when <Tab> is inserted
+-- (these options can be overwritten by the `Sleuth` plugin)
+local tabwidth = 2
+vim.opt.tabstop = tabwidth -- number of spaces that a <Tab> in the file counts for
+vim.opt.shiftwidth = tabwidth -- number of spaces to use for (auto)indent step
+vim.opt.softtabstop = tabwidth -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
+vim.opt.expandtab = true -- use spaces when <Tab> is inserted ()
 vim.opt.smartindent = true -- smart auto indenting for C programs
 vim.opt.shiftround = true -- round to 'shiftwidth' for "<<" and ">>"
 

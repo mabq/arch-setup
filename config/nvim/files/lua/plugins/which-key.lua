@@ -8,8 +8,14 @@ return {
 		config = function() -- this is the function that runs, AFTER loading
 			require("which-key").setup()
 
-			-- Document existing key chains
+			-- To show all mappings run `:WhichKey`
 			require("which-key").register({
+				["]"] = { name = "+Next", _ = "which_key_ignore" },
+				["["] = { name = "+Previous", _ = "which_key_ignore" },
+				["g"] = { name = "+Go", _ = "which_key_ignore" },
+				["z"] = { name = "+Fold, spell, move and more", _ = "which_key_ignore" },
+				["<leader>"] = { name = "+(LeaderKey)", _ = "which_key_ignore" },
+				["<leader>f"] = { name = "Flash", _ = "which_key_ignore" },
 				["<leader>h"] = { name = "Harpoon", _ = "which_key_ignore" },
 				["<leader>l"] = { name = "LSP", _ = "which_key_ignore" },
 				["<leader>o"] = { name = "Open", _ = "which_key_ignore" },

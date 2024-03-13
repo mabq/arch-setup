@@ -20,14 +20,23 @@ return {
 				integrations = {
 					cmp = true,
 					gitsigns = true,
-					treesitter = true,
-					mini = {
-						enabled = true,
-						indentscope_color = "",
-					},
-					fidget = true,
-					mason = true,
 					lsp_trouble = true,
+					mason = true,
+					markdown = true,
+					mini = true,
+					native_lsp = {
+						enabled = true,
+						underlines = {
+							errors = { "undercurl" },
+							hints = { "undercurl" },
+							warnings = { "undercurl" },
+							information = { "undercurl" },
+						},
+					},
+					semantic_tokens = true,
+					telescope = true,
+					treesitter = true,
+					treesitter_context = true,
 					which_key = true,
 				},
 			})

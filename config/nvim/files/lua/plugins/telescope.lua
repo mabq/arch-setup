@@ -11,17 +11,23 @@ return {
 				-- Improve sorting performance (native C)
 				--  if encountering errors, see telescope-fzf-native README for install instructions
 				"nvim-telescope/telescope-fzf-native.nvim",
-
 				-- `build` is used to run some command when the plugin is installed/updated.
 				-- This is only run then, not every time Neovim starts up.
 				build = "make",
-
-				-- `cond` is a condition used to determine whether this plugin should be installed and loaded.
 				cond = function()
+					-- condition used to determine whether this plugin should be installed and loaded
 					return vim.fn.executable("make") == 1
 				end,
+				config = function()
+					require("telescope").load_extension("fzf")
+				end,
 			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{
+				"nvim-telescope/telescope-ui-select.nvim",
+				config = function()
+					require("telescope").load_extension("ui-select")
+				end,
+			},
 
 			-- Useful for getting pretty icons, but requires special font.
 			--  If you already have a Nerd Font, or terminal set up with fallback fonts you can enable this
@@ -48,17 +54,15 @@ return {
 			-- do as well as how to actually do it!
 
 			-- See `:help telescope` and `:help telescope.setup()`
-			local actions = require("telescope.actions")
 			require("telescope").setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				defaults = {
 					mappings = {
-						i = { ["<esc>"] = actions.close }, -- do not enter normal-like mode, just exit on esc
+						i = { ["<esc>"] = require("telescope.actions").close }, -- do not enter normal-like mode, just exit on esc
 						-- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 					},
 				},
-				-- },
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
@@ -66,10 +70,6 @@ return {
 					},
 				},
 			})
-
-			-- Enable telescope extensions, if they are installed
-			pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
 
 			-- See `:help telescope.builtin`
 			-- NOTE: Some

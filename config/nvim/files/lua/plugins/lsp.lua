@@ -57,7 +57,6 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("mabq-lsp-attach", { clear = true }),
 				callback = function(event)
-					--
 					-- NOTE: Remember that lua is a real programming language, and as such it is possible
 					-- to define small helper and utility functions so you don't have to repeat yourself
 					-- many times.
@@ -78,7 +77,7 @@ return {
 					map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp)")
 
 					-- Find references for the word under your cursor.
-					map("<leader>lr", require("telescope.builtin").lsp_references, "Go to references (lsp)")
+					-- map("<leader>lr", require("telescope.builtin").lsp_references, "Go to references (lsp)") -- replaced with Trouble
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
@@ -219,12 +218,12 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				-- lsp formatting capabilities will only be used when these tools are not found
+				-- Important! Use a sub-list to run only the first available formatter.
 				lua = { "stylua" },
 				-- python = { "isort", "black" },
 				html = { "prettierd" },
 				css = { "prettierd" },
-				javascript = { "prettierd" },
+				javascript = { { "prettierd", "biome" } },
 				json = { "prettierd" },
 			},
 			-- -- Customize formatters

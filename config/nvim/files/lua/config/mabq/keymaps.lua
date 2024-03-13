@@ -6,29 +6,30 @@
 -- Clear search with <esc>
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Down" })
+vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Down" })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Up" })
+vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Up" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Page down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Page up (centered)" })
 
 -- Better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
 
 -- Better join line
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join line" })
 
 -- Better next/previous match
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next match (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous match (centered)" })
 
 -- Yank/Delete to clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>d", [["+d]], { desc = "Delete to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank (to clipboard)" })
+vim.keymap.set({ "n", "v" }, "<leader>d", [["+d]], { desc = "Delete (to clipboard)" })
 
 -- Paste without yanking
-vim.keymap.set("x", "<leader>p", [["_c<Esc>p]], { desc = "Paste without yanking" }) -- [["_dP]]
+vim.keymap.set("x", "<leader>p", [["_c<Esc>p]], { desc = "Paste (without affecting register)" }) -- [["_dP]]
 
 -- Better up/down pop up menu
 vim.keymap.set("c", "<down>", function()
@@ -47,9 +48,8 @@ end, { expr = true })
 -- Toggle options
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<CR>", { desc = "Toggle spelling" })
-vim.keymap.set("n", "<leader>tL", "<cmd>set relativenumber!<CR>", { desc = "Toggle relative line numbers" })
 vim.keymap.set("n", "<leader>tl", "<cmd>set number!<CR>", { desc = "Toggle line numbers" })
-vim.keymap.set("n", "<leader>ti", vim.show_pos, { desc = "Toggle highlight symbol under cursor" })
+vim.keymap.set("n", "<leader>tL", "<cmd>set relativenumber!<CR>", { desc = "Toggle relative line numbers" })
 
 -- Move to window using the <ctrl> hjkl keys (use default keybindings, these are now used by Harpoon)
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
@@ -64,12 +64,12 @@ vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decreas
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move lines
-vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-vim.keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+vim.keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
+vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 
 -- Keywordprg
 -- vim.keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
