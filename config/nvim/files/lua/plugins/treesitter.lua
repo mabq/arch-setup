@@ -8,14 +8,15 @@ return {
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
-					-- A list of parser names, or "all" (the first five listed parsers should always be installed)
+					-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
 					"bash",
-					"html",
-					"markdown",
 					"c",
 					"css",
+					"html",
+					"html",
 					"javascript",
 					"lua",
+					"markdown",
 					"rust",
 					"typescript",
 					"vim",

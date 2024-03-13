@@ -1,46 +1,17 @@
--- https://github.com/folke/trouble.nvim
 return {
 	{
 		enabled = true,
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- opts = {},
-		keys = { -- launches only via keybindings
-			{
-				"<leader>xx",
-				"<cmd>TroubleToggle<cr>",
-				desc = "Trouble toggle",
-			},
-			{
-				"<leader>xw",
-				"<cmd>TroubleToggle workspace_diagnostics<cr>", -- workspace diagnostics from the builtin LSP client
-				desc = "Trouble workspace",
-			},
-			{
-				"<leader>xb",
-				"<cmd>TroubleToggle document_diagnostics<cr>", -- document diagnostics from the builtin LSP client
-				desc = "Trouble buffer",
-			},
-			{
-				"<leader>xr",
-				"<cmd>TroubleToggle lsp_references<cr>", -- references of the word under the cursor from the builtin LSP client
-				desc = "Trouble references",
-			},
-			{
-				"<leader>xd",
-				"<cmd>TroubleToggle lsp_definitions<cr>", -- definitions of the word under the cursor from the builtin LSP client
-				desc = "Trouble definitions",
-			},
-			{
-				"<leader>xq",
-				"<cmd>TroubleToggle quickfix<cr>", -- quickfix items
-				desc = "Trouble quickfix",
-			},
-			{
-				"<leader>xl",
-				"<cmd>TroubleToggle loclist<cr>", -- items from the window's location list
-				desc = "Trouble loclist",
-			},
+		keys = {
+			-- { "<leader>ld", "<cmd>TroubleToggle lsp_definitions<cr>", desc = "Go to definitions (trouble)" }, -- can't go back with `Ctrl-t` (only `Ctrl-o`), use telescope for now
+			-- { "<leader>lr", "<cmd>TroubleToggle lsp_references<cr>", desc = "Go to references (trouble)" }, -- can't go back with `Ctrl-t` (only `Ctrl-o`), use telescope for now
+			{ "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Trouble toggle" },
+			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble workspace" }, -- workspace diagnostics from the builtin LSP client
+			{ "<leader>xb", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble buffer" }, -- document diagnostics from the builtin LSP client
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix" }, -- quickfix items
+			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble loclist" }, -- items from the window's location list
 		},
 	},
 }

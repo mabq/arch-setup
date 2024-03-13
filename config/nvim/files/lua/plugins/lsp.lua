@@ -4,7 +4,7 @@
 
 return {
 	{
-		-- LSP
+		-- LSP -----------------------------------------------------------------
 		enabled = true,
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -12,7 +12,7 @@ return {
 			{
 				"williamboman/mason.nvim",
 				config = function()
-					vim.keymap.set("n", "<leader>om", "<cmd>Mason<cr>", { desc = "Open mason" })
+					vim.keymap.set("n", "<leader>om", "<cmd>Mason<cr>", { desc = "Open Mason" })
 				end,
 			},
 			"williamboman/mason-lspconfig.nvim",
@@ -73,7 +73,7 @@ return {
 					--  To jump back, press <C-T>.
 					map("<leader>ld", require("telescope.builtin").lsp_definitions, "Go to definition (lsp)")
 
-					--  WARN: This is not Goto Definition, this is Goto Declaration.
+					--  NOTE: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header
 					map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp)")
 
@@ -92,14 +92,14 @@ return {
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "Document symbols (lsp)")
+					map("<leader>lsd", require("telescope.builtin").lsp_document_symbols, "Symbols document (lsp)")
 
 					-- Fuzzy find all the symbols in your current workspace
 					--  Similar to document symbols, except searches over your whole project.
 					map(
-						"<leader>lw",
+						"<leader>lsw",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"Workspace symbols (lsp)"
+						"Symbols workspace (lsp)"
 					)
 
 					-- Rename the variable under your cursor
@@ -151,16 +151,18 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
+				-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				lua_ls = {},
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+				tsserver = {}, -- check as an alternative https://github.com/pmizio/typescript-tools.nvim
 
-				-- Some languages (like typescript) have entire language plugins that can be useful: https://github.com/pmizio/typescript-tools.nvim
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				tsserver = {},
+				-- Formatters
+				stylua = {}, -- used to format lua
+				-- biome = {}, -- used to format js, json, css, html
+				prettierd = {}, -- used to format js, json, css, html
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -174,10 +176,9 @@ return {
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format lua code
-				"prettierd", -- used to format js, json, css, html
-			})
+			-- vim.list_extend(ensure_installed, {
+			-- 	"stylua", -- Used to format lua code
+			-- })
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
@@ -194,7 +195,9 @@ return {
 			})
 		end,
 	},
-	{ -- Autoformat
+	{
+		-- Formatting ----------------------------------------------------------
+		-- check `none-ls` as an alternative: https://www.youtube.com/watch?v=SxuwQJ0JHMU&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&index=5
 		enabled = true,
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
@@ -236,7 +239,8 @@ return {
 		--   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		-- end,
 	},
-	{ -- Autocompletion
+	{
+		-- Autocompletion ------------------------------------------------------
 		enabled = true,
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",

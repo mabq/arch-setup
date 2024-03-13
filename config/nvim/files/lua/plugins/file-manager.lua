@@ -21,8 +21,8 @@ return {
 			-- Customise UI. The below options are the default
 			ui = {
 				border = "rounded",
-				height = 0.85,
-				width = 0.95,
+				height = 0.8,
+				width = 0.9,
 				x = 0.5,
 				y = 0.5,
 			},
