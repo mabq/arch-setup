@@ -11,7 +11,6 @@ return {
 	config = function()
 		require("aerial").setup({
 			backends = { "lsp", "treesitter", "markdown", "man" },
-			default_direction = "prefer_left",
 			on_attach = function(bufnr)
 				-- Jump forwards/backwards with '{' and '}'
 				vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Aerial previous" })
