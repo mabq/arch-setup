@@ -48,8 +48,8 @@ end, { expr = true })
 -- Toggle options
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 vim.keymap.set("n", "<leader>ts", "<cmd>set spell!<CR>", { desc = "Toggle spelling" })
-vim.keymap.set("n", "<leader>tl", "<cmd>set number!<CR>", { desc = "Toggle line numbers" })
-vim.keymap.set("n", "<leader>tL", "<cmd>set relativenumber!<CR>", { desc = "Toggle relative line numbers" })
+vim.keymap.set("n", "<leader>tln", "<cmd>set number!<CR>", { desc = "Toggle line numbers" })
+vim.keymap.set("n", "<leader>tlr", "<cmd>set relativenumber!<CR>", { desc = "Toggle relative line numbers" })
 
 -- Move to window using the <ctrl> hjkl keys (use default keybindings, these are now used by Harpoon)
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })

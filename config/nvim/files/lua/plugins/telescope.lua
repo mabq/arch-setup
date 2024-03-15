@@ -15,19 +15,11 @@ return {
 				-- This is only run then, not every time Neovim starts up.
 				build = "make",
 				cond = function()
-					-- condition used to determine whether this plugin should be installed and loaded
+					-- condition used to determine whether this plugin should be installed and loaded.
 					return vim.fn.executable("make") == 1
 				end,
-				config = function()
-					require("telescope").load_extension("fzf")
-				end,
 			},
-			{
-				"nvim-telescope/telescope-ui-select.nvim",
-				config = function()
-					require("telescope").load_extension("ui-select")
-				end,
-			},
+			{ "nvim-telescope/telescope-ui-select.nvim" },
 
 			-- Useful for getting pretty icons, but requires special font.
 			--  If you already have a Nerd Font, or terminal set up with fallback fonts you can enable this
@@ -63,6 +55,7 @@ return {
 						-- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 					},
 				},
+				-- },
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
@@ -70,6 +63,10 @@ return {
 					},
 				},
 			})
+
+			-- Enable telescope extensions, if they are installed
+			pcall(require("telescope").load_extension, "fzf")
+			pcall(require("telescope").load_extension, "ui-select")
 
 			-- See `:help telescope.builtin`
 			-- NOTE: Some

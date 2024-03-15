@@ -1,5 +1,6 @@
 return {
 	{
+		enabled = true,
 		"rolv-apneseth/tfm.nvim",
 		lazy = false,
 		opts = {

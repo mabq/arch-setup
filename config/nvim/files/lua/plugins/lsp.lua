@@ -5,6 +5,7 @@
 return {
 	{
 		-- LSP -----------------------------------------------------------------
+
 		enabled = true,
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -57,6 +58,11 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("mabq-lsp-attach", { clear = true }),
 				callback = function(event)
+					-- for k, v in pairs(lsp_clients) do
+					-- if v == value then
+					-- 	return true
+					-- end
+					-- end
 					-- NOTE: Remember that lua is a real programming language, and as such it is possible
 					-- to define small helper and utility functions so you don't have to repeat yourself
 					-- many times.
@@ -152,16 +158,18 @@ return {
 			local servers = {
 				-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				lua_ls = {},
+				tsserver = {}, -- check as an alternative https://github.com/pmizio/typescript-tools.nvim
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
-				tsserver = {}, -- check as an alternative https://github.com/pmizio/typescript-tools.nvim
 
 				-- Formatters
-				stylua = {}, -- used to format lua
-				-- biome = {}, -- used to format js, json, css, html
-				prettierd = {}, -- used to format js, json, css, html
+				stylua = {}, -- lua formatter
+				prettierd = {}, -- js, json, css, html formatter
+
+				-- Linters
+				eslint_d = {}, -- js linter
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -182,6 +190,7 @@ return {
 
 			require("mason-lspconfig").setup({
 				handlers = {
+					-- this function is automatically called for each server
 					function(server_name)
 						local server = servers[server_name] or {}
 						-- This handles overriding only values explicitly passed
@@ -194,52 +203,50 @@ return {
 			})
 		end,
 	},
+
 	{
 		-- Formatting ----------------------------------------------------------
-		-- check `none-ls` as an alternative: https://www.youtube.com/watch?v=SxuwQJ0JHMU&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&index=5
+
 		enabled = true,
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
+		lazy = true,
 		cmd = { "ConformInfo" },
+		event = { "BufWritePre" },
 		keys = {
 			{
+				mode = { "n" },
 				"<leader>lf",
 				function()
-					require("conform").format({ async = true, lsp_fallback = true })
+					require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
 				end,
-				mode = "",
-				desc = "Format buffer (lsp)",
+				desc = "Format buffer (lsp + conform)",
 			},
 		},
 		opts = {
-			-- notify_on_error = false,
 			format_on_save = {
-				timeout_ms = 500,
+				timeout_ms = 1000,
 				lsp_fallback = true,
+				async = false,
 			},
 			formatters_by_ft = {
-				-- Important! Use a sub-list to run only the first available formatter.
+				-- Important! Use a sub-list to run only the first available formatter
+				-- Available formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
 				lua = { "stylua" },
-				-- python = { "isort", "black" },
-				html = { "prettierd" },
-				css = { "prettierd" },
 				javascript = { { "prettierd", "biome" } },
+				typescript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
 				json = { "prettierd" },
+				yaml = { "prettierd" },
 			},
-			-- -- Customize formatters
-			-- formatters = {
-			--   shfmt = {
-			--     prepend_args = { "-i", "2" },
-			--   },
-			-- },
 		},
-		-- init = function()
-		--   -- If you want the formatexpr, here is the place to set it
-		--   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		-- end,
 	},
+
 	{
 		-- Autocompletion ------------------------------------------------------
+
 		enabled = true,
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
@@ -348,6 +355,34 @@ return {
 					}),
 				},
 			})
+		end,
+	},
+
+	{
+		-- Linting -----------------------------------------------------------------
+
+		enabled = false,
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("lint").linters_by_ft = {
+				-- Available linters: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
+				javascript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				markdown = { "vale" },
+			}
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = vim.api.nvim_create_augroup("mabq_lint", { clear = true }),
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
+
+			vim.keymap.set("n", "<leader>tli", function()
+				require("lint").try_lint()
+			end, { desc = "Toogle linting (nvim-lint)" })
 		end,
 	},
 }
