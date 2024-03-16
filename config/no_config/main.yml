@@ -202,7 +202,7 @@
               ignore_errors: true
 
             - name: no-config - Install ttf-apple-emoji
-              when: not ttfappleemoji.stat.exist
+              when: not ttfappleemoji.stat.exists
               # Emoji font
               ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"
 
