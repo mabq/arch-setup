@@ -1,8 +1,6 @@
 - tags: nodejs
   block:
-
     # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n?tab=readme-ov-file#installing-nodejs-versions)
-
     - name: Install `n` node version manage
       block:
         - name: nodejs - Check if `n` is already installed
@@ -16,5 +14,4 @@
           # everything after `--` are arguments passed to the script
           # `-y` assumes yes as the reply to all prompts (run unattended)
           # `-n` suppresses updating of the relevant shell initialization file
-          ansible.builtin.shell: 'curl -L https://bit.ly/n-install | bash -s -- -y -n'
-
+          ansible.builtin.shell: "curl -L https://bit.ly/n-install | bash -s -- -y -n"

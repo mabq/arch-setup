@@ -14,7 +14,8 @@ alias mkdir='mkdir -p'
 # Shortcuts/renames:
 alias cpuinfo='bat /proc/cpuinfo'
 alias drivers='lspci -k'
-alias e='nvim .'
+alias v='nvim .' # (do not use `n`, it is used ny the n node manager)
+alias e='ya' # explorer
 alias fat32='sudo mkfs.fat -F 32' # format external disk to work on any OS
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
 alias fonts='fc-list : family | sort | uniq | fzf'
