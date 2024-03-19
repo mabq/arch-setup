@@ -17,7 +17,7 @@ return {
 			-- Custom keybindings only applied within the TFM buffer
 			-- Default: {}
 			keybindings = {
-				-- ["<ESC>"] = "q",
+				["<ESC>"] = "q",
 			},
 			-- Customise UI. The below options are the default
 			ui = {
