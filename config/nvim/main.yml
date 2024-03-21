@@ -1,38 +1,47 @@
 - tags: nvim
   block:
-
     - name: nvim - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - neovim      # Fork of Vim aiming to improve user experience, plugins, and GUIs
-          - ripgrep     # A search tool that combines the usability of ag with the raw speed of grep (required by telescope)
-          - fd          # Simple, fast and user-friendly alternative to find (required by telescope)
-
+          - neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
+          - ripgrep # A search tool that combines the usability of ag with the raw speed of grep (required by telescope)
+          - fd # Simple, fast and user-friendly alternative to find (required by telescope)
 
     - name: nvim - Create config files
       block:
-      - name: nvim - Create directory
-        ansible.builtin.file:
-          path: "{{ home }}/.config/nvim"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: '700'
-          state: directory
+        - name: nvim - Create directory
+          ansible.builtin.file:
+            path: "{{ home }}/.config/nvim"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+        - name: nvim - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/nvim/files/{{ item.name }}"
+            path: "{{ home }}/.config/nvim/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "{{ item.mode }}"
+            state: "link"
+          loop:
+            - { name: "init.lua", mode: "600" }
+            # Link the entire `lua` and `spell` directories, that way you won't
+            # need to edit this file everytime you create a new plugin file.
+            - { name: "lua", mode: "700" }
+            - { name: "spell", mode: "700" }
 
-      - name: nvim - Create links
-        ansible.builtin.file:
-          src: "{{ repo_dir }}/config/nvim/files/{{ item.name }}"
-          path: "{{ home }}/.config/nvim/{{ item.name }}"
-          owner: "{{ user }}"
-          group: "{{ user }}"
-          mode: "{{ item.mode }}"
-          state: "link"
-        loop:
-          - { name: 'init.lua', mode: '600' }
-          # Link the entire `lua` and `spell` directories, that way you won't
-          # need to edit this file everytime you create a new plugin file.
-          - { name: 'lua', mode: '700' }
-          - { name: 'spell', mode: '700' }
-
+    - name: Install the "styled-components" required packages globally
+      # https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#-styled-components-support
+      # https://styled-components.com/docs/basics#installation
+      block:
+        - name: Install "@styled/typescript-styled-plugin" globally
+          community.general.npm:
+            name: "@styled/typescript-styled-plugin"
+            global: true
+        - name: Install "@styled/typescript-styled-plugin" globally
+          community.general.npm:
+            name: "@styled/typescript-styled-plugin"
+            global: true

@@ -2,10 +2,103 @@
 -- Use `opts = {}` to force loading a plugin on startup.
 -- Use `:checkhealth` to check for errors
 
+local servers_to_install = {
+	-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
+	lua_ls = {},
+	tsserver = {}, -- required by typescript-tools.nvim
+	-- clangd = {},
+	-- gopls = {},
+	-- pyright = {},
+	-- rust_analyzer = {},
+
+	-- Formatters
+	stylua = {}, -- lua formatter
+	prettierd = {}, -- json, css, html formatter
+
+	-- Linters
+	eslint_d = {}, -- js linter
+}
+
+local onLspAttach = function(event)
+	-- for k, v in pairs(lsp_clients) do
+	-- if v == value then
+	-- 	return true
+	-- end
+	-- end
+	-- NOTE: Remember that lua is a real programming language, and as such it is possible
+	-- to define small helper and utility functions so you don't have to repeat yourself
+	-- many times.
+	--
+	-- In this case, we create a function that lets us more easily define mappings specific
+	-- for LSP related items. It sets the mode, buffer and description for us each time.
+	local map = function(keys, func, desc)
+		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
+	end
+
+	-- Jump to the definition of the word under your cursor.
+	--  This is where a variable was first declared, or where a function is defined, etc.
+	--  To jump back, press <C-T>.
+	map("<leader>ld", require("telescope.builtin").lsp_definitions, "Go to definition (lsp)")
+
+	--  NOTE: This is not Goto Definition, this is Goto Declaration.
+	--  For example, in C this would take you to the header
+	map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp)")
+
+	-- Find references for the word under your cursor.
+	-- map("<leader>lr", require("telescope.builtin").lsp_references, "Go to references (lsp)") -- replaced with Trouble
+
+	-- Jump to the implementation of the word under your cursor.
+	--  Useful when your language has ways of declaring types without an actual implementation.
+	map("<leader>li", require("telescope.builtin").lsp_implementations, "Go to implementation (lsp)")
+
+	-- Jump to the type of the word under your cursor.
+	--  Useful when you're not sure what type a variable is and you want to see
+	--  the definition of its *type*, not where it was *defined*.
+	-- map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+	map("<leader>lt", require("telescope.builtin").lsp_type_definitions, "Go to type definition (lsp)")
+
+	-- Fuzzy find all the symbols in your current document.
+	--  Symbols are things like variables, functions, types, etc.
+	map("<leader>lsd", require("telescope.builtin").lsp_document_symbols, "Symbols document (lsp)")
+
+	-- Fuzzy find all the symbols in your current workspace
+	--  Similar to document symbols, except searches over your whole project.
+	map("<leader>lsw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Symbols workspace (lsp)")
+
+	-- Rename the variable under your cursor
+	--  Most Language Servers support renaming across files, etc.
+	map("<leader>ln", vim.lsp.buf.rename, "Rename symbol (lsp)")
+
+	-- Execute a code action, usually your cursor needs to be on top of an error
+	-- or a suggestion from your LSP for this to activate.
+	map("<leader>la", vim.lsp.buf.code_action, "Code action (lsp)")
+
+	-- Opens a popup that displays documentation about the word under your cursor
+	--  See `:help K` for why this keymap
+	map("K", vim.lsp.buf.hover, "Hover documentation (lsp)")
+
+	-- The following two autocommands are used to highlight references of the
+	-- word under your cursor when your cursor rests there for a little while.
+	--    See `:help CursorHold` for information about when this is executed
+	--
+	-- When you move your cursor, the highlights will be cleared (the second autocommand).
+	-- local client = vim.lsp.get_client_by_id(event.data.client_id)
+	-- if client and client.server_capabilities.documentHighlightProvider then
+	-- 	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+	-- 		buffer = event.buf,
+	-- 		callback = vim.lsp.buf.document_highlight,
+	-- 	})
+	--
+	-- 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+	-- 		buffer = event.buf,
+	-- 		callback = vim.lsp.buf.clear_references,
+	-- 	})
+	-- end
+end
+
 return {
 	{
 		-- LSP -----------------------------------------------------------------
-
 		enabled = true,
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -24,6 +117,26 @@ return {
 
 			-- Automatically configures lua-language-server for your Neovim config, Neovim runtime and plugin directories
 			{ "folke/neodev.nvim", opts = {} },
+
+			-- Replace tsserver with typescript-tools
+			{
+				"pmizio/typescript-tools.nvim",
+				dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+				-- opts = {},
+				-- the keybinds work without passing a function to `on_attach`
+				config = function()
+					require("typescript-tools").setup({
+						settings = {
+							tsserver_plugins = {
+								-- for TypeScript v4.9+
+								"@styled/typescript-styled-plugin", -- need to install this plugin globally (see the ansible file)
+								-- or for older TypeScript versions
+								-- "typescript-styled-plugin",
+							},
+						},
+					})
+				end,
+			},
 		},
 		config = function()
 			-- Brief Aside: **What is LSP?**
@@ -57,86 +170,7 @@ return {
 			--    this function will be executed to configure the current buffer.
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("mabq-lsp-attach", { clear = true }),
-				callback = function(event)
-					-- for k, v in pairs(lsp_clients) do
-					-- if v == value then
-					-- 	return true
-					-- end
-					-- end
-					-- NOTE: Remember that lua is a real programming language, and as such it is possible
-					-- to define small helper and utility functions so you don't have to repeat yourself
-					-- many times.
-					--
-					-- In this case, we create a function that lets us more easily define mappings specific
-					-- for LSP related items. It sets the mode, buffer and description for us each time.
-					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
-					end
-
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
-					--  To jump back, press <C-T>.
-					map("<leader>ld", require("telescope.builtin").lsp_definitions, "Go to definition (lsp)")
-
-					--  NOTE: This is not Goto Definition, this is Goto Declaration.
-					--  For example, in C this would take you to the header
-					map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp)")
-
-					-- Find references for the word under your cursor.
-					-- map("<leader>lr", require("telescope.builtin").lsp_references, "Go to references (lsp)") -- replaced with Trouble
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("<leader>li", require("telescope.builtin").lsp_implementations, "Go to implementation (lsp)")
-
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					-- map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-					map("<leader>lt", require("telescope.builtin").lsp_type_definitions, "Go to type definition (lsp)")
-
-					-- Fuzzy find all the symbols in your current document.
-					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>lsd", require("telescope.builtin").lsp_document_symbols, "Symbols document (lsp)")
-
-					-- Fuzzy find all the symbols in your current workspace
-					--  Similar to document symbols, except searches over your whole project.
-					map(
-						"<leader>lsw",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"Symbols workspace (lsp)"
-					)
-
-					-- Rename the variable under your cursor
-					--  Most Language Servers support renaming across files, etc.
-					map("<leader>ln", vim.lsp.buf.rename, "Rename symbol (lsp)")
-
-					-- Execute a code action, usually your cursor needs to be on top of an error
-					-- or a suggestion from your LSP for this to activate.
-					map("<leader>la", vim.lsp.buf.code_action, "Code action (lsp)")
-
-					-- Opens a popup that displays documentation about the word under your cursor
-					--  See `:help K` for why this keymap
-					map("K", vim.lsp.buf.hover, "Hover documentation (lsp)")
-
-					-- The following two autocommands are used to highlight references of the
-					-- word under your cursor when your cursor rests there for a little while.
-					--    See `:help CursorHold` for information about when this is executed
-					--
-					-- When you move your cursor, the highlights will be cleared (the second autocommand).
-					-- local client = vim.lsp.get_client_by_id(event.data.client_id)
-					-- if client and client.server_capabilities.documentHighlightProvider then
-					-- 	vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-					-- 		buffer = event.buf,
-					-- 		callback = vim.lsp.buf.document_highlight,
-					-- 	})
-					--
-					-- 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-					-- 		buffer = event.buf,
-					-- 		callback = vim.lsp.buf.clear_references,
-					-- 	})
-					-- end
-				end,
+				callback = onLspAttach,
 			})
 
 			-- LSP servers and clients are able to communicate to each other what features they support.
@@ -155,22 +189,7 @@ return {
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			local servers = {
-				-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				lua_ls = {},
-				tsserver = {}, -- check as an alternative https://github.com/pmizio/typescript-tools.nvim
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-
-				-- Formatters
-				stylua = {}, -- lua formatter
-				prettierd = {}, -- js, json, css, html formatter
-
-				-- Linters
-				eslint_d = {}, -- js linter
-			}
+			local servers = servers_to_install
 
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
@@ -232,10 +251,10 @@ return {
 				-- Important! Use a sub-list to run only the first available formatter
 				-- Available formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
 				lua = { "stylua" },
-				javascript = { { "prettierd", "biome" } },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
+				-- javascript = { { "prettierd", "biome" } }, -- default to lsp (nvim-tools)
+				-- typescript = { "prettierd" }, -- default to lsp (nvim-tools)
+				-- javascriptreact = { "prettierd" }, -- default to lsp (nvim-tools)
+				-- typescriptreact = { "prettierd" }, -- default to lsp (nvim-tools)
 				css = { "prettierd" },
 				html = { "prettierd" },
 				json = { "prettierd" },
@@ -370,7 +389,7 @@ return {
 				javascriptreact = { "eslint_d" },
 				typescript = { "eslint_d" },
 				typescriptreact = { "eslint_d" },
-				markdown = { "vale" },
+				-- markdown = { "vale" },
 			}
 
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
