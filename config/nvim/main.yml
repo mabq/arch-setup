@@ -45,3 +45,11 @@
           community.general.npm:
             name: "typescript-styled-plugin"
             global: true
+        - name: Install "typescript" globally
+          community.general.npm:
+            name: "typescript"
+            global: true
+        - name: Install "typescript-language-server" globally
+          community.general.npm:
+            name: "typescript-language-server"
+            global: true

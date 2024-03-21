@@ -2,21 +2,27 @@
 -- Use `opts = {}` to force loading a plugin on startup.
 -- Use `:checkhealth` to check for errors
 
-local servers_to_install = {
-	-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
-	lua_ls = {},
-	tsserver = {}, -- required by typescript-tools.nvim
+local servers_to_enable = {
+	-- Language servers:
+	--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+	--  Add any additional override configuration in the following tables. Available keys are:
+	--  - cmd (table): Override the default command used to start the server
+	--  - filetypes (table): Override the default list of associated filetypes for the server
+	--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+	--  - settings (table): Override the default settings passed when initializing the server.
+	lua_ls = {}, -- see https://luals.github.io/wiki/settings/
+	-- tsserver = {}, -- must be installed globally because of `typescript-tools.nvim` (see the ansible file)
 	-- clangd = {},
 	-- gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
 
-	-- Formatters
+	-- Formatters:
 	stylua = {}, -- lua formatter
 	prettierd = {}, -- json, css, html formatter
 
-	-- Linters
-	eslint_d = {}, -- js linter
+	-- Linters:
+	-- eslint_d = {}, -- js linter
 }
 
 local onLspAttach = function(event)
@@ -123,7 +129,6 @@ return {
 				"pmizio/typescript-tools.nvim",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
-					"neovim/nvim-lspconfig",
 				},
 				-- the keybinds work without passing a function to `on_attach`
 				config = function()
@@ -131,7 +136,7 @@ return {
 						settings = {
 							tsserver_plugins = {
 								-- for TypeScript v4.9+
-								"@styled/typescript-styled-plugin", -- need to install this plugin globally (see the ansible file)
+								"@styled/typescript-styled-plugin",
 								-- or for older TypeScript versions
 								-- "typescript-styled-plugin",
 							},
@@ -182,17 +187,6 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			local servers = servers_to_install
-
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
 			--  other tools, you can run
@@ -203,6 +197,7 @@ return {
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
+			local servers = servers_to_enable
 			local ensure_installed = vim.tbl_keys(servers or {})
 			-- vim.list_extend(ensure_installed, {
 			-- 	"stylua", -- Used to format lua code
@@ -379,31 +374,31 @@ return {
 		end,
 	},
 
-	{
-		-- Linting -----------------------------------------------------------------
+	-- {
+	-- Linting -----------------------------------------------------------------
 
-		enabled = false,
-		"mfussenegger/nvim-lint",
-		config = function()
-			require("lint").linters_by_ft = {
-				-- Available linters: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
-				javascript = { "eslint_d" },
-				javascriptreact = { "eslint_d" },
-				typescript = { "eslint_d" },
-				typescriptreact = { "eslint_d" },
-				-- markdown = { "vale" },
-			}
-
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = vim.api.nvim_create_augroup("mabq_lint", { clear = true }),
-				callback = function()
-					require("lint").try_lint()
-				end,
-			})
-
-			vim.keymap.set("n", "<leader>tli", function()
-				require("lint").try_lint()
-			end, { desc = "Toogle linting (nvim-lint)" })
-		end,
-	},
+	-- 	enabled = false,
+	-- 	"mfussenegger/nvim-lint",
+	-- 	config = function()
+	-- 		require("lint").linters_by_ft = {
+	-- 			-- Available linters: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
+	-- 			javascript = { "eslint_d" },
+	-- 			javascriptreact = { "eslint_d" },
+	-- 			typescript = { "eslint_d" },
+	-- 			typescriptreact = { "eslint_d" },
+	-- 			-- markdown = { "vale" },
+	-- 		}
+	--
+	-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+	-- 			group = vim.api.nvim_create_augroup("mabq_lint", { clear = true }),
+	-- 			callback = function()
+	-- 				require("lint").try_lint()
+	-- 			end,
+	-- 		})
+	--
+	-- 		vim.keymap.set("n", "<leader>tli", function()
+	-- 			require("lint").try_lint()
+	-- 		end, { desc = "Toogle linting (nvim-lint)" })
+	-- 	end,
+	-- },
 }
