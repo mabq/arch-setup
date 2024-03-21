@@ -43,5 +43,5 @@
             global: true
         - name: Install "@styled/typescript-styled-plugin" globally
           community.general.npm:
-            name: "@styled/typescript-styled-plugin"
+            name: "styled/typescript-styled-plugin"
             global: true
