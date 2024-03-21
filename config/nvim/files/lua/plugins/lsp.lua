@@ -130,7 +130,7 @@ return {
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
-				-- the keybinds work without passing a function to `on_attach`
+				-- syntax is handled by tree-sitter
 				config = function()
 					require("typescript-tools").setup({
 						settings = {

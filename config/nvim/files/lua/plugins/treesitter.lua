@@ -21,6 +21,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"rust",
+					"styled", -- styled components
 					"tsx",
 					"typescript",
 					"vim",
