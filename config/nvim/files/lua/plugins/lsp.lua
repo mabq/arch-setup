@@ -121,8 +121,10 @@ return {
 			-- Replace tsserver with typescript-tools
 			{
 				"pmizio/typescript-tools.nvim",
-				dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-				-- opts = {},
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+					"neovim/nvim-lspconfig",
+				},
 				-- the keybinds work without passing a function to `on_attach`
 				config = function()
 					require("typescript-tools").setup({
