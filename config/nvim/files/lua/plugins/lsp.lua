@@ -1,8 +1,7 @@
--- NOTE:
 -- Use `opts = {}` to force loading a plugin on startup.
 -- Use `:checkhealth` to check for errors
 
-local servers_to_enable = {
+local servers = {
 	-- Language servers:
 	--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 	--  Add any additional override configuration in the following tables. Available keys are:
@@ -11,7 +10,7 @@ local servers_to_enable = {
 	--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 	--  - settings (table): Override the default settings passed when initializing the server.
 	lua_ls = {}, -- see https://luals.github.io/wiki/settings/
-	-- tsserver = {}, -- must be installed globally because of `typescript-tools.nvim` (see the ansible file)
+	-- tsserver = {}, -- must be installed globally for `typescript-tools.nvim` to support styled-components (see the ansible file)
 	-- clangd = {},
 	-- gopls = {},
 	-- pyright = {},
@@ -26,12 +25,7 @@ local servers_to_enable = {
 }
 
 local onLspAttach = function(event)
-	-- for k, v in pairs(lsp_clients) do
-	-- if v == value then
-	-- 	return true
-	-- end
-	-- end
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
+	-- Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
 	-- many times.
 	--
@@ -124,21 +118,17 @@ return {
 			-- Automatically configures lua-language-server for your Neovim config, Neovim runtime and plugin directories
 			{ "folke/neodev.nvim", opts = {} },
 
-			-- Replace tsserver with typescript-tools
+			-- Replace tsserver with typescript-tools (to support styled-components), syntax is supported by treesitter
 			{
 				"pmizio/typescript-tools.nvim",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
-				-- syntax is handled by tree-sitter
 				config = function()
 					require("typescript-tools").setup({
 						settings = {
 							tsserver_plugins = {
-								-- for TypeScript v4.9+
 								"@styled/typescript-styled-plugin",
-								-- or for older TypeScript versions
-								-- "typescript-styled-plugin",
 							},
 						},
 					})
@@ -146,10 +136,6 @@ return {
 			},
 		},
 		config = function()
-			-- Brief Aside: **What is LSP?**
-			--
-			-- LSP is an acronym you've probably heard, but might not understand 'what it is.
-			--
 			-- LSP stands for Language Server Protocol. It's a protocol that helps editors
 			-- and language tooling communicate in a standardized fashion.
 			--
@@ -197,7 +183,6 @@ return {
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
-			local servers = servers_to_enable
 			local ensure_installed = vim.tbl_keys(servers or {})
 			-- vim.list_extend(ensure_installed, {
 			-- 	"stylua", -- Used to format lua code
