@@ -12,34 +12,34 @@ return {
 		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 		-- - sd'   - [S]urround [D]elete [']quotes
 		-- - sr)'  - [S]urround [R]eplace [)] [']
-		require("mini.surround").setup({
-			mappings = {
-				add = "gsa", -- Add surrounding in Normal and Visual modes
-				delete = "gsd", -- Delete surrounding
-				find = "gsf", -- Find surrounding (to the right)
-				find_left = "gsF", -- Find surrounding (to the left)
-				highlight = "gsh", -- Highlight surrounding
-				replace = "gsr", -- Replace surrounding
-				update_n_lines = "gsn", -- Update `n_lines`
-
-				suffix_last = "l", -- Suffix to search with "prev" method
-				suffix_next = "n", -- Suffix to search with "next" method
-			},
-		})
+		-- require("mini.surround").setup({
+		-- 	mappings = {
+		-- 		add = "gsa", -- Add surrounding in Normal and Visual modes
+		-- 		delete = "gsd", -- Delete surrounding
+		-- 		find = "gsf", -- Find surrounding (to the right)
+		-- 		find_left = "gsF", -- Find surrounding (to the left)
+		-- 		highlight = "gsh", -- Highlight surrounding
+		-- 		replace = "gsr", -- Replace surrounding
+		-- 		update_n_lines = "gsn", -- Update `n_lines`
+		--
+		-- 		suffix_last = "l", -- Suffix to search with "prev" method
+		-- 		suffix_next = "n", -- Suffix to search with "next" method
+		-- 	},
+		-- })
 
 		-- Autopairs -----------------------------------------------------------
-		local function toggleAutoPairs()
-			local Util = require("lazy.core.util")
-			vim.g.minipairs_disable = not vim.g.minipairs_disable
-			if vim.g.minipairs_disable then
-				Util.warn("Disabled auto pairs", { title = "Option" })
-			else
-				Util.info("Enabled auto pairs", { title = "Option" })
-			end
-		end
-		require("mini.pairs").setup({
-			vim.keymap.set("n", "<leader>tp", toggleAutoPairs, { desc = "Toggle auto pairs" }),
-		})
+		-- local function toggleAutoPairs()
+		-- 	local Util = require("lazy.core.util")
+		-- 	vim.g.minipairs_disable = not vim.g.minipairs_disable
+		-- 	if vim.g.minipairs_disable then
+		-- 		Util.warn("Disabled auto pairs", { title = "Option" })
+		-- 	else
+		-- 		Util.info("Enabled auto pairs", { title = "Option" })
+		-- 	end
+		-- end
+		-- require("mini.pairs").setup({
+		-- 	vim.keymap.set("n", "<leader>tp", toggleAutoPairs, { desc = "Toggle auto pairs" }),
+		-- })
 
 		-- Simple and easy statusline ------------------------------------------
 		local statusline = require("mini.statusline")
