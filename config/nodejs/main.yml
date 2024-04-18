@@ -19,6 +19,7 @@
     - name: Install global packages
       block:
         - name: nodejs - Install package 'ngrok'
+          # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
           community.general.npm:
             name: "ngrok"
             global: true
