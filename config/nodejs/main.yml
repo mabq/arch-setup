@@ -15,3 +15,10 @@
           # `-y` assumes yes as the reply to all prompts (run unattended)
           # `-n` suppresses updating of the relevant shell initialization file
           ansible.builtin.shell: "curl -L https://bit.ly/n-install | bash -s -- -y -n"
+
+    - name: Install global packages
+      block:
+        - name: nodejs - Install package 'ngrok'
+          community.general.npm:
+            name: "ngrok"
+            global: true
