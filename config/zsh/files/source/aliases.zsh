@@ -29,6 +29,7 @@ alias h='history -i 1'
 alias keycodes="xev | awk -F '[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf \"%-3s %s\n\", \$5, \$8 }'"
 alias logout='loginctl terminate-user $USER'
 alias mdserve='mdbook serve --open'
+alias monitor='btm'
 alias mousecodes='xev -event button | grep button'
 alias path='echo $PATH | tr ":" "\n"'
 alias psbyuser='ps --no-headers -Leo user | sort | uniq --count'
