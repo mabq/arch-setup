@@ -1,0 +1,9 @@
+- tags: flatpak
+  block:
+    - name: flatpak - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - flatpak # Linux application sandboxing and distribution framework
+
