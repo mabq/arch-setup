@@ -1,5 +1,5 @@
 return {
-	enabled = true,
+	enabled = false, -- replaced with mini.hipatterns
 	"folke/todo-comments.nvim",
 	event = "VimEnter",
 	dependencies = {

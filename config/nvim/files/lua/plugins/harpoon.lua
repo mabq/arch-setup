@@ -1,5 +1,6 @@
 return {
 	{
+		-- Getting you where you want with the fewest keystrokes
 		enabled = true,
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",

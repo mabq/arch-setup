@@ -1,4 +1,6 @@
 return {
+	-- A code outline window for skimming and quick navigation
+	enabled = false,
 	"stevearc/aerial.nvim",
 	opts = {},
 	dependencies = {

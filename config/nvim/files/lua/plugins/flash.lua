@@ -1,5 +1,6 @@
 return {
-	enabled = true,
+	-- navigate your code with search labels
+	enabled = false,
 	"folke/flash.nvim",
 	event = "VeryLazy",
 	opts = {

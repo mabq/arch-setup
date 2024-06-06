@@ -1,3 +1,5 @@
+;; -----------------------------------------------------------------------------
+
 ;; Documentation:
 ;;   - tutorial: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd#L111 
 ;;   - keycodes: https://github.com/kmonad/kmonad/blob/master/src/KMonad/Keyboard/Keycode.hs 
@@ -32,91 +34,102 @@
 
 ;; -----------------------------------------------------------------------------
 
-(defalias
-    met   (tap-hold-next-release 200 spc lmet)
-
-    _1  (tap-hold-next-release 200 d (layer-toggle _1))
-    _1x (layer-toggle _1x)
-    _2  (tap-hold-next-release 200 a (layer-toggle _2))
-    _3  (tap-hold-next-release 200 ; (layer-toggle _3))
-    _4  (layer-toggle _4)
-
-    next C-tab
-    prev C-S-tab
-    back A-left
-    frwd A-right
-    copy C-c
-    paste C-S-v
-)
-
-;; -----------------------------------------------------------------------------
-
 ;; Default Qwerty layout definition:
 (defsrc
     esc     f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12     volu
     grv     1       2       3       4       5       6       7       8       9       0       -       =       bspc
     tab     q       w       e       r       t       y       u       i       o       p       [       ]       bksl
     caps    a       s       d       f       g       h       j       k       l       ;       '       ret
-    lsft    z       x       c       v       b       n       m       ,       .       /       shft
+    lsft    z       x       c       v       b       n       m       ,       .       /       rsft
     lctl    lmet    lalt                    spc                             ralt    shft    rctl
 )
 
 ;; -----------------------------------------------------------------------------
 
-;; The first `deflayer` statement in a KMonad config will be the layer that is active when KMonad starts up (the name is not important).
+(defalias
+    smet  (tap-hold-next-release 200 spc lmet)
+
+    wctrl (tap-hold-next-release 200 w lctrl)
+    octrl (tap-hold-next-release 200 o rctrl)
+
+    `shft (tap-hold-next-release 200 ` lshft)
+    'shft (tap-hold-next-release 200 ' rshft)
+
+    a2    (tap-hold-next-release 200 a (layer-toggle 2))
+    ;2    (tap-hold-next-release 200 ; (layer-toggle 2))
+
+    d1    (tap-hold-next-release 200 d (layer-toggle 1))
+    df1x  (layer-toggle 1x)
+
+    f3    (tap-hold-next-release 200 f (layer-toggle 3))
+    fs3x  (layer-toggle 3x)
+)
+
+;; -----------------------------------------------------------------------------
+;; The first `deflayer` statement in a KMonad config will be the layer that is 
+;; active when KMonad starts up (the name is not important).
+;; -----------------------------------------------------------------------------
+
+;; Why this layout:
+;; - met is super easy to reach and combine with all other keys.
+;; - most important vim motion keys are not affected. Instead of 'w' use 'e'. Lets see if 'n' repetition is not really need it.
+;; - easy access to "ctrl + shift"
+;; - easy access to "alt + arrows"
+;; - easy access to numbers
+;; - shift works normally
 
 (deflayer default
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    XX      _       _       _       _       _       _       _       _       _       _       XX      XX      XX
-    @_4     _       _       _       _       _       _       _       _       _       _       XX      XX      XX
-    lctrl   @_2     _       @_1     _       _       _       _       _       _       @_3     rctrl   XX
+    esc     _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       @wctrl  _       _       _       _       _       _       @octrl  _       -       _       _
+    @`shft  @a2     _       @d1     @f3     _       _       _       _       _       @;2     @'shft  _
     _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _                       @met                            _       _       _
+    _       _       _                       @smet                           _       _       _
 )
 
-(deflayer _1
+(deflayer 1
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       esc     bspc    _       _       _       _
-    _       _       _       XX      @_1x    _       left    down    up      rght    _       _       _
-    _       _       _       _       _       _       ret     tab     bspc    del     _       _
+    caps    _       lalt    XX      @df1x   _       left    down    up      rght    _       _       _
+    _       _       _       _       _       _       ret     _       _       tab     _       _
     _       _       _                       spc                             _       _       _
 )
 
-(deflayer _1x
+(deflayer 1x
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       del     _       _       _       _
     _       _       _       XX      XX      _       home    pgdn    pgup    end     _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _                       _                               _       _       _
 )
 
-(deflayer _2
+(deflayer 2
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       [       ]       -       =       _       _       _
-    _       XX      _       _       _       _       _       \(      \)      `       '       _       _
-    _       _       _       _       _       _       _       _       _       _       \\      _
-    _       _       _                       lshft                           _       _       _
+    _       !       @       #       $       %       ^       &       *       \(      \)      +       _       _
+    _       _       _       |       \\      _       =       [       ]       {       }       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       _                               _       _       _
 )
 
-(deflayer _3
+(deflayer 3
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
     _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    caps    _       @back   @prev   @next   @frwd   _       _       _       _       XX      _       _
-    _       _       _       @copy   @paste  _       _       _       _       _       _       _
-    _       _       _                       lshft                           _       _       _
-)
-
-(deflayer _4
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    _       _       _       _       _       _       _       _       _       _       _       _       _       _
-    XX      _       _       _       _       _       _       7       8       9       _       _       _       _
+    _       _       _       _       _       _       _       7       8       9       _       _       _       _
     _       _       _       _       _       _       _       4       5       6       _       _       _
     _       _       _       _       _       _       0       1       2       3       _       _
-    _       _       _                       lshft                           _       _       _
+    _       _       _                       @fs3x                           _       _       _
+)
+
+(deflayer 3x
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _     f12      f7      f8      f9       _       _       _       _
+    _       _       _       _       _       _     f11      f4      f5      f6       _       _       _
+    _       _       _       _       XX      _     f10      f1      f2      f3       _       _
+    _       _       _                       XX                              _       _       _
 )
 
 ;; -----------------------------------------------------------------------------
