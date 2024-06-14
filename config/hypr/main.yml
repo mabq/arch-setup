@@ -11,12 +11,13 @@
               - hyprland # A highly customizable dynamic tiling Wayland compositor
               - hyprlock # Hyprland’s GPU-accelerated screen locking utility
               - hypridle # hyprland’s idle daemon
+              - hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
               - brightnessctl # Lightweight brightness control tool
               - playerctl # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
               - polkit-kde-agent # Daemon providing a polkit authentication UI for KDE
               - qt5-wayland # Provides APIs for Wayland
               - qt6-wayland # Provides APIs for Wayland
-              - swaybg # Wallpaper tool for Wayland compositors
+              # - swaybg # Wallpaper tool for Wayland compositors
               - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
               # - wireplumber                 # Session / policy manager implementation for PipeWire (installed as dependency of `pipewire-pulse`)
               - wl-clipboard # Command-line copy/paste utilities for Wayland
