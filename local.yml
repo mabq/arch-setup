@@ -29,7 +29,7 @@
 
     - import_tasks: config/hypr/main.yml
     - import_tasks: config/dunst/main.yml
-    - import_tasks: config/swaylock/main.yml
+    # - import_tasks: config/swaylock/main.yml # replaced with hyprlock
     - import_tasks: config/tofi/main.yml
     - import_tasks: config/waybar/main.yml
 
