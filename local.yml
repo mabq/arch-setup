@@ -10,6 +10,8 @@
 
     - import_tasks: config/no_config/main.yml # must go after pacman and paru
 
+    - import_tasks: config/flatpak/main.yml
+
     - import_tasks: config/nodejs/main.yml
 
     - import_tasks: config/bluetooth/main.yml
@@ -52,5 +54,3 @@
     - import_tasks: config/mpv/main.yml
 
     - import_tasks: config/spotify/main.yml
-
-    - import_tasks: config/flatpak/main.yml

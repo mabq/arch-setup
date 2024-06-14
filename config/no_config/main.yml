@@ -38,7 +38,7 @@
           - bottom # A graphical process/system monitor (`htop` alternative)
           - hwinfo # Hardware detection tool from openSUSE
           - inxi # Full featured CLI system information tool
-          - neofetch # A CLI system information tool written in BASH that supports displaying images.
+          - fastfetch # Like Neofetch, but much faster because written in C
           #
           # ------------------------------------------------------------------------
           #
@@ -168,6 +168,18 @@
               when: which_plex.rc != 0
               # The back-end media server component of Plex (server sources must be configured manually)
               ansible.builtin.shell: "paru -S --skipreview plex-media-server"
+
+        - name: Localsend
+          block:
+            - name: no-config - Check if localsend is already installed
+              ansible.builtin.command: "which localsend"
+              register: which_localsend
+              ignore_errors: true
+
+            - name: no-config - Install localsend
+              when: which_localsend.rc != 0
+              # Video Conferencing and Web Conferencing Service
+              ansible.builtin.shell: "paru -S --skipreview localsend-bin"
 
         - name: Zoom
           block:
