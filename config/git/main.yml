@@ -1,13 +1,13 @@
-- tags: git 
+- tags: git
   block:
-
     - name: git - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - git             # The fast distributed version control system
-          - git-delta       # Syntax-highlighting pager for git and diff output
+          - git # The fast distributed version control system
+          - git-delta # Syntax-highlighting pager for git and diff output
+          - github-cli # The GitHub CLI (Take GitHub to the command line)
 
     - name: git - Create links
       ansible.builtin.file:
@@ -15,7 +15,7 @@
         path: "{{ home }}/{{ item.name }}"
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: '600'
+        mode: "600"
         state: "link"
       loop:
         - { name: ".gitconfig" }
