@@ -35,6 +35,7 @@ To run the script execute the following command:
 
 > The first time is going to take time, be patient
 > You should be able to change the destination directory without any problems
+> Push all changes to the repository
 
 ```sh 
 ansible-pull --url https://github.com/mabq/arch-setup --vault-password-file ~/.vault_key --directory ~/projects/arch-setup
