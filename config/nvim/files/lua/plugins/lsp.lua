@@ -1,29 +1,6 @@
 -- Use `opts = {}` to force loading a plugin on startup.
 -- Use `:checkhealth` to check for errors
 
-local servers = {
-	-- Language servers:
-	--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-	--  Add any additional override configuration in the following tables. Available keys are:
-	--  - cmd (table): Override the default command used to start the server
-	--  - filetypes (table): Override the default list of associated filetypes for the server
-	--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-	--  - settings (table): Override the default settings passed when initializing the server.
-	lua_ls = {}, -- see https://luals.github.io/wiki/settings/
-	-- tsserver = {}, -- must be installed globally for `typescript-tools.nvim` to support styled-components (see the ansible file)
-	-- clangd = {},
-	-- gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-
-	-- Formatters:
-	stylua = {}, -- lua formatter
-	prettierd = {}, -- json, css, html formatter
-
-	-- Linters:
-	-- eslint_d = {}, -- js linter
-}
-
 local onLspAttach = function(event)
 	-- Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
@@ -96,6 +73,32 @@ local onLspAttach = function(event)
 	-- end
 end
 
+local servers = {
+	-- These packages will be automatically installed with Mason.
+
+	-- Language servers:
+	--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+	--  Add any additional override configuration in the following tables. Available keys are:
+	--  - cmd (table): Override the default command used to start the server
+	--  - filetypes (table): Override the default list of associated filetypes for the server
+	--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+	--  - settings (table): Override the default settings passed when initializing the server.
+	lua_ls = {}, -- see https://luals.github.io/wiki/settings/
+	-- tsserver = {}, -- must be installed globally for `typescript-tools.nvim` to support styled-components (see the ansible file)
+	-- clangd = {},
+	-- gopls = {},
+	-- pyright = {},
+	-- rust_analyzer = {},
+
+	-- Formatters:
+	stylua = {}, -- lua formatter
+	-- prettierd = {}, -- (for some reason `prettierd` does not work)
+	prettier = {}, -- js, json, css, html formatter
+
+	-- Linters:
+	-- eslint_d = {}, -- js linter
+}
+
 return {
 	{
 		-- LSP -----------------------------------------------------------------
@@ -118,7 +121,7 @@ return {
 			-- Automatically configures lua-language-server for your Neovim config, Neovim runtime and plugin directories
 			{ "folke/neodev.nvim", opts = {} },
 
-			-- Replace tsserver with typescript-tools (to support styled-components), syntax is supported by treesitter
+			-- Replace tsserver with typescript-tools to support styled-components auto-completion, syntax highlighting is supported by treesitter
 			{
 				"pmizio/typescript-tools.nvim",
 				dependencies = {
@@ -218,7 +221,7 @@ return {
 				mode = { "n" },
 				"<leader>lf",
 				function()
-					require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
+					require("conform").format({ lsp_fallback = false, async = false, timeout_ms = 1000 })
 				end,
 				desc = "Format buffer (lsp + conform)",
 			},
@@ -226,21 +229,23 @@ return {
 		opts = {
 			format_on_save = {
 				timeout_ms = 1000,
-				lsp_fallback = true,
+				lsp_format = "never",
 				async = false,
 			},
 			formatters_by_ft = {
 				-- Important! Use a sub-list to run only the first available formatter
 				-- Available formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
 				lua = { "stylua" },
-				-- javascript = { { "prettierd", "biome" } }, -- default to lsp (nvim-tools)
-				-- typescript = { "prettierd" }, -- default to lsp (nvim-tools)
-				-- javascriptreact = { "prettierd" }, -- default to lsp (nvim-tools)
-				-- typescriptreact = { "prettierd" }, -- default to lsp (nvim-tools)
-				css = { "prettierd" },
-				html = { "prettierd" },
-				json = { "prettierd" },
-				yaml = { "prettierd" },
+				-- javascript = { { "prettier", "biome" } }, -- default to lsp (nvim-tools)
+				javascript = { "prettier" },
+				-- javascriptreact = { { "prettier", "prettier", "biome" } }, -- default to lsp (nvim-tools)
+				javascriptreact = { { "prettier" } },
+				-- typescript = { "prettier" }, -- default to lsp (nvim-tools)
+				-- typescriptreact = { "prettier" }, -- default to lsp (nvim-tools)
+				css = { "prettier" },
+				html = { "prettier" },
+				json = { "prettier" },
+				yaml = { "prettier" },
 			},
 		},
 	},
