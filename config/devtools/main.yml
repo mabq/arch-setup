@@ -1,0 +1,43 @@
+- tags: devtools
+  block:
+    # -- Replaced with mise (see below).
+    # # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n?tab=readme-ov-file#installing-nodejs-versions)
+    # - name: Install `n` node version manage
+    #   block:
+    #     - name: nodejs - Check if `n` is already installed
+    #       ansible.builtin.stat:
+    #         path: "{{ home }}/n"
+    #       register: n
+    #
+    #     - name: nodejs - Install `n` (if not already installed)
+    #       when: n.stat.isdir is not defined or n.stat.isdir == False
+    #       # `-s` is for silent
+    #       # everything after `--` are arguments passed to the script
+    #       # `-y` assumes yes as the reply to all prompts (run unattended)
+    #       # `-n` suppresses updating of the relevant shell initialization file
+    #       ansible.builtin.shell: "curl -L https://bit.ly/n-install | bash -s -- -y -n"
+
+    - name: Install mise
+      # Manager for nodejs python and more...
+      # Read https://mise.jdx.dev/dev-tools/
+      # Note: if you stop using `mise`, remove the `eval "$(mise activate zsh)"` from the `plugings.zsh` file
+      block:
+        - name: devtools - Check if mise is already installed
+          ansible.builtin.stat:
+            path: "{{ home }}/.local/bin/mise"
+          register: mise
+          ignore_errors: true
+
+        - name: devtools - Install mise
+          when: not mise.stat.exists
+          ansible.builtin.shell: "paru -S --skipreview mise"
+
+        - name: devtools - Install latest node version for global use
+          when: not mise.stat.exists
+          ansible.builtin.shell: "mise use -g node@lts"
+
+    - name: ngrok
+      # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
+      community.general.npm:
+        name: "ngrok"
+        global: true

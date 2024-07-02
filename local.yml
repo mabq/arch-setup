@@ -12,7 +12,7 @@
 
     - import_tasks: config/flatpak/main.yml
 
-    - import_tasks: config/nodejs/main.yml
+    - import_tasks: config/devtools/main.yml
 
     - import_tasks: config/bluetooth/main.yml
 
