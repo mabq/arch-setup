@@ -30,7 +30,7 @@
 
         - name: devtools - Install mise
           when: not mise.stat.exists
-          ansible.builtin.shell: "paru -S --skipreview mise"
+          ansible.builtin.shell: "curl https://mise.run | sh"
 
         - name: devtools - Install latest node version for global use
           when: not mise.stat.exists
