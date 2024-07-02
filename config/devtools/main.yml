@@ -22,21 +22,14 @@
       # Read https://mise.jdx.dev/dev-tools/
       # Note: if you stop using `mise`, remove the `eval "$(mise activate zsh)"` from the `plugings.zsh` file
       block:
-        - name: devtools - Check if mise is already installed
-          ansible.builtin.stat:
-            path: "{{ home }}/.local/bin/mise"
-          register: mise
-          ignore_errors: true
+        - name: devtools - Install mise
+          ansible.builtin.shell: "curl https://mise.run | sh"
 
-        - name: devtools - Intall mise
-          when: not mise.stat.exists
-          block:
-            - name: devtools - Install mise
-              ansible.builtin.shell: "curl https://mise.run | sh"
-            - name: devtools - Install latest node version for global use
-              ansible.builtin.shell: "mise use -g node@lts"
-            - name: devtools - Source zshrc so that node and npm commands work from here on
-              ansible.builtin.shell: "source {{ home }}/.config/zsh/.zshrc"
+        - name: devtools - Install latest node version for global use
+          ansible.builtin.shell: "mise use -g node@lts"
+
+        - name: devtools - Source zshrc so that node and npm commands work from here on
+          ansible.builtin.shell: "source {{ home }}/.zshenv && source {{ home }}/.config/zsh/.zshrc"
 
     - name: ngrok
       # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
