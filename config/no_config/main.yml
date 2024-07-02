@@ -156,6 +156,17 @@
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
+        - name: Install mise
+          # Manager for nodejs python and more...
+          # Read https://mise.jdx.dev/dev-tools/
+          # Note: if you stop using `mise`, remove the `eval "$(mise activate zsh)"` from the `plugings.zsh` file
+          block:
+            - name: devtools - Install mise
+              ansible.builtin.shell: "curl https://mise.run | sh"
+
+            - name: devtools - Install latest node version for global use
+              ansible.builtin.shell: "mise use -g node@lts"
+
         - name: Plex media server
           # (start the service manually when required to avoid consumming resources)
           block:

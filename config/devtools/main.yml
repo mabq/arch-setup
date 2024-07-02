@@ -17,17 +17,6 @@
     #       # `-n` suppresses updating of the relevant shell initialization file
     #       ansible.builtin.shell: "curl -L https://bit.ly/n-install | bash -s -- -y -n"
 
-    - name: Install mise
-      # Manager for nodejs python and more...
-      # Read https://mise.jdx.dev/dev-tools/
-      # Note: if you stop using `mise`, remove the `eval "$(mise activate zsh)"` from the `plugings.zsh` file
-      block:
-        - name: devtools - Install mise
-          ansible.builtin.shell: "curl https://mise.run | sh"
-
-        - name: devtools - Install latest node version for global use
-          ansible.builtin.shell: "mise use -g node@lts"
-
     - name: ngrok
       # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
       community.general.npm:

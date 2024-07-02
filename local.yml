@@ -14,15 +14,15 @@
 
     - import_tasks: config/bluetooth/main.yml
 
-    - import_tasks: config/devtools/main.yml # must go before zsh
-
     - import_tasks: config/zsh/main.yml
     - import_tasks: config/starship/main.yml
     - import_tasks: config/ssh/main.yml
     - import_tasks: config/git/main.yml
 
     - import_tasks: config/tmux/main.yml
-    - import_tasks: config/nvim/main.yml # must go after nodejs
+    - import_tasks: config/nvim/main.yml # must go after zsh
+
+    - import_tasks: config/devtools/main.yml # must go after zsh
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
