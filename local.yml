@@ -12,8 +12,6 @@
 
     - import_tasks: config/flatpak/main.yml
 
-    - import_tasks: config/devtools/main.yml
-
     - import_tasks: config/bluetooth/main.yml
 
     - import_tasks: config/zsh/main.yml
@@ -26,6 +24,8 @@
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
+
+    - import_tasks: config/devtools/main.yml # must go after zsh
 
     - import_tasks: config/dropbox/main.yml
 
