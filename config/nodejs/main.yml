@@ -1,4 +1,4 @@
-- tags: devtools
+- tags: nodejs
   block:
     # Use `n` to interactively manage your nodejs versions (https://github.com/tj/n?tab=readme-ov-file#installing-nodejs-versions)
     - name: Install `n` node version manage
@@ -19,7 +19,7 @@
         - name: nodejs - Install lts version
           ansible.builtin.shell: "n lts"
 
-    - name: ngrok
+    - name: nodejs - Install ngrok
       # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
       community.general.npm:
         name: "ngrok"
