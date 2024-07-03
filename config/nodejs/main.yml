@@ -24,3 +24,9 @@
       community.general.npm:
         name: "ngrok"
         global: true
+
+    - name: nodejs - Install new-component
+      # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
+      community.general.npm:
+        name: "new-component"
+        global: true

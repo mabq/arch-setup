@@ -96,7 +96,7 @@ local servers = {
 	prettier = {}, -- js, json, css, html formatter
 
 	-- Linters:
-	-- eslint_d = {}, -- js linter
+	eslint_d = {}, -- js linter
 }
 
 return {
@@ -364,31 +364,30 @@ return {
 		end,
 	},
 
-	-- {
-	-- Linting -----------------------------------------------------------------
+	{
+		-- Linting -----------------------------------------------------------------
+		enabled = true,
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("lint").linters_by_ft = {
+				-- Available linters: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
+				javascript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				-- markdown = { "vale" },
+			}
 
-	-- 	enabled = false,
-	-- 	"mfussenegger/nvim-lint",
-	-- 	config = function()
-	-- 		require("lint").linters_by_ft = {
-	-- 			-- Available linters: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
-	-- 			javascript = { "eslint_d" },
-	-- 			javascriptreact = { "eslint_d" },
-	-- 			typescript = { "eslint_d" },
-	-- 			typescriptreact = { "eslint_d" },
-	-- 			-- markdown = { "vale" },
-	-- 		}
-	--
-	-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-	-- 			group = vim.api.nvim_create_augroup("mabq_lint", { clear = true }),
-	-- 			callback = function()
-	-- 				require("lint").try_lint()
-	-- 			end,
-	-- 		})
-	--
-	-- 		vim.keymap.set("n", "<leader>tli", function()
-	-- 			require("lint").try_lint()
-	-- 		end, { desc = "Toogle linting (nvim-lint)" })
-	-- 	end,
-	-- },
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = vim.api.nvim_create_augroup("mabq_lint", { clear = true }),
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
+
+			vim.keymap.set("n", "<leader>tli", function()
+				require("lint").try_lint()
+			end, { desc = "Toogle linting (nvim-lint)" })
+		end,
+	},
 }
