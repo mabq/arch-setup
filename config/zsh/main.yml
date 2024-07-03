@@ -47,12 +47,6 @@
               # zsh won't put any files into the `source` directory, so it is safe to link the whole directory
               - { name: "source", mode: "700" }
 
-    - name: Source .zshenv
-      shell: "source {{ home }}/.zshenv"
-
-    - name: Source .zshrc
-      shell: "source {{ home }}/.config/zsh/.zshrc"
-
     - name: Create shared history file
       block:
         - name: zsh - Create `~/.cache/zsh` directory
