@@ -31,6 +31,7 @@ alias logout='loginctl terminate-user $USER'
 alias mdserve='mdbook serve --open'
 alias monitor='btm'
 alias mousecodes='xev -event button | grep button'
+alias nc='new-component' # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
 alias path='echo $PATH | tr ":" "\n"'
 alias psbyuser='ps --no-headers -Leo user | sort | uniq --count'
 alias reboot='systemctl reboot'

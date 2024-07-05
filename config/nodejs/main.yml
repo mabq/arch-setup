@@ -27,6 +27,7 @@
 
     - name: nodejs - Install new-component
       # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
+      # I added a zsh alias so that I can call this component with `nc`
       community.general.npm:
         name: "new-component"
         global: true
