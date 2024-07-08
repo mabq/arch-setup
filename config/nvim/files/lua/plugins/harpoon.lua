@@ -14,7 +14,7 @@ return {
 				function()
 					require("harpoon"):list():append()
 				end,
-				desc = "Append file (harpoon)",
+				desc = "Add file",
 			},
 			{
 				"<leader>ho",
@@ -25,32 +25,46 @@ return {
 				desc = "Open harpoon",
 			},
 			{
-				"<C-h>",
+				"<leader>h1",
 				function()
 					require("harpoon"):list():select(1)
 				end,
-				desc = "Go to file 1 (harpoon)",
+				desc = "File 1",
 			},
 			{
-				"<C-j>",
+				"<leader>h2",
 				function()
 					require("harpoon"):list():select(2)
 				end,
-				desc = "Go to file 2 (harpoon)",
+				desc = "File 2",
 			},
 			{
-				"<C-k>",
+				"<leader>h3",
 				function()
 					require("harpoon"):list():select(3)
 				end,
-				desc = "Go to file 3 (harpoon)",
+				desc = "File 3",
 			},
 			{
-				"<C-l>",
+				"<leader>h4",
 				function()
 					require("harpoon"):list():select(4)
 				end,
-				desc = "Go to file 4 (harpoon)",
+				desc = "File 4",
+			},
+			{
+				"<leader>h5",
+				function()
+					require("harpoon"):list():select(5)
+				end,
+				desc = "File 5",
+			},
+			{
+				"<leader>h6",
+				function()
+					require("harpoon"):list():select(6)
+				end,
+				desc = "File 6",
 			},
 		},
 	},

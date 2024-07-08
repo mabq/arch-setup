@@ -15,11 +15,13 @@ local onLspAttach = function(event)
 	-- Jump to the definition of the word under your cursor.
 	--  This is where a variable was first declared, or where a function is defined, etc.
 	--  To jump back, press <C-T>.
-	map("<leader>ld", require("telescope.builtin").lsp_definitions, "Go to definition (lsp)")
+	map("gd", require("telescope.builtin").lsp_definitions, "Go to definition (lsp)") -- default keybinding
+	map("<leader>ld", require("telescope.builtin").lsp_definitions, "Go to definition (lsp - also 'gd')")
 
 	--  NOTE: This is not Goto Definition, this is Goto Declaration.
 	--  For example, in C this would take you to the header
-	map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp)")
+	map("gD", require("telescope.builtin").lsp_definitions, "Go to declaration (lsp)") -- default keybinding
+	map("<leader>lD", vim.lsp.buf.declaration, "Go to declaration (lsp - also 'dD')")
 
 	-- Find references for the word under your cursor.
 	-- map("<leader>lr", require("telescope.builtin").lsp_references, "Go to references (lsp)") -- replaced with Trouble
@@ -44,7 +46,7 @@ local onLspAttach = function(event)
 
 	-- Rename the variable under your cursor
 	--  Most Language Servers support renaming across files, etc.
-	map("<leader>ln", vim.lsp.buf.rename, "Rename symbol (lsp)")
+	map("<leader>lr", vim.lsp.buf.rename, "Rename symbol (lsp)") -- now that references is done via trouble "r" is free
 
 	-- Execute a code action, usually your cursor needs to be on top of an error
 	-- or a suggestion from your LSP for this to activate.
@@ -52,7 +54,8 @@ local onLspAttach = function(event)
 
 	-- Opens a popup that displays documentation about the word under your cursor
 	--  See `:help K` for why this keymap
-	map("K", vim.lsp.buf.hover, "Hover documentation (lsp)")
+	map("K", vim.lsp.buf.hover, "Hover documentation (lsp)") -- default keybinding
+	map("<leader>lk", vim.lsp.buf.code_action, "Code action (lsp - also 'K')")
 
 	-- The following two autocommands are used to highlight references of the
 	-- word under your cursor when your cursor rests there for a little while.
@@ -100,6 +103,26 @@ local servers = {
 }
 
 return {
+
+	{
+		-- Trouble ----------------------------------------------------------
+
+		enabled = true,
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- opts = {},
+		keys = {
+			-- { "<leader>ld", "<cmd>TroubleToggle lsp_definitions<cr>", desc = "Go to definitions (trouble)" }, -- can't go back with `Ctrl-t` (only `Ctrl-o`), use telescope for now
+			{ "<leader>lR", "<cmd>TroubleToggle lsp_references<cr>", desc = "Go to references (lsp-trouble)" },
+
+			{ "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Trouble toggle" },
+			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble workspace" }, -- workspace diagnostics from the builtin LSP client
+			{ "<leader>xb", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble buffer" }, -- document diagnostics from the builtin LSP client
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix" }, -- quickfix items
+			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble loclist" }, -- items from the window's location list
+		},
+	},
+
 	{
 		-- LSP -----------------------------------------------------------------
 		enabled = true,

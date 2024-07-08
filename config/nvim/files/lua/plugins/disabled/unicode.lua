@@ -1,4 +1,4 @@
 return {
-	enabled = true,
+	enabled = false,
 	"chrisbra/unicode.vim",
 }
