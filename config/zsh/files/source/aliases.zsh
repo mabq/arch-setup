@@ -17,6 +17,7 @@ alias drivers='lspci -k'
 alias v='nvim .' # (do not use `n`, it is used ny the n node manager)
 alias e='ya' # explorer
 alias fat32='sudo mkfs.fat -F 32' # format external disk to work on any OS
+alias plex='flatpak run tv.plex.PlexDesktop'
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
 alias fonts='fc-list : family | sort | uniq | fzf'
 alias ga='git add'
