@@ -36,7 +36,8 @@ vim.opt.breakindent = true -- preserve indentation in wrapped text
 vim.opt.scrolloff = 3 -- number of lines to show around the cursor
 vim.opt.sidescrolloff = 8 -- minimum number of columns to scroll horizontal (defaults to 1 in Neovim)
 vim.opt.list = true -- show tabs and end-of-lines
-vim.opt.listchars = { tab = " ", trail = "·", nbsp = "␣" } -- list of strings used for list mode
+-- vim.opt.listchars = { tab = " ", trail = "·", nbsp = "␣" } -- list of strings used for list mode
+vim.opt.listchars = { tab = "▏ ", trail = "·", nbsp = "␣" } -- list of strings used for list mode
 
 -- 05. Syntax, highlighting and spelling:
 vim.opt.hlsearch = false -- highlight all matches for the last used search pattern

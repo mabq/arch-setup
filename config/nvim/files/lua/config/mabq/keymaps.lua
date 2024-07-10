@@ -3,6 +3,13 @@
 --  `:h map-modes`
 --  https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>%",
+	':source $MYVIMRC<CR>:echo "Config reloaded!"<CR>',
+	{ noremap = true, silent = true }
+)
+
 -- Clear search with <esc>
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
