@@ -17,6 +17,7 @@ return {
 			require("ibl").setup({
 				indent = {
 					-- char: reuse the same character defined in 'mabq/options.lua' (vim.opt.listchars)
+					char = "▏",
 					highlight = { "indent-blankline-unfocus" },
 				},
 				scope = {
