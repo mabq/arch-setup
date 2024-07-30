@@ -1,0 +1,203 @@
+;; Key codes: https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
+;;
+;; Pressing and holding all of the three following keys together at the same time
+;; will cause kanata to exit:
+;;
+;;     Left Control, Space, Escape
+;;
+;; Comments are prefixed by double-semicolon. A single semicolon is parsed as the
+;; keyboard key. Comments are ignored for the configuration file.
+;;
+;; This configuration language is Lisp-like. If you're unfamiliar with Lisp,
+;; don't be alarmed. The maintainer jtroo is also unfamiliar with Lisp. You
+;; don't need to know Lisp in-depth to be able to configure kanata.
+;;
+;; If you follow along with the examples, you should be fine. Kanata should
+;; also hopefully have helpful error messages in case something goes wrong.
+;; If you need help, you are welcome to ask.
+
+(defcfg
+  ;; Your keyboard device will likely differ from this. I believe /dev/input/by-id/
+  ;; is preferable; I recall reading that it's less likely to change names on you,
+  ;; but I didn't find any keyboard device in there in my VM. 🔥 If you are on Linux
+  ;; and omit this entry, kanata will try to attach to every device found on your
+  ;; system that seems like a keyboard.
+  ;; linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+  ;; Enable processing of keys that are not in defsrc.
+  ;; This is useful if you are only mapping a few keys in defsrc instead of
+  ;; most of the keys on your keyboard. Without this, the tap-hold-release and
+  ;; tap-hold-press actions will not activate for keys that are not in defsrc.
+  ;; The reason this is not enabled by default is because some keys may not
+  ;; work correctly if they are intercepted. E.g. rctl/altgr on Windows; see the
+  ;; windows-altgr configuration item above for context.
+  process-unmapped-keys yes
+
+  ;; This configuration makes multiple tap-hold actions that are activated near
+  ;; in time expire their timeout quicker. Without this, the timeout for the 2nd
+  ;; tap-hold onwards will start from 0ms after the previous tap-hold expires.
+  ;;
+  ;;concurrent-tap-hold yes
+
+  ;; This configuration makes the release of one-shot-press and of the tap in a tap-hold
+  ;; by the defined number of milliseconds (approximate).
+  ;; The default value is 5.
+  ;; While the release is delayed, further processing of inputs is also paused.
+  ;; This means that there will be a minor input latency impact in the mentioned scenarios.
+  ;; The reason for this configuration existing is that some environments
+  ;; do not process the scenarios correctly due to the rapidity of the release.
+  ;; Kanata does send the events in the correct order,
+  ;; so the fault is more in the environment, but kanata provides a workaround anyway.
+  ;;rapid-event-delay 5
+
+  ;; This configuration will press and then immediately release the non-modifier key
+  ;; as soon as the override activates, meaning you are unlikely as a human to ever
+  ;; release modifiers first, which can result in unintended behaviour.
+  ;;
+  ;; The downside of this configuration is that the non-modifier key
+  ;; does not remain held which is important to consider for your use cases.
+  ;;override-release-on-activation yes
+)
+
+;; Only one defsrc is allowed.
+;;
+;; defsrc defines the keys that will be intercepted by kanata. The order of the
+;; keys matches the deflayer declarations and all deflayer declarations must
+;; have the same number of keys as defsrc.
+;;
+;; The visual/spatial positioning is *not* mandatory; it is done by convention
+;; for visual ease. These items are parsed as a long list with newlines being
+;; ignored.
+;;
+;; If you are looking for other keys, the file src/keys/mod.rs should hopefully
+;; provide some insight.
+(defsrc
+  grv   1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab   q     w     e     r     t     y     u     i     o     p     [     ]     \
+  caps  a     s     d     f     g     h     j     k     l     ;     '     ret
+  lsft  z     x     c     v     b     n     m     ,     .     /     rsft
+  lctl  lmet  lalt              spc               ralt  rmet  rctl
+)
+
+;; defvar can be used to declare commonly-used values
+(defvar
+  ;; One of the following options:
+  ;;   1. `tap-hold`
+  ;;   2. `tap-hold-press` -- if there is a key press, the hold action is activated
+  ;;   3. `tap-hold-release` -- if there is a press and release of another key, the
+  ;;       hold action is activated
+  ;; Options 2 and 3 are useful if you don't want to wait for the whole hold
+  ;; timeout to activate, but want to activate the hold action immediately
+  ;; based on the next key press or press and release of another key. These
+  ;; versions might be great to implement home row mods.
+  mode tap-hold-press
+
+  ;; The tap timeout is best explained in a roundabout way. When you press and
+  ;; hold a standard key on your keyboard (e.g. 'a'), your operating system will
+  ;; read that and keep sending 'a' to the active application. 🔥 To be able to
+  ;; replicate this behaviour with a tap-hold key, you must press-release-press
+  ;; the key within the tap timeout window (number is milliseconds). Simply
+  ;; holding the key results in the hold action activating, which is why you
+  ;; need to double-press for the tap action to stay pressed.
+  tap-timeout 500
+
+  ;; The hold timeout is the number of milliseconds after which the hold action
+  ;; will activate.
+  hold-timeout 500
+)
+
+;; defalias is used to declare a shortcut for a more complicated action to keep
+;; the deflayer declarations clean and aligned. The alignment in deflayers is not
+;; necessary, but is strongly recommended for ease of understanding visually.
+;;
+;; Aliases are referred to by `@<alias_name>`. Aliases can refer to each other,
+;; e.g. in the `anm` alias. However, an alias can only refer to another alias
+;; that has been defined before it in the file.
+(defalias
+  w    (tap-hold-press $tap-timeout $hold-timeout w lctl)
+  o    (tap-hold-press $tap-timeout $hold-timeout o lctl)
+
+  ;;grv  (tap-hold-press $tap-timeout $hold-timeout grv (layer-while-held symbols))
+  ;;'    (tap-hold-press $tap-timeout $hold-timeout '   (layer-while-held symbols))
+  v    (tap-hold-press $tap-timeout $hold-timeout v   (layer-while-held symbols))
+  n    (tap-hold-press $tap-timeout $hold-timeout n   (layer-while-held symbols))
+
+  a    (tap-hold-press $tap-timeout $hold-timeout a lsft)
+  ;    (tap-hold-press $tap-timeout $hold-timeout ; lsft)
+
+  d    (tap-hold-press $tap-timeout $hold-timeout d (layer-while-held navigation))
+  df   (layer-while-held navigation2)
+  ds   (layer-while-held media)
+
+  f    (tap-hold-press $tap-timeout $hold-timeout f (layer-while-held numbers))
+  fspc (layer-while-held fns)
+
+  spc  (tap-hold-press $tap-timeout $hold-timeout spc lmet)
+)
+
+;; The first layer defined is the layer that will be active by default when
+;; kanata starts up.
+
+(deflayer default
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     @w    _     _     _     _     _     _     @o    _     -     _     _
+  `     @a    _     @d    @f    _     _     _     _     _     @;    '     _
+  _     _     _     _     @v    _     @n    _     _     _     _     _
+  _     _     _                 @spc              _     _     _
+)
+
+(deflayer symbols
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     S-1   S-2   S-3   S-4   S-5   S-6   S-7   S-8   -     +     _     _     _
+  XX    S-9   S-0   {     }     =     S--   [     ]     S-\   \     XX    _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer navigation
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     esc   bspc  _     _     _     _
+  _     _     @ds   XX    @df   _     lft   down  up    rght  _     caps  _
+  _     _     _     _     _     _     ret   _     _     tab   _     _
+  _     _     _                 spc               _     _     _
+)
+
+(deflayer navigation2
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     del   _     _     _     _
+  _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer media
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     pp    _     _     _     _
+  _     _     XX    XX    _     _     prev  vold  volu  next  _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer numbers
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     7     8     9     _     _     _     _
+  _     _     _     _     XX    _     _     4     5     6     _     _     _
+  _     _     _     _     _     _     0     1     2     3     _     _
+  _     _     _                 @fspc             _     _     _
+)
+
+(deflayer fns
+  _     _     _     _     _     _     _     f10   f11   f12   _     _     _     _
+  _     _     _     _     _     _     _     f7    f8    f9    _     _     _     _
+  _     _     _     _     XX    _     _     f4    f5    f6    _     _     _
+  _     _     _     _     _     _     _     f1    f2    f3    _     _
+  _     _     _                 XX                _     _     _
+)
+
+(deflayer blank
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)

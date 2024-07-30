@@ -1,0 +1,110 @@
+;; -----------------------------------------------------------------------------
+
+;; Documentation:
+;;   - config docs: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
+;;   - key names: https://www.toptal.com/developers/keycode
+
+;; -----------------------------------------------------------------------------
+
+(defcfg
+  process-unmapped-keys yes ;;enable processing of keys that are not in defsrc,
+                            ;;useful if mapping a few keys in defsrc instead of
+                            ;;most of the keys on your keyboard. Without this,
+                            ;;the tap-hold-release and tap-hold-press actions
+                            ;;will not activate for keys that are not in defsrc.
+                            ;;Disabled because some keys may not work correctly
+                            ;;if they are intercepted.
+                            ;;E.g. rctl/altgr on Windows; see the windows-altgr
+                            ;;configuration item above for context.
+)
+
+(defvar
+  tap-timeout  100
+  hold-timeout 200
+)
+
+(defalias
+    smet  (tap-hold-release $tap-timeout $hold-timeout spc lmet)
+
+    wctrl (tap-hold-release $tap-timeout $hold-timeout w lctrl)
+    octrl (tap-hold-release $tap-timeout $hold-timeout o lctrl)
+
+    `shft (tap-hold-release $tap-timeout $hold-timeout ` lshft)
+    'shft (tap-hold-release $tap-timeout $hold-timeout ' lshft)
+
+    a2    (tap-hold-release $tap-timeout $hold-timeout a (layer-toggle 2))
+    ;2    (tap-hold-release $tap-timeout $hold-timeout ; (layer-toggle 2))
+
+    d1    (tap-hold-release $tap-timeout $hold-timeout d (layer-while-held 1))
+    df1x  (layer-while-held 1x)
+
+    f3    (tap-hold-release $tap-timeout $hold-timeout f (layer-while-held 3))
+    fs3x  (layer-while-held 3x)
+)
+
+(defsrc
+    grv     1       2       3       4       5       6       7       8       9       0       -       =       bspc
+    tab     q       w       e       r       t       y       u       i       o       p       [       ]       \
+    caps    a       s       d       f       g       h       j       k       l       ;       '       ret
+    lsft    z       x       c       v       b       n       m       ,       .       /       rsft
+    lctl    lalt    lmet                    spc                             rmet    ralt
+)
+
+(deflayer default
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       @wctrl  _       _       _       _       _       _       @octrl  _       -       _       _
+    @`shft  @a2     _       @d1     @f3     _       _       _       _       _       @;2     @'shft  _
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       @smet                           _       _
+)
+
+(deflayer 1
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       esc     bspc    _       _       _       _
+    caps    _       lalt    XX      @df1x   _       left    down    up      rght    _       _       _
+    _       _       _       _       _       _       ret     _       _       tab     _       _
+    _       _       _                       spc                             _       _
+)
+
+(deflayer 1x
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       _       _       del     _       _       _       _
+    _       _       _       XX      XX      _       home    pgdn    pgup    end     _       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       _                               _       _
+)
+
+(deflayer 2
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       !       @       #       $       %       ^       &       *       S-9     S-0     _       _       _
+    _       _       _       |       \       _       =       [       ]       {       }       _       _
+    _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _                       _                               _       _
+)
+
+(deflayer 3
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _       _       7       8       9       _       _       _       _
+    _       _       _       _       _       _       _       4       5       6       _       _       _
+    _       _       _       _       _       _       0       1       2       3       _       _
+    _       _       _                       @fs3x                           _       _
+)
+
+(deflayer 3x
+    _       _       _       _       _       _       _       _       _       _       _       _       _       _
+    _       _       _       _       _       _     f12      f7      f8      f9       _       _       _       _
+    _       _       _       _       XX      _     f11      f4      f5      f6       _       _       _
+    _       _       _       _       _       _     f10      f1      f2      f3       _       _
+    _       _       _                       XX                              _       _
+)
+
+;; -----------------------------------------------------------------------------
+
+;; (black template
+    ;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _       _       _       _       _       _       _       _       _       _
+;;     _       _       _                       _                               _       _
+;; )
+
