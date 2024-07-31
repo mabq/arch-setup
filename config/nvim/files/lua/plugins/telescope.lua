@@ -71,17 +71,17 @@ return {
 			-- See `:help telescope.builtin`
 			-- NOTE: Some
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Search help" })
-			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Search keymaps" })
-			vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Search files" })
-			vim.keymap.set("n", "<leader>ft", builtin.builtin, { desc = "Search telescope builtins" })
-			vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Search string" })
-			vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = "Search live (grep)" })
-			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Search diagnostics" }) -- use `Ctrl-q` to send the list to  quickfix
-			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Search resume" })
-			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Search old files" })
-			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Search buffers" })
-			vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Search git files" })
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Search help" })
+			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
+			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
+			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Search telescope builtins" })
+			vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "Search string" })
+			vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "Search live (grep)" })
+			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search diagnostics" }) -- use `Ctrl-q` to send the list to  quickfix
+			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search resume" })
+			vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search old files" })
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search buffers" })
+			vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "Search git files" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>f/", function()

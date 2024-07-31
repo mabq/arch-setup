@@ -26,7 +26,7 @@
     cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
 
     ;; let non-configured keys act normal 
-    fallthrough true
+    fallthrough truu
 
     ;; do not run commands for security reasons 
     allow-cmd false 
