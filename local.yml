@@ -46,7 +46,8 @@
     - import_tasks: config/brave/main.yml
     - import_tasks: config/keepassxc/main.yml
 
-    - import_tasks: config/kmonad/main.yml
+    # - import_tasks: config/kmonad/main.yml # replaced with kanata
+    - import_tasks: config/kanata/main.yml
     - import_tasks: config/logiops/main.yml
 
     - import_tasks: config/flameshot/main.yml
