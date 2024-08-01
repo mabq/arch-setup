@@ -5,8 +5,7 @@
       community.general.pacman:
         state: latest
         name:
-          - openssh   # SSH protocol implementation for remote login, command execution and file transfer
-
+          - openssh # SSH protocol implementation for remote login, command execution and file transfer
 
     - name: SSH client side configurations (connect from this machine to other machines)
       block:
@@ -15,7 +14,7 @@
             path: "{{ home }}/.ssh"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: '700'
+            mode: "700"
             state: directory
 
         - name: ssh - Copy ssh keys
@@ -26,8 +25,8 @@
             group: "{{ user }}"
             mode: "{{ item.mode }}"
           with_items:
-            - { name: "{{ ssh_key_name }}", mode: '600' }
-            - { name: "{{ ssh_key_name }}.pub", mode: '644' }
+            - { name: "{{ ssh_key_name }}", mode: "600" }
+            - { name: "{{ ssh_key_name }}.pub", mode: "644" }
 
         - name: ssh - Create links
           ansible.builtin.file:
@@ -35,11 +34,10 @@
             path: "{{ home }}/.ssh/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: '600'
+            mode: "600"
             state: "link"
           loop:
             - { name: "config" }
-
 
     - name: SSH server side configurations (connect from other machines to this machine)
       block:
@@ -76,7 +74,6 @@
             regexp: "^#PasswordAuthentication"
             line: "PasswordAuthentication no"
           when: ssh_disable_password_authentication
-
 
     - name: ssh-agent setup
       # The private key is protected with a passphrase for major security.
@@ -116,15 +113,15 @@
               community.general.pacman:
                 state: latest
                 name:
-                  - python-pexpect    # For controlling and automating applications
+                  - python-pexpect # For controlling and automating applications
 
             - name: ssh - Add the private key passphrase to the ssh-agent
+              ignore_errors: yes
               ansible.builtin.expect:
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
                   # This is the only question asked, use a regular expression
                   # to match it.
-                  '(?i)Enter passphrase (.*):': "{{ ssh_key_passphrase }}"
+                  "(?i)Enter passphrase (.*):": "{{ ssh_key_passphrase }}"
               # Do not show passphrase in logs
               no_log: true
-

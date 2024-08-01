@@ -1,10 +1,9 @@
-;; Press and hold 'Control-Space-Escape' to quit kanata.
+;; Press and hold Control-Space-Escape to quit kanata
+
 ;; Documentation: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
 
 (defcfg
-  ;; By default, kanata will try to detect which input devices are keyboards
-  ;; and try to intercept them all. However, you may specify exact keyboard
-  ;; devices from the /dev/input directories using the linux-dev configuration.
+  ;; Without any 
   ;;linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
 
   ;; Disable logs
@@ -13,10 +12,10 @@
 
 (defvar
   ;; Milliseconds to wair for double tap
-  tap-timeout 500 
+  tap-timeout 500
 
   ;; Irrelevant with `tap-hold-press` and `tap-hold-release` but must be set
-  hold-timeout 500 
+  hold-timeout 500
 )
 
 (defsrc
@@ -29,10 +28,10 @@
 
 (deflayer base
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     _     _     _     -     _     _ ;; 👀 notice the '-' here (third from the right)
+  _     _     _     _     _     _     _     _     _     _     _     -     _     _  ;; 👀 notice the '-' here (third from the right)
   @'met _     _     @nav1 _     _     _     _     _     _     @;    @'    @rmet
   _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _                 @sctl             _     _     _                   ;; ⚠️  leave default modifier keys unchanged
+  _     _     _                 @sctl             _     _     _                    ;; ⚠️  leave default modifier keys unchanged
 )
 
 (defalias
