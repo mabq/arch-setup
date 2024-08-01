@@ -9,42 +9,30 @@
           - nodejs # Evented I/O for V8 javascript
           - npm # JavaScript package manager
 
-    - name: nodejs - Install "n" node version manager
-      become: true
-      community.general.npm:
-        name: "n" # Interactively manage your nodejs versions
-        global: true
+    - name: Install "n" node manager
+      block:
+        - name: nodejs - Install "n" node version manager
+          become: true
+          community.general.npm:
+            name: "n" # Interactively manage your nodejs versions
+            global: true
+        - name: nodejs - Install node lts version with "n"
+          become: true
+          ansible.builtin.shell: "n lts"
 
-    - name: nodejs - Install node lts version with "n"
-      become: true
-      ansible.builtin.shell: "n lts"
+    - name: Install some npm packages globally
+      block:
+        - name: nodejs - Install ngrok
+          # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
+          become: true
+          community.general.npm:
+            name: "ngrok"
+            global: true
 
-    # - name: Install `n` node version manage
-    #   block:
-    #     - name: nodejs - Check if `n` is already installed
-    #       ansible.builtin.stat:
-    #         path: "{{ home }}/n"
-    #       register: n
-    #
-    #     - name: nodejs - Install `n` (if not already installed)
-    #       when: n.stat.isdir is not defined or n.stat.isdir == False
-    #       # https://github.com/tj/n?tab=readme-ov-file#installation
-    #       ansible.builtin.shell: |
-    #         curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
-    #         npm install -g n
-    #
-    #     - name: nodejs - Install lts version
-    #       ansible.builtin.shell: "n lts"
-
-    - name: nodejs - Install ngrok
-      # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
-      community.general.npm:
-        name: "ngrok"
-        global: true
-
-    - name: nodejs - Install new-component
-      # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
-      # I added a zsh alias so that I can call this component with `nc`
-      community.general.npm:
-        name: "new-component"
-        global: true
+        - name: nodejs - Install new-component
+          # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
+          # I added a zsh alias so that I can call this component with `nc`
+          become: true
+          community.general.npm:
+            name: "new-component"
+            global: true
