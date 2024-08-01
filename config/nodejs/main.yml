@@ -10,11 +10,10 @@
 
         - name: nodejs - Install `n` (if not already installed)
           when: n.stat.isdir is not defined or n.stat.isdir == False
-          # `-s` is for silent
-          # everything after `--` are arguments passed to the script
-          # `-y` assumes yes as the reply to all prompts (run unattended)
-          # `-n` suppresses updating of the relevant shell initialization file
-          ansible.builtin.shell: "curl -L https://bit.ly/n-install | bash -s -- -y -n"
+          # https://github.com/tj/n?tab=readme-ov-file#installation
+          ansible.builtin.shell: |
+            curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
+            npm install -g n
 
         - name: nodejs - Install lts version
           ansible.builtin.shell: "n lts"
