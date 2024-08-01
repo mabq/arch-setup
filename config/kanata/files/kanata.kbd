@@ -1,34 +1,23 @@
 ;; Press and hold 'Control-Space-Escape' to quit kanata.
-;;
-;; For key codes visit https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
+;; Documentation: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
 
 (defcfg
-  ;; If you are on Linux and omit this entry, kanata will try to attach to every
-  ;; device found on your system that seems like a keyboard.
+  ;; By default, kanata will try to detect which input devices are keyboards
+  ;; and try to intercept them all. However, you may specify exact keyboard
+  ;; devices from the /dev/input directories using the linux-dev configuration.
   ;;linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
-)
 
-;; defvar can be used to declare commonly-used values:
+  ;; Disable logs
+  log-layer-changes no
+)
 
 (defvar
-  ;; When you press and hold a standard key on your keyboard, your operating
-  ;; system will read that and keep sending that key to the active application.
-  ;; To be able to replicate this behaviour with a tap-hold key, you must
-  ;; press-release-press the key within the tap timeout window (number is
-  ;; milliseconds). Simply holding the key results in the hold action activating,
-  ;; which is why you need to double-press for the tap action to stay pressed.
-  tap-timeout 500 ;; 🔥 Using a relatevily high value makes it easier to use.
+  ;; Milliseconds to wair for double tap
+  tap-timeout 500 
 
-  ;; The hold timeout is the number of milliseconds after which the hold action
-  ;; will activate.
-  hold-timeout 500 ;; Irrelevant with `tap-hold-press` and `tap-hold-release`.
+  ;; Irrelevant with `tap-hold-press` and `tap-hold-release` but must be set
+  hold-timeout 500 
 )
-
-;; Only one defsrc is allowed.
-;;
-;; defsrc defines the keys that will be intercepted by kanata. The order of the
-;; keys matches the deflayer declarations and all deflayer declarations must
-;; have the same number of keys as defsrc.
 
 (defsrc
   grv   1     2     3     4     5     6     7     8     9     0     -     =     bspc
@@ -38,10 +27,7 @@
   lctl  lmet  lalt              spc               ralt  rmet  rctl
 )
 
-;; The first layer defined is the layer that will be active by default when
-;; kanata starts up.
-
-(deflayer default
+(deflayer base
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     _     _     _     -     _     _ ;; 👀 notice the '-' here (third from the right)
   @'met _     _     @nav1 _     _     _     _     _     _     @;    @'    @rmet
@@ -50,7 +36,7 @@
 )
 
 (defalias
-  ;; depending on the action, `tap-hold-press` or `tap-hold-release` are used.
+  ;; `tap-hold-release` produces less unintended modifier actions compared to `tap-hold-press`
 
   sctl (tap-hold-release $tap-timeout $hold-timeout spc lctl)
 
@@ -72,7 +58,7 @@
 (deflayer navigation1
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     esc   bspc  _     _     _     _
-  _     _     @nav2 XX    @nums _     lft   down  up    rght  _     _     _
+  _     _     @nums XX    @nav2 _     lft   down  up    rght  _     _     _
   _     _     _     _     _     _     ret   _     _     tab   _     @up
   _     _     _                 spc               _     _     _
 )
@@ -80,7 +66,7 @@
 (deflayer navigation2
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     ins   del   _     _     _     _
-  _     _     XX    XX    _     _     home  pgdn  pgup  end   _     _     _
+  _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
   _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _                 _                 _     _     _
 )
@@ -88,7 +74,7 @@
 (deflayer numbers
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     7     8     9     _     _     _     _
-  _     _     _     XX    XX    _     _     4     5     6     _     _     _
+  _     _     XX    XX    _     _     _     4     5     6     _     _     _
   _     _     _     _     _     _     0     1     2     3     _     _
   _     _     _                 @func             _     _     _
 )
@@ -96,7 +82,7 @@
 (deflayer functions
   _     _     _     _     _     _     _     f10   f11   f12   _     _     _     _
   _     _     _     _     _     _     _     f7    f8    f9    _     _     _     _
-  _     _     _     XX    XX    _     _     f4    f5    f6    _     _     _
+  _     _     XX    XX    _     _     _     f4    f5    f6    _     _     _
   _     _     _     _     _     _     _     f1    f2    f3    _     _
   _     _     _                 XX                _     _     _
 )
