@@ -68,10 +68,6 @@
   '    (tap-hold-press $tap-timeout $hold-timeout ' (layer-while-held media))
 
   up   (caps-word 2000)
-  ct   C-tab
-  cst  C-S-tab
-  al   A-left
-  ar   A-rght
 )
 
 (deflayer navigation
@@ -84,9 +80,9 @@
 
 (deflayer navigation2
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     ins   del   @cst  _     _     _
+  _     _     _     _     _     _     _     _     ins   del   _     _     _     _
   _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
-  _     _     _     _     _     _     @ct   _     @al   @ar   _     _
+  _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _                 _                 _     _     _
 )
 
