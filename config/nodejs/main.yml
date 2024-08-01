@@ -16,6 +16,7 @@
         global: true
 
     - name: nodejs - Install node lts version with "n"
+      become: true
       ansible.builtin.shell: "n lts"
 
     # - name: Install `n` node version manage
