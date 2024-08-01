@@ -44,36 +44,35 @@
 (deflayer default
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     _     _     _     -     _     _ ;; 👀 notice the '-' here (third from the right)
-  @grv  _     _     @d    @f    _     _     _     _     _     @;    @'    @ret
+  @'met _     _     @nav1 _     _     _     _     _     _     @;    @'    @rmet
   _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _                 @spc              _     _     _                   ;; ⚠️  leave default modifier keys unchanged
+  _     _     _                 @sctl             _     _     _                   ;; ⚠️  leave default modifier keys unchanged
 )
 
 (defalias
-  ;; `tap-hold-press` feels better than `tap-hold-release`. `tap-hold` is not good at all.
+  ;; depending on the action, `tap-hold-press` or `tap-hold-release` are used.
 
-  spc  (tap-hold-press $tap-timeout $hold-timeout spc lctl)
+  sctl (tap-hold-release $tap-timeout $hold-timeout spc lctl)
 
-  grv  (tap-hold-press $tap-timeout $hold-timeout grv lmet)
-  ret  (tap-hold-press $tap-timeout $hold-timeout ret rmet)
+  'met (tap-hold-release $tap-timeout $hold-timeout grv lmet)
+  rmet (tap-hold-release $tap-timeout $hold-timeout ret rmet)
 
-  d    (tap-hold-press $tap-timeout $hold-timeout d (layer-while-held navigation))
+  nav1 (tap-hold-release $tap-timeout $hold-timeout d (layer-while-held navigation1))
   nav2 (layer-while-held navigation2)
-
-  f    (tap-hold-press $tap-timeout $hold-timeout f (layer-while-held numbers))
+  nums (layer-while-held numbers)
   func (layer-while-held functions)
 
-  ;    (tap-hold-press $tap-timeout $hold-timeout ; (layer-while-held symbols))
+  ;    (tap-hold-release $tap-timeout $hold-timeout ; (layer-while-held symbols))
 
-  '    (tap-hold-press $tap-timeout $hold-timeout ' (layer-while-held media))
+  '    (tap-hold-release $tap-timeout $hold-timeout ' (layer-while-held media))
 
   up   (caps-word 2000)
 )
 
-(deflayer navigation
+(deflayer navigation1
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     esc   bspc  _     _     _     _
-  _     _     _     XX    @nav2 _     lft   down  up    rght  _     _     _
+  _     _     @nav2 XX    @nums _     lft   down  up    rght  _     _     _
   _     _     _     _     _     _     ret   _     _     tab   _     @up
   _     _     _                 spc               _     _     _
 )
@@ -81,7 +80,7 @@
 (deflayer navigation2
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     ins   del   _     _     _     _
-  _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
+  _     _     XX    XX    _     _     home  pgdn  pgup  end   _     _     _
   _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _                 _                 _     _     _
 )
@@ -89,9 +88,9 @@
 (deflayer numbers
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     7     8     9     _     _     _     _
-  _     _     _     @func XX    _     _     4     5     6     _     _     _
+  _     _     _     XX    XX    _     _     4     5     6     _     _     _
   _     _     _     _     _     _     0     1     2     3     _     _
-  _     _     _                 _                 _     _     _
+  _     _     _                 @func             _     _     _
 )
 
 (deflayer functions
@@ -99,7 +98,7 @@
   _     _     _     _     _     _     _     f7    f8    f9    _     _     _     _
   _     _     _     XX    XX    _     _     f4    f5    f6    _     _     _
   _     _     _     _     _     _     _     f1    f2    f3    _     _
-  _     _     _                 _                 _     _     _
+  _     _     _                 XX                _     _     _
 )
 
 (deflayer media
