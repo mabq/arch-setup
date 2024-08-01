@@ -19,7 +19,7 @@ It's important that you execute this playbook with `ansible-pull`, some parts of
 
 All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and then re-run `ansible-pull`.
 
-> If a file with the same name already exists the creatiion of the link/file will through an error. I could force the creatiion but I prefer the error in order to avoid loosing any data that might be important.
+> If a file with the same name already exists the creation of the link/file will through an error. I could force the creation but I prefer the error in order to avoid loosing any data that might be important.
 
 
 ## Before running this script
