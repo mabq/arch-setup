@@ -120,7 +120,9 @@
               ansible.builtin.expect:
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
+                  Question:
+                    - "{{ ssh_key_passphrase }}"
                   # This is the only question asked, use a regular expression to match it.
-                  .*: "{{ ssh_key_passphrase }}"
+                  #"(?i)Enter passphrase (.*):": "{{ ssh_key_passphrase }}"
               # Do not show passphrase in logs
-              no_log: true
+              #no_log: true
