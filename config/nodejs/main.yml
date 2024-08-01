@@ -10,6 +10,7 @@
           - npm # JavaScript package manager
 
     - name: nodejs - Install "n" node version manager
+      become: true
       community.general.npm:
         name: "n" # Interactively manage your nodejs versions
         global: true
