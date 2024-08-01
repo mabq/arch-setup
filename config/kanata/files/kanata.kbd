@@ -1,18 +1,30 @@
-;; Pressing and holding 'Control-Space-Escape' together at the same time
-;; will cause kanata to exit.
+;; Press and hold 'Control-Space-Escape' to quit kanata.
 ;;
 ;; For key codes visit https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
 
 (defcfg
-  ;; Your keyboard device will likely differ from this. I believe /dev/input/by-id/
-  ;; is preferable; I recall reading that it's less likely to change names on you,
-  ;; but I didn't find any keyboard device in there in my VM.
-  ;; 🔥 If you are on Linux  and omit this entry, kanata will try to attach to every
+  ;; If you are on Linux and omit this entry, kanata will try to attach to every
   ;; device found on your system that seems like a keyboard.
   ;;linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
 )
 
-;; Only one defsrc is allowed:
+;; defvar can be used to declare commonly-used values:
+
+(defvar
+  ;; When you press and hold a standard key on your keyboard, your operating
+  ;; system will read that and keep sending that key to the active application.
+  ;; To be able to replicate this behaviour with a tap-hold key, you must
+  ;; press-release-press the key within the tap timeout window (number is
+  ;; milliseconds). Simply holding the key results in the hold action activating,
+  ;; which is why you need to double-press for the tap action to stay pressed.
+  tap-timeout 500 ;; 🔥 Using a relatevily high value makes it easier to use.
+
+  ;; The hold timeout is the number of milliseconds after which the hold action
+  ;; will activate.
+  hold-timeout 500 ;; Irrelevant with `tap-hold-press` and `tap-hold-release`.
+)
+
+;; Only one defsrc is allowed.
 ;;
 ;; defsrc defines the keys that will be intercepted by kanata. The order of the
 ;; keys matches the deflayer declarations and all deflayer declarations must
@@ -31,110 +43,83 @@
 
 (deflayer default
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     @w    _     _     _     _     _     _     @o    _     -     _     _
-  @grv  @a    _     @d    @f    @g    _     _     _     _     @;    @'    _
+  _     _     _     _     _     _     _     _     _     _     _     -     _     _ ;; 👀 notice the '-' here (third from the right)
+  @grv  _     _     @d    @f    _     _     _     _     _     @;    @'    @ret
   _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _                 @spc              _     _     _
-)
-
-;; defvar can be used to declare commonly-used values:
-
-(defvar
-  ;; When you press and hold a standard key on your keyboard, your operating
-  ;; system will read that and keep sending that key to the active application.
-  ;; To be able to replicate this behaviour with a tap-hold key, you must
-  ;; press-release-press the key within the tap timeout window (number is
-  ;; milliseconds). Simply holding the key results in the hold action activating,
-  ;; which is why you need to double-press for the tap action to stay pressed.
-  ;; 🔥 Using a relatevily high value makes it easier to use.
-  tap-timeout 500
-
-  ;; The hold timeout is the number of milliseconds after which the hold action
-  ;; will activate.
-  ;; 🔥 Irrelevant with `tap-hold-press` and `tap-hold-release`.
-  hold-timeout 500
+  _     _     _                 @spc              _     _     _                   ;; ⚠️  leave default modifier keys unchanged
 )
 
 (defalias
   ;; `tap-hold-press` feels better than `tap-hold-release`. `tap-hold` is not good at all.
 
-  w    (tap-hold-press $tap-timeout $hold-timeout w lctl)
-  o    (tap-hold-press $tap-timeout $hold-timeout o lctl)
+  spc  (tap-hold-press $tap-timeout $hold-timeout spc lctl)
 
-  grv  (tap-hold-press $tap-timeout $hold-timeout grv (layer-while-held symbols))
-  '    (tap-hold-press $tap-timeout $hold-timeout '   (layer-while-held symbols))
-
-  a    (tap-hold-press $tap-timeout $hold-timeout a lsft)
-  ;    (tap-hold-press $tap-timeout $hold-timeout ; lsft)
+  grv  (tap-hold-press $tap-timeout $hold-timeout grv lmet)
+  ret  (tap-hold-press $tap-timeout $hold-timeout ret rmet)
 
   d    (tap-hold-press $tap-timeout $hold-timeout d (layer-while-held navigation))
-  df   (layer-while-held navigation2)
-  ds   (layer-while-held media)
+  nav2 (layer-while-held navigation2)
 
-  f    (tap-hold-press $tap-timeout $hold-timeout f (layer-while-held parens))
+  f    (tap-hold-press $tap-timeout $hold-timeout f (layer-while-held numbers))
+  func (layer-while-held functions)
 
-  g    (tap-hold-press $tap-timeout $hold-timeout g (layer-while-held numbers))
-  gspc (layer-while-held fns)
+  ;    (tap-hold-press $tap-timeout $hold-timeout ; (layer-while-held symbols))
 
-  spc  (tap-hold-press $tap-timeout $hold-timeout spc lmet)
+  '    (tap-hold-press $tap-timeout $hold-timeout ' (layer-while-held media))
 
   up   (caps-word 2000)
-)
-
-(deflayer symbols
-  _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  XX    S-1   S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-\   \     XX    _
-  _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _                 _                 _     _     _
-)
-
-(deflayer parens
-  _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     XX    _     =     S-9   S-0   S-[   S-]   +     _
-  _     _     _     _     _     _     S--   _     [     ]     _     _
-  _     _     _                 _                 _     _     _
+  ct   C-tab
+  cst  C-S-tab
+  al   A-left
+  ar   A-rght
 )
 
 (deflayer navigation
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     @up   esc   bspc  _     _     _     _
-  _     _     @ds   XX    @df   _     lft   down  up    rght  _     _     _
-  _     _     _     _     _     _     ret   _     _     tab   _     _
+  _     _     _     _     _     _     _     _     esc   bspc  _     _     _     _
+  _     _     _     XX    @nav2 _     lft   down  up    rght  _     _     _
+  _     _     _     _     _     _     ret   _     _     tab   _     @up
   _     _     _                 spc               _     _     _
 )
 
 (deflayer navigation2
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     _     del   _     _     _     _
+  _     _     _     _     _     _     _     _     ins   del   @cst  _     _     _
   _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
-  _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _                 _                 _     _     _
-)
-
-(deflayer media
-  _     _     _     _     _     _     _     _     _     _     _     _     _     _
-  _     _     _     _     _     _     _     _     _     _     pp    _     _     _
-  _     _     XX    XX    _     _     prev  vold  volu  next  _     _     _
-  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     @ct   _     @al   @ar   _     _
   _     _     _                 _                 _     _     _
 )
 
 (deflayer numbers
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     7     8     9     _     _     _     _
-  _     _     _     _     _     XX    _     4     5     6     _     _     _
+  _     _     _     @func XX    _     _     4     5     6     _     _     _
   _     _     _     _     _     _     0     1     2     3     _     _
-  _     _     _                 @gspc             _     _     _
+  _     _     _                 _                 _     _     _
 )
 
-(deflayer fns
+(deflayer functions
   _     _     _     _     _     _     _     f10   f11   f12   _     _     _     _
   _     _     _     _     _     _     _     f7    f8    f9    _     _     _     _
-  _     _     _     _     XX    _     _     f4    f5    f6    _     _     _
+  _     _     _     XX    XX    _     _     f4    f5    f6    _     _     _
   _     _     _     _     _     _     _     f1    f2    f3    _     _
-  _     _     _                 XX                _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer media
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     prev  volu  vold  next  _     _     _     _     _     XX    _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 pp                _     _     _
+)
+
+(deflayer symbols
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  \     S-1   S-2   =     S-.   S-5   _     _     _     _     _     _     _     _
+  S-6   S-[   S-]   S-9   S-0   S-4   S-3   [     ]     _     XX    _     _
+  _     S-7   S-\   S-8   S-=   _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
 )
 
 ;;(deflayer blank
@@ -144,3 +129,4 @@
 ;;  _     _     _     _     _     _     _     _     _     _     _     _
 ;;  _     _     _                 _                 _     _     _
 ;;)
+
