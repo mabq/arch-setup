@@ -97,28 +97,35 @@
             scope: "user"
 
         - name: ssh - Add the private key passphrase to the ssh-agent
-          # The `ssh-add` command does not accept the passphrase as an
-          # argument, the command is meant to be used interactively.
-          #
-          # In order to add the passphrase we need to use the `expect`
-          # module, which is based on the `expect` command (a tool for
-          # automating interactive applications).
-          #
-          # The `expect` module requires the `pexpect` package to be
-          # installed in order to evaluate regex patterns in the promped
-          # questions.
-          block:
-            - name: ssh - Install `pexpect`
-              become: true
-              community.general.pacman:
-                state: latest
-                name:
-                  - python-pexpect # For controlling and automating applications
+          ansible.netcommon.cli_command:
+            command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+            prompt: "Enter passphrase for {{ home }}/.ssh/{{ ssh_key_name }}:"
+            answer: "{{ ssh_key_passphrase }}"
+            newline: false
 
-            - name: ssh - add the private key passphrase to the ssh-agent
-              ansible.builtin.expect:
-                command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-                # There is the only one question asked
-                responses:
-                  Question:
-                    - "{{ ssh_key_passphrase }}"
+        # - name: ssh - Add the private key passphrase to the ssh-agent
+        #   # The `ssh-add` command does not accept the passphrase as an
+        #   # argument, the command is meant to be used interactively.
+        #   #
+        #   # In order to add the passphrase we need to use the `expect`
+        #   # module, which is based on the `expect` command (a tool for
+        #   # automating interactive applications).
+        #   #
+        #   # The `expect` module requires the `pexpect` package to be
+        #   # installed in order to evaluate regex patterns in the promped
+        #   # questions.
+        #   block:
+        #     - name: ssh - Install `pexpect`
+        #       become: true
+        #       community.general.pacman:
+        #         state: latest
+        #         name:
+        #           - python-pexpect # For controlling and automating applications
+        #
+        #     - name: ssh - add the private key passphrase to the ssh-agent
+        #       ansible.builtin.expect:
+        #         command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+        #         # There is the only one question asked
+        #         responses:
+        #           Question:
+        #             - "{{ ssh_key_passphrase }}"
