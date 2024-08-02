@@ -116,7 +116,6 @@
                   - python-pexpect # For controlling and automating applications
 
             - name: ssh - add the private key passphrase to the ssh-agent
-              ignore_errors: yes
               ansible.builtin.expect:
                 command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
                 # There is the only one question asked
