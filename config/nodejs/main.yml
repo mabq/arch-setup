@@ -19,20 +19,3 @@
         - name: nodejs - Install node lts version with "n"
           become: true
           ansible.builtin.shell: "n lts"
-
-    - name: Install some npm packages globally
-      block:
-        - name: nodejs - Install ngrok
-          # you must run a command to add the user token to a config file, check the documentation (the account was created with Github credentials)
-          become: true
-          community.general.npm:
-            name: "ngrok"
-            global: true
-
-        - name: nodejs - Install new-component
-          # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
-          # I added a zsh alias so that I can call this component with `nc`
-          become: true
-          community.general.npm:
-            name: "new-component"
-            global: true
