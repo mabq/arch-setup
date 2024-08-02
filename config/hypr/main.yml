@@ -21,6 +21,7 @@
               - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
               # - wireplumber                 # Session / policy manager implementation for PipeWire (installed as dependency of `pipewire-pulse`)
               - wl-clipboard # Command-line copy/paste utilities for Wayland
+              - wlr-randr # Utility to manage outputs of a Wayland compositor
               - xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
               - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
 
@@ -38,18 +39,6 @@
                   when: which_hyprpicker.rc != 0
                   # A wlroots-compatible Wayland color picker that does not suck
                   ansible.builtin.shell: "paru -S --skipreview hyprpicker"
-
-            - name: wlr-randr
-              block:
-                - name: hypr - Check if wlr-randr is already installed
-                  ansible.builtin.command: "which wlr-randr"
-                  register: which_wlrrandr
-                  ignore_errors: true
-
-                - name: hypr - Install wlr-randr
-                  when: which_wlrrandr.rc != 0
-                  # Utility to manage outputs of a Wayland compositor
-                  ansible.builtin.shell: "paru -S --skipreview wlr-randr"
 
     - name: hypr - Link config files
       # link the whole directory, there is nothing sensible here
