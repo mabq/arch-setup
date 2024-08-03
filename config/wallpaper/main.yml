@@ -10,8 +10,7 @@
         clone: true
         update: true
         key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
-        # This is the first time connecting to github via ssh, we must 
+        # This is the first time connecting to github via ssh, we must
         # accept it's key to be automatically added to the `known_hosts`
-        # file, otherwise the verification fails.
+        # file, otherwise verification will fail.
         accept_hostkey: true
-
