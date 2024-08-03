@@ -1,7 +1,7 @@
 - tags: nodejs
   block:
-    # First, install nodejs with pacman
     - name: nodejs - Install nodejs and npm with pacman
+      # First, install nodejs with pacman. The "n" nodejs manager is installed with npm.
       become: true
       community.general.pacman:
         state: latest
@@ -10,6 +10,7 @@
           - npm # JavaScript package manager
 
     - name: Install "n" node manager
+      # "n" is installed in a directory owned by root, so you will need to run the `n` command with `sudo`.
       block:
         - name: nodejs - Install "n" node version manager
           become: true
