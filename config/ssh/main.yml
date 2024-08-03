@@ -96,12 +96,25 @@
             enabled: true
             scope: "user"
 
-        - name: ssh - Add the private key passphrase to the ssh-agent
-          ansible.netcommon.cli_command:
-            command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-            prompt: "Enter passphrase for {{ home }}/.ssh/{{ ssh_key_name }}:"
-            answer: "{{ ssh_key_passphrase }}"
-            newline: false
+        - name: Add private key passphrase
+          block:
+            - name: ssh - Install `expect`
+              # required to respond to the prompt asking for the passphrase
+              become: true
+              community.general.pacman:
+                state: latest
+                name:
+                  - expect # A tool for automating interactive applications
+            - name: ssh - Run ssh-add with expect
+              ansible.builtin.shell: |
+                set timeout 300
+                "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+                expect "Enter passphrase for {{ home }}/.ssh/{{ ssh_key_name }}:"
+                send "{{ ssh_key_passphrase }}\n"
+                exit 0
+              args:
+                executable: /usr/bin/expect
+              delegate_to: localhost
 
         # - name: ssh - Add the private key passphrase to the ssh-agent
         #   # The `ssh-add` command does not accept the passphrase as an

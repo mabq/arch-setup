@@ -116,15 +116,15 @@
           #
           # Books:
           - evince # Document viewer (PDF, PostScript, XPS, djvu, dvi, tiff, cbr, cbz, cb7, cbt)
-          - foliate # A simple and modern GTK eBook reader
+          # - foliate # A simple and modern GTK eBook reader
           - mdbook # Create book from markdown files, like Gitbook but implemented in Rust
           #
           # ------------------------------------------------------------------------
           #
           # Office:
           - inkscape # Professional vector graphics editor
-          - kicad # Electronic schematic and printed circuit board (PCB) design tools
-          - kicad-library # KiCad symbol, footprint and template libraries
+          # - kicad # Electronic schematic and printed circuit board (PCB) design tools
+          # - kicad-library # KiCad symbol, footprint and template libraries
           - libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
           #
           # ------------------------------------------------------------------------
@@ -163,7 +163,6 @@
               ansible.builtin.shell: "pacman -Q | rg plex-media-server"
               register: which_plex
               ignore_errors: true
-
             - name: no-config - Install plex-media-server
               when: which_plex.rc != 0
               # The back-end media server component of Plex (server sources must be configured manually)
@@ -175,7 +174,6 @@
               ansible.builtin.command: "which localsend"
               register: which_localsend
               ignore_errors: true
-
             - name: no-config - Install localsend
               when: which_localsend.rc != 0
               # Video Conferencing and Web Conferencing Service
@@ -187,7 +185,6 @@
               ansible.builtin.command: "which zoom"
               register: which_zoom
               ignore_errors: true
-
             - name: no-config - Install Zoom
               when: which_zoom.rc != 0
               # Video Conferencing and Web Conferencing Service
@@ -199,7 +196,6 @@
               ansible.builtin.command: "which kalker"
               register: which_kalker
               ignore_errors: true
-
             - name: no-config - Install Kalker
               when: which_kalker.rc != 0
               # A calculator program that supports user-defined variables, functions, derivation, and integration.
@@ -212,20 +208,7 @@
                 path: "/usr/share/fonts/apple-color-emoji/apple-color-emoji.ttf"
               register: ttfappleemoji
               ignore_errors: true
-
             - name: no-config - Install ttf-apple-emoji
               when: not ttfappleemoji.stat.exists
               # Emoji font
               ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"
-
-        - name: Emote
-          block:
-            - name: no-config - Check if Emote is already installed
-              ansible.builtin.command: "which emote"
-              register: which_emote
-              ignore_errors: true
-
-            - name: no-config - Install Emote
-              when: which_emote.rc != 0
-              # Emoji Picker for Linux written in GTK3
-              ansible.builtin.shell: "paru -S --skipreview emote"
