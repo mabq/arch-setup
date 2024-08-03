@@ -1,6 +1,6 @@
 - tags: fonts
   block:
-    # I cannot include proprietary fonts in a public repo, all fonts should 
+    # I cannot include proprietary fonts in a public repo, all fonts should
     # be stored in a private repository.
     - name: fonts - Clone the fonts private repository
       ansible.builtin.git:
@@ -9,7 +9,7 @@
         clone: true
         update: true
         key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
-        # This is the first time connecting to github via ssh, we must 
+        # This is the first time connecting to github via ssh, we must
         # accept it's key to be automatically added to the `known_hosts`
         # file, otherwise the verification fails.
         accept_hostkey: true
@@ -21,6 +21,5 @@
         path: "/usr/local/share/fonts"
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: '755'
+        mode: "755"
         state: "link"
-

@@ -105,10 +105,11 @@
                 state: latest
                 name:
                   - expect # A tool for automating interactive applications
+                  # - python-pexpect # For controlling and automating applications
             - name: ssh - Run ssh-add with expect
               ansible.builtin.shell: |
                 set timeout 1000
-                "spawn ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+                spawn ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
                 expect -re "Enter passphrase .*:"
                 send "{{ ssh_key_passphrase }}\n"
                 exit 0
@@ -141,4 +142,4 @@
         #         # There is the only one question asked
         #         responses:
         #           Question:
-        #             - "{{ ssh_key_passphrase }}"
+        #             - "{{ ssh_key_passphrase
