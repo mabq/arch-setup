@@ -112,7 +112,7 @@
                 command: ssh-add
                 responses:
                   (.*): "{{ ssh_key_passphrase }}"
-              no_log: true
+                no_log: true
 
             # - name: ssh - Install `expect`
             #   # required to respond to the prompt asking for the passphrase

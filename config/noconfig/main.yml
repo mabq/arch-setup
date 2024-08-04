@@ -1,6 +1,6 @@
 - tags: noconfig
   block:
-    - name: no-config - Install packages from pacman
+    - name: noconfig - Install packages from pacman
       become: true
       community.general.pacman:
         state: latest
@@ -152,7 +152,7 @@
           #
           # ------------------------------------------------------------------------
 
-    - name: no-config - Install packages from AUR
+    - name: noconfig - Install packages from AUR
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
@@ -213,7 +213,7 @@
               # Emoji font
               ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"
 
-    - name: no-config - Install packages from flathub
+    - name: noconfig - Install packages from flathub
       tags: flatpak
       community.general.flatpak:
         name:

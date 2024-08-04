@@ -9,7 +9,7 @@
     - import_tasks: config/paru/main.yml
     - import_tasks: config/flatpak/main.yml
 
-    - import_tasks: config/no_config/main.yml # must go after pacman, paru and flatpak
+    - import_tasks: config/noconfig/main.yml # must go after pacman, paru and flatpak
 
     - import_tasks: config/bluetooth/main.yml
 
