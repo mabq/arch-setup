@@ -1,6 +1,5 @@
 - tags: dropbox
   block:
-
     - name: Install Dropbox
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
@@ -13,12 +12,11 @@
         - name: dropbox - Install Dropbox
           when: which_dropbox.rc != 0
           # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
-          ansible.builtin.shell: 'paru -S --skipreview dropbox'
-
+          ansible.builtin.shell: "paru -S --skipreview dropbox"
 
     - name: dropbox - Copy dropbox key
       # In order to unlock everything else you need the passwords database
-      # stored in dropbox. If you want you can remove the unencrypted file 
+      # stored in dropbox. If you want you can remove the unencrypted file
       # from your local directory after login in.
       ansible.builtin.template:
         src: "files/.dropbox_key"
@@ -27,12 +25,11 @@
         group: "{{ user }}"
         mode: "600"
 
-
     # Important!
-    #   For some reason when starting dropbox as a service it spins many 
+    #   For some reason when starting dropbox as a service it spins many
     #   processes that permanentrly consume a significant amount of cpu.
     #   I guess it is a bug related to the service configuration file provided
-    #   by the package since starting it manually with the window manager does 
+    #   by the package since starting it manually with the window manager does
     #   solve the problem.
     #
     # - name: dropbox - Start and enable as a user service
@@ -47,4 +44,3 @@
     #     state: "started"
     #     enabled: true
     #     scope: "user"
-

@@ -2,7 +2,7 @@
 
 - tags: wallpapers
   block:
-    - name: fonts - Clone the wallpaper repository
+    - name: wallpapers - Clone the wallpaper repository
       ansible.builtin.git:
         repo: "git@github.com:mabq/wallpapers.git"
         # (if you ever change the dest path, update hyprland exec file)

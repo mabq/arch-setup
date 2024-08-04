@@ -18,7 +18,7 @@
             mode: "700"
             state: directory
 
-        - name: pacman - Link script
+        - name: bluetooth - Link scripts
           # I create a link so that the hyprland configuration file does not need to be a template.
           # Although this script is almost always called with a keybinding, the scripts folder is the best place for it.
           ansible.builtin.file:

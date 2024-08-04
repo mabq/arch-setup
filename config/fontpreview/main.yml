@@ -1,7 +1,6 @@
 - tags: fontpreview
   # Install a modified version of `fontpreview-ueberzug`
   block:
-
     - name: Install required packages
       block:
         - name: fontpreview - Install packages from official repositories
@@ -9,8 +8,8 @@
           community.general.pacman:
             state: latest
             name:
-              - fzf               # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
-              - imagemagick       # An image viewing/manipulation program (the image is generated with the `convert` command)
+              - fzf # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
+              - imagemagick # An image viewing/manipulation program (the image is generated with the `convert` command)
 
         - name: fontpreview - Install packages from AUR
           tags: aur
@@ -20,10 +19,10 @@
               register: which_ueberzugpp
               ignore_errors: true
 
-            - name: fontpreview - Install ueberzugpp 
+            - name: fontpreview - Install ueberzugpp
               when: which_ueberzugpp.rc != 0
               # Command line util which allows to display images in combination with X11 written in C++
-              ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
+              ansible.builtin.shell: "paru -S --skipreview ueberzugpp"
 
     - name: Link script
       block:
@@ -32,7 +31,7 @@
             path: "{{ home }}/.local/bin"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: '700'
+            mode: "700"
             state: directory
 
         - name: fontpreview - Process templates
@@ -43,7 +42,6 @@
             dest: "{{ home }}/.local/bin/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"
-            mode: '700'
+            mode: "700"
           loop:
             - { name: "fontpreview" }
-

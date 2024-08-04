@@ -1,13 +1,11 @@
 - tags: dunst
   block:
-
     - name: dunst - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - dunst     # Customizable and lightweight notification-daemon
-
+          - dunst # Customizable and lightweight notification-daemon
 
     - name: dunst - Link the whole directory
       # link the whole directory, there is nothing sensible here
@@ -18,7 +16,6 @@
         group: "{{ user }}"
         mode: "0700"
         state: "link"
-
 
     - name: dunst - Enable user service
       # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
@@ -33,4 +30,3 @@
         # state: "started"
         enabled: true
         scope: "user"
-

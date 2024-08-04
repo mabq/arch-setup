@@ -1,6 +1,6 @@
 - tags: system
   block:
-    - name: Clock setup
+    - name: system - Clock setup
       block:
         - name: system - Start and enable `systemd-timesyncd`
           become: true
@@ -15,7 +15,7 @@
             # This options is recommended by the `timedatectl` command
             hwclock: "UTC"
 
-    - name: Locale setup
+    - name: system - Locale setup
       block:
         - name: system - Add locales
           become: true
@@ -30,7 +30,7 @@
           ansible.builtin.command: localectl set-locale LANG=en_US.UTF-8
           when: locale_gen.changed
 
-    - name: Microcode
+    - name: system - Microcode
       block:
         - name: system - Install `intel-ucode`
           become: true

@@ -1,36 +1,34 @@
 - tags: yazi
   block:
-
     - name: yazi - Install packages
       block:
-      - name: yazi - Install packages from official repositories
-        become: true
-        community.general.pacman:
-          state: latest
-          name:
-            - yazi                # Blazing fast terminal file manager written in Rust, based on async I/O
-            - ffmpegthumbnailer   # (optional, for video thumbnails) Lightweight video thumbnailer that can be used by file managers
-            - unarchiver          # (optional, for archive preview) unar and lsar: Objective-C tools for uncompressing archive files
-            - jq                  # (optional, for JSON preview) Command-line JSON processor
-            - poppler             # (optional, for PDF preview) PDF rendering library based on xpdf 3.0
-            - fd                  # (optional, for file searching) Simple, fast and user-friendly alternative to find
-            - ripgrep             # (optional, for file content searching) A search tool that combines the usability of ag with the raw speed of grep
-            - fzf                 # (optional, for quick file subtree navigation) Command-line fuzzy finder
-            - zoxide              # (optional, for historical directories navigation) A smarter cd command for your terminal
+        - name: yazi - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - yazi # Blazing fast terminal file manager written in Rust, based on async I/O
+              - ffmpegthumbnailer # (optional, for video thumbnails) Lightweight video thumbnailer that can be used by file managers
+              - unarchiver # (optional, for archive preview) unar and lsar: Objective-C tools for uncompressing archive files
+              - jq # (optional, for JSON preview) Command-line JSON processor
+              - poppler # (optional, for PDF preview) PDF rendering library based on xpdf 3.0
+              - fd # (optional, for file searching) Simple, fast and user-friendly alternative to find
+              - ripgrep # (optional, for file content searching) A search tool that combines the usability of ag with the raw speed of grep
+              - fzf # (optional, for quick file subtree navigation) Command-line fuzzy finder
+              - zoxide # (optional, for historical directories navigation) A smarter cd command for your terminal
 
-      - name: yazi - Install packages from AUR
-        # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
-        block:
-          - name: yazi - Check if ueberzugpp is already installed
-            ansible.builtin.command: "which ueberzugpp"
-            register: which_ueberzugpp
-            ignore_errors: true
+        - name: yazi - Install packages from AUR
+          # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
+          block:
+            - name: yazi - Check if ueberzugpp is already installed
+              ansible.builtin.command: "which ueberzugpp"
+              register: which_ueberzugpp
+              ignore_errors: true
 
-          - name: yazi - Install ueberzugpp
-            when: which_ueberzugpp.rc != 0
-            # Command line util which allows to display images in combination with X11 written in C++
-            ansible.builtin.shell: 'paru -S --skipreview ueberzugpp'
-
+            - name: yazi - Install ueberzugpp
+              when: which_ueberzugpp.rc != 0
+              # Command line util which allows to display images in combination with X11 written in C++
+              ansible.builtin.shell: "paru -S --skipreview ueberzugpp"
 
     - name: yazi - Link the whole directory
       # link the whole directory, there is nothing sensible here
@@ -41,4 +39,3 @@
         group: "{{ user }}"
         mode: "0700"
         state: "link"
-

@@ -1,12 +1,11 @@
 - tags: tmux
   block:
-
     - name: tmux - Install packages
       become: true
       community.general.pacman:
         state: latest
         name:
-          - tmux  # Terminal multiplexer
+          - tmux # Terminal multiplexer
 
     - name: tmux - Link the whole directory
       # link the whole directory, there is nothing sensible here
@@ -17,4 +16,3 @@
         group: "{{ user }}"
         mode: "0700"
         state: "link"
-

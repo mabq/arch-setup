@@ -1,6 +1,6 @@
 - tags: hypr
   block:
-    - name: Install required packages
+    - name: hypr - Install required packages
       # see https://wiki.hyprland.org/Useful-Utilities/Must-have/
       block:
         - name: hypr - Install packages from official repositories
@@ -28,7 +28,7 @@
         - name: hypr - Install packages from AUR
           tags: aur
           block:
-            - name: hyprpicker
+            - name: hrpr - hyprpicker
               block:
                 - name: hypr - Check if hyprpicker is already installed
                   ansible.builtin.command: "which hyprpicker"

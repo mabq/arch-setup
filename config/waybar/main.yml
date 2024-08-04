@@ -1,6 +1,5 @@
 - tags: waybar
   block:
-
     - name: waybar - Install packages
       become: true
       community.general.pacman:
@@ -17,4 +16,3 @@
         group: "{{ user }}"
         mode: "0700"
         state: "link"
-

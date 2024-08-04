@@ -7,7 +7,7 @@
         name:
           - openssh # SSH protocol implementation for remote login, command execution and file transfer
 
-    - name: SSH client side configurations (connect from this machine to other machines)
+    - name: ssh - Client side configurations (connect from this machine to other machines)
       block:
         - name: ssh - Create directory
           ansible.builtin.file:
@@ -39,14 +39,14 @@
           loop:
             - { name: "config" }
 
-    - name: SSH server side configurations (connect from other machines to this machine)
+    - name: ssh - Server side configurations (connect from other machines to this machine)
       block:
         - name: ssh - Add public key to authorized keys
           # Let my other machines access this machine (single pair of keys
-          # across all machines).
+          # across all machines)
           ansible.posix.authorized_key:
             user: "{{ user }}"
-            # Must pass the content of the key, not the key path.
+            # Must pass the content of the key, not the key path
             key: "{{ lookup('file', '{{ home }}/.ssh/{{ ssh_key_name }}.pub') }}"
 
         - name: ssh - Start and enable ssh daemon
@@ -75,7 +75,7 @@
             line: "PasswordAuthentication no"
           when: ssh_disable_password_authentication
 
-    - name: ssh-agent setup
+    - name: ssh - SSH agent setup
       # The private key is protected with a passphrase for major security.
       # Some tasks of this playbook will clone private repositories, so we
       # need to "pre-open" the key by adding its passphrase to the ssh-agent,
@@ -83,7 +83,7 @@
       # Add the tags of all tasks that clone a private repository to this tasks.
       tags: ssh, fonts, wallpapers
       block:
-        - name: ssh-agent - Start and enable ssh-agent (as a user service) with systemd
+        - name: ssh - Start and enable the ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
           # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
           environment:
@@ -96,9 +96,9 @@
             enabled: true
             scope: "user"
 
-        - name: Add private key passphrase
+        - name: ssh - Add private key passphrase to the ssh agent
           block:
-            - name: ssh-agent - Install required packages for the "expect" module to work
+            - name: ssh - Install required packages for the "expect" module to work
               become: true
               community.general.pacman:
                 state: latest
@@ -106,55 +106,9 @@
                   - python # The Python programming language
                   - python-pexpect # For controlling and automating applications
 
-            - name: ssh-agent - Add ssh key passphrase to ssh-agent
+            - name: ssh - Add ssh key passphrase to ssh-agent
               # there is only one prompt to enter the passphrase
               ansible.builtin.expect:
                 command: ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
                   Enter passphrase(.*): "{{ ssh_key_passphrase }}"
-
-            # - name: ssh - Install `expect`
-            #   # required to respond to the prompt asking for the passphrase
-            #   become: true
-            #   community.general.pacman:
-            #     state: latest
-            #     name:
-            #       - expect # A tool for automating interactive applications
-            #       # - python-pexpect # For controlling and automating applications
-            # - name: ssh - Run ssh-add with expect
-            #   ansible.builtin.shell: |
-            #     set timeout 1000
-            #     spawn ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
-            #     expect -re "Enter passphrase .*:"
-            #     send "{{ ssh_key_passphrase }}\n"
-            #     exit 0
-            #   args:
-            #     executable: /usr/bin/expect
-            #   delegate_to: localhost
-
-        # - name: ssh - Add the private key passphrase to the ssh-agent
-        #   # The `ssh-add` command does not accept the passphrase as an
-        #   # argument, the command is meant to be used interactively.
-        #   #
-        #   # In order to add the passphrase we need to use the `expect`
-        #   # module, which is based on the `expect` command (a tool for
-        #   # automating interactive applications).
-        #   #
-        #   # The `expect` module requires the `pexpect` package to be
-        #   # installed in order to evaluate regex patterns in the promped
-        #   # questions.
-        #   block:
-        #     - name: ssh - Install `pexpect`
-        #       become: true
-        #       community.general.pacman:
-        #         state: latest
-        #         name:
-        #           - python-pexpect # For controlling and automating applications
-        #
-        #     - name: ssh - add the private key passphrase to the ssh-agent
-        #       ansible.builtin.expect:
-        #         command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-        #         # There is the only one question asked
-        #         responses:
-        #           Question:
-        #             - "{{ ssh_key_passphrase

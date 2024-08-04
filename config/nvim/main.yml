@@ -33,10 +33,11 @@
             - { name: "lua", mode: "700" }
             - { name: "spell", mode: "700" }
 
-    - name: Install npm packages
+    - name: nvim - Install npm packages
       block:
-        - name: Install `tsserver` language server packages (must be installed globally for `styled-components` to work)
+        - name: nvim - Install `tsserver` language server packages
           # https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+          # Must be installed globally for `styled-components` to work
           block:
             - name: nvim - Install "typescript" package
               become: true
@@ -49,21 +50,21 @@
                 name: "typescript-language-server"
                 global: true
 
-        - name: Install packages to support styled-components
+        - name: nvim - Install packages to support styled-components
           # https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#-styled-components-support
           block:
-            - name: Install "@styled/typescript-styled-plugin" package
+            - name: nvim - Install "@styled/typescript-styled-plugin" package
               become: true
               community.general.npm:
                 name: "@styled/typescript-styled-plugin"
                 global: true
-            - name: Install "styled/typescript-styled-plugin" package
+            - name: nvim - Install "styled/typescript-styled-plugin" package
               become: true
               community.general.npm:
                 name: "typescript-styled-plugin"
                 global: true
 
-        - name: nvim - Install new-component
+        - name: nvim - Install new-component (joshwcomeau)
           # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
           # I added a zsh alias so that I can call this component with `nc`
           become: true

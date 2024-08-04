@@ -1,12 +1,15 @@
+# Unlike kmonad, kanata offers the double-tap functionality. It is
+# useful for the spacebar to work on apps like figma, where holding
+# the spacebar allows you to move with the mouse.
+
 - tags: kanata
   block:
-    - name: Install
+    - name: kanata - Install
       block:
         - name: kanata - Check if kanata is already installed
           ansible.builtin.command: "which kanata"
           register: which_kanata
           ignore_errors: true
-
         - name: kanata - Install kanata
           when: which_kanata.rc != 0
           # Bring the customizability of a QMK board to any keyboard near you

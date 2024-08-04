@@ -12,7 +12,9 @@
 
 (defvar
   ;; Milliseconds to wair for double tap
-  tap-timeout 500
+  ;; Keep it low to avoid triggering a repeated "d" when trying to use the
+  ;; arrows right after typing the letter d.
+  tap-timeout 200
 
   ;; Does also matter for `tap-hold-release`
   ;; Use the same value as the `repeat-delay` variable of hyprland config.
