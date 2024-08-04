@@ -31,28 +31,29 @@
     - import_tasks: config/dropbox/main.yml
 
     - import_tasks: config/hypr/main.yml
+      # - import_tasks: config/swaylock/main.yml # replaced with hyprlock
     - import_tasks: config/dunst/main.yml
-    # - import_tasks: config/swaylock/main.yml # replaced with hyprlock
     - import_tasks: config/tofi/main.yml
     - import_tasks: config/waybar/main.yml
 
     - import_tasks: config/wallpapers/main.yml # must go after ssh
 
+      # - import_tasks: config/kmonad/main.yml # replaced with kanata
+    - import_tasks: config/kanata/main.yml
+
+    - import_tasks: config/alacritty/main.yml
+
     - import_tasks: config/fonts/main.yml # must go after ssh
     - import_tasks: config/fontconfig/main.yml
     - import_tasks: config/fontpreview/main.yml
 
-    - import_tasks: config/alacritty/main.yml
-
     - import_tasks: config/brave/main.yml
     - import_tasks: config/keepassxc/main.yml
 
-    # - import_tasks: config/kmonad/main.yml # replaced with kanata
-    - import_tasks: config/kanata/main.yml
     # - import_tasks: config/logiops/main.yml # replaced with keyboard shortcuts in hyprland
 
     - import_tasks: config/flameshot/main.yml
 
     - import_tasks: config/mpv/main.yml
 
-    - import_tasks: config/spotify/main.yml
+    # - import_tasks: config/spotify/main.yml
