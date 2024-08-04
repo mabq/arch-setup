@@ -81,7 +81,7 @@
       # need to "pre-open" the key by adding its passphrase to the ssh-agent,
       # otherwise the cloning will fail.
       # Add the tags of all tasks that clone a private repository to this tasks.
-      tags: fonts, wallpapers
+      tags: ssh, fonts, wallpapers
       block:
         - name: ssh - Start and enable ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
@@ -98,24 +98,25 @@
 
         - name: Add private key passphrase
           block:
-            - name: ssh - Install `expect`
-              # required to respond to the prompt asking for the passphrase
-              become: true
-              community.general.pacman:
-                state: latest
-                name:
-                  - expect # A tool for automating interactive applications
-                  # - python-pexpect # For controlling and automating applications
-            - name: ssh - Run ssh-add with expect
-              ansible.builtin.shell: |
-                set timeout 1000
-                spawn ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
-                expect -re "Enter passphrase .*:"
-                send "{{ ssh_key_passphrase }}\n"
-                exit 0
-              args:
-                executable: /usr/bin/expect
-              delegate_to: localhost
+            - name: ssh - Add ssh key passphrase to ssh-agent
+            # - name: ssh - Install `expect`
+            #   # required to respond to the prompt asking for the passphrase
+            #   become: true
+            #   community.general.pacman:
+            #     state: latest
+            #     name:
+            #       - expect # A tool for automating interactive applications
+            #       # - python-pexpect # For controlling and automating applications
+            # - name: ssh - Run ssh-add with expect
+            #   ansible.builtin.shell: |
+            #     set timeout 1000
+            #     spawn ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
+            #     expect -re "Enter passphrase .*:"
+            #     send "{{ ssh_key_passphrase }}\n"
+            #     exit 0
+            #   args:
+            #     executable: /usr/bin/expect
+            #   delegate_to: localhost
 
         # - name: ssh - Add the private key passphrase to the ssh-agent
         #   # The `ssh-add` command does not accept the passphrase as an
