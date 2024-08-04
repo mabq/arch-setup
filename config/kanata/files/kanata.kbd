@@ -54,6 +54,7 @@
   '    (tap-hold-release $tap-timeout $hold-timeout ' (layer-while-held media))
 
   up   (caps-word 2000)
+  csv  C-S-v
 )
 
 (deflayer navigation1
@@ -92,7 +93,7 @@
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     _     _     _     _     _     _     _     _     _     _     _     _
   _     _     prev  volu  vold  next  _     _     _     _     _     XX    _
-  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     @csv  _     _     _     _     _     _     _
   _     _     _                 pp                _     _     _
 )
 

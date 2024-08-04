@@ -6,6 +6,3 @@
         state: latest
         name:
           - flatpak # Linux application sandboxing and distribution framework
-
-
-  # Used to install spotify while `spotify-launcher` fixes an issue

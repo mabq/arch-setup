@@ -1,6 +1,6 @@
 - tags: noconfig
   block:
-    - name: no-config - Install packages that do not require configuration files from official repositories
+    - name: no-config - Install packages from pacman
       become: true
       community.general.pacman:
         state: latest
@@ -152,7 +152,7 @@
           #
           # ------------------------------------------------------------------------
 
-    - name: Install packages from AUR
+    - name: no-config - Install packages from AUR
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
@@ -212,3 +212,12 @@
               when: not ttfappleemoji.stat.exists
               # Emoji font
               ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"
+
+    - name: no-config - Install packages from flathub
+      tags: flatpak
+      community.general.flatpak:
+        name:
+          - tv.plex.PlexDesktop
+          # - com.spotify.Client
+        method: user
+        remote: flathub

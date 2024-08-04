@@ -7,16 +7,17 @@
 
     - import_tasks: config/pacman/main.yml
     - import_tasks: config/paru/main.yml
-
-    - import_tasks: config/no_config/main.yml # must go after pacman and paru
-
     - import_tasks: config/flatpak/main.yml
+
+    - import_tasks: config/no_config/main.yml # must go after pacman, paru and flatpak
 
     - import_tasks: config/bluetooth/main.yml
 
     - import_tasks: config/zsh/main.yml
     - import_tasks: config/starship/main.yml
+
     - import_tasks: config/ssh/main.yml
+
     - import_tasks: config/git/main.yml
 
     - import_tasks: config/nodejs/main.yml # must go after zsh
@@ -35,7 +36,7 @@
     - import_tasks: config/tofi/main.yml
     - import_tasks: config/waybar/main.yml
 
-    - import_tasks: config/wallpaper/main.yml # must go after ssh
+    - import_tasks: config/wallpapers/main.yml # must go after ssh
 
     - import_tasks: config/fonts/main.yml # must go after ssh
     - import_tasks: config/fontconfig/main.yml

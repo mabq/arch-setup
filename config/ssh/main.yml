@@ -83,7 +83,7 @@
       # Add the tags of all tasks that clone a private repository to this tasks.
       tags: ssh, fonts, wallpapers
       block:
-        - name: ssh - Start and enable ssh-agent (as a user service) with systemd
+        - name: ssh-agent - Start and enable ssh-agent (as a user service) with systemd
           # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
           # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
           environment:
@@ -98,7 +98,22 @@
 
         - name: Add private key passphrase
           block:
-            - name: ssh - Add ssh key passphrase to ssh-agent
+            - name: ssh-agent - Install required packages for the "expect" module to work
+              become: true
+              community.general.pacman:
+                state: latest
+                name:
+                  - python # The Python programming language
+                  - python-pexpect # For controlling and automating applications
+
+            - name: ssh-agent - Add ssh key passphrase to ssh-agent
+              ansible.builtin.expect:
+                command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
+                # there is only one prompt to enter the passphrase
+                responses:
+                  (.*): "{{ ssh_key_passphrase }}"
+              no_log: true
+
             # - name: ssh - Install `expect`
             #   # required to respond to the prompt asking for the passphrase
             #   become: true
