@@ -218,4 +218,4 @@
       community.general.flatpak:
         name:
           - tv.plex.PlexDesktop
-          # spotify is also installed with flatpak, but on the spotify file
+          - com.spotify.Client

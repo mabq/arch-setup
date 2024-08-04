@@ -54,4 +54,4 @@
 
     - import_tasks: config/mpv/main.yml
 
-    - import_tasks: config/spotify/main.yml
+    # - import_tasks: config/spotify/main.yml # now installed via flatpak
