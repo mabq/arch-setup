@@ -33,7 +33,7 @@
                 state: directory
             - name: pacman - Create link
               ansible.builtin.file:
-                src: "{{ repo_dir }}/config/pacman/scripts/{{ item.name }}"
+                src: "{{ repo_dir }}/config/package-managers/scripts/{{ item.name }}"
                 path: "{{ home }}/.local/bin/{{ item.name }}"
                 owner: "{{ user }}"
                 group: "{{ user }}"
