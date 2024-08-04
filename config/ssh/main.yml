@@ -109,9 +109,9 @@
             - name: ssh-agent - Add ssh key passphrase to ssh-agent
               # there is only one prompt to enter the passphrase
               ansible.builtin.expect:
-                command: ssh-add
+                command: ssh-add "{{ home }}/.ssh/{{ ssh_key_name }}"
                 responses:
-                  Enter passphrase(.*): "{{ ssh_key_passphrase }}\n"
+                  Enter passphrase(.*): "{{ ssh_key_passphrase }}"
 
             # - name: ssh - Install `expect`
             #   # required to respond to the prompt asking for the passphrase
