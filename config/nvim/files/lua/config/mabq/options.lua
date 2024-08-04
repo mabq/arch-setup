@@ -43,7 +43,7 @@ vim.opt.listchars = { tab = "▏ ", trail = "·", nbsp = "␣" } -- list of stri
 vim.opt.hlsearch = false -- highlight all matches for the last used search pattern
 vim.opt.inccommand = "split" -- -- preview substitutions live, as you type
 vim.opt.termguicolors = true -- use GUI colors for the terminal
-vim.opt.cursorline = true -- highlight the screen line of the cursor
+vim.opt.cursorline = false -- highlight the screen line of the cursor
 -- vim.opt.colorcolumn = "80,120" -- columns to highlight
 -- vim.opt.spell = false -- highlight spelling mistakes
 vim.opt.spelllang = { "en", "es" } -- list of accepted languages (when enabled)

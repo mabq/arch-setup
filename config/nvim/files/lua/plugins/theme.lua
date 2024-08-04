@@ -9,7 +9,7 @@ return {
 			require("tokyonight").setup({
 				style = "moon",
 				on_highlights = function(hl, c)
-					hl.CursorLine.bg = "#1d1e2a"
+					hl.CursorLine.bg = "#1d1e2a" -- enable `vim.opt.cursorline`
 				end,
 			})
 			vim.cmd.colorscheme("tokyonight-night")
