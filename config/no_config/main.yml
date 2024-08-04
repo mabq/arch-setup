@@ -219,5 +219,3 @@
         name:
           - tv.plex.PlexDesktop
           # - com.spotify.Client
-        method: user
-        remote: flathub
