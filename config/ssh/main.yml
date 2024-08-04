@@ -107,9 +107,9 @@
                   - python-pexpect # For controlling and automating applications
 
             - name: ssh-agent - Add ssh key passphrase to ssh-agent
+              # there is only one prompt to enter the passphrase
               ansible.builtin.expect:
-                command: "ssh-add {{ home }}/.ssh/{{ ssh_key_name }}"
-                # there is only one prompt to enter the passphrase
+                command: ssh-add
                 responses:
                   (.*): "{{ ssh_key_passphrase }}"
               no_log: true
