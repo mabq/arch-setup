@@ -111,7 +111,7 @@
               ansible.builtin.expect:
                 command: ssh-add
                 responses:
-                  (.*): "{{ ssh_key_passphrase }}\n"
+                  Enter passphrase(.*): "{{ ssh_key_passphrase }}\n"
 
             # - name: ssh - Install `expect`
             #   # required to respond to the prompt asking for the passphrase
