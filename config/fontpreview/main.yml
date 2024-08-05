@@ -43,4 +43,4 @@
             mode: "700"
             state: "link"
           loop:
-            - { name: "fontpreview.sh" }
+            - { name: "fontpreview" }
