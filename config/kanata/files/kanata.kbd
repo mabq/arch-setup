@@ -14,11 +14,11 @@
   ;; Milliseconds to wair for double tap
   ;; Keep it low to avoid triggering a repeated "d" when trying to use the
   ;; arrows right after typing the letter d.
-  tap-timeout 200
+  tap-timeout 150
 
   ;; Does also matter for `tap-hold-release`
   ;; Use the same value as the `repeat-delay` variable of hyprland config.
-  hold-timeout 200
+  hold-timeout 150
 )
 
 (defsrc

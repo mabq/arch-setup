@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Description:
-#   This script will replace all of the hex color codes for the corresponding 
+#   This script will replace all of the hex color codes for the corresponding
 #   theme variables used by ansible.
 
 # Usage:
