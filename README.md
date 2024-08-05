@@ -26,13 +26,15 @@ This playbook is meant to be executed all the time from the same machine via `an
 
 ## About this playbook
 
-This playbook will install and configure all packages, allowing you to start working immediately.
+This playbook installs and configures all packages, allowing you to start working immediately.
 
-The first time you run this playbook it will take some time since all packages must be installed (some of them compiled). Sub-sequent runs will take a minute or so (depending on updates).
+The first time you run this playbook it will take about an hour to complete (installing and compiling some packages takes time). Sub-sequent runs will take a minute or so (depending on updates).
 
 It's important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine -- Ansible evaluates the value of variables on the controller, look for `lookup('env', '{variable}')` to see where this matters.
 
-All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and then re-run this playbook with `ansible-pull`.
+All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately, without having to re-run this playbook.
+
+Managing all packages themes from a single global variable required templating. I decided to sacrifice that in favor of links. I change config options much more often than themes. You can change a package's theme on its config file.
 
 If a normal file with the same name already exists, the creation of a link or file will throw an error. I could force the creation by overwriting thee file but I prefer the error in order to avoid loosing any data that might be important.
 

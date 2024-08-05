@@ -7,7 +7,6 @@
 cwd = { fg = "#89b4fa" }
 
 # (reversed does not work as intended)
-# hovered = { fg = "{{ color_white_high }}", bg = "#313244" }
 hovered = { fg = "#cdd6f4", bg = "#313244" }
 preview_hovered = { fg = "#cdd6f4", bg = "#313244" }
 

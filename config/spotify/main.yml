@@ -6,8 +6,8 @@
   # You don't need to install a spotify client, but sometimes it can be
   # useful. The interesting thing is that you can completely close the
   # client liberating all its resources and the music will continue playing.
-  #
   # It's like tmux for music, you can close the client and reattach later.
+  #
   block:
     - name: spotify - Install spotifyd
       block:
@@ -51,8 +51,3 @@
             # state: "started"
             enabled: true
             scope: "user"
-
-    - name: spotify - Install client
-      community.general.flatpak:
-        name:
-          - com.spotify.Client

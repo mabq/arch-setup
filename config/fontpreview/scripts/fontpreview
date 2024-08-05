@@ -3,7 +3,7 @@
 # Font preview with ueberzug and fzf
 
 # Modifies version of https://github.com/xlucn/fontpreview-ueberzug.
-# The original script causes an issue because of `--no-opencv` option, see 
+# The original script causes an issue because of `--no-opencv` option, see
 # below.
 
 # Checking for environment variables if available.

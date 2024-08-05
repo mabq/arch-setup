@@ -20,6 +20,6 @@
         regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
         replace: \1git@\2:\3
 
-    - name: pre-tasks - Load theme variables
-      ansible.builtin.include_vars:
-        file: "themes/{{ theme }}.yml"
+    # - name: pre-tasks - Load theme variables
+    #   ansible.builtin.include_vars:
+    #     file: "themes/{{ theme }}.yml"

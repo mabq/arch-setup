@@ -214,8 +214,7 @@
               ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"
 
     - name: no-config - Install packages from flathub
-      tags: flatpak, spotify
       community.general.flatpak:
         name:
           - tv.plex.PlexDesktop
-          - com.spotify.Client
+          # - com.spotify.Client # using the terminal version

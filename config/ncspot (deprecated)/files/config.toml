@@ -41,20 +41,20 @@ flip_status_indicators = true
 #   https://github.com/hrkfdn/ncspot/blob/main/doc/users.md#theming
 
 [theme]
-background = "{{ color_black }}"
-primary = "{{ color_white_high }}"
-secondary = "{{ color_white_high }}"
-title = "{{ color_white_high }}"
-playing = "{{ color_green }}"
-playing_selected = "{{ color_white_high }}"
-playing_bg = "{{ color_highlight_low }}"
-highlight = "{{ color_white_high }}"
-highlight_bg = "{{ color_green }}"
-error = "{{ color_red }}"
-error_bg = "{{ color_black_low }}"
-statusbar = "{{ color_white_high }}"
-statusbar_progress = "{{ color_green }}"
-statusbar_bg = "{{ color_black_low }}"
-cmdline = "{{ color_yellow }}"
-cmdline_bg = "{{ color_black_low }}"
+background =
+primary =
+secondary =
+title =
+playing =
+playing_selected =
+playing_bg =
+highlight =
+highlight_bg =
+error =
+error_bg =
+statusbar =
+statusbar_progress =
+statusbar_bg =
+cmdline =
+cmdline_bg =
 
