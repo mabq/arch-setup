@@ -1,15 +1,4 @@
 #!/bin/sh
-#
-# -----------------------------------------------------------------------------
-#
-#              _____                    _       _         _
-#             |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
-#               | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
-#               | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
-#               |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
-#                                |_|
-#             
-# -----------------------------------------------------------------------------
 
 # Font preview with ueberzug and fzf
 
@@ -21,8 +10,8 @@
 # These are compatible with original fontpreview.
 SIZE=800x800
 FONT_SIZE=72
-BG_COLOR={{ color_black_low }}
-FG_COLOR={{ color_white_high }}
+BG_COLOR=#e0def4
+FG_COLOR=#191724
 TEXT_ALIGN=center
 PREVIEW_TEXT="ABCDEFGHIJKLM\nNOPQRSTUVWXYZ\n\
     abcdefghijklm\nnopqrstuvwxyz\n1234567890\n!@#$\%^&*,.;:\n_-=+'\"|\\(){}[]"
@@ -62,8 +51,8 @@ preview() {
     [ "$TEXT_ALIGN" = center ] || [ "$TEXT_ALIGN" = south ] || [ "$TEXT_ALIGN" = north ] || PADDING=50
     fontfile=$(echo "$1" | cut -f2)
     # In fzf the cols and lines are those of the preview pane
-    # The `convert` command is provided by the `imagemagick` package
-    convert -size "$SIZE" xc:"$BG_COLOR" -fill "$FG_COLOR" \
+    # The `magick` command is provided by the `imagemagick` package
+    magick -size "$SIZE" xc:"$BG_COLOR" -fill "$FG_COLOR" \
         -pointsize "$FONT_SIZE" -font "$fontfile" -gravity "$TEXT_ALIGN" \
         -annotate +"${PADDING:-0}+0" "$PREVIEW_TEXT" "$IMAGE" &&
         {   printf '{ "action": "add", "identifier": "%s", "path": "%s",' "$ID" "$IMAGE"

@@ -1,25 +1,40 @@
 # Ansible Post Installation Script
 
+To automate my Archlinux setup I created 2 ansible playbooks:
 
-## Requirements
+1. [Arch-base](https://github.com/mabq/arch-base) - fully automates a [basic Archlinux installation](https://wiki.archlinux.org/title/Installation_guide).
 
-This playbook assumes you installed Archlinux with the [arch-base](https://github.com/mabq/arch-base) playbook. If you used any other method notice that:
-
-   - The following packages must be already installed:
-      - `base-devel`
-      - `ansible`
-      - `git`
-   - This playbook will create configuration files for the user currently logged in when executing the playbook. Make sure the user has `sudo` privileges as some tasks in the playbook require elevated privileges.
-   - The encryption key used to decrypt some of the variables of this playbook must be stored in `/home/{currently-logged-in-user}/.vault_key`.
+2. [Arch-setup](https://github.com/mabq/arch-setup) (thiss repo) - installs and configures everything.
 
 
-## About this script
+## Why two different scrips?
 
-It's important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine. Ansible evaluates the value of variables on the controller (look for `lookup('env', '{variable}')` to see where this matters).
+The Arch-base playbook is meant to be used only once, when installing Arch, from a controller machine.
 
-All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and then re-run `ansible-pull`.
+This playbook is meant to be executed all the time from the same machine via `ansible-pull`.
 
-> If a file with the same name already exists the creation of the link/file will through an error. I could force the creation but I prefer the error in order to avoid loosing any data that might be important.
+
+## What do you need to run this playbook?
+
+  - This playbook assumes you installed Archlinux with the [arch-base](https://github.com/mabq/arch-base) playbook. If you used any other method notice that:
+
+    - `base-devel`, `ansible` and `git` must be installed.
+    - The user running the playbook must have `sudo` privileges.
+
+  - The encryption key must be stored in `~/.vault_key`.
+
+
+## About this playbook
+
+This playbook will install and configure all packages, allowing you to start working immediately.
+
+The first time you run this playbook it will take some time since all packages must be installed (some of them compiled). Sub-sequent runs will take a minute or so (depending on updates).
+
+It's important that you execute this playbook with `ansible-pull`, some parts of the playbook assume that the controller and the managed node are the same machine -- Ansible evaluates the value of variables on the controller, look for `lookup('env', '{variable}')` to see where this matters.
+
+All configuration files that do not require templating are created as links, that way you can update the content of the file and see the result immediately. To apply changes in files that require templating you need to edit the files of this repository, commit and push the changes, and then re-run this playbook with `ansible-pull`.
+
+If a normal file with the same name already exists, the creation of a link or file will throw an error. I could force the creation by overwriting thee file but I prefer the error in order to avoid loosing any data that might be important.
 
 
 ## Before running this script

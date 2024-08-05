@@ -3,7 +3,7 @@
   block:
     - name: Install required packages
       block:
-        - name: fontpreview - Install packages from official repositories
+        - name: fontpreview - Install packages required by the script
           become: true
           community.general.pacman:
             state: latest
@@ -26,7 +26,7 @@
 
     - name: Link script
       block:
-        - name: fontpreview - Create directory
+        - name: fontpreview - Ensure directory
           ansible.builtin.file:
             path: "{{ home }}/.local/bin"
             owner: "{{ user }}"
@@ -34,14 +34,13 @@
             mode: "700"
             state: directory
 
-        - name: fontpreview - Process templates
-          # This script is always executed from the terminal
-          tags: theme
-          ansible.builtin.template:
-            src: "scripts/{{ item.name }}"
-            dest: "{{ home }}/.local/bin/{{ item.name }}"
+        - name: fontpreview - Link scripts
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/fontpreview/scripts/{{ item.name }}"
+            path: "{{ home }}/.local/bin/{{ item.name }}"
             owner: "{{ user }}"
             group: "{{ user }}"
             mode: "700"
+            state: "link"
           loop:
-            - { name: "fontpreview" }
+            - { name: "fontpreview.sh" }

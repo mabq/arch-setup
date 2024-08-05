@@ -22,4 +22,4 @@
 
     - name: pre-tasks - Load theme variables
       ansible.builtin.include_vars:
-        file: "themes/{{ theme }}/vars.yml"
+        file: "themes/{{ theme }}.yml"
