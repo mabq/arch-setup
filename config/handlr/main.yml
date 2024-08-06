@@ -9,11 +9,11 @@
     #
     # For example:
     #
-    #   - `handlr set '.png' nsxiv.desktop`
-    #   - `handlr set 'image/png' nsxiv.desktop`
-    #   - `handlr set 'image/*' nsxiv.desktop`
+    #   - `handlr set '.png' nsxiv.desktop`         # extension
+    #   - `handlr set 'image/png' nsxiv.desktop`    # mime type
+    #   - `handlr set 'image/*' nsxiv.desktop`      # all images
     #
-    # `handlr` has autocomplete for both, file extensions (and mime types) and
+    # 🔥 `handlr` has autocomplete for both, file extensions (or mime types) and
     # available desktop entries on your system.
     #
     # See `https://github.com/chmln/handlr#usage` or use `handlr --help` for
@@ -21,9 +21,9 @@
     #
     # Yazi is configured to use `handlr` to open files.
     #
-    # IMPORTANT!
-    #   Unlike other configuration files, this one is going to change more
-    #   frequently, so you will need to push changes to the repo.
+    # Unlike other configuration files, the mimeapps.list will change
+    # when using the handlr command, not necessarily manually changing
+    # the file.
 
     - name: handlr - Install packages
       become: true

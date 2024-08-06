@@ -26,7 +26,7 @@
         mode: "600"
 
     # Important!
-    #   For some reason when starting dropbox as a service it spins many
+    #   For some reason when starting dropbox as a service spins many
     #   processes that permanentrly consume a significant amount of cpu.
     #   I guess it is a bug related to the service configuration file provided
     #   by the package since starting it manually with the window manager does

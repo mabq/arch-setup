@@ -4,13 +4,16 @@
 #   https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
 #   https://yazi-rs.github.io/docs/configuration/yazi
 
+# Keybindings:
+#   https://yazi-rs.github.io/docs/quick-start#keybindings
+
 # ------------------------------------------------------------------------------
 
 [plugins]
 
 preload = [
-    # disable status line
-	"~/.config/yazi/init.lua",
+  # disable status line
+  "~/.config/yazi/init.lua",
 ]
 
 # ------------------------------------------------------------------------------
@@ -62,11 +65,11 @@ open = [
 # 	{ run = 'unar "$1"', desc = "Extract here", for = "unix" },
 # 	# { run = 'unar "%1"', desc = "Extract here", for = "windows" },
 # ]
-# play = [
-# 	{ run = 'mpv "$@"', orphan = true, for = "unix" },
-# 	# { run = 'mpv "%1"', orphan = true, for = "windows" },
-# 	# { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
-# ]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+	# { run = 'mpv "%1"', orphan = true, for = "windows" },
+	# { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
+]
 
 # ------------------------------------------------------------------------------
 

@@ -156,6 +156,17 @@
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
+        - name: Brave
+          block:
+            - name: no-config - Check if Brave is already installed
+              ansible.builtin.command: "which brave"
+              register: which_brave
+              ignore_errors: true
+            - name: no-config - Install Brave
+              when: which_brave.rc != 0
+              # Web browser that blocks ads and trackers by default (binary release)
+              ansible.builtin.shell: "paru -S --skipreview brave-bin"
+
         - name: Plex media server
           # (start the service manually when required to avoid consumming resources)
           block:
@@ -217,4 +228,3 @@
       community.general.flatpak:
         name:
           - tv.plex.PlexDesktop
-          # - com.spotify.Client # using the terminal version

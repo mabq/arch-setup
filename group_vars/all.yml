@@ -1,59 +1,48 @@
-# ------------------------------------------------------------------------------
-
-# Preferences:
-#   These are the default values for all hosts. To apply different preferences between hosts use host preferences files (`host_vars` directory).
-
-theme: "rose-pine"
+# --- Preferences:
+#     These are the default values for all hosts. To apply different preferences
+#     between hosts use host preferences files (`host_vars` directory)
 timezone: "America/Guayaquil"
-#   (password authentication is disabled by default for the root user. You can opt to disable password authentication for all other users as well)
+
+# --- SSH
+#     Password authentication is disabled by default for the root user. Setting
+#     this variable to `true` will disable ssh password authentication for all
+#     other users as well
 ssh_disable_password_authentication: false
-
-# ------------------------------------------------------------------------------
-
-# Encrypted variables:
-#   You can change these variables here if required.
-
-#   (required for tasks that clone private repos)
-ssh_key_passphrase: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          64353630333534343932353433616436633165333437393732333264633761323935633263393736
-          3732326334666666313836336435323832346166373562390a616461376265613366303131383631
-          38646433333831613137666264303866616531316163613663616238386335326632383831633437
-          3730333639313366360a346231363637663031336230653136303863326230623835323037323235
-          6532
-
-spotify_username: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          35376439363737646332343665353362393030396135343434653563396466663338363232303464
-          6436326166336162623438366334623562336566383465370a333466653262313230393939376635
-          38363365336362383863383361366365363333313630646438313534373335306631663531313261
-          3235633333343962360a333731373630626134336539663662393462313866333538373264633038
-          38636530346335636436363961656136356531623530643931366665313034336266
-spotify_password: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          33376262303638663935306537626462646135616137656261653736343532353636366235323465
-          6134313039393839326236643066333239326236636431390a376234626431303166353961333366
-          66333963646162373664653365623664343639313639616563653833646638636136653834303161
-          3336373863393838340a623037616335346265376333663062356663663064653163653733383461
-          65373734663931633361313638306431633234333734303663643935383663306432
-
-# ------------------------------------------------------------------------------
-
-# Rarely changed:
-
-#   (in case you ever use another key type)
 ssh_key_name: "id_ed25519"
+#     Some tasks require to clone private repos
+ssh_key_passphrase: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  64353630333534343932353433616436633165333437393732333264633761323935633263393736
+  3732326334666666313836336435323832346166373562390a616461376265613366303131383631
+  38646433333831613137666264303866616531316163613663616238386335326632383831633437
+  3730333639313366360a346231363637663031336230653136303863326230623835323037323235
+  6532
 
-# ------------------------------------------------------------------------------
+# --- Spotify
+#     Used to setup spotifyd. You will need to login manually in the client app.
+spotify_username: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  35376439363737646332343665353362393030396135343434653563396466663338363232303464
+  6436326166336162623438366334623562336566383465370a333466653262313230393939376635
+  38363365336362383863383361366365363333313630646438313534373335306631663531313261
+  3235633333343962360a333731373630626134336539663662393462313866333538373264633038
+  38636530346335636436363961656136356531623530643931366665313034336266
+spotify_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  33376262303638663935306537626462646135616137656261653736343532353636366235323465
+  6134313039393839326236643066333239326236636431390a376234626431303166353961333366
+  66333963646162373664653365623664343639313639616563653833646638636136653834303161
+  3336373863393838340a623037616335346265376333663062356663663064653163653733383461
+  65373734663931633361313638306431633234333734303663643935383663306432
 
-# Calculated variables (no need to touch):
-
-#   (lookup env will get the given environment variable from the controller machine. This is why we must execute this script via `ansible-pull` and while logged in as the user for which we want to generate the config files. For more info see: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup)
+# --- Calculated variables (do not change)
+#     Lookup env will get the given environment variable from the controller machine. This
+#     is why we must execute this script via `ansible-pull` and while logged in as the
+#     user for which we want to generate the config files. For more info see:
+#     https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup)
 home: "{{ lookup('env', 'HOME') }}"
 user: "{{ lookup('env', 'USER') }}"
-#   (required for link creation)
+#     Required for link creation
 repo_dir: "{{ ansible_facts.env.PWD }}"
-#   (required for processor firmware updates)
+#     Required for processor firmware updates
 is_intel: "{{ 'GenuineIntel' in ansible_processor }}"
-
-# ------------------------------------------------------------------------------

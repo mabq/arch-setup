@@ -8,6 +8,10 @@
           - mpv # A free, open source, and cross-platform media player
           - mpv-mpris # MPRIS plugin for mpv (media keys)
 
+    - name: mpv - Install uosc
+      # Feature-rich minimalist proximity-based UI for MPV player
+      ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tomasklaen/uosc/HEAD/installers/unix.sh)"
+
     - name: mpv - Create config files
       block:
         - name: mpv - Create directories

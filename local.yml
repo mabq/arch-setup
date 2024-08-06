@@ -47,7 +47,6 @@
     - import_tasks: config/fontconfig/main.yml
     - import_tasks: config/fontpreview/main.yml
 
-    - import_tasks: config/brave/main.yml
     - import_tasks: config/keepassxc/main.yml
 
     - import_tasks: config/flameshot/main.yml

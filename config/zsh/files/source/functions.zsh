@@ -14,34 +14,19 @@ function appendToPATH_fn {
     esac
 }
 
-function reload () {
-    exec "${SHELL}" "$@"
-}
-
-function ya() {
-    # yazi wrappoer for changing directory on exit
-	tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-	yazi --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-# function br {
-#     # broot wrapper for changing directory on exit, see https://github.com/Canop/broot
-#     local cmd cmd_file code
-#     cmd_file=$(mktemp)
-#     if broot --outcmd "$cmd_file" "$@"; then
-#         cmd=$(<"$cmd_file")
-#         command rm -f "$cmd_file"
-#         eval "$cmd"
-#     else
-#         code=$?
-#         command rm -f "$cmd_file"
-#         return "$code"
-#     fi
+# function reload () {
+#     exec "${SHELL}" "$@"
 # }
+
+function yy() {
+    # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    	builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
 
 function extract () {
     # Easily extract archives
@@ -66,4 +51,3 @@ function extract () {
         echo "'$1' is not a valid file"
     fi
 }
-

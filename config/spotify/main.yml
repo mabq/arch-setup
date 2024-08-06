@@ -1,13 +1,4 @@
 - tags: spotify
-  # Spotifyd is a spotify daemon that implements the "Spotify Connect"
-  # protocol, meaning that you can control the music from any spotify
-  # client on the same network.
-  #
-  # You don't need to install a spotify client, but sometimes it can be
-  # useful. The interesting thing is that you can completely close the
-  # client liberating all its resources and the music will continue playing.
-  # It's like tmux for music, you can close the client and reattach later.
-  #
   block:
     - name: spotify - Install spotifyd
       block:
@@ -16,8 +7,14 @@
           community.general.pacman:
             state: latest
             name:
+              # Spotifyd is a spotify daemon that implements the "Spotify Connect"
+              # protocol, meaning that you can control the music from any spotify
+              # client on the same network. The benefit of using spotifyd is that
+              # you can close the client app and the music will keep playing
+              # while consuming very little resources.
               - spotifyd # Lightweight spotify streaming daemon with spotify connect support
-              # - spotify-launcher # Client for spotify's apt repository in Rust for Arch Linux
+              # spotify-launcher can act as a client of spotifyd or not.
+              - spotify-launcher # Client for spotify's apt repository in Rust for Arch Linux
 
         - name: Config files
           block:

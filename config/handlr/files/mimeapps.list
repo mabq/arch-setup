@@ -1,5 +1,3 @@
-[Added Associations]
-
 [Default Applications]
 application/json=nvim.desktop;
 application/pdf=org.gnome.Evince.desktop;
