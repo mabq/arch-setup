@@ -1,4 +1,4 @@
-# must be `all` and not `localhost` to be able to get the {{inventory_hostname}} value
+# must be `all`, not `localhost`, to be able to use the {{inventory_hostname}} variable
 - hosts: all
   tasks:
     - import_tasks: config/pre-tasks/main.yml
@@ -10,9 +10,6 @@
     - import_tasks: config/no-config/main.yml # must after package-managers
 
     - import_tasks: config/bluetooth/main.yml
-
-    - import_tasks: config/zsh/main.yml
-    - import_tasks: config/starship/main.yml
 
     - import_tasks: config/ssh/main.yml
 
