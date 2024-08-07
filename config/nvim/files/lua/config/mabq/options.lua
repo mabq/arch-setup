@@ -44,7 +44,7 @@ vim.opt.hlsearch = false -- highlight all matches for the last used search patte
 vim.opt.inccommand = "split" -- -- preview substitutions live, as you type
 vim.opt.termguicolors = true -- use GUI colors for the terminal
 vim.opt.cursorline = true -- highlight the screen line of the cursor
--- vim.opt.colorcolumn = "80,120" -- columns to highlight
+vim.opt.colorcolumn = "80" -- columns to highlight (can be a comma separatred list of values)
 -- vim.opt.spell = false -- highlight spelling mistakes
 vim.opt.spelllang = { "en", "es" } -- list of accepted languages (when enabled)
 

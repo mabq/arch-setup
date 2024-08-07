@@ -5,9 +5,7 @@
     # In order to define a default application you need to associate a file
     # extension or mime type to a desktop entry.
     #
-    # `handlr` is an abstraction tool that helps you manage the `mimeapps.list`.
-    #
-    # For example:
+    # `handlr` is a tool that helps you manage the `mimeapps.list`, e.g:
     #
     #   - `handlr set '.png' nsxiv.desktop`         # extension
     #   - `handlr set 'image/png' nsxiv.desktop`    # mime type

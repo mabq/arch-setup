@@ -8,8 +8,10 @@ return {
 		config = function()
 			require("tokyonight").setup({
 				style = "moon",
+				-- https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#-overriding-colors--highlight-groups
 				on_highlights = function(hl, c)
 					hl.CursorLine.bg = "#1d1e2a" -- enable `vim.opt.cursorline`
+					hl.ColorColumn.bg = "#1b1c27" -- enable `vim.opt.colorcolumn`
 				end,
 			})
 			vim.cmd.colorscheme("tokyonight-night")
