@@ -11,14 +11,15 @@
 
     - import_tasks: config/bluetooth/main.yml
 
+    - import_tasks: config/zsh/main.yml
+    - import_tasks: config/tmux/main.yml
     - import_tasks: config/ssh/main.yml
 
     - import_tasks: config/git/main.yml
 
-    - import_tasks: config/nodejs/main.yml # must go after zsh
-
-    - import_tasks: config/tmux/main.yml
     - import_tasks: config/nvim/main.yml # must go after zsh
+
+    - import_tasks: config/nodejs/main.yml # must go after zsh
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
@@ -39,6 +40,7 @@
     # - import_tasks: config/logiops/main.yml # replaced with keyboard shortcuts in hyprland
 
     - import_tasks: config/alacritty/main.yml
+    - import_tasks: config/foot/main.yml
 
     - import_tasks: config/fonts/main.yml # must go after ssh
     - import_tasks: config/fontconfig/main.yml

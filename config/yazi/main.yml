@@ -19,14 +19,13 @@
               - zoxide # (optional, for historical directories navigation) A smarter cd command for your terminal
               - imagemagick # (for SVG, Font, HEIC, and JPEG XL preview) An image viewing/manipulation program
 
-        - name: yazi - Install packages from AUR
+        - name: yazi - Install packages from AUR (in version 3.0 ueberzugpp was replaced with imagemagick)
           # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
           block:
             - name: yazi - Check if ueberzugpp is already installed
               ansible.builtin.command: "which ueberzugpp"
               register: which_ueberzugpp
               ignore_errors: true
-
             - name: yazi - Install ueberzugpp
               when: which_ueberzugpp.rc != 0
               # Command line util which allows to display images in combination with X11 written in C++
