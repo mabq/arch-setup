@@ -27,7 +27,7 @@
     # - import_tasks: config/zed/main.yml
 
     - import_tasks: config/hypr/main.yml
-    - import_tasks: config/swaylock/main.yml # hyprlock is causing the red-screen issue
+    # - import_tasks: config/swaylock/main.yml # hyprlock is causing the red-screen issue
     - import_tasks: config/dunst/main.yml
     - import_tasks: config/waybar/main.yml
     - import_tasks: config/tofi/main.yml
