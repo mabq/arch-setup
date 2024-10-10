@@ -5,6 +5,8 @@
     email = alejandro.banderas@me.com
     name = mabq
 
+[rerere]
+	enabled = true
 
 # --- `git-delta` configurations (see https://github.com/dandavison/delta):
 
