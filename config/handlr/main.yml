@@ -1,0 +1,53 @@
+- tags: handlr
+  block:
+    # Default application information is stored in `~/.config/mimeapps.list`.
+    #
+    # In order to define a default application you need to associate a file
+    # extension or mime type to a desktop entry.
+    #
+    # `handlr` is a tool that helps you manage the `mimeapps.list`, e.g:
+    #
+    #   - `handlr set '.png' nsxiv.desktop`         # extension
+    #   - `handlr set 'image/png' nsxiv.desktop`    # mime type
+    #   - `handlr set 'image/*' nsxiv.desktop`      # all images
+    #
+    # 🔥 `handlr` has autocomplete for both, file extensions (or mime types) and
+    # available desktop entries on your system.
+    #
+    # See `https://github.com/chmln/handlr#usage` or use `handlr --help` for
+    # usage instructions.
+    #
+    # Yazi is configured to use `handlr` to open files.
+    #
+    # Unlike other configuration files, the mimeapps.list will change
+    # when using the handlr command, not necessarily manually changing
+    # the file.
+
+    - name: handlr - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - handlr # Powerful alternative to xdg-utils written in Rust
+
+    - name: handlr - Create config files
+      block:
+        - name: handlr - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.config"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: handlr - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/handlr/files/{{ item.name }}"
+            path: "{{ home }}/.config/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "755"
+            state: "link"
+            force: true
+          loop:
+            - { name: "mimeapps.list" }

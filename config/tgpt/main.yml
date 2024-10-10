@@ -1,0 +1,8 @@
+- tags: tgpt
+  block:
+    - name: tgpt - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - tgpt # AI Chatbots in terminal without needing API keys

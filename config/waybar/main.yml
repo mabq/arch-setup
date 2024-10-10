@@ -1,0 +1,18 @@
+- tags: waybar
+  block:
+    - name: waybar - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - waybar # highly customizable Wayland bar for Sway and Wlroots based compositors
+
+    - name: waybar - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/waybar/files"
+        path: "{{ home }}/.config/waybar"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

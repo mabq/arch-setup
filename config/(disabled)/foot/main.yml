@@ -1,0 +1,31 @@
+- tags: foot
+  block:
+    - name: foot - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - foot # 	Fast, lightweight, and minimalistic Wayland terminal emulator
+
+    - name: Create config files
+      block:
+        - name: foot - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.config/foot"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: foot - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/foot/files/{{ item.name }}"
+            path: "{{ home }}/.config/foot/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "{{ item.mode }}"
+            state: "link"
+          loop:
+            - { name: "foot.ini", mode: "600" }
+            # link the entire theme directory, that way you can add and delete themes whenever you want without the need to edit this file
+            - { name: "themes", mode: "700" }

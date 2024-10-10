@@ -1,0 +1,25 @@
+- tags: always
+  block:
+    - name: pre-tasks - Check linux distribution
+      when: ansible_distribution != "Archlinux"
+      ansible.builtin.fail:
+        msg: This playbook can only be executed on Archlinux distributions
+
+    - name: pre-tasks - Make sure all packages are up to date
+      become: true
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+
+    - name: pre-tasks - Change the repository url protocol
+      # On the first run `ansible-pull` uses the https protocol to clone the
+      # repository, we need to change the remote url protocol (from https
+      # to ssh) in order to be able to push any changes made to linked files
+      ansible.builtin.replace:
+        path: "{{ repo_dir }}/.git/config"
+        regexp: ^(\s*url\s*=\s*)https:\/\/(github\.com)\/(.+)
+        replace: \1git@\2:\3
+
+    # - name: pre-tasks - Load theme variables (not used anymore)
+    #   ansible.builtin.include_vars:
+    #     file: "themes/{{ theme }}.yml"

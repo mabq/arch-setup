@@ -1,0 +1,46 @@
+- tags: dropbox
+  block:
+    - name: Install Dropbox
+      # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
+      tags: aur
+      block:
+        - name: dropbox - Check if Dropbox is already installed
+          ansible.builtin.command: "which dropbox"
+          register: which_dropbox
+          ignore_errors: true
+
+        - name: dropbox - Install Dropbox
+          when: which_dropbox.rc != 0
+          # A free service that lets you bring your photos, docs, and videos anywhere and share them easily
+          ansible.builtin.shell: "paru -S --skipreview dropbox"
+
+    - name: dropbox - Copy dropbox key
+      # In order to unlock everything else you need the passwords database
+      # stored in dropbox. If you want you can remove the unencrypted file
+      # from your local directory after login in.
+      ansible.builtin.template:
+        src: "files/.dropbox_key"
+        dest: "{{ home }}/.dropbox_key"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "600"
+
+    # Important!
+    #   For some reason when starting dropbox as a service spins many
+    #   processes that permanentrly consume a significant amount of cpu.
+    #   I guess it is a bug related to the service configuration file provided
+    #   by the package since starting it manually with the window manager does
+    #   solve the problem.
+    #
+    # - name: dropbox - Start and enable as a user service
+    #   # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+    #   # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+    #   environment:
+    #     # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+    #     XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+    #   # User services do not require super user privileges.
+    #   ansible.builtin.systemd_service:
+    #     name: "dropbox.service"
+    #     state: "started"
+    #     enabled: true
+    #     scope: "user"

@@ -1,0 +1,18 @@
+- tags: swaylock
+  block:
+    - name: swaylock - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - swaylock # Screen locker for Wayland
+
+    - name: swaylock - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/swaylock/files"
+        path: "{{ home }}/.config/swaylock"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

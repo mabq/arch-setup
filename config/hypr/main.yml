@@ -1,0 +1,52 @@
+- tags: hypr
+  block:
+    - name: hypr - Install required packages
+      # see https://wiki.hyprland.org/Useful-Utilities/Must-have/
+      block:
+        - name: hypr - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - hyprland # A highly customizable dynamic tiling Wayland compositor
+              - hyprlock # Hyprland’s GPU-accelerated screen locking utility
+              # - hypridle # hyprland’s idle daemon
+              - swayidle # Idle management daemon for Wayland (only while hypridle solves the issue of the red screen of death)
+              - hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
+              - brightnessctl # Lightweight brightness control tool
+              - playerctl # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
+              - polkit-kde-agent # Daemon providing a polkit authentication UI for KDE
+              - qt5-wayland # Provides APIs for Wayland
+              - qt6-wayland # Provides APIs for Wayland
+              - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
+              - wl-clipboard # Command-line copy/paste utilities for Wayland
+              - wlr-randr # Utility to manage outputs of a Wayland compositor
+              - xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
+              - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
+              - jq # Command-line JSON processor (required by on of `close-special.sh` script)
+
+        - name: hypr - Install packages from AUR
+          tags: aur
+          block:
+            - name: hrpr - hyprpicker
+              block:
+                - name: hypr - Check if hyprpicker is already installed
+                  ansible.builtin.command: "which hyprpicker"
+                  register: which_hyprpicker
+                  ignore_errors: true
+
+                - name: hypr - Install hyprpicker
+                  when: which_hyprpicker.rc != 0
+                  # A wlroots-compatible Wayland color picker that does not suck
+                  # Important!, The non-git version made the picker appear on the top-left corner
+                  ansible.builtin.shell: "paru -S --skipreview hyprpicker-git"
+
+    - name: hypr - Link config files
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/hypr/files"
+        path: "{{ home }}/.config/hypr"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

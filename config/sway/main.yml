@@ -1,0 +1,55 @@
+- tags: sway
+  block:
+    - name: sway - Install required packages
+      block:
+        - name: sway - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - sway # Tiling Wayland compositor and replacement for the i3 window manager
+              - swaybg # Wallpaper tool for Wayland compositors
+              - swaylock # Screen locker for Wayland
+              - swayidle # Idle management daemon for Wayland
+              - playerctl # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
+
+              - brightnessctl # Lightweight brightness control tool
+              - polkit-kde-agent # Daemon providing a polkit authentication UI for KDE
+              - qt5-wayland # Provides APIs for Wayland
+              - qt6-wayland # Provides APIs for Wayland
+              - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
+              - wl-clipboard # Command-line copy/paste utilities for Wayland
+              - xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
+
+              # - hypridle # hyprland’s idle daemon
+              # - hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
+              # - wireplumber                 # Session / policy manager implementation for PipeWire (installed as dependency of `pipewire-pulse`)
+              # - wlr-randr # Utility to manage outputs of a Wayland compositor
+              # - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
+              # - jq # Command-line JSON processor (required by on of `close-special.sh` script)
+
+        - name: sway - Install packages from AUR
+          tags: aur
+          block:
+            - name: hrpr - hyprpicker
+              block:
+                - name: sway - Check if hyprpicker is already installed
+                  ansible.builtin.command: "which hyprpicker"
+                  register: which_hyprpicker
+                  ignore_errors: true
+
+                - name: sway - Install hyprpicker
+                  when: which_hyprpicker.rc != 0
+                  # A wlroots-compatible Wayland color picker that does not suck
+                  # Important!, The non-git version made the picker appear on the top-left corner
+                  ansible.builtin.shell: "paru -S --skipreview hyprpicker-git"
+
+    - name: sway - Link config files
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/sway/files"
+        path: "{{ home }}/.config/sway"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

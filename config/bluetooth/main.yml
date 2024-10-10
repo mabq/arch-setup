@@ -1,0 +1,32 @@
+- tags: bluetooth
+  block:
+    - name: bluetooth - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - bluez # Daemons for the bluetooth protocol stack
+          - bluez-utils # Development and debugging utilities for the bluetooth protocol stack
+
+    - name: bluetooth - Link script
+      block:
+        - name: bluetooth - Ensure directory
+          ansible.builtin.file:
+            path: "{{ home }}/.local/bin"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: bluetooth - Link scripts
+          # I create a link so that the hyprland configuration file does not need to be a template.
+          # Although this script is almost always called with a keybinding, the scripts folder is the best place for it.
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/bluetooth/scripts/{{ item.name }}"
+            path: "{{ home }}/.local/bin/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: "link"
+          loop:
+            - { name: "toggle-bluetooth-device.sh" }

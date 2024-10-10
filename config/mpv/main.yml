@@ -1,0 +1,35 @@
+- tags: mpv
+  block:
+    - name: mpv - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - mpv # A free, open source, and cross-platform media player
+          - mpv-mpris # MPRIS plugin for mpv (media keys)
+
+    - name: mpv - Install uosc
+      # Feature-rich minimalist proximity-based UI for MPV player
+      ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tomasklaen/uosc/HEAD/installers/unix.sh)"
+
+    # - name: mpv - Create config files
+    #   block:
+    #     - name: mpv - Create directories
+    #       ansible.builtin.file:
+    #         path: "{{ home }}/.config/mpv/scripts"
+    #         owner: "{{ user }}"
+    #         group: "{{ user }}"
+    #         mode: "700"
+    #         state: directory
+    #
+    #     - name: mpv - Create links
+    #       # These links are created only to avoid hard-coding the path of the repository in configuration files.
+    #       ansible.builtin.file:
+    #         src: "{{ repo_dir }}/config/mpv/scripts/{{ item.name }}"
+    #         path: "{{ home }}/.config/mpv/scripts/{{ item.name }}"
+    #         owner: "{{ user }}"
+    #         group: "{{ user }}"
+    #         mode: "0700"
+    #         state: "link"
+    #       loop:
+    #         - { name: "freeCodeCampRadio.sh" }

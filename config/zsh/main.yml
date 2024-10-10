@@ -1,0 +1,85 @@
+- tags: zsh
+  block:
+    - name: zsh - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - zsh # A very advanced and programmable command interpreter (shell) for UNIX
+          - zsh-autosuggestions # Fish-like autosuggestions for zsh
+          - zsh-history-substring-search # ZSH port of Fish history search (replaced with atuin)
+          - zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
+          - atuin # Magical shell history
+
+    - name: zsh - Create config files
+      block:
+        - name: zsh - Create directory
+          ansible.builtin.file:
+            path: "{{ home }}/.config/zsh"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: zsh - Config files
+          block:
+            - name: zsh - Create link for `.zshenv`
+              # Unlike the other links, this link is placed directly under the user's home directory
+              ansible.builtin.file:
+                src: "{{ repo_dir }}/config/zsh/files/.zshenv"
+                path: "{{ home }}/.zshenv"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "600"
+                state: "link"
+
+            - name: zsh - Create links for zsh files
+              # Do not link the entire `files` directory to the `zsh` config directory cause zsh will create some files on it, those files should not be part of the repo.
+              ansible.builtin.file:
+                src: "{{ repo_dir }}/config/zsh/files/{{ item.name }}"
+                path: "{{ home }}/.config/zsh/{{ item.name }}"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "{{ item.mode }}"
+                state: "link"
+              loop:
+                - { name: ".zshrc", mode: "600" }
+                # zsh won't put any files into the `source` directory, so it is safe to link the whole directory.
+                # if you ever change this name you will also need to update the disks task.
+                - { name: "source", mode: "700" }
+
+            - name: zsh - Create link for atuin
+              # Atuin documentation: https://docs.atuin.sh/
+              ansible.builtin.file:
+                src: "{{ repo_dir }}/config/zsh/atuin"
+                path: "{{ home }}/.config/atuin"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "0700"
+                state: "link"
+                # overwrite the default file
+                force: true
+
+    - name: zsh - Create shared history file
+      block:
+        - name: zsh - Create `~/.cache/zsh` directory
+          ansible.builtin.file:
+            path: "{{ home }}/.cache/zsh"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: zsh - Create history file
+          ansible.builtin.file:
+            path: "{{ home }}/.cache/zsh/history"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "600"
+            state: touch
+
+    - name: zsh - Make zsh the default shell
+      become: true
+      ansible.builtin.user:
+        name: "{{ user }}"
+        shell: /usr/bin/zsh

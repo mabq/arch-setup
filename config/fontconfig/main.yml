@@ -1,0 +1,31 @@
+- tags: fontconfig
+  block:
+    - name: Install required packages
+      block:
+        - name: fontconfig - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - fontconfig # Library for configuring and customizing font access
+
+    - name: Create config files
+      block:
+        - name: fontconfig - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.config/fontconfig"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: fontconfig - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/fontconfig/files/{{ item.name }}"
+            path: "{{ home }}/.config/fontconfig/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "600"
+            state: "link"
+          loop:
+            - { name: "fonts.conf" }

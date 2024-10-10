@@ -1,0 +1,47 @@
+# Unlike kmonad, kanata automatically attaches to all keyboards
+
+- tags: kanata
+  block:
+    - name: kanata - Install
+      block:
+        - name: kanata - Check if kanata is already installed
+          ansible.builtin.command: "which kanata"
+          register: which_kanata
+          ignore_errors: true
+        - name: kanata - Install kanata
+          when: which_kanata.rc != 0
+          # Bring the customizability of a QMK board to any keyboard near you
+          ansible.builtin.shell: "paru -S --skipreview kanata-bin"
+
+    - name: Add user to the uinput group
+      # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
+      block:
+        - name: kanata - Ensure the `uinput` group exists
+          # The uinput driver allows user-space programs to create and interact with virtual input devices.
+          become: true
+          ansible.builtin.group:
+            name: uinput
+            state: present
+
+        - name: kanata - Add your user to the `input` and the `uinput` group
+          become: true
+          ansible.builtin.user:
+            append: true
+            groups: input,uinput
+            name: "{{ user }}"
+
+        - name: kanata - Ensure the `uinput` device file has the right permissions
+          become: true
+          ansible.builtin.copy:
+            content: 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'
+            dest: /etc/udev/rules.d/99-kmonad.rules
+
+    - name: kanata - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/kanata/files"
+        path: "{{ home }}/.config/kanata"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

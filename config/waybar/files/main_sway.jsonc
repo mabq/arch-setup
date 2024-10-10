@@ -1,0 +1,53 @@
+{
+  // --- Bar configuration:
+  //     Use `man waybar` for more information
+  "name": "main", // this name is used in `exec` and `bindings`
+  "position": "bottom",
+
+  "mode": "dock", // dock | hide | invisible | overlay
+  "layer": "top", // applicable only for overlay mode
+
+  "spacing": 10, // space between modules
+
+  "modules-center": ["sway/workspaces"],
+  "modules-right": ["bluetooth", "battery", "clock"],
+
+  // ---
+
+  "sway/workspaces": {
+    "all-outputs": true,
+    "disable-scroll": true,
+    "disable-auto-back-and-forth": true,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "music": "",
+      "passwords": "󰯄",
+    },
+  },
+
+  "bluetooth": {
+    // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+    "format": "",
+    "tooltip-format": "No devices connected",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": false,
+  },
+
+  "clock": {
+    // https://github.com/Alexays/Waybar/wiki/Module:-Clock
+    "format": "{:%a. %d %b. %H:%M}",
+    "tooltip": false,
+  },
+}

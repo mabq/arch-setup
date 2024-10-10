@@ -1,0 +1,38 @@
+- tags: logiops
+  block:
+    - name: logiops - Install package from AUR
+      tags: aur
+      block:
+        - name: logiops - Check if logiops is already installed
+          ansible.builtin.command: "which logid"
+          register: which_logid
+          ignore_errors: true
+
+        - name: logiops - Install logiops
+          when: which_logid.rc != 0
+          # An unofficial driver for Logitech HID++>2.0 mice and keyboard
+          ansible.builtin.shell: "paru -S --skipreview logiops"
+
+    - name: Create config files
+      block:
+        # Put the config file in the `/etc` directory, not in the home
+        # directory, otherwise you won't be able to manage the service
+        # through systed.
+        - name: logiops - Create links
+          become: true
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/logiops/files/logid.cfg"
+            path: "/etc/logid.cfg"
+            owner: "root"
+            group: "root"
+            mode: "644"
+            state: "link"
+
+    - name: Enable it as a service
+      block:
+        - name: logiops - Start and enable service
+          become: true
+          ansible.builtin.systemd_service:
+            name: "logid.service"
+            state: "started"
+            enabled: true
