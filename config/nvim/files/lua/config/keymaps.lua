@@ -15,6 +15,9 @@
 -- Better join line
 -- vim.keymap.set("n", "J", "mzJ`z", { desc = "Join line" })
 
+vim.keymap.set({ "n", "v" }, "<ScrollWheelUp>", "<C-y>", { desc = "Scroll up a single line" })
+vim.keymap.set({ "n", "v" }, "<ScrollWheelDown>", "<C-e>", { desc = "Scroll down a single line" })
+
 -- Leader-key combinations -----------------------------------------------------
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank (to clipboard)" })
