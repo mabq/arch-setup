@@ -80,10 +80,13 @@
           # ------------------------------------------------------------------------
           #
           # Audio:
+          # Read https://wiki.archlinux.org/title/PipeWire
           - pipewire-alsa # Low-latency audio/video router and processor - ALSA configuration
           - pipewire-jack # Low-latency audio/video router and processor - JACK replacement
-          - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement
-          - pavucontrol # PulseAudio Volume Control
+          - pipewire-pulse # Replaces `pulseaudio` and `pulseaudio-bluetooth`
+          - pavucontrol # PulseAudio Volume Control (replaced with helvum, issues when changing headphones profile)
+          # `wireplumber` is installed as a dependency of all pipewire packages.
+          # The `pactl` command is provided by PulseAudio client library package `libpulse`, which is installed with `pipewire-pulse` as a dependency.
           #
           # ------------------------------------------------------------------------
           #
