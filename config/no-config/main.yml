@@ -97,7 +97,7 @@
           #
           # Browsers:
           # - chromium # A web browser built for speed, simplicity, and security
-          # - firefox # Standalone web browser from mozilla.org (install with flathub for whatsapp attachments to work)
+          - firefox # Standalone web browser from mozilla.org (the flatpak version solves the whatsapp problem but cannot work with keepassxc)
           #
           # ------------------------------------------------------------------------
           #
@@ -153,10 +153,10 @@
       community.general.flatpak:
         name:
           # Verified developers only!, for non-verified applications use paru.
-          - org.mozilla.firefox
+          # - org.mozilla.firefox
           - tv.plex.PlexDesktop
           - org.libreoffice.LibreOffice
-          # - com.brave.Browser
+          - com.brave.Browser
           - org.localsend.localsend_app
 
     - name: no-config - Install packages from AUR
