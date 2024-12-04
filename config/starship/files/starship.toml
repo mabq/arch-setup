@@ -1,0 +1,11 @@
+# --- Notes:
+#     Most defaults are used, just minnor changes.
+
+# Sets user-defined palette
+# palette = "tokyonight_night"
+
+[character]
+success_symbol = "[󰍟](green)"
+error_symbol = "[󰍟](red)"
+vimcmd_symbol = "[󰍞](green)"
+

@@ -1,0 +1,124 @@
+;; Press and hold Control-Space-Escape to quit kanata
+
+;; Documentation: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
+
+(defcfg
+  ;; Without any 
+  ;;linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+  ;; Disable logs
+  log-layer-changes no
+)
+
+(defvar
+  ;; Milliseconds to wair for double tap
+  ;; Keep it low to avoid triggering a repeated "d" when trying to use the
+  ;; arrows right after typing the letter d.
+  tap-timeout 200
+
+  ;; Does also matter for `tap-hold-release`
+  hold-timeout 150
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defsrc
+  grv   1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab   q     w     e     r     t     y     u     i     o     p     [     ]     \
+  caps  a     s     d     f     g     h     j     k     l     ;     '     ret
+  lsft  z     x     c     v     b     n     m     ,     .     /     rsft
+  lctl  lmet  lalt              spc               ralt  rmet  rctl
+)
+
+(deflayer base
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     -     _     _  ;; 👀 notice the '-' here (third from the right)
+  @'ctl _     _     @nav1 _     _     _     _     _     _     @;    @'    @rctl
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 @smet             _     _     _                    ;; ⚠️  leave default modifier keys unchanged
+)
+
+(defalias
+  tap (on-idle-fakekey to-base tap 20)
+
+  ;; `tap-hold-release` will only trigger the modified behavior while the modifier key is being pressed.
+  ;; `tap-hold-press` will keep triggerijss;ng the modified behavior even after reljssdf;easing the modifier key.
+
+  ;; smet (tap-hold-release $tap-timeout $hold-timeout spc lmet)
+  smet (tap-hold-release $tap-timeout $hold-timeout (multi spc @tap) lmet)
+
+  'ctl (tap-hold-release $tap-timeout $hold-timeout grv lctl)
+  rctl (tap-hold-release $tap-timeout $hold-timeout ret rctl)
+
+  ;; nav1 (tap-hold-release $tap-timeout $hold-timeout d (layer-while-held navigation1))
+  nav1 (tap-hold-release $tap-timeout $hold-timeout (multi d @tap) (layer-while-held navigation1))
+  nav2 (layer-while-held navigation2)
+  nums (layer-while-held numbers)
+  func (layer-while-held functions)
+
+  ;    (tap-hold-release $tap-timeout $hold-timeout ; (layer-while-held symbols))
+
+  '    (tap-hold-release $tap-timeout $hold-timeout ' (layer-while-held media))
+
+  up   (caps-word 2000)
+  csv  C-S-v
+)
+
+(deflayer navigation1
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     esc   bspc  _     _     _     _
+  _     _     @nums XX    @nav2 _     lft   down  up    rght  _     _     _
+  _     _     _     _     _     _     ret   _     _     tab   _     @up
+  _     _     _                 spc               _     _     _
+)
+
+(deflayer navigation2
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     ins   del   _     _     _     _
+  _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer numbers
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     7     8     9     _     _     _     _
+  _     _     XX    XX    _     _     _     4     5     6     _     _     _
+  _     _     _     _     _     _     0     1     2     3     _     _
+  _     _     _                 @func             _     _     _
+)
+
+(deflayer functions
+  _     _     _     _     _     _     _     f10   f11   f12   _     _     _     _
+  _     _     _     _     _     _     _     f7    f8    f9    _     _     _     _
+  _     _     XX    XX    _     _     _     f4    f5    f6    _     _     _
+  _     _     _     _     _     _     _     f1    f2    f3    _     _
+  _     _     _                 XX                _     _     _
+)
+
+(deflayer media
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     prev  volu  vold  next  _     _     _     _     _     XX    _
+  _     _     _     _     @csv  _     _     _     _     _     _     _
+  _     _     _                 pp                _     _     _
+)
+
+(deflayer symbols
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  \     S-1   S-2   =     S-.   S-5   _     _     _     _     _     _     _     _
+  S-6   S-[   S-]   S-9   S-0   S-4   S-3   [     ]     _     XX    _     _
+  _     S-7   S-\   S-8   S-=   _     _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+;;(deflayer blank
+;;  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _                 _                 _     _     _
+;;)
+

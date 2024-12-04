@@ -1,0 +1,8 @@
+/*
+ * The bar will appear on top of all apps, so colors should be generic.
+ * I took these ones from Brave 
+ */
+
+@define-color color_fg #1A1B26;
+@define-color color_bar_bg #e1e2e7;
+@define-color color_active_bg #b4b5b9;

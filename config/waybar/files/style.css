@@ -1,0 +1,73 @@
+@import "./themes/custom-theme.css";
+
+* {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.main,
+.monitor {
+  background-color: transparent;
+}
+
+#cpu,
+#memory,
+#disk,
+#network {
+  margin: 6px 0 0 0;
+}
+
+#network {
+  margin-right: 6px;
+}
+
+#clock,
+#bluetooth,
+#workspaces {
+  margin: 0 0 6px 0;
+}
+
+#clock,
+#bluetooth,
+#workspaces,
+#cpu,
+#memory,
+#disk,
+#network {
+  background: @color_bar_bg;
+  color: @color_fg;
+  padding: 5px 9px;
+  border-radius: 6px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/Module:-Clock -------------------- */
+#clock {
+  margin-right: 6px; /* most right module */
+}
+
+/* https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#style ----------- */
+#workspaces {
+  padding: 0px 0px; /* replace with button padding below */
+}
+#workspaces button {
+  min-height: 0; /* remove default */
+  min-width: 0; /* remove default */
+  border: none; /* remove default */
+  border-radius: inherit; /* remove default, force inherit */
+  padding: 5px 9px; /* must be the same as the ones applied to all modules above */
+  color: @color_fg;
+}
+#workspaces button:hover {
+  /* Important!
+   * This rule must go before the `active` rule for the hover bg not to be overwritten.
+   * This rule only applies when mode is `dock`, leave it here in case you ever want that.
+   * */
+  box-shadow: inherit; /* remove default */
+  text-shadow: inherit; /* remove default */
+  transition: none; /* remove default */
+  background: @color_active_bg; /* remove default */
+}
+#workspaces button.visible {
+  color: @color_fg;
+  background: @color_active_bg;
+}

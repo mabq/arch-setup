@@ -1,0 +1,21 @@
+- tags: zed
+  block:
+    - name: zed - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - zed #	A high-performance, multiplayer code editor from the creators of Atom and Tree-sitter
+
+    - name: zed - Link config files
+      # Do not link the entire directory cause zed will create some files on it, those files should not be part of the repo.
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/zed/files/{{ item.name }}"
+        path: "{{ home }}/.config/zed/{{ item.name }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "{{ item.mode }}"
+        state: "link"
+      loop:
+        - { name: "keymap.json", mode: "600" }
+        - { name: "settings.json", mode: "600" }

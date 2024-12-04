@@ -1,0 +1,23 @@
+- tags: nodejs
+  block:
+    - name: nodejs - Install nodejs and npm with pacman
+      # First, install nodejs with pacman. The "n" nodejs manager is installed with npm.
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - nodejs # Evented I/O for V8 javascript
+          - npm # JavaScript package manager
+
+    - name: Install "n" node manager
+      # "n" is installed in a directory owned by root, so you will need to run the `n` command with `sudo`.
+      block:
+        - name: nodejs - Install "n" node version manager
+          become: true
+          community.general.npm:
+            name: "n" # Interactively manage your nodejs versions
+            global: true
+        - name: nodejs - Install node lts version with "n"
+          become: true
+          ansible.builtin.shell: "n lts"
+

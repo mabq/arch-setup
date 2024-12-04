@@ -1,0 +1,58 @@
+# ==============================================================================
+# IMPORTANT!
+# This has been replaced with `flameshot`.
+# Do not delete in case it stop working for any reason.
+# ==============================================================================
+
+- tags: screenshot
+  block:
+
+      # Slurp defines the region and show the selection size.
+      # Grim takes the screenshot with the coordinates provided by slurp.
+      # Swappy let us take some notes on the screenshot and save it.
+
+      # I had to create scripts for the sequence of commands because 
+      # calling the whole sequence as a Hyperland bind cause a bug (something
+      # related to scaping color codes). The dark script is the default
+      # because it is suitable for most cases. The light version is for those
+      # rare cases where the contrast is not good enough. The colors of 
+      # these scripts are not related to the theme, they should look good 
+      # regardless od the theme.
+
+    - name: screenshot - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - slurp       # Select a region in a Wayland compositor
+          - grim        # Screenshot utility for Wayland
+          - swappy      # A Wayland native snapshot editing tool
+
+
+    - name: Create config files
+      block:
+      - name: screenshot - Create directories
+        ansible.builtin.file:
+          path: "{{ home }}/{{ item.path }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: '700'
+          state: directory
+        loop:
+          - { path: ".config/swappy" }
+          - { path: ".config/slurp" }
+          - { path: "screenshots" }
+
+      - name: screenshot - Create links
+        ansible.builtin.file:
+          src: "{{ repo_dir }}/config/screenshot/{{ item.src }}"
+          path: "{{ home }}/.config/{{ item.path }}"
+          owner: "{{ user }}"
+          group: "{{ user }}"
+          mode: "{{ item.mode }}"
+          state: "link"
+        loop:
+          - { src: "files/swappy/config", path: "swappy/config", mode: "600" }
+          - { src: "scripts/slurp/dark", path: "slurp/dark", mode: "700" }
+          - { src: "scripts/slurp/light", path: "slurp/light", mode: "700" }
+

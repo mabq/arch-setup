@@ -1,0 +1,7 @@
+# 🔥 File created from template. See the `disks` task.
+
+{% for item in external_disks | dict2items %}
+alias mount-{{ item.key }}='sudo mount /dev/disk/by-uuid/{{ item.value }} /mnt/{{ item.key }}'
+alias umount-{{ item.key }}='sudo umount /mnt/{{ item.key }} && sleep 3 && sudo hdparm -y /dev/disk/by-uuid/{{ item.value }}'
+
+{% endfor %}
