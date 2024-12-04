@@ -25,7 +25,7 @@
         state: "link"
       loop:
         - { name: "lazyvim" }
-        - { name: "kickstart" }
+        - { name: "nvim" }
 
     # - name: nvim - Install npm packages
     #   block:

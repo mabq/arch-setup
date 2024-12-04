@@ -47,9 +47,9 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' })
 vim.g.mapleader = ' '
 
 -- refresh lua configurations, see https://youtu.be/CuWfgiwI73Q?si=cJcpEE3-VAXjuQ_g&t=1393
-vim.keymap.set('n', '<leader>X', '<cmd>source %<CR>', { desc = 'Source file' })
-vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Source current line' })
-vim.keymap.set('v', '<leader>x', '<cmd>source %<CR>', { desc = 'Source selected lines' })
+vim.keymap.set('n', '<leader>x', '<cmd>source %<CR>', { desc = 'Source file' })
+vim.keymap.set('n', '<leader>X', '<cmd>.lua<CR>', { desc = 'Source current line' })
+vim.keymap.set('v', '<leader>X', '<cmd>source %<CR>', { desc = 'Source selected lines' })
 
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without yanking' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank to clipboard' })
