@@ -18,13 +18,13 @@
       # which version is used is determined by a zsh alias
       ansible.builtin.file:
         src: "{{ repo_dir }}/config/nvim/files/{{ item.name }}"
-        path: "{{ home }}/.config/nvim-{{ item.name }}"
+        path: "{{ home }}/.config/{{ item.name }}"
         owner: "{{ user }}"
         group: "{{ user }}"
         mode: "0700"
         state: "link"
       loop:
-        - { name: "lazyvim" }
+        - { name: "nvim-lazyvim" }
         - { name: "nvim" }
 
     # - name: nvim - Install npm packages
