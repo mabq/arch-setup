@@ -3,6 +3,8 @@
 -- `:h map-modes`           - check modes table
 -- You can check keybindings with `:nnoremap {key}` - the first `n` is for normal, you can change that.
 
+-- stylua: ignore start
+
 -- No special key:
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hightlight' })
@@ -18,18 +20,8 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Increase indentation (keep selection)'
 vim.keymap.set('v', 'J', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move line down' })
 vim.keymap.set('v', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move line up' })
 
-vim.keymap.set('c', '<down>', function()
-    if vim.fn.pumvisible() == 1 then
-        return '<c-n>'
-    end
-    return '<down>'
-end, { expr = true, desc = 'Select next menu item' })
-vim.keymap.set('c', '<up>', function()
-    if vim.fn.pumvisible() == 1 then
-        return '<c-p>'
-    end
-    return '<up>'
-end, { expr = true, desc = 'Select previous menu item' })
+vim.keymap.set('c', '<down>', function() if vim.fn.pumvisible() == 1 then return '<c-n>' end return '<down>' end, { expr = true, desc = 'Select next menu item' })
+vim.keymap.set('c', '<up>', function() if vim.fn.pumvisible() == 1 then return '<c-p>' end return '<up>' end, { expr = true, desc = 'Select previous menu item' })
 
 -- Ctrl --
 
@@ -39,17 +31,14 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Page down (centered)' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' })
 
 -- Alt --
-
--- see vim-tmux-navigator
+--   see vim-tmux-navigator
 
 -- Leader
 
 vim.g.mapleader = ' '
 
 -- refresh lua configurations, see https://youtu.be/CuWfgiwI73Q?si=cJcpEE3-VAXjuQ_g&t=1393
-vim.keymap.set('n', '<leader>x', '<cmd>source %<CR>', { desc = 'Source file' })
-vim.keymap.set('n', '<leader>X', '<cmd>.lua<CR>', { desc = 'Source current line' })
-vim.keymap.set('v', '<leader>X', '<cmd>source %<CR>', { desc = 'Source selected lines' })
+vim.keymap.set('n', '<leader>%', '<cmd>source %<CR>', { desc = 'Source file' })
 
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without yanking' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank to clipboard' })

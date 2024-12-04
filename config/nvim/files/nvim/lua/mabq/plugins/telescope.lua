@@ -43,23 +43,16 @@ return {
 
         -- See `:help telescope.builtin`
         local builtin = require 'telescope.builtin'
+        -- stylua: ignore start
         vim.keymap.set('n', '<leader><leader>', builtin.git_files, { desc = 'Project git files' })
-        vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Project files' })
-        vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Project buffers' })
-        vim.keymap.set('n', '<leader>sw', function()
-            local word = vim.fn.expand '<cword>'
-            builtin.grep_string { search = word }
-        end, { desc = 'Project word search' })
-        vim.keymap.set('n', '<leader>sW', function()
-            local word = vim.fn.expand '<cWORD>'
-            builtin.grep_string { search = word }
-        end, { desc = 'Project WORD search' })
-        vim.keymap.set('n', '<leader>sp', function()
-            builtin.grep_string { search = vim.fn.input 'Grep > ' }
-        end, { desc = 'Project search' })
         vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Telescope resume' })
-
+        vim.keymap.set('n', '<leader>ss', builtin.find_files, { desc = 'Project files' })
+        vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Project buffers' })
+        vim.keymap.set('n', '<leader>sw', function() local word = vim.fn.expand '<cword>' builtin.grep_string { search = word } end, { desc = 'Project word search' })
+        vim.keymap.set('n', '<leader>sW', function() local word = vim.fn.expand '<cWORD>' builtin.grep_string { search = word } end, { desc = 'Project WORD search' })
+        vim.keymap.set('n', '<leader>sp', function() builtin.grep_string { search = vim.fn.input 'Grep > ' } end, { desc = 'Project search' })
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'View help' })
         vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = 'View all' })
+        -- stylua: ignore end
     end,
 }
