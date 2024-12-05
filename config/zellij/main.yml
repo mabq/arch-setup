@@ -1,0 +1,18 @@
+- tags: zellij
+  block:
+    - name: zellij - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - zellij # A terminal multiplexer
+
+    - name: zellij - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/zellij/files"
+        path: "{{ home }}/.config/zellij"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
