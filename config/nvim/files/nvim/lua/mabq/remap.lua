@@ -37,13 +37,16 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' })
 
 vim.g.mapleader = ' '
 
--- refresh lua configurations, see https://youtu.be/CuWfgiwI73Q?si=cJcpEE3-VAXjuQ_g&t=1393
-vim.keymap.set('n', '<leader>%', '<cmd>source %<CR>', { desc = 'Source file' })
-
+-- clipboard related
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without yanking' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank to clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete withou yanking' })
 
+-- remane all instances of word under cursor
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- refresh lua configurations, see https://youtu.be/CuWfgiwI73Q?si=cJcpEE3-VAXjuQ_g&t=1393
+vim.keymap.set('n', '<leader>x', '<cmd>source %<CR>', { desc = 'Source file' })
+
+-- make the current file executable
+vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
