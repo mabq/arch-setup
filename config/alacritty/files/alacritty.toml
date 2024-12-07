@@ -20,7 +20,7 @@ glyph_offset = { x = 0, y = 1  } # center the glyph
 draw_bold_text_with_bright_colors = true
 
 [window]
-padding = { x = 10, y = 0 }
+padding = { x = 0, y = 0 }
 dynamic_padding = true
 
 [env]
