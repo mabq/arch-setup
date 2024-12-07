@@ -25,7 +25,7 @@ directories="$HOME/ $HOME/projects/"
 if [[ $# -eq 1 ]]; then
   working_directory=$1
 else
-  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | fzf)
+  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | sk)
 fi
 
 if [[ -z $working_directory ]]; then
