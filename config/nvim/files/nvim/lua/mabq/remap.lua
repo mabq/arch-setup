@@ -26,6 +26,7 @@ vim.keymap.set('c', '<up>', function() if vim.fn.pumvisible() == 1 then return '
 -- Ctrl --
 
 vim.keymap.set('n', '<C-f>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
+--vim.keymap.set('n', '<C-f>', ':silent !zellij action new-tab --name sessionizer $HOME/.config/zellij/scripts/zellij-sessioniner.sh<CR>', { desc = 'Run zellij-sessionizer' })
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Page down (centered)' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' })

@@ -8,7 +8,6 @@ alias la='eza -al'
 alias mkdir='mkdir -p'
 # alias mv='mv -iv'
 # alias rm='rm -iv --preserve-root'
-# alias tmux='tmux -2' # force tmux to assume that the terminal support 256 colors https://wiki.archlinux.org/title/tmux#256_colors
 
 
 # Shortcuts/renames:
