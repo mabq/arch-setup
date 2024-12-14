@@ -1,13 +1,3 @@
-// Pros:
-//   - Way easier to use and configure
-//   - No color issues with neovim
-//   - Transparency in bars - looks good with any neovim colorscheme
-//   - Builin layout and plugin system
-//
-// Cons:
-//  - sessions switch
-
-
 // Keybindings ----------------------------------------------------------------
 
 // Available modes:
@@ -47,9 +37,14 @@
 //     modules. All other letter must work normally, otherwise you won't be
 //     able to type.
 
-keybinds clear-defaults=true {
+keybinds clear-defaults=true { // will clear all default keybinds
     locked {
         bind "Ctrl space" { SwitchToMode "normal"; }
+        //bind "Ctrl Alt h" { MoveFocusOrTab "left"; }
+        //bind "Ctrl Alt j" { MoveFocus "down"; }
+        //bind "Ctrl Alt k" { MoveFocus "up"; }
+        //bind "Ctrl Alt l" { MoveFocusOrTab "right"; }
+        //bind "Ctrl Alt n" { NewPane; }
     }
     shared_except "locked" {
         // make sure you can leave from any mode
@@ -59,6 +54,23 @@ keybinds clear-defaults=true {
     // default keymappins (all modes except "locked" and input modes)
     //shared_except "locked" "renametab" "renamepane" "entersearch" {
     normal {
+        // Sessions
+        //bind "s" {
+        //    LaunchOrFocusPlugin "file:~/.config/zellij/plugins/zellij-session-tree.wasm" {
+        //        floating true
+        //        move_to_focused_tab true
+        //        cwd "/"
+        //        root_dirs "/home/mabq;/home/mabq/projects"
+        //        session_layout "default"
+        //    }; SwitchToMode "Locked";
+        //}
+        bind "s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
         // Detach or quit
         bind "d" { Detach; }
         bind "Shift Q" { Quit; }
@@ -116,20 +128,13 @@ keybinds clear-defaults=true {
         // fullscreen pane
         bind "z" { ToggleFocusFullscreen; }
         // sync tabs
-        bind "Shift s" { ToggleActiveSyncTab; SwitchToMode "locked"; }
+        //bind "Shift s" { ToggleActiveSyncTab; SwitchToMode "locked"; }
         // Layout
-        bind "," { NextSwapLayout; }
+        bind "]" { NextSwapLayout; }
+        bind "[" { PreviousSwapLayout; }
         bind "." { TogglePaneFrames; }
         // Switch mode
         bind "space" { SwitchToMode "scroll"; }
-        // Session
-        bind "s" {
-            LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-            }
-            SwitchToMode "locked"
-        }
         // Plugin manager
         bind "p" {
             LaunchOrFocusPlugin "plugin-manager" {
@@ -153,9 +158,6 @@ keybinds clear-defaults=true {
         bind "esc" { SwitchToMode "normal"; }
         bind "enter" { SwitchToMode "search"; }
     }
-    scroll {
-        bind "v" { EditScrollback; SwitchToMode "locked"; }
-    }
     search {
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
@@ -170,6 +172,7 @@ keybinds clear-defaults=true {
         bind "l" "right" "PageDown" "Ctrl d" { PageScrollDown; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
+        bind "e" { EditScrollback; SwitchToMode "locked"; }
         bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
     }
 }
@@ -181,24 +184,30 @@ keybinds clear-defaults=true {
 // changing these requires a restart to take effect
 plugins {
     compact-bar location="zellij:compact-bar"
-    configuration location="zellij:configuration"
+    //configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
-        cwd "/"
+        // most of my sessions will be based on `project` directories
+        // see https://zellij.dev/documentation/filepicker-alias
+        cwd "/home/mabq/projects"
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="zellij:status-bar"
-    strider location="zellij:strider"
-    tab-bar location="zellij:tab-bar"
-    welcome-screen location="zellij:session-manager" {
-        welcome_screen true
-    }
+    //status-bar location="zellij:status-bar"
+    //strider location="zellij:strider"
+    //tab-bar location="zellij:tab-bar"
+    //welcome-screen location="zellij:session-manager" {
+    //    welcome_screen true
+    //}
 }
 
 // Plugins to load in the background when a new session starts
+// https://zellij.dev/documentation/plugin-loading#on-startup
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    //https://example.com/my-plugin.wasm
+    //file:/path/to/my/plugin.kdl
+    //my-plugin-alias
 }
 
 
@@ -215,7 +224,16 @@ load_plugins {
 // theme_dir "/tmp"
 
 // Choose the theme (see the themes directory):
+// List of pre-included themes:
 theme "tokyonight_storm"
+
+// UI preferences
+//ui {
+//    pane_frames {
+//        rounded_corners true
+//        hide_session_name false
+//    }
+//}
 
 // Choose the base input mode of zellij.
 // Options:
@@ -234,9 +252,15 @@ default_mode "locked"
 // (Requires restart)
 // layout_dir "/tmp"
 
-// The name of the default layout to load on startup
+// The name of the default layout to load on startup (must be in the layouts folder)
 // Default: "default"
 default_layout "compact"
+
+// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
+// Options:
+//   - true (default)
+//   - false
+//auto_layout true
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -250,6 +274,7 @@ default_layout "compact"
 // Options:
 //   - true (default, enabled)
 //   - false
+// Note: If you disable this, the `borderless` property on layout config won't apply. Maybe just edit the defult layout.
 pane_frames false
 
 // When attaching to an existing session with other users,
@@ -317,17 +342,11 @@ session_name "Playground"
 //   - false (default)
 attach_to_session true
 
-// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
-// Options:
-//   - true (default)
-//   - false
-// auto_layout true
-
 // Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands) so that they can later be resurrected
 // Options:
 //   - true (default)
 //   - false
-// session_serialization true
+session_serialization false
 
 // How often in seconds sessions are serialized
 // serialization_interval 10000
@@ -341,7 +360,7 @@ attach_to_session true
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
-scrollback_lines_to_serialize 600
+// scrollback_lines_to_serialize 600
 
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals

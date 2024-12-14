@@ -1,7 +1,13 @@
+// "Layout" files determine how the layout looks at launch time.
 // https://zellij.dev/documentation/layouts
+
 layout {
-    pane split_direction="vertical" {
-        pane
-        pane
+    pane {
+        name "main"
+    }
+    pane {
+        size 1
+        borderless true
+        plugin location="zellij:compact-bar"
     }
 }
