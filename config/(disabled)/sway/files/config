@@ -1,0 +1,10 @@
+# Read `man 5 sway` for a complete reference.
+
+include /etc/sway/config.d/*
+
+include source/settings.conf
+include source/window-rules.conf
+include source/input.conf
+include source/outputs.conf
+include source/exec.conf
+include source/binds.conf
