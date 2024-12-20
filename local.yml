@@ -19,7 +19,7 @@
 
     - import_tasks: config/tgpt/main.yml
 
-    - import_tasks: config/asdf/main.yml
+    # - import_tasks: config/asdf/main.yml
     - import_tasks: config/docker/main.yml
 
     - import_tasks: config/keyd/main.yml
