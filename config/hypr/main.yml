@@ -61,21 +61,21 @@
               block:
                 # A remix of BreezeX with Rose-Pine colors, packaged for Hyprcursor
                 - name: hypr - rose-pine-hyprcursor
-                  ansible.builtin.command: "which rose-pine-hyprcursor"
-                  register: which_rose-pine-hyprcursor
+                  ansible.builtin.command: "which rose_pine_hyprcursor"
+                  register: which_rose_pine_hyprcursor
                   ignore_errors: true
                 - name: hypr - Install rose-pine-hyprcursor
-                  when: which_rose-pine-hyprcursor.rc != 0
+                  when: which_rose_pine_hyprcursor.rc != 0
                   ansible.builtin.shell: "paru -S --skipreview rose-pine-hyprcursor"
             - name: hrpr - hyprland-qtutils-git
               block:
                 # A small bunch of utility applications that hyprland might invoke. These are stuff like dialogs or popups.
                 - name: hypr - hyprland-qtutils-git
-                  ansible.builtin.command: "which hyprland-qtutils-git"
-                  register: which_hyprland-qtutils-git
+                  ansible.builtin.command: "which hyprland_qtutils_git"
+                  register: which_hyprland_qtutils_git
                   ignore_errors: true
                 - name: hypr - Install hyprland-qtutils-git
-                  when: which_hyprland-qtutils-git.rc != 0
+                  when: which_hyprland_qtutils_git.rc != 0
                   ansible.builtin.shell: "paru -S --skipreview hyprland-qtutils-git"
 
     - name: hypr - Link config files
