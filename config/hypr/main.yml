@@ -18,16 +18,17 @@
               - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
               - hyprcursor # hyprcursor is a new cursor theme format that has many advantages over the widely used xcursor.
               - hyprgraphics # Hyprland graphics resources and utilities
-              - hyprutils # hyprutils is a library providing shared implementations of commonly used types across the hypr* ecosystem
+              # - hyprutils # hyprutils is a library providing shared implementations of commonly used types across the hypr* ecosystem
               - hyprlang # hyprlang is a library that implements parsing for the hypr configuration language.
               - hyprwayland-scanner # a utility to generate sources and headers for wayland protocol specifications.
               - aquamarine # a very light linux rendering backend library
-              # --- Additinal tools ---
+              # --- Must have ---
+              - qt5-wayland # Provides APIs for Wayland
+              - qt6-wayland # Provides APIs for Wayland
+              # --- Additional tools ---
               - brightnessctl # Lightweight brightness control tool
               - playerctl # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
               #- polkit-kde-agent # Daemon providing a polkit authentication UI for KDE
-              - qt5-wayland # Provides APIs for Wayland
-              - qt6-wayland # Provides APIs for Wayland
               - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
               - wl-clipboard # Command-line copy/paste utilities for Wayland
               - wlr-randr # Utility to manage outputs of a Wayland compositor
