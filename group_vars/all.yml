@@ -1,0 +1,38 @@
+# --- Preferences:
+#     These are the default values for all hosts. To apply different preferences
+#     between hosts use host preferences files (`host_vars` directory)
+timezone: "America/Guayaquil"
+
+# --- SSH
+#     Password authentication is disabled by default for the root user. Setting
+#     this variable to `true` will disable ssh password authentication for all
+#     other users as well
+ssh_disable_password_authentication: false
+ssh_key_name: "id_ed25519"
+#     Some tasks require to clone private repos
+ssh_key_passphrase: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  64353630333534343932353433616436633165333437393732333264633761323935633263393736
+  3732326334666666313836336435323832346166373562390a616461376265613366303131383631
+  38646433333831613137666264303866616531316163613663616238386335326632383831633437
+  3730333639313366360a346231363637663031336230653136303863326230623835323037323235
+  6532
+
+# --- External disks
+#     Automatically create mounting directories and aliases for external disks.
+external_disks:
+  alejandro: "04D0-1DBF"
+  series: "EBC6-97B8"
+  courses: "7443-E3E7"
+
+# --- Calculated variables (do not change)
+#     Lookup env will get the given environment variable from the controller machine. This
+#     is why we must execute this script via `ansible-pull` and while logged in as the
+#     user for which we want to generate the config files. For more info see:
+#     https://docs.ansible.com/ansible/latest/collections/ansible/builtin/env_lookup.html#ansible-collections-ansible-builtin-env-lookup)
+home: "{{ lookup('env', 'HOME') }}"
+user: "{{ lookup('env', 'USER') }}"
+#     Required for link creation
+repo_dir: "{{ ansible_facts.env.PWD }}"
+#     Required for processor firmware updates
+is_intel: "{{ 'GenuineIntel' in ansible_processor }}"

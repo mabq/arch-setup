@@ -1,0 +1,20 @@
+- tags: docker
+  block:
+    - name: docker - Install
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - docker # Pack, ship and run any application as a lightweight container
+
+    - name: docker - Manage Docker as a non-root user
+      # When installing docker with pacman it automatically creates the `docker` group,
+      # we just need add the user to that group. It also automatically configures systemd
+      # to automatically launch the `docker` and `containerd` services.
+      # https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+      # Log out and log back in so that your group membership is re-evaluated.
+      become: true
+      ansible.builtin.user:
+        append: true
+        groups: docker
+        name: "{{ user }}"

@@ -1,0 +1,23 @@
+- tags: tofi
+  block:
+    - name: tofi - Install packages from AUR
+      tags: aur
+      block:
+        - name: tofi - Check if tofi is already installed
+          ansible.builtin.command: "which tofi"
+          register: which_tofi
+          ignore_errors: true
+        - name: tofi - Install tofi
+          when: which_tofi.rc != 0
+          # Tiny rofi / dmenu replacement for wlroots-based Wayland compositors
+          ansible.builtin.shell: "paru -S --skipreview tofi"
+
+    - name: tofi - Link the whole directory
+      # Link the entire directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/tofi/files"
+        path: "{{ home }}/.config/tofi"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

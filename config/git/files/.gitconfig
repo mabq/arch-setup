@@ -1,0 +1,42 @@
+[user]
+  email = alejandro.banderas@me.com
+  name = mabq
+
+[core]
+  editor = nvim
+
+[init]
+	defaultBranch = main
+
+[rerere]
+	enabled = true
+
+; [pull]
+;   rebase = true # autmatically do a rebase when pulling
+
+; [alias]
+;   co = checkout
+
+# ------------------------------------------------------------------------------
+
+# `git-delta` configurations (see https://github.com/dandavison/delta):
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  light = false  # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  dark = true
+  ; side-by-side = true  # https://github.com/dandavison/delta#side-by-side-view
+  line-numbers = true  # https://github.com/dandavison/delta#line-numbers
+
+[merge]
+  # `diff3` includes the "base" version, `merge` (which is the default) only shows "theirs" and "ours"
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default

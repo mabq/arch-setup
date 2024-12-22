@@ -1,0 +1,50 @@
+- hosts: all # must be `all`, not `localhost`, to be able to use the {{inventory_hostname}} variable
+  tasks:
+    - import_tasks: config/pre-tasks/main.yml
+    - import_tasks: config/system/main.yml
+
+    - import_tasks: config/package-repositories/main.yml
+    - import_tasks: config/no-config/main.yml # must go after `package-repositories'
+
+    - import_tasks: config/bluetooth/main.yml
+    - import_tasks: config/disks/main.yml
+
+    - import_tasks: config/ssh/main.yml
+    - import_tasks: config/git/main.yml
+    - import_tasks: config/tmux/main.yml
+    # - import_tasks: config/zellij/main.yml # not ready yet, see notes inside
+    - import_tasks: config/zsh/main.yml
+    - import_tasks: config/starship/main.yml
+    - import_tasks: config/bat/main.yml
+
+    - import_tasks: config/tgpt/main.yml
+
+    # - import_tasks: config/asdf/main.yml
+    - import_tasks: config/docker/main.yml
+
+    - import_tasks: config/keyd/main.yml
+
+    - import_tasks: config/nvim/main.yml # must go after asdf (uses npm)
+    # - import_tasks: config/zed/main.yml
+
+    - import_tasks: config/hypr/main.yml
+    # - import_tasks: config/sway/main.yml
+    # - import_tasks: config/swaylock/main.yml # hyprlock is causing the red-screen issue
+    - import_tasks: config/dunst/main.yml
+    - import_tasks: config/waybar/main.yml
+    - import_tasks: config/tofi/main.yml
+    - import_tasks: config/flameshot/main.yml
+    - import_tasks: config/wallpapers/main.yml # must go after ssh (clone private repo)
+
+    - import_tasks: config/fonts/main.yml # must go after ssh (clone private repo)
+    - import_tasks: config/fontconfig/main.yml
+    - import_tasks: config/fontpreview/main.yml
+
+    - import_tasks: config/alacritty/main.yml
+    - import_tasks: config/mpv/main.yml
+    - import_tasks: config/spotify_launcher/main.yml
+    - import_tasks: config/dropbox/main.yml
+    - import_tasks: config/keepassxc/main.yml
+
+    - import_tasks: config/handlr/main.yml
+    - import_tasks: config/yazi/main.yml

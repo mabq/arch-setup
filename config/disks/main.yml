@@ -1,0 +1,50 @@
+# --- Important!
+#
+#     Disks UUIDs change when formatted. Update zsh aliases whenever you format
+#     one of the frequently used external disks.
+
+- tags: disks
+  block:
+    - name: disks - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - duf # Disk Usage/Free Utility (`df` alternative)
+          - ncdu # Disk usage analyzer with an ncurses interface (`du` alternative)
+          - hdparm # A shell utility for manipulating Linux IDE drive/driver parameters (used in aliases-disks to stop external disks spinning)
+          # - wipe # Secure file wiping utility
+
+    - name: disks - Link the mnt directory to ~/disks for easier access
+      become: true
+      ansible.builtin.file:
+        src: "/mnt"
+        path: "{{ home }}/disks"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0755"
+        state: "link"
+
+    - name: disks - Create a mount directory for each disk
+      become: true
+      ansible.builtin.file:
+        path: "/mnt/{{ item.key }}"
+        owner: "root"
+        group: "root"
+        mode: "777"
+        state: directory
+      loop: "{{ external_disks | dict2items }}"
+
+    - name: disks - Create the `aliases-disks` file from template
+      block:
+        - name: disks - Create `source-disks` directory in zsh config files
+          ansible.builtin.file:
+            path: "{{ home }}/.config/zsh/source-disks/"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "755"
+            state: directory
+        - name: disks - Create disks aliases file from template
+          ansible.builtin.template:
+            src: "{{ repo_dir }}/config/disks/templates/zsh-aliases.j2"
+            dest: "{{ home }}/.config/zsh/source-disks/aliases.zsh"

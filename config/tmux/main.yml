@@ -1,0 +1,20 @@
+- tags: tmux
+  block:
+    - name: tmux - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - tmux # Terminal multiplexer
+          - fd # Simple, fast and user-friendly alternative to find (`find` alternative)
+          - skim # Fuzzy Finder in Rust!
+
+    - name: tmux - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/tmux/files"
+        path: "{{ home }}/.config/tmux"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

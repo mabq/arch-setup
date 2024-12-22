@@ -1,0 +1,60 @@
+# ------------------------------------------------------------------------------
+#             
+#               _____                    _       _         _
+#              |_   _|__ _ __ ___  _ __ | | __ _| |_ ___  | |
+#                | |/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \ | |
+#                | |  __/ | | | | | |_) | | (_| | ||  __/ |_|
+#                |_|\___|_| |_| |_| .__/|_|\__,_|\__\___| (_)
+#                                 |_|
+#             
+# ------------------------------------------------------------------------------
+
+# Configuration
+#   https://github.com/hrkfdn/ncspot/blob/main/doc/users.md#configuration
+
+use_nerdfont = true
+flip_status_indicators = true
+# notify = true
+
+#-------------------------------------------------------------------------------
+
+# Custom keybindings
+#   https://github.com/hrkfdn/ncspot/blob/main/doc/users.md#custom-keybindings
+
+[keybindings]
+# disable quitting (use `:quit`)
+"q" = "noop"
+# remapings
+"Ctrl+q" = "focus queue"
+"Ctrl+f" = "focus search"
+"Ctrl+l" = "focus library"
+"Ctrl+h" = "focus library"
+"Ctrl+n" = "next"
+"Ctrl+p" = "previous"
+# easier play/pause
+"Space" = "playpause"
+"Esc" = "back"
+
+#-------------------------------------------------------------------------------
+
+# Custom theme
+#   https://github.com/hrkfdn/ncspot/blob/main/doc/users.md#theming
+
+[theme]
+background =
+primary =
+secondary =
+title =
+playing =
+playing_selected =
+playing_bg =
+highlight =
+highlight_bg =
+error =
+error_bg =
+statusbar =
+statusbar_progress =
+statusbar_bg =
+cmdline =
+cmdline_bg =
+

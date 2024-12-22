@@ -1,0 +1,10 @@
+[Default]
+save_dir=$HOME/screenshots
+save_filename_format=capture-%H%M%S.png
+show_panel=false
+line_size=2
+text_size=10
+text_font=monospace
+paint_mode=brush
+early_exit=true
+fill_shape=false

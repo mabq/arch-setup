@@ -1,0 +1,111 @@
+# Default config files available at:
+#   https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
+
+
+[manager]
+
+cwd = { fg = "#89b4fa" }
+
+# (reversed does not work as intended)
+hovered = { fg = "#cdd6f4", bg = "#313244" }
+preview_hovered = { fg = "#cdd6f4", bg = "#313244" }
+
+find_keyword = { fg = "#fab387", italic = true, bold = true }
+find_position = { fg = "#fab387", italic = true }
+
+marker_selected = { fg = "#bac2de", bg = "#bac2de" }
+marker_copied = { fg = "#a6e3a1", bg = "#a6e3a1" }
+marker_cut  = { fg = "#f38ba8", bg = "#f38ba8" }
+
+tab_active = { fg = "#89b4fa", bold = true }
+tab_inactive = { fg = "#585b70" }
+tab_width = 2
+
+border_symbol = "│"
+border_style = { fg = "#313244" }
+
+folder_offset  = [ 0, 1, 0, 1 ]
+preview_offset = [ 1, 2, 1, 2 ]
+
+syntect_theme = ""
+
+# ------------------------------------------------------------------------------
+
+# [status]
+# disabled
+
+# ------------------------------------------------------------------------------
+
+[select]
+
+border   = { fg = "#89b4fa" }
+active   = { fg = "#f5c2e7" }
+inactive = {}
+
+# ------------------------------------------------------------------------------
+
+[input]
+
+border   = { fg = "#89b4fa" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# ------------------------------------------------------------------------------
+
+[completion]
+
+border   = { fg = "#89b4fa" }
+active   = { bg = "#f5c2e7" }
+inactive = {}
+
+# ------------------------------------------------------------------------------
+
+[tasks]
+
+border  = { fg = "#89b4fa" }
+title   = {}
+hovered = { underline = true }
+
+# ------------------------------------------------------------------------------
+
+[which]
+
+mask            = { bg = "#313244" }
+cand            = { fg = "#94e2d5" }
+rest            = { fg = "#9399b2" }
+desc            = { fg = "#f5c2e7" }
+separator       = "  "
+separator_style = { fg = "#585b70" }
+
+# ------------------------------------------------------------------------------
+
+[help]
+
+on      = { fg = "#f5c2e7" }
+exec    = { fg = "#94e2d5" }
+desc    = { fg = "#9399b2" }
+hovered = { bg = "#585b70", bold = true }
+footer  = { fg = "#45475a", bg = "#cdd6f4" }
+
+# ------------------------------------------------------------------------------
+
+[filetype]
+
+rules = [
+    # Since `reversed` color does not work, it makes no sense to assign colors to file types.
+    # Version 1.6 will allow custom colors for symbolic links (see https://github.com/sxyazi/yazi/issues/287#issuecomment-1769794925)
+    { name = "*/", fg = "#a6adc8" },
+    { name = "*", fg = "#a6adc8" },
+]
+
+# ------------------------------------------------------------------------------
+
+[icons]
+
+# Disable all custom icons, just folders and documents.
+"*/" = " "
+"*"  = " "
+
+# ------------------------------------------------------------------------------
+
