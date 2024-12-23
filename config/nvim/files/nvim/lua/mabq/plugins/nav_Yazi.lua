@@ -1,4 +1,5 @@
 return {
+    -- Yazi integration (hierarchy find and CRUD operations);
     'rolv-apneseth/tfm.nvim',
     name = 'yazi (tfm.nvim)',
     lazy = false,
@@ -8,13 +9,11 @@ return {
         enable_cmds = true,
         ui = {
             border = 'rounded',
-            height = 0.8,
+            height = 0.9,
             width = 0.9,
             x = 0.5,
             y = 0.5,
         },
     },
-    keys = {
-        { '<leader>e', '<cmd>Tfm<cr>', desc = 'Explore (yazi)' },
-    },
+    keys = { { '<C-e>', '<cmd>Tfm<cr>', desc = 'Explore (yazi)' } },
 }

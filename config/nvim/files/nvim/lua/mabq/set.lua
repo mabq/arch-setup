@@ -1,45 +1,48 @@
--- `:help vim.opt`
+-- Watch: [Configure Neovim Options](https://www.youtube.com/watch?v=F1CQVXA5gf0&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=5)
+-- `:help set`
 -- `:help option-list` - for more options
 
-vim.opt.guicursor = ''
+local set = vim.opt
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+set.guicursor = ''
 
-vim.opt.smartindent = true
--- options related to tab-width are set dynamically by the `sleuth` plugin
+set.number = true
+set.relativenumber = true
 
-vim.opt.wrap = false
-vim.opt.breakindent = true -- preserve indentation in wrapped text (when enabled)
-vim.opt.linebreak = true -- do not break words when wrapping
+set.shiftwidth = 4 -- default, see `vim-sleuth` plugin notes
+set.softtabstop = -1 -- use `shidtwidth` as tab width
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+set.wrap = false
+set.breakindent = true -- preserve indentation in wrapped text (when enabled)
+set.linebreak = true -- do not break words when wrapping
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
-vim.opt.undofile = true
+set.ignorecase = true
+set.smartcase = true
 
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
+set.swapfile = false
+set.backup = false
+set.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+set.undofile = true
 
-vim.opt.cursorline = true
-vim.opt.colorcolumn = '80'
+set.incsearch = true
+set.hlsearch = true
 
-vim.opt.termguicolors = true
+set.cursorline = true
+set.colorcolumn = '80'
 
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = 'yes'
-vim.opt.isfname:append '@-@' -- adds `-` and `@` as filename characters
+set.termguicolors = true
 
-vim.opt.updatetime = 50
+set.scrolloff = 8
+set.signcolumn = 'yes'
+set.isfname:append '@-@' -- adds `-` and `@` as filename characters
 
-vim.opt.spelllang = { 'en', 'es' }
+set.updatetime = 50
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+set.spelllang = { 'en', 'es' }
+
+set.splitright = true
+set.splitbelow = true
 
 --  See `:help 'list'` and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '│ ', trail = '·', nbsp = '␣' }
+set.list = true
+set.listchars = { tab = '│ ', trail = '·', nbsp = '␣' }
