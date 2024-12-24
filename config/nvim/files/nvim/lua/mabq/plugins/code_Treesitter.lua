@@ -1,21 +1,25 @@
 -- Watch [Treesitter basics and installation](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=6)
 -- `:help lsp-vs-treesitter`
 -- `:help nvim-treesitter`
+-- `:checkhealth nvim-treesitter`
+-- `:Inspect` - shows all currently applied highlights for text under cursor.
 
 -- If you get an error, try syncing all plugins with Lazy.
 
 return {
     {
+        -- Treesitter
+        --   Better code highlight, indent `=`, incremental selection
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         config = function()
             require('nvim-treesitter.configs').setup {
-                -- A list of parser names, or "all" (the listed parsers MUST always be installed)
                 -- Supported languages: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
                 ensure_installed = {
                     'bash',
                     'css',
                     'diff',
+                    'editorconfig',
                     'git_config',
                     'go',
                     'html',
@@ -50,9 +54,10 @@ return {
                 auto_install = false,
                 -- List of parsers to ignore installing (or "all")
                 ignore_install = {},
+                -- Hightlight feature
                 highlight = {
                     enable = true,
-                    -- Disable slow treesitter highlight for large files
+                    -- Disable for large files
                     disable = function(lang, buf)
                         local max_filesize = 100 * 1024 -- 100 KB
                         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -60,28 +65,40 @@ return {
                             return true
                         end
                     end,
-                    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                    -- Instead of true it can also be a list of languages
+                    -- only really required for ruby or php
                     additional_vim_regex_highlighting = false,
                 },
                 indent = {
+                    -- Indentation based on treesitter for the `=` operator.
                     enable = true,
+                },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = '<right>',
+                        node_incremental = '<right>',
+                        scope_incremental = false,
+                        node_decremental = '<left>',
+                    },
                 },
                 modules = {
                     -- Additional modules that might interest you:
-                    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-                    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-                    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+                    --   - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+                    --   - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+                    --   - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
                 },
             }
         end,
     },
 
     {
-        -- Use treesitter to auto close and auto rename html tag
+        -- Use treesitter to auto close and auto rename html tag.
+        -- Will not work unless you have treesitter parsers (like html) installed for a given filetype.
         'windwp/nvim-ts-autotag',
-        opts = {},
+        opts = {
+            enable_close = true,           -- auto close tags
+            enable_rename = true,          -- auto rename pairs of tags
+            enable_close_on_slash = false, -- auto close on trailing </
+        },
     },
 }
