@@ -1,0 +1,49 @@
+{
+  // --- Bar configuration:
+  //     Use `man waybar` for more information
+  "name": "monitor", // this name is used in `bindings`
+  "position": "top",
+
+  "mode": "overlay", // dock | hide | invisible | overlay
+  "layer": "top", // applicable only for overlay mode
+
+  "spacing": 10, // space between modules
+
+  "modules-right": ["cpu", "memory", "disk#root", "network"],
+
+  // ---
+
+  "cpu": {
+    "interval": 1,
+    "format": " {usage}%",
+    "tooltip": false,
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": " {used:0.1f}Gb used",
+    "tooltip": false,
+  },
+
+  "disk#root": {
+    "interval": 10,
+    "format": " {specific_free:0.1f}Gb avail",
+    "path": "/",
+    "unit": "GB",
+    "tooltip": false,
+  },
+
+  //"disk#home": {
+  //    "interval": 30,
+  //    "format": "~ {free}",
+  //    "path": "/home"
+  //},
+
+  "network": {
+    "interval": 5,
+    "format": "{ifname}",
+    "format-wifi": " {essid} {bandwidthUpBytes} {bandwidthDownBytes}",
+    "format-ethernet": "󰈁  {bandwidthUpBytes} {bandwidthDownBytes}",
+    "format-disconnected": "", //An empty format will hide the module.
+  },
+}

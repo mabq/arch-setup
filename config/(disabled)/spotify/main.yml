@@ -1,0 +1,50 @@
+- tags: spotify
+  block:
+    - name: spotify - Install spotifyd
+      block:
+        - name: spotify - Install packages
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              # Spotifyd is a spotify daemon that implements the "Spotify Connect"
+              # protocol, meaning that you can control the music from any spotify
+              # client on the same network. The benefit of using spotifyd is that
+              # you can close the client app and the music will keep playing
+              # while consuming very little resources.
+              - spotifyd # Lightweight spotify streaming daemon with spotify connect support
+              # spotify-launcher can act as a client of spotifyd or not.
+              - spotify-launcher # Client for spotify's apt repository in Rust for Arch Linux
+
+        - name: Config files
+          block:
+            - name: spotify - Create directory
+              ansible.builtin.file:
+                path: "{{ home }}/.config/spotifyd"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "700"
+                state: directory
+
+            - name: spotify - Process config file template (encrypted account details)
+              ansible.builtin.template:
+                src: "files/spotifyd.conf"
+                dest: "{{ home }}/.config/spotifyd/spotifyd.conf"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                # make sure only you have access to this file
+                mode: "600"
+
+        - name: spotify - Start and enable it as a user service
+          # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+          # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+          environment:
+            # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+            XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+          # User services do not require super user privileges.
+          ansible.builtin.systemd_service:
+            name: "spotifyd.service"
+            # (do not start the service yet, the first time we run this command we do it from a TTY without any window manager started, it will throw an error)
+            # state: "started"
+            enabled: true
+            scope: "user"

@@ -1,0 +1,44 @@
+# Advantages of keyd vs. kanata/kmonad
+#  - Much faster
+#  - Runs as a service
+#  - Much easier to configure
+
+- tags: keyd
+  block:
+    - name: keyd - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - keyd # A key remapping daemon for linux
+
+    - name: keyd - Add your user to the `keyd` group
+      become: true
+      ansible.builtin.user:
+        append: true
+        groups: keyd
+        name: "{{ user }}"
+
+    - name: keyd - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      become: true
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/keyd/files"
+        path: "/etc/keyd"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0744"
+        state: "link"
+        # have to force it to create a link as the user and not root
+        force: true
+
+    - name: keyd - Start and enable as a system service
+      become: true
+      ansible.builtin.systemd_service:
+        name: "keyd.service"
+        state: "started"
+        enabled: true
+
+    - name: keyd - Reload config
+      become: true
+      ansible.builtin.shell: "keyd reload"

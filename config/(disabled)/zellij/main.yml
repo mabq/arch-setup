@@ -1,0 +1,31 @@
+# Why not?
+#
+# Zellij is actually really cool and has great documentation. Unfortunatelly
+# there are a couple of drawbacks that made me switch back to Tmux:
+#
+#  - There is not CLI command to switch sessions, see here why https://www.reddit.com/r/zellij/comments/18go1y5/switching_sessions_via_cli/.
+#    The sessions plugin feels aweful and laggy compared to the tmux-sessionizer script.
+#    The customs plugins that I found are buggy and slow.
+#
+#  - Tmux feels much snappier.
+#
+- tags: zellij
+  block:
+    - name: zellij - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - zellij # A terminal multiplexer
+          - fd # Simple, fast and user-friendly alternative to find (`find` alternative)
+          - skim # Fuzzy Finder in Rust!
+
+    - name: zellij - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/zellij/files"
+        path: "{{ home }}/.config/zellij"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

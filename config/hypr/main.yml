@@ -1,0 +1,94 @@
+- tags: hypr
+  block:
+    - name: hypr - Install required packages
+      # see https://wiki.hyprland.org/Useful-Utilities/Must-have/
+      block:
+        - name: hypr - Install packages from official repositories
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - hyprland # A highly customizable dynamic tiling Wayland compositor
+              - hypridle # hypridle is Hyprland’s idle management daemon.
+              # - swayidle # Idle management daemon for Wayland (only while hypridle solves the issue of the red screen of death)
+              - hyprlock # hyprlock is a simple, yet fast, multi-threaded and GPU-accelerated screen lock for Hyprland.
+              - hyprpaper # hyprpaper is a fast, IPC-controlled wallpaper utility for Hyprland.
+              - hyprpicker # hyprpicker is a neat utility for picking a color from your screen on Hyprland.
+              - xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
+              - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
+              - qt5-wayland # Provides APIs for Wayland
+              - qt6-wayland # Provides APIs for Wayland
+              - polkit-kde-agent # Daemon providing a polkit authentication UI for KDE
+              # --- Additional tools ---
+              - brightnessctl # Lightweight brightness control tool
+              - playerctl # Mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others
+              - wev # A tool for debugging wayland events on a Wayland window, analogous to the X11 tool xev
+              - wl-clipboard # Command-line copy/paste utilities for Wayland
+              - wlr-randr # Utility to manage outputs of a Wayland compositor
+              - jq # Command-line JSON processor (required by on of `close-special.sh` script)
+
+        - name: hypr - Install packages from AUR
+          tags: aur
+          block:
+            - name: hrpr - hyprsunset
+              block:
+                # hyprsunset is a small utility to provide a blue light filter for your system.
+                - name: hypr - An application to enable a blue-light filter on Hyprland
+                  ansible.builtin.command: "which hyprsunset"
+                  register: which_hyprsunset
+                  ignore_errors: true
+                - name: hypr - Install hyprsunset
+                  when: which_hyprsunset.rc != 0
+                  ansible.builtin.shell: "paru -S --skipreview hyprsunset"
+            # - name: hrpr - uwsm (universal wayland session manager)
+            #   block:
+            #     # A standalone Wayland session manager
+            #     # recommended way to start hyprland - https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
+            #     - name: hypr - check uwsm
+            #       ansible.builtin.command: "which uwsm"
+            #       register: which_uwsm
+            #       ignore_errors: true
+            #     - name: hypr - Install uwsm
+            #       when: which_uwsm.rc != 0
+            #       ansible.builtin.shell: "paru -S --skipreview uwsm"
+            # - name: hrpr - hyprpolkitagent (`hyprutils-git` conflicts with `hyprutils`)
+            #   block:
+            #     # hyprpolkitagent is a polkit authentication daemon. It is required for GUI applications to be able to request elevated privileges.
+            #     # Instead of `polkit-kde-agent`
+            #     - name: hypr - A polkit authentication agent written in QT/QML
+            #       ansible.builtin.command: "which hyprpolkitagent"
+            #       register: which_hyprpolkitagent
+            #       ignore_errors: true
+            #     - name: hypr - Install hyprpolkitagent
+            #       when: which_hyprpolkitagent.rc != 0
+            #       ansible.builtin.shell: "paru -S --skipreview hyprpolkitagent-git"
+            # - name: hrpr - hyprland-qtutils-git (`hyprutils-git` conflicts with `hyprutils`)
+            #   block:
+            #     # A small bunch of utility applications that hyprland might invoke. These are stuff like dialogs or popups.
+            #     - name: hypr - hyprland-qtutils-git
+            #       ansible.builtin.command: "which hyprland_qtutils_git"
+            #       register: which_hyprland_qtutils_git
+            #       ignore_errors: true
+            #     - name: hypr - Install hyprland-qtutils-git
+            #       when: which_hyprland_qtutils_git.rc != 0
+            #       ansible.builtin.shell: "paru -S --skipreview hyprland-qtutils-git"
+            # - name: hrpr - rose-pine-hyprcursor
+            #   block:
+            #     # A remix of BreezeX with Rose-Pine colors, packaged for Hyprcursor
+            #     - name: hypr - rose-pine-hyprcursor
+            #       ansible.builtin.command: "which rose_pine_hyprcursor"
+            #       register: which_rose_pine_hyprcursor
+            #       ignore_errors: true
+            #     - name: hypr - Install rose-pine-hyprcursor
+            #       when: which_rose_pine_hyprcursor.rc != 0
+            #       ansible.builtin.shell: "paru -S --skipreview rose-pine-hyprcursor"
+
+    - name: hypr - Link config files
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/hypr/files"
+        path: "{{ home }}/.config/hypr"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"

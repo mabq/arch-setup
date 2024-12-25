@@ -1,0 +1,383 @@
+// Keybindings ----------------------------------------------------------------
+
+// Available modes:
+// https://zellij.dev/documentation/keybindings-modes
+//   - locked
+//     When Zellij is locked all keys should be passed down the stack, except
+//     for the prefix to unlock Zellij.
+//   - normal
+//     Normally, this is the default mode when unlocking Zellij and where all
+//     other modules are accessed.
+//     I found out that I only need a single mode for all my keybindings,
+//     since frames remain green in "normal" mode I prefer to use "pane" as
+//     my default mode. Makes it easier to percive that Zellij is unlocked.
+//   - pane
+//     Treated as my main mode, this is where all bindings are defined.
+//   - tab
+//     No need, all tab actions are done from "pane".
+//   - session
+//     No need, the sessions plugin is lauched directly from "pain", no need
+//     for other actions normally part of this mode.
+//   - resize
+//     No need, resizing is done from "pane".
+//   - move
+//     No need, moving panes and tabs is done from "pane".
+//   - tmux
+//     No need.
+//   - scroll
+//     Zellij does not have a Vi mode like tmux. To copy something from the
+//     terminal you have the following options:
+//       1. Select it with the mouse.
+//       2. Send the terminal content to the editor (much more powerfull).
+//       3. Only you scroll and have the target in view, use Alacritty vi mode.
+//   - search
+//     Accessed from "scroll" mode.
+//   - entersearch, renamepane and renametab:
+//     All these are input modes, only enter and escape should be bound in these
+//     modules. All other letter must work normally, otherwise you won't be
+//     able to type.
+
+keybinds clear-defaults=true { // will clear all default keybinds
+    locked {
+        bind "Ctrl space" { SwitchToMode "normal"; }
+        //bind "Ctrl Alt h" { MoveFocusOrTab "left"; }
+        //bind "Ctrl Alt j" { MoveFocus "down"; }
+        //bind "Ctrl Alt k" { MoveFocus "up"; }
+        //bind "Ctrl Alt l" { MoveFocusOrTab "right"; }
+        //bind "Ctrl Alt n" { NewPane; }
+    }
+    shared_except "locked" {
+        // make sure you can leave from any mode
+        bind "enter" { SwitchToMode "locked"; }
+        bind "esc" { SwitchToMode "locked"; }
+    }
+    // default keymappins (all modes except "locked" and input modes)
+    //shared_except "locked" "renametab" "renamepane" "entersearch" {
+    normal {
+        // Sessions
+        //bind "s" {
+        //    LaunchOrFocusPlugin "file:~/.config/zellij/plugins/zellij-session-tree.wasm" {
+        //        floating true
+        //        move_to_focused_tab true
+        //        cwd "/"
+        //        root_dirs "/home/mabq;/home/mabq/projects"
+        //        session_layout "default"
+        //    }; SwitchToMode "Locked";
+        //}
+        bind "s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
+        // Detach or quit
+        bind "d" { Detach; }
+        bind "Shift Q" { Quit; }
+        // Focus pane
+        bind "h" { MoveFocusOrTab "left"; }
+        bind "j" { MoveFocus "down"; }
+        bind "k" { MoveFocus "up"; }
+        bind "l" { MoveFocusOrTab "right"; }
+        // Focus tab
+        bind "1" { GoToTab 1; }
+        bind "2" { GoToTab 2; }
+        bind "3" { GoToTab 3; }
+        bind "4" { GoToTab 4; }
+        bind "5" { GoToTab 5; }
+        bind "6" { GoToTab 6; }
+        bind "7" { GoToTab 7; }
+        bind "8" { GoToTab 8; }
+        bind "9" { GoToTab 9; }
+        bind "o" { GoToNextTab; }
+        bind "i" { GoToPreviousTab; }
+        // New
+        bind "n" { NewPane; }
+        bind "\"" { NewPane "down"; }
+        bind "%" { NewPane "right"; }
+        bind "Shift n" { NewTab; }
+        // Close
+        bind "x" { CloseFocus; }
+        bind "Shift x" { CloseTab; }
+        // Rename
+        bind "r" { SwitchToMode "renamepane"; }
+        bind "Shift r" { SwitchToMode "renametab"; TabNameInput 0; }
+        // Move pane
+        bind "Shift h" { MovePane "left"; }
+        bind "Shift j" { MovePane "down"; }
+        bind "Shift k" { MovePane "up"; }
+        bind "Shift l" { MovePane "right"; }
+        bind ">" { BreakPaneRight; } // shift .
+        bind "<" { BreakPaneLeft; } // shift ,
+        bind "Shift b" { BreakPane; }
+        // Move tab
+        bind "Shift o" { MoveTab "left"; }
+        bind "Shift i" { MoveTab "right"; }
+        // Resize pane
+        bind "left" { Resize "Increase left"; }
+        bind "down" { Resize "Increase down"; }
+        bind "up" { Resize "Increase up"; }
+        bind "right" { Resize "Increase right"; }
+        bind "Shift left" { Resize "Decrease right"; }
+        bind "Shift up" { Resize "Decrease down"; }
+        bind "Shift down" { Resize "Decrease up"; }
+        bind "Shift right" { Resize "Decrease left"; }
+        // Float pane
+        bind "f" { ToggleFloatingPanes; }
+        bind "e" { TogglePaneEmbedOrFloating; }
+        // fullscreen pane
+        bind "z" { ToggleFocusFullscreen; }
+        // sync tabs
+        //bind "Shift s" { ToggleActiveSyncTab; SwitchToMode "locked"; }
+        // Layout
+        bind "]" { NextSwapLayout; }
+        bind "[" { PreviousSwapLayout; }
+        bind "." { TogglePaneFrames; }
+        // Switch mode
+        bind "space" { SwitchToMode "scroll"; }
+        // Plugin manager
+        bind "p" {
+            LaunchOrFocusPlugin "plugin-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
+    }
+    renamepane {
+        // overwrite - undo rename first
+        bind "esc" { UndoRenamePane; SwitchToMode "normal"; }
+        bind "enter" { SwitchToMode "normal"; }
+    }
+    renametab {
+        // overwrite - undo rename first
+        bind "esc" { UndoRenameTab; SwitchToMode "normal"; }
+        bind "enter" { SwitchToMode "normal"; }
+    }
+    entersearch {
+        bind "esc" { SwitchToMode "normal"; }
+        bind "enter" { SwitchToMode "search"; }
+    }
+    search {
+        bind "n" { Search "down"; }
+        bind "N" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+    }
+    shared_among "scroll" "search" {
+        bind "j" "down" { ScrollDown; }
+        bind "k" "up" { ScrollUp; }
+        bind "h" "left" "PageUp" "Ctrl u" { PageScrollUp; }
+        bind "l" "right" "PageDown" "Ctrl d" { PageScrollDown; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "e" { EditScrollback; SwitchToMode "locked"; }
+        bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
+    }
+}
+
+
+// Plugins --------------------------------------------------------------------
+
+// Plugin aliases - can be used to change the implementation of Zellij
+// changing these requires a restart to take effect
+plugins {
+    compact-bar location="zellij:compact-bar"
+    //configuration location="zellij:configuration"
+    filepicker location="zellij:strider" {
+        // most of my sessions will be based on `project` directories
+        // see https://zellij.dev/documentation/filepicker-alias
+        cwd "/home/mabq/projects"
+    }
+    plugin-manager location="zellij:plugin-manager"
+    session-manager location="zellij:session-manager"
+    //status-bar location="zellij:status-bar"
+    //strider location="zellij:strider"
+    //tab-bar location="zellij:tab-bar"
+    //welcome-screen location="zellij:session-manager" {
+    //    welcome_screen true
+    //}
+}
+
+// Plugins to load in the background when a new session starts
+// https://zellij.dev/documentation/plugin-loading#on-startup
+// eg. "file:/path/to/my-plugin.wasm"
+// eg. "https://example.com/my-plugin.wasm"
+load_plugins {
+    //https://example.com/my-plugin.wasm
+    //file:/path/to/my/plugin.kdl
+    //my-plugin-alias
+}
+
+
+// Config options -------------------------------------------------------------
+
+// Use a simplified UI without special fonts (arrow glyphs)
+// Options:
+//   - true
+//   - false (Default)
+// simplified_ui false
+
+// The folder in which Zellij will look for themes
+// (Requires restart)
+// theme_dir "/tmp"
+
+// Choose the theme (see the themes directory):
+// List of pre-included themes:
+theme "tokyonight_storm"
+
+// UI preferences
+//ui {
+//    pane_frames {
+//        rounded_corners true
+//        hide_session_name false
+//    }
+//}
+
+// Choose the base input mode of zellij.
+// Options:
+//   - normal (default)
+//   - locked
+default_mode "locked"
+
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+// default_shell "fish"
+
+// Choose the path to override cwd that zellij will use for opening new panes
+// default_cwd "/tmp"
+
+// The folder in which Zellij will look for layouts
+// (Requires restart)
+// layout_dir "/tmp"
+
+// The name of the default layout to load on startup (must be in the layouts folder)
+// Default: "default"
+default_layout "compact"
+
+// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
+// Options:
+//   - true (default)
+//   - false
+//auto_layout true
+
+// Toggle enabling the mouse mode.
+// On certain configurations, or terminals this could
+// potentially interfere with copying text.
+// Options:
+//   - true (default)
+//   - false
+// mouse_mode true
+
+// Toggle having pane frames around the panes
+// Options:
+//   - true (default, enabled)
+//   - false
+// Note: If you disable this, the `borderless` property on layout config won't apply. Maybe just edit the defult layout.
+pane_frames false
+
+// When attaching to an existing session with other users,
+// should the session be mirrored (true)
+// or should each user have their own cursor (false)
+// (Requires restart)
+//   - true
+//   - false (default)
+// mirror_session false
+
+// Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
+// eg. when terminal window with an active zellij session is closed
+// (Requires restart)
+// Options:
+//   - detach (default)
+//   - quit
+// on_force_close "detach"
+
+// Configure the scroll back buffer size
+// This is the number of lines zellij stores for each pane in the scroll back
+// buffer. Excess number of lines are discarded in a FIFO fashion.
+// (Requires restart)
+// Valid values: positive integers
+// Default value: 10000
+// scroll_buffer_size 10000
+
+// Provide a command to execute when copying text. The text will be piped to
+// the stdin of the program to perform the copy. This can be used with
+// terminal emulators which do not support the OSC 52 ANSI control sequence
+// that will be used by default if this option is not set.
+// Examples:
+//
+// copy_command "xclip -selection clipboard" // x11
+// copy_command "wl-copy"                    // wayland
+// copy_command "pbcopy"                     // osx
+//
+// copy_command "pbcopy"
+
+// Choose the destination for copied text
+// Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
+// Does not apply when using copy_command.
+// Options:
+//   - system (default)
+//   - primary
+// copy_clipboard "system"
+
+// Enable automatic copying (and clearing) of selection when releasing mouse
+//   - true (default)
+//   - false
+// copy_on_select true
+
+// Path to the default editor to use to edit pane scrollbuffer
+// Default: $EDITOR or $VISUAL
+// scrollback_editor "/usr/bin/vim"
+
+// A fixed name to always give the Zellij session.
+// Consider also setting `attach_to_session true,`
+// otherwise this will error if such a session exists.
+// Default: <RANDOM>
+session_name "Playground"
+
+// When `session_name` is provided, attaches to that session
+// if it is already running or creates it otherwise.
+//   - true
+//   - false (default)
+attach_to_session true
+
+// Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands) so that they can later be resurrected
+// Options:
+//   - true (default)
+//   - false
+session_serialization false
+
+// How often in seconds sessions are serialized
+// serialization_interval 10000
+
+// Whether pane viewports are serialized along with the session, default is false
+// Options:
+//   - true
+//   - false (default)
+// serialize_pane_viewport false
+
+// Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
+// defaults to the scrollback size. If this number is higher than the scrollback size, it will
+// also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
+// scrollback_lines_to_serialize 600
+
+// Enable or disable the rendering of styled and colored underlines (undercurl).
+// May need to be disabled for certain unsupported terminals
+// (Requires restart)
+//   - true (default)
+//   - false
+// styled_underlines true
+
+// Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
+// metadata info on this session)
+// (Requires restart)
+//   - true
+//   - false (default)
+// disable_session_metadata false
+
+// Enable or disable support for the enhanced Kitty Keyboard Protocol (the host terminal must also support it)
+// (Requires restart)
+//   - true (default, if the host terminal supports it)
+//   - false
+// support_kitty_keyboard_protocol true

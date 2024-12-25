@@ -1,0 +1,125 @@
+# --- Notes:
+#     DO NOT APPEND COMMENTS, PUT THEM IN THEIR OWN LINES.
+#
+#     These configurations apply to all keyboards.
+#
+#     Included files should not contain an [ids] section.
+#     Included files should not end in `.conf`.
+#     Included files should include other files.
+#
+#     Use:
+#     - `keyd monitor` to check key names
+#     - `sudo systemd enable/start keyd.service` to enable/start the service
+#     - `sudo keyd reload` to update changes on config files
+#     - `sudo journalctl -eu keyd` to check for error after update, the output
+#       will also show the keyboard names and the configuration file applied.
+
+[global]
+# (usefull when regret typing a modifier key, just hold it a little longer and nothing will by typed)
+overload_tap_timeout = 300
+
+
+[main]
+space = overload(meta, space)
+capslock = overload(control, oneshot(control))
+enter = overload(control, oneshot(control))
+f = overload(nav, f)
+; = overload(symbols, ;)
+' = overload(media, ')
+[ = -
+# (is this what is causing keyboard layouts switch?)
+# rightshift = overload(shift, oneshot(shift))
+# leftshift = overload(shift, oneshot(shift))
+
+
+[nav]
+# --- top row
+y = capslock
+u = tab
+i = esc
+o = backspace
+p = *
+[ = +
+# --- home row
+h = left
+j = down
+k = up
+l = right
+; = ~
+' = `
+enter = enter
+# --- bottom row
+n = enter
+m = tab
+, = [
+. = ]
+/ = \
+shift =
+# --- toggle layer
+d = layer(nav2)
+
+[nav:M]
+# --- disable overload for key repetition
+space = space
+
+[nav2]
+# --- top row
+y =
+u = f11
+i = f2
+o = delete
+p = macro(C-S-v)
+[ =
+# --- home row
+h = home
+j = pagedown
+k = pageup
+l = end
+; =
+' =
+enter =
+# --- bottom row
+n =
+m =
+, = macro(C-S-tab)
+. = macro(C-tab)
+/ =
+# --- thumb
+space = macro(C-space [)
+
+
+[symbols]
+# --- top row
+q = !
+w = @
+e = #
+r = $
+t = %
+# --- home row
+capslock = ^
+a = (
+s = )
+d = {
+f = }
+g = =
+# --- bottom row
+z =
+x =
+c =
+v = |
+b = &
+
+
+[media]
+s = previoussong
+d = volumeup
+f = volumedown
+g = nextsong
+space = playpause
+
+
+[shift]
+# (make sure pressing both shifts work, required for accents)
+# (see hyprland input variables)
+rightshift = macro(leftshift+rightshift)
+leftshift = macro(leftshift+rightshift)

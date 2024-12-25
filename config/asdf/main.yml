@@ -1,0 +1,76 @@
+# https://asdf-vm.com/guide/getting-started.html
+# If you ever need to unintall see: https://asdf-vm.com/manage/core.html#uninstall
+- tags: asdf
+  block:
+    - name: asdf - Install node and npm
+      # Must install `nodejs` and `npm` from pacman, otherwise tasks which use npm to install
+      # packages will fail during the very first run of this playbook. The `npm` version
+      # installed with `asdf` is not available in to shell yet. See notes on the README.md
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          -  nodejs # Evented I/O for V8 javascript
+          -  npm # JavaScript package manager
+
+    - name: asdf - Install or update
+      block:
+        - name: asdf - Check if asdf is installed
+          ansible.builtin.command: "which asdf"
+          register: which_asdf
+          ignore_errors: true
+
+        - name: asdf - Install asdf and plugins
+          when: which_asdf.rc != 0
+          block:
+            - name: asdf - Install dependencies
+              become: true
+              community.general.pacman:
+                state: latest
+                name:
+                  -  curl # command line tool and library for transferring data with URLs
+                  -  git # the fast distributed version control system
+            - name: asdf - Install by cloning the asdf repo
+              ansible.builtin.git:
+                repo: "git@github.com:asdf-vm/asdf.git"
+                # The documentation points to the current version of asdf,
+                # I prefer not to specify a version so that the most current
+                # version is always downloaded. By default `version` points
+                # to `HEAD`.
+                # version: "v0.14.1"
+                # If you change the destination, you must also update the tasks below!
+                dest: "{{ home }}/.asdf"
+                clone: true
+                update: true
+                key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
+                # This is the first time connecting to github via ssh, we must
+                # accept it's key to be automatically added to the `known_hosts`
+                # file, otherwise verification will fail.
+                accept_hostkey: true
+                # Replace any previous directory
+                force: true
+            - name: asdf - Install plugins
+              # For a list of plugins see https://github.com/asdf-vm/asdf-plugins?tab=readme-ov-file
+              block:
+                - name: asdf - nodejs
+                  # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+                  # The nodejs plugin installs the proper version of npm, when you install/change the nodejs version, the npm version will be changed automatically
+                  block:
+                  # ⚠️  Right after we install asdf the command won't be available (it is loaded with zsh config files).
+                  # So we must manually source the file on every task before using the command.
+                  # Read the "Shell environment" notes on the README.md
+                  - name: asdf - Install the `asdf-nodejs` plugin
+                    ansible.builtin.shell: "source {{ home }}/.asdf/asdf.sh && asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+                  - name: asdf - Install nodejs latest version
+                    # https://asdf-vm.com/guide/getting-started.html#_5-install-a-version
+                    ansible.builtin.shell: "source {{ home }}/.asdf/asdf.sh && asdf install nodejs latest"
+                  - name: asdf - Setup a node js global version
+                    # https://asdf-vm.com/guide/getting-started.html#_6-set-a-version
+                    ansible.builtin.shell: "source {{ home }}/.asdf/asdf.sh && asdf global nodejs latest"
+
+        - name: asdf - Already installed, just update
+          # https://asdf-vm.com/manage/core.html#update
+          when: which_asdf.rc == 0
+          ansible.builtin.shell: "asdf update"
+
+

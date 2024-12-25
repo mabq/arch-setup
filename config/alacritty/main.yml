@@ -1,0 +1,45 @@
+- tags: alacritty
+  block:
+    - name: alacritty - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - alacritty # A cross-platform, GPU-accelerated terminal emulator
+
+    - name: alacritty - Install packages from AUR
+      # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
+      block:
+        # Alacritty does not yet support any image protocol, so ueberzugpp must be installed.
+        # https://yazi-rs.github.io/docs/image-preview/
+        - name: alacritty - Check if ueberzugpp is already installed
+          ansible.builtin.command: "which ueberzugpp"
+          register: which_ueberzugpp
+          ignore_errors: true
+        - name: alacritty - Install ueberzugpp
+          when: which_ueberzugpp.rc != 0
+          # Command line util which allows to display images in combination with X11 written in C++
+          ansible.builtin.shell: "paru -S --skipreview ueberzugpp"
+
+    - name: Create config files
+      block:
+        - name: alacritty - Create directories
+          ansible.builtin.file:
+            path: "{{ home }}/.config/alacritty"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "700"
+            state: directory
+
+        - name: alacritty - Create links
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/alacritty/files/{{ item.name }}"
+            path: "{{ home }}/.config/alacritty/{{ item.name }}"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "{{ item.mode }}"
+            state: "link"
+          loop:
+            - { name: "alacritty.toml", mode: "600" }
+            # link the entire theme directory, that way you can add and delete themes whenever you want without the need to edit this file
+            - { name: "themes", mode: "700" }

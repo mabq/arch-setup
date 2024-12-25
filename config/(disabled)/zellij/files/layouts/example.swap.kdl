@@ -1,0 +1,198 @@
+// "Swap layout" files determine how the layout is adjusted when adding more panes.
+// https://zellij.dev/documentation/swap-layouts
+
+// Template:
+tab_template name="ui" {
+    children
+    pane {
+        size 1
+        borderless true
+        plugin location="zellij:compact-bar"
+    }
+}
+
+// Important: `max_panes` must be +1 due to the bar pane.
+
+// Tiled layouts:
+swap_tiled_layout name="master/vertical" {
+    // 1 bar, 1 master, 6 vertical slaves
+    ui max_panes=8 {
+        pane split_direction="vertical" {
+            pane size="55%"
+            pane split_direction="horizontal" { children; }
+        }
+    }
+}
+swap_tiled_layout name="master/vstacked" {
+    // 1 bar, 1 master, unlimited vertical slaves
+    ui {
+        pane split_direction="vertical" {
+            pane size="55%"
+            pane stacked=true { children; }
+        }
+    }
+}
+swap_tiled_layout name="master/horizontal" {
+    // 1 bar, 1 master, 6 horizontal slaves
+    ui max_panes=8 {
+        pane split_direction="horizontal" {
+            pane
+            pane split_direction="vertical" { children; }
+        }
+    }
+}
+swap_tiled_layout name="master/hstacked" {
+    // 1 bar, 1 master, unlimited horizontal slaves
+    ui {
+        pane split_direction="horizontal" {
+            pane
+            pane stacked=true { children; }
+        }
+    }
+}
+swap_tiled_layout name="square" {
+    // 1 bar, 1...12 equally distributed panes
+    ui max_panes=3 {
+        pane split_direction="vertical" { children; }
+    }
+    ui max_panes=4 {
+        pane
+        pane split_direction="vertical" { children; }
+    }
+    ui max_panes=5 {
+        pane split_direction="vertical" { pane; pane; }
+        pane split_direction="vertical" { pane; pane; }
+    }
+    ui max_panes=6 {
+        pane split_direction="vertical" { pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; }
+    }
+    ui max_panes=7 {
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; }
+    }
+    ui max_panes=8 {
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=9 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=10 {
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; }
+    }
+    ui max_panes=11 {
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=12 {
+        pane split_direction="vertical" { pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=13 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=14 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=15 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=16 {
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=17 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+    }
+    ui max_panes=18 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=19 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=20 {
+        pane split_direction="vertical" { pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+    ui max_panes=21 {
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+        pane split_direction="vertical" { pane; pane; pane; pane; pane; }
+    }
+}
+swap_tiled_layout name="vertical" {
+    // 1 bar + up to 6 vertical panes
+    ui max_panes=9 {
+        pane split_direction="vertical" { children; }
+    }
+}
+swap_tiled_layout name="horizontal" {
+    // 1 bar + up to 6 horizontal panes
+    ui max_panes=9 {
+        pane split_direction="horizontal" { children; }
+    }
+}
+
+// Float layouts:
+swap_floating_layout name="staggered" {
+    floating_panes
+}
+swap_floating_layout name="enlarged" {
+    floating_panes max_panes=10 {
+        pane { x "5%"; y 1; width "90%"; height "90%"; }
+        pane { x "5%"; y 2; width "90%"; height "90%"; }
+        pane { x "5%"; y 3; width "90%"; height "90%"; }
+        pane { x "5%"; y 4; width "90%"; height "90%"; }
+        pane { x "5%"; y 5; width "90%"; height "90%"; }
+        pane { x "5%"; y 6; width "90%"; height "90%"; }
+        pane { x "5%"; y 7; width "90%"; height "90%"; }
+        pane { x "5%"; y 8; width "90%"; height "90%"; }
+        pane { x "5%"; y 9; width "90%"; height "90%"; }
+        pane focus=true { x 10; y 10; width "90%"; height "90%"; }
+    }
+}
+swap_floating_layout name="spread" {
+    floating_panes max_panes=1 {
+        pane {y "50%"; x "50%"; }
+    }
+    floating_panes max_panes=2 {
+        pane { x "1%"; y "25%"; width "45%"; }
+        pane { x "50%"; y "25%"; width "45%"; }
+    }
+    floating_panes max_panes=3 {
+        pane focus=true { y "55%"; width "45%"; height "45%"; }
+        pane { x "1%"; y "1%"; width "45%"; }
+        pane { x "50%"; y "1%"; width "45%"; }
+    }
+    floating_panes max_panes=4 {
+        pane { x "1%"; y "55%"; width "45%"; height "45%"; }
+        pane focus=true { x "50%"; y "55%"; width "45%"; height "45%"; }
+        pane { x "1%"; y "1%"; width "45%"; height "45%"; }
+        pane { x "50%"; y "1%"; width "45%"; height "45%"; }
+    }
+}

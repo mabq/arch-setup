@@ -1,0 +1,85 @@
+{
+	// --- Bar configuration:
+	//     Use `man waybar` for more information
+	"name": "main", // this name is used in `exec` and `bindings`
+	"position": "bottom",
+	"mode": "overlay", // dock | hide | invisible | overlay
+	"layer": "top", // applicable only for overlay mode
+	"spacing": 10, // space between modules
+	"modules-center": [
+		"hyprland/workspaces"
+	],
+	"modules-right": [
+		"hyprland/workspaces#specials",
+		"bluetooth",
+		"battery",
+		"clock"
+	],
+	// ---
+	"hyprland/workspaces": {
+		// https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
+		// Numbered and special workspace names have different paddings by default,
+		// adding padding with css does not work for
+		// "format": "{name}",
+		"format": "{icon}",
+		"format-icons": {
+			"1": "",
+			"2": "󰈹"
+		},
+		"show-special": false
+	},
+	"hyprland/workspaces#specials": {
+		// https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
+		// Numbered and special workspace names have different paddings by default,
+		// adding padding with css does not work for
+		// "format": "{name}",
+		"format": "{icon}",
+		"format-icons": {
+			"music": "",
+			"tempterm": "",
+			"explorer": "",
+			"passwords": "󰌆",
+			"gpt": "󰚩"
+		},
+		"show-special": true,
+		"ignore-workspaces": [
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"10"
+		]
+	},
+	"bluetooth": {
+		// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+		"format": "",
+		"tooltip-format": "No devices connected",
+		"tooltip-format-connected": "{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}"
+	},
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"tooltip": false
+	},
+	"clock": {
+		// https://github.com/Alexays/Waybar/wiki/Module:-Clock
+		"format": "{:%a. %d %b. %H:%M}",
+		"tooltip": false
+	}
+}

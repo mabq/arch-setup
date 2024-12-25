@@ -1,0 +1,48 @@
+# Read notes on the fontconfig config file
+- tags: fonts
+  block:
+    - name: fonts - Intall propietary fonts
+      block:
+        - name: fonts - Clone the fonts private repository
+          ansible.builtin.git:
+            repo: "git@github.com:mabq/fonts.git"
+            dest: "{{ home }}/projects/fonts"
+            clone: true
+            update: true
+            key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
+            # This is the first time connecting to github via ssh, we must
+            # accept it's key to be automatically added to the `known_hosts`
+            # file, otherwise the verification fails.
+            accept_hostkey: true
+        - name: fonts - Create link to include fonts for all users
+          become: true
+          ansible.builtin.file:
+            # Check the README of the fonts repo
+            src: "{{ home }}/projects/fonts/include"
+            # https://wiki.archlinux.org/title/Fonts#Manual_installation
+            path: "/usr/local/share/fonts"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "755"
+            state: "link"
+
+    - name: fonts - Install public fonts
+      block:
+        - name: fonts - Intall fonts
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - ttf-nerd-fonts-symbols # High number of extra glyphs from popular 'iconic fonts'
+              - ttf-nerd-fonts-symbols-mono # High number of extra glyphs from popular 'iconic fonts' (monospace)
+        - name: fonts - Install fonts from AUR
+          block:
+            - name: no-config - Check if ttf-apple-emoji is already installed
+              ansible.builtin.stat:
+                path: "/usr/share/fonts/apple-color-emoji/apple-color-emoji.ttf"
+              register: ttfappleemoji
+              ignore_errors: true
+            - name: no-config - Install ttf-apple-emoji
+              when: not ttfappleemoji.stat.exists
+              # Apple Color Emoji is a color typeface used by iOS and macOS to display emoji
+              ansible.builtin.shell: "paru -S --skipreview ttf-apple-emoji"

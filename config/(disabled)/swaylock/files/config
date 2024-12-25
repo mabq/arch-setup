@@ -1,0 +1,105 @@
+# Uncomment the color theme you want to use, swaylock does not support imports
+
+ignore-empty-password
+show-failed-attempts
+daemonize
+
+show-keyboard-layout
+indicator-caps-lock
+
+indicator-radius=58
+indicator-thickness=14
+
+line-uses-inside
+
+font=monospace
+font-size=14
+
+
+# Catppuccin-mocha ------------------------------------------------------------
+
+# background and text colors
+color=1e1e2e
+text-color=cdd6f4
+
+# highlight color on keypress, same for all keys
+key-hl-color=cdd6f4
+bs-hl-color=cdd6f4
+caps-lock-key-hl-color=cdd6f4
+caps-lock-bs-hl-color=cdd6f4
+
+# remove border between highlight color and circle
+separator-color=00000000
+
+# match ring and inner circle text
+ring-color=89b4fa
+
+ring-caps-lock-color=b4befe
+text-caps-lock-color=b4befe
+
+ring-clear-color=cdd6f4
+text-clear-color=cdd6f4
+
+ring-ver-color=f2cdcd
+text-ver-color=f2cdcd
+
+ring-wrong-color=eba0ac
+text-wrong-color=eba0ac
+
+# text below circle
+layout-bg-color=00000000
+layout-border-color=00000000
+layout-text-color=cdd6f4
+
+# (make inner circle always transparent to match the background color)
+inside-color=00000000
+inside-caps-lock-color=00000000
+inside-clear-color=00000000
+inside-ver-color=00000000
+inside-wrong-color=00000000
+
+# (make line always transparent)
+line-caps-lock-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+
+# Rose-pine -------------------------------------------------------------------
+#
+# color=191724
+#
+# key-hl-color=e0def4
+# caps-lock-key-hl-color=e0def4
+# bs-hl-color=908caa
+# caps-lock-bs-hl-color=908caa
+#
+# layout-bg-color=191724
+# layout-border-color=191724
+# layout-text-color=e0def4
+#
+# separator-color=191724
+#
+# inside-color=191724
+# line-color=191724
+# ring-color=26233a
+#
+# inside-clear-color=191724
+# line-clear-color=191724
+# ring-clear-color=908caa
+# text-clear-color=e0def4
+#
+# inside-caps-lock-color=191724
+# line-caps-lock-color=191724
+# ring-caps-lock-color=26233a
+# text-caps-lock-color=e0def4
+#
+# inside-ver-color=ebbcba
+# line-ver-color=191724
+# ring-ver-color=ebbcba
+# text-ver-color=191724
+#
+# inside-wrong-color=eb6f92
+# line-wrong-color=191724
+# ring-wrong-color=eb6f92
+# text-wrong-color=191724

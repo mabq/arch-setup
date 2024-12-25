@@ -1,0 +1,17 @@
+- tags: spotify
+  block:
+    - name: spotify - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - spotify-launcher # Client for spotify's apt repository in Rust for Arch Linux
+
+    - name: spotify - Link configuration file
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/spotify_launcher/files/spotify-launcher.conf"
+        path: "{{ home }}/.config/spotify-launcher.conf"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0600"
+        state: "link"

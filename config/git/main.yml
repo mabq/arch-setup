@@ -1,0 +1,37 @@
+# --- Note:
+#     `git-delta` uses `bat` for syntax-highlighting, see notes on the bat
+#     ansible task.
+- tags: git
+  block:
+    - name: git - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - git # The fast distributed version control system
+          - git-delta # Syntax-highlighting pager for git and diff output
+          - github-cli # The GitHub CLI (Take GitHub to the command line)
+          - lazygit # Simple terminal UI for git commands (optional)
+
+    - name: git - Create links
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/git/files/{{ item.name }}"
+        path: "{{ home }}/{{ item.name }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "600"
+        state: "link"
+      loop:
+        - { name: ".gitconfig" }
+
+    - name: git - Create links for lazygit
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/git/files/lazygit/{{ item.name }}"
+        path: "{{ home }}/.config/lazygit/{{ item.name }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "600"
+        state: "link"
+        force: true
+      loop:
+        - { name: "config.yml" }

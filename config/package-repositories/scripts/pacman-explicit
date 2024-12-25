@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This script lists all explicitly installed packages filtering out all packages that are installed as part of the `base` and `base-devel` meta groups.
+
+base_group=("archlinux-keyring" "bash" "bzip2" "coreutils" "file" "filesystem" "findutils" "gawk" "gcc-libs" "gettext" "glibc" "grep" "gzip" "iproute2" "iputils" "licenses" "pacman" "pciutils" "procps-ng" "psmisc" "sed" "shadow" "systemd" "systemd-sysvcompat" "tar" "util-linux" "xz" "linux")
+base_devel_group=("archlinux-keyring" "autoconf" "automake" "binutils" "bison" "debugedit" "fakeroot" "file" "findutils" "flex" "gawk" "gcc" "gettext" "grep" "groff" "gzip" "libtool" "m4" "make" "pacman" "patch" "pkgconf" "sed" "sudo" "texinfo" "which")
+
+rg --line-regexp --invert-match --no-line-number --file <(printf "%s\n" "${base_group[@]}" "${base_devel_group[@]}" | sort -u) <(pacman -Qqe)
+

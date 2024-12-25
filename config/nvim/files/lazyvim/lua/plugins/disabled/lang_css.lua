@@ -1,0 +1,26 @@
+return {
+  -- Format CSS files with Biome
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = {
+  --     ensure_installed = { "biome" },
+  --   },
+  -- },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   opts = {
+  --     formatters_by_ft = {
+  --       css = { "biome", stop_after_first = true },
+  --     },
+  --   },
+  -- },
+  -- {
+  --   -- Add treesitter support for styled-components
+  --   "nvim-treesitter/nvim-treesitter",
+  --   opts = {
+  --     ensure_installed = {
+  --       "styled",
+  --     },
+  --   },
+  -- },
+}

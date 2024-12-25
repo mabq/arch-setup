@@ -1,0 +1,33 @@
+# --- IMPORTANT:
+#     Many packages and plugins use `bat` under the hood. Changing the bat
+#     theme affects all those packages and plugins.
+#
+#     You can customize the bat theme with a config file or with an environment
+#     variable. See:
+#       https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting-theme
+#       https://github.com/folke/tokyonight.nvim/issues/23#issuecomment-1636639722
+#
+#     Apparently the config file works for bat itself but not for the other
+#     packages or Neovim plugins. The environment variable does work for all.
+#     Check the `exports` zsh config file.
+- tags: bat
+  block:
+    - name: bat - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - bat # Cat clone with syntax highlighting and git integration (`cat` alternative)
+
+    - name: bat - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/bat/files"
+        path: "{{ home }}/.config/bat"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
+
+    - name: bat - Build themes
+      ansible.builtin.command: bat cache --build

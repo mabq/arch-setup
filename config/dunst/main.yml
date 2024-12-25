@@ -1,0 +1,36 @@
+# --- Note
+#     Use `dunstify -u "low|nornal|critical" "{message}"` to test notifications
+#
+- tags: dunst
+  block:
+    - name: dunst - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - dunst # Customizable and lightweight notification-daemon
+          - libnotify # Library for sending desktop notifications (required to test)
+
+    - name: dunst - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/dunst/files"
+        path: "{{ home }}/.config/dunst"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
+
+    - name: dunst - Enable user service
+      # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
+      # Requires `SSH_AUTH_LOCK` environment variable (see zsh config)
+      environment:
+        # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_service_module.html#parameter-scope
+        XDG_RUNTIME_DIR: "{{ lookup('env', 'XDG_RUNTIME_DIR') }}"
+      # User services do not require super user privileges.
+      ansible.builtin.systemd_service:
+        name: "dunst.service"
+        # (do not start the service yet, the first time we run this command we do it from a TTY without any window manager started, it will throw an error)
+        # state: "started"
+        enabled: true
+        scope: "user"

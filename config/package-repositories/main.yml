@@ -1,0 +1,81 @@
+- tags: pacman
+  block:
+    - name: pacman
+      block:
+        - name: pacman - Enable colored output, verbose lists and parallel downloads
+          become: true
+          ansible.builtin.lineinfile:
+            dest: /etc/pacman.conf
+            regexp: "{{ item.regex }}"
+            line: "{{ item.line }}"
+          loop:
+            - { regex: "^#Color", line: "Color" }
+            - { regex: "^#VerbosePkgLists", line: "VerbosePkgLists" }
+            - { regex: "^#ParallelDownloads", line: "ParallelDownloads = 10" }
+            # - { regex: "^#IgnorePkg", line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers" }
+
+        - name: pacman - Install `pacman-contrib`
+          # Contributed scripts and tools for pacman systems (provides the `pactree` command)
+          become: true
+          community.general.pacman:
+            state: latest
+            name: pacman-contrib
+
+        - name: pacman - Link script
+          # The script is always called from the terminal, must be in the $PATH
+          block:
+            - name: pacman - Create directory
+              ansible.builtin.file:
+                path: "{{ home }}/.local/bin"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "700"
+                state: directory
+            - name: pacman - Create link
+              ansible.builtin.file:
+                src: "{{ repo_dir }}/config/package-repositories/scripts/{{ item.name }}"
+                path: "{{ home }}/.local/bin/{{ item.name }}"
+                owner: "{{ user }}"
+                group: "{{ user }}"
+                mode: "700"
+                state: "link"
+              loop:
+                - { name: "pacman-explicit" }
+
+- tags: paru
+  block:
+    - name: paru - Ensure `base-devel` is installed
+      # Should be already installed, but just in case someone does not read the README.md file
+      become: true
+      community.general.pacman:
+        state: latest
+        name: base-devel
+
+    - name: paru - Check if paru is already installed
+      ansible.builtin.command: "which paru"
+      register: which_paru
+      ignore_errors: true
+
+    - name: paru - Install paru
+      # https://github.com/Morganamilo/paru?tab=readme-ov-file#installation
+      # Once installed this will never run again, update paru with paru itself
+      when: which_paru.rc != 0
+      block:
+        - name: pacman - paru - Clone the `paru` repository
+          ansible.builtin.git:
+            repo: https://aur.archlinux.org/paru.git
+            dest: "/tmp/paru/"
+        - name: paru - Build
+          # `-s` installs dependencies automatilly
+          # `-i` install the package after successfully building it
+          # `--noconfirm` answers `yes` to all prompts without asking questions
+          ansible.builtin.shell: "cd /tmp/paru && makepkg -si --noconfirm"
+
+- tags: flatpak
+  block:
+    - name: flatpak - Install flatpak
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - flatpak # Linux application sandboxing and distribution framework

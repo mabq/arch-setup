@@ -1,0 +1,16 @@
+# Wallpapers are stored in a separate repo because it is really hard to find nice wallpapers, once I find them I don't want to remove them. I don't want to download all those images everytime I run this ansible playbook to update minor details.
+
+- tags: wallpapers
+  block:
+    - name: wallpapers - Clone the wallpaper repository
+      ansible.builtin.git:
+        repo: "git@github.com:mabq/wallpapers.git"
+        # (if you ever change the dest path, update hyprland exec file)
+        dest: "{{ home }}/projects/wallpapers"
+        clone: true
+        update: true
+        key_file: "{{ home }}/.ssh/{{ ssh_key_name }}"
+        # This is the first time connecting to github via ssh, we must
+        # accept it's key to be automatically added to the `known_hosts`
+        # file, otherwise verification will fail.
+        accept_hostkey: true

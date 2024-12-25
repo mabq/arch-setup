@@ -1,0 +1,143 @@
+;; --- Lesson learned!
+;;     Software keyboard managers are nice, but dedicated hardware is better.
+;;
+;;     When purchasing a new keyboard look for 3 things:
+;;       1) Reachable, dedicated keys. Contour keyboards seem best.
+;;       2) Ortholinear layout.
+;;       2) Thumb-key modifier keys.
+;;
+;;     Configuration documentation:
+;;       tutorial: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd#L111
+;;       keycodes: https://github.com/kmonad/kmonad/blob/master/src/KMonad/Keyboard/Keycode.hs
+
+(defcfg
+  ;; When no dev input is specified, Kanata attaches itself to all keyboards,
+  ;; including the laptop keyboard. This is great an something that I could
+  ;; not do with Kmonad.
+  ;;
+  ;; Exclude devices that are not keyboards, use `libinput --list-devices`
+  ;; to check names.
+  linux-dev-names-exclude (
+    "Logitech MX Master 3"
+    "WH-1000XM3 (AVRCP)"
+  )
+
+  ;; linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+  ;; Disable logs
+  log-layer-changes no
+)
+
+(defvar
+  ;; Time window to activate a double-tap (in milliseconds)
+  tap-timeout 300
+
+  ;; Does also matter for `tap-hold-release`
+  hold-timeout 150
+)
+
+(deffakekeys
+  ;; Taken from the home-row-mod-advanced example config file, see:
+  ;;   https://github.com/jtroo/kanata/blob/main/cfg_samples/home-row-mod-advanced.kbd
+  to-base (layer-switch base)
+)
+
+(defsrc
+  ;;    |                 |                 |                 |
+  tab   q     w     e     r     t     y     u     i     o     p     [     ]     \
+  caps  a     s     d     f     g     h     j     k     l     ;     '     ret
+  lsft  z     x     c     v     b     n     m     ,     .     /     rsft
+  lctl  lmet  lalt              spc               ralt  rmet  rctl
+)
+
+;; The index finger is the fastest to release a key. Using 'f' will produce
+;; less unintended modified keys.
+;; Use non-letter keys as modifiers -- less friction while typing.
+(deflayer base
+  ;;    |                 |                 |                 |
+  _     _     _     _     _     _     _     _     _     _     _     -     _     _  ;; 👀 notice the '-' (third from the right)
+  @'ctl _     _     _     @feq  _     _     _     _     _     @;    @'    @rctl
+  _     _     _     _     _     _     _     _     @,    @.    _     _
+  _     _     _                 @smet             _     _     _                    ;; ⚠️  leave default modifier keys unchanged
+)
+
+(defalias
+  tap  (on-idle-fakekey to-base tap 20)
+
+  up   (caps-word 2000)
+  csv  C-S-v
+  csc  C-S-c
+  tne  C-tab
+  tpr  C-S-tab
+  hne  A-right
+  hpr  A-left
+
+  'ctl (tap-hold-release $tap-timeout $hold-timeout (multi esc @tap) lctl)
+  rctl (tap-hold-release $tap-timeout $hold-timeout (multi ret @tap) rctl)
+  smet (tap-hold-release $tap-timeout $hold-timeout (multi spc @tap) lmet)
+
+  feq  (tap-hold-release $tap-timeout $hold-timeout (multi f @tap) (layer-while-held frequent))
+  feq2 (layer-while-held frequent2)
+
+  ;    (tap-hold-release $tap-timeout $hold-timeout (multi ; @tap) (layer-while-held symbols))
+  '    (tap-hold-release $tap-timeout $hold-timeout (multi ' @tap) (layer-while-held media))
+  .    (tap-hold-release $tap-timeout $hold-timeout (multi . @tap) (layer-while-held numbers))
+  ,    (tap-hold-release $tap-timeout $hold-timeout (multi , @tap) (layer-while-held function))
+)
+
+(deflayer frequent
+  ;;    |                 |                 |                 |
+  _     _     _     _     _     _     @csc  _     esc   bspc  @csv  _     _     _
+  _     _     _     @feq2 XX    _     lft   down  up    rght  S-`   `     _
+  _     _     _     _     _     _     ret   _     _     tab   _     @up
+  _     _     _                 spc               _     _     _
+)
+
+(deflayer frequent2
+  ;;    |                 |                 |                 |
+  _     _     _     _     _     _     _     _     ins   del   @tpr  _     _     _
+  _     _     _     XX    XX    _     home  pgdn  pgup  end   _     _     _
+  _     _     _     _     _     _     @tne  _     @hpr  @hne  _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer symbols
+  ;;    |                 |                 |                 |
+  S-\   S-1   S-2   S-[   S-]   S-5   _     _     _     _     _     _     _     _
+  S-6   +     =     S-9   S-0   S-4   _     S-.   S-3   _     XX    _     _
+  _     \     S-8   [     ]     S-7   _     _     _     _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer numbers
+  ;;    |                 |                 |                 |
+  _     _     7     8     9     _     _     _     _     _     _     _     _     _
+  _     _     4     5     6     _     _     _     _     _     _     _     _
+  _     _     1     2     3     _     _     _     _     XX    _     _
+  _     _     _                 0                 _     _     _
+)
+
+(deflayer function
+  ;;    |                 |                 |                 |
+  _     _     f7    f8    f9    f10   _     _     _     _     _     _     _     _
+  _     _     f4    f5    f6    f11   _     _     _     _     _     _     _
+  _     _     f1    f2    f3    f12   _     _     XX    _     _     _
+  _     _     _                 _                 _     _     _
+)
+
+(deflayer media
+  ;;    |                 |                 |                 |
+  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     prev  volu  vold  next  _     _     _     _     _     XX    _
+  _     _     _     _     _     _     _     _     _     _     _     _
+  _     _     _                 pp                _     _     _
+)
+
+;;(deflayer blank
+  ;;    |                 |                 |                 |
+;;  _     _     _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _     _     _     _     _     _     _     _     _     _
+;;  _     _     _                 _                 _     _     _
+;;)
+

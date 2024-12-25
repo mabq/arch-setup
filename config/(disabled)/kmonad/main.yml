@@ -1,0 +1,76 @@
+# Replaced with kanata!
+
+# Sometimes the event number at which the `/dev/input/by-id/{name}` points changes. This is normally solved by reconnecting the usb reveiver.
+- tags: kmonad
+  block:
+    - name: Install required packages
+      block:
+        - name: kmonad - Install package from AUR
+          tags: aur
+          block:
+            - name: kmonad - Check if kmonad is already installed
+              ansible.builtin.command: "which kmonad"
+              register: which_kmonad
+              ignore_errors: true
+
+            - name: kmonad - Install kmonad
+              when: which_kmonad.rc != 0
+              # An advanced keyboard manager - static binary version
+              ansible.builtin.shell: "paru -S --skipreview kmonad-bin"
+
+        - name: kmonad - Install evtest
+          become: true
+          community.general.pacman:
+            state: latest
+            name:
+              - evtest # Input device event monitor and query tool (required to identify the keyboard address)
+
+      # No need to link the config file, pass the config file in this repo as an argument.
+
+    - name: Avoid running kmonad with sudo
+      # https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions
+      block:
+        - name: kmonad - Ensure the `uinput` group exists
+          # The uinput driver allows user-space programs to create and interact with virtual input devices.
+          become: true
+          ansible.builtin.group:
+            name: uinput
+            state: present
+
+        - name: kmonad - Add your user to the `input` and the `uinput` group
+          become: true
+          ansible.builtin.user:
+            append: true
+            groups: input,uinput
+            name: "{{ user }}"
+
+        - name: kmonad - Ensure the `uinput` device file has the right permissions
+          become: true
+          ansible.builtin.copy:
+            content: 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'
+            dest: /etc/udev/rules.d/99-kmonad.rules
+          # register: rule
+
+          # (restart required - this only happens once)
+
+        # - name: kmonad - Ensure the `uinput` drivers are loaded
+        #   become: true
+        #   ansible.builtin.command: modprobe uinput
+        #   when: rule.changed
+
+    - name: kmonad - Create a static link to address dynamic event number for magic keyboard
+      become: true
+      ansible.builtin.copy:
+        # use `sudo udevadm info --attribute-walk /dev/input/event{NUMBER}` to check device info to create the rule
+        content: 'ACTION=="add", SUBSYSTEM=="input", ATTRS{uniq}=="0c:d7:46:e8:46:63", SYMLINK+="applekeyboard"'
+        dest: /etc/udev/rules.d/99-magickeyboard.rules
+
+    - name: kmonad - Link the whole directory
+      # link the whole directory, there is nothing sensible here
+      ansible.builtin.file:
+        src: "{{ repo_dir }}/config/kmonad/files"
+        path: "{{ home }}/.config/kmonad"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0700"
+        state: "link"
