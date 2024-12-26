@@ -1,11 +1,11 @@
 - tags: ghostty
   block:
-    - name: ghostty - Install packages
-      become: true
-      community.general.pacman:
-        state: latest
-        name:
-          - ghostty # Fast, native, feature-rich terminal emulator pushing modern features
+    # - name: ghostty - Install packages
+    #   become: true
+    #   community.general.pacman:
+    #     state: latest
+    #     name:
+    #       - ghostty # Fast, native, feature-rich terminal emulator pushing modern features
 
     - name: Create config files
       block:
