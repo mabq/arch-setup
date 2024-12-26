@@ -1,0 +1,20 @@
+- tags: ghostty
+  block:
+    - name: ghostty - Install packages
+      become: true
+      community.general.pacman:
+        state: latest
+        name:
+          - ghostty # Fast, native, feature-rich terminal emulator pushing modern features
+
+    - name: Create config files
+      block:
+        - name: ghostty - Link the whole directory
+          # link the whole directory, there is nothing sensible here
+          ansible.builtin.file:
+            src: "{{ repo_dir }}/config/ghostty/files"
+            path: "{{ home }}/.config/ghostty"
+            owner: "{{ user }}"
+            group: "{{ user }}"
+            mode: "0700"
+            state: "link"
