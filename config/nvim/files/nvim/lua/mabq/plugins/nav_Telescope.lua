@@ -5,6 +5,8 @@ return {
     --     `:checkhealth telescope`
     --     While in Telescope, use `<c-/>` (insert mode) or `?` (normal mode) to open
     --     a window that shows you all of the keymaps for the current Telescope picker
+    -- Tips:
+    --    `<C-q>` sends telescope results into Quickfix list.
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -47,13 +49,13 @@ return {
         -- stylua: ignore start
         vim.keymap.set('n', '<C-g>', builtin.git_files, { desc = 'Project git files' })
         vim.keymap.set('n', '<C-s>', builtin.find_files, { desc = 'Project files' })
-        vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Telescope resume' })
         vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Project buffers' })
         vim.keymap.set('n', '<leader>sw', function() local word = vim.fn.expand '<cword>' builtin.grep_string { search = word } end, { desc = 'Project word search' })
         vim.keymap.set('n', '<leader>sW', function() local word = vim.fn.expand '<cWORD>' builtin.grep_string { search = word } end, { desc = 'Project WORD search' })
         vim.keymap.set('n', '<leader>sp', function() builtin.grep_string { search = vim.fn.input 'Grep > ' } end, { desc = 'Project search' })
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
         vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = 'Search telescope' })
+        vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Telescope resume' })
         -- stylua: ignore end
     end,
 }

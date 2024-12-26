@@ -32,8 +32,8 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Increase indentation (keep selection)'
 vim.keymap.set('v', 'J', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move line down' })
 vim.keymap.set('v', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move line up' })
 
-vim.keymap.set('c', '<down>', function() if vim.fn.pumvisible() == 1 then return '<c-n>' end return '<down>' end, { expr = true, desc = 'Select next menu item' })
-vim.keymap.set('c', '<up>', function() if vim.fn.pumvisible() == 1 then return '<c-p>' end return '<up>' end, { expr = true, desc = 'Select previous menu item' })
+-- vim.keymap.set('c', '<down>', function() if vim.fn.pumvisible() == 1 then return '<c-n>' end return '<down>' end, { expr = true, desc = 'Select next menu item' })
+-- vim.keymap.set('c', '<up>', function() if vim.fn.pumvisible() == 1 then return '<c-p>' end return '<up>' end, { expr = true, desc = 'Select previous menu item' })
 
 
 -- Ctrl -----------------------------------------------------------------------
@@ -47,8 +47,12 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +1<CR>', { desc = 'Increase w
 vim.keymap.set('n', '<C-Down>', ':resize -1<CR>', { desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', ':resize +1<CR>', { desc = 'Increase window height' })
 
-vim.keymap.set('n', '<C-_>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
+vim.keymap.set('n', '<C-f>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
 --vim.keymap.set('n', '<C-_>', ':silent !zellij action new-tab --name sessionizer $HOME/.config/zellij/scripts/zellij-sessioniner.sh<CR>', { desc = 'Run zellij-sessionizer' })
+
+vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'Next quickfix entry' })
+vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'Previous quickfix entry' })
+vim.keymap.set('n', '<C-q>', '<cmd>cclose<CR>', { desc = 'Close quickfix' })
 
 --vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Page down (centered)' }) -- feels weird
 -- vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' }) -- feels weird

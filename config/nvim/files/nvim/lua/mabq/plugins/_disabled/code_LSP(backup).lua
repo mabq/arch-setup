@@ -1,56 +1,22 @@
 -- Watch [LSP in Neovim](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=7)
 -- LSP facilitates features like go-to-definition, find references, hover, completion, rename, format, refactor, etc., using semantic whole-project analysis (unlike ctags).
 -- `:h lsp`
---
+
 return {
     {
         -- Default Nvim LSP client configurations for various LSP servers.
         'neovim/nvim-lspconfig',
         dependencies = {
-            {
-                -- Performant, batteries-included completion plugin for Neovim
-                'saghen/blink.cmp',
-                dependencies = {
-                    'rafamadriz/friendly-snippets',
-                    'moyiz/blink-emoji.nvim',
-                },
-                version = '*',
-                opts = {
-                    -- https://cmp.saghen.dev/configuration/keymap.html#presets
-                    keymap = { preset = 'default' },
-                    signature = { enabled = true },
-                    appearance = {
-                        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                        -- Useful for when your theme doesn't support blink.cmp
-                        -- Will be removed in a future release
-                        use_nvim_cmp_as_default = false,
-                        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'. Adjusts spacing to ensure icons are aligned.
-                        nerd_font_variant = 'mono',
-                    },
-                    -- https://cmp.saghen.dev/configuration/sources.html#sources
-                    sources = {
-                        default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji' },
-                        providers = {
-                            emoji = {
-                                module = 'blink-emoji',
-                                name = 'Emoji',
-                                score_offset = 15, -- Tune by preference
-                            },
-                        },
-                    },
-                },
-                opts_extend = { 'sources.default' },
-            },
-            {
-                -- A simple popup display that provides breadcrumbs feature using LSP server
-                'SmiteshP/nvim-navbuddy',
-                dependencies = {
-                    'SmiteshP/nvim-navic',
-                    'MunifTanjim/nui.nvim',
-                },
-                opts = { lsp = { auto_attach = true } },
-                -- keymap set below in autocommand
-            },
+            -- Neovim acts as an LSP client, you still need to install the actual LPS servers. Mason allows you to easily install and manage LSP servers, DAP servers, linters, and formatters.
+            -- Tip: run `:echo executable('{tool-name}')` to check if the tools is findable by Neovim.
+            'williamboman/mason.nvim',
+            -- Makes it easier to use lspconfig with Mason
+            -- Read: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#introduction
+            'williamboman/mason-lspconfig.nvim',
+            -- Show LSP status updates
+            'j-hui/fidget.nvim',
+            -- Add extra capabilities for LSP completions
+            'hrsh7th/cmp-nvim-lsp',
             {
                 -- Faster LuaLS setup for Neovim
                 'folke/lazydev.nvim',
@@ -76,23 +42,24 @@ return {
                     -- For other commands, see: https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#custom-user-commands
                 },
             },
-            -- Neovim acts as an LSP client, you still need to install the actual LPS servers. Mason allows you to easily install and manage LSP servers, DAP servers, linters, and formatters.
-            -- Tip: run `:echo executable('{tool-name}')` to check if the tools is findable by Neovim.
-            'williamboman/mason.nvim',
-            -- Makes it easier to use lspconfig with Mason
-            -- Read: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#introduction
-            'williamboman/mason-lspconfig.nvim',
-            -- Show LSP status updates
-            'j-hui/fidget.nvim',
+            {
+                -- A simple popup display that provides breadcrumbs feature using LSP server
+                'SmiteshP/nvim-navbuddy',
+                dependencies = {
+                    'SmiteshP/nvim-navic',
+                    'MunifTanjim/nui.nvim',
+                },
+                opts = { lsp = { auto_attach = true } },
+                -- keymap set below in autocommand
+            },
         },
         config = function()
             require('fidget').setup {}
             require('mason').setup()
 
             -- Extend lsp capabilities:
-            -- https://cmp.saghen.dev/installation.html#lazy-nvim
             local builtin_capabilities = vim.lsp.protocol.make_client_capabilities()
-            local extended_capabilities = require('blink.cmp').get_lsp_capabilities()
+            local extended_capabilities = require('cmp_nvim_lsp').default_capabilities()
             local capabilities = vim.tbl_deep_extend('force', {}, builtin_capabilities, extended_capabilities)
             require('mason-lspconfig').setup {
                 ensure_installed = {
