@@ -41,6 +41,7 @@
     - import_tasks: config/fontpreview/main.yml
 
     - import_tasks: config/alacritty/main.yml
+    - import_tasks: config/ghostty/main.yml
     - import_tasks: config/mpv/main.yml
     - import_tasks: config/spotify_launcher/main.yml
     - import_tasks: config/dropbox/main.yml
