@@ -5,7 +5,7 @@ bindkey -v
 bindkey '^?' backward-delete-char
 
 # Launch tmux-sessionizer with Ctrl-/
-bindkey -s '^_' "$HOME/.config/tmux/scripts/tmux-sessionizer.sh\n"
+bindkey -s '^f' "$HOME/.config/tmux/scripts/tmux-sessionizer.sh\n"
 #bindkey -s '^_' "$HOME/.config/zellij/scripts/zellij-sessioniner.sh\n"
 
 # History search up/down arrows (requires zsh-history-substring-search plugin)
