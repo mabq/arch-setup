@@ -11,18 +11,18 @@
               - fzf # Command-line fuzzy finder (required for fontpreview, installed as a core-util alternative)
               - imagemagick # An image viewing/manipulation program (the image is generated with the `convert` command)
 
-        - name: fontpreview - Install packages from AUR
-          tags: aur
-          block:
-            - name: fontpreview - Check if ueberzugpp is already installed
-              ansible.builtin.command: "which ueberzugpp"
-              register: which_ueberzugpp
-              ignore_errors: true
-
-            - name: fontpreview - Install ueberzugpp
-              when: which_ueberzugpp.rc != 0
-              # Command line util which allows to display images in combination with X11 written in C++
-              ansible.builtin.shell: "paru -S --skipreview ueberzugpp"
+        # - name: fontpreview - Install packages from AUR
+        #   tags: aur
+        #   block:
+        #     - name: fontpreview - Check if ueberzugpp is already installed
+        #       ansible.builtin.command: "which ueberzugpp"
+        #       register: which_ueberzugpp
+        #       ignore_errors: true
+        #
+        #     - name: fontpreview - Install ueberzugpp
+        #       when: which_ueberzugpp.rc != 0
+        #       # Command line util which allows to display images in combination with X11 written in C++
+        #       ansible.builtin.shell: "paru -S --skipreview ueberzugpp"
 
     - name: Link script
       block:
