@@ -1,18 +1,14 @@
 return {
-    -- A buffer can be formatted by one or more tools. Conform allows you to
-    -- easily configure which tools you want to use for each language.
+    -- Some languages provide standardized formatting tools (Go, Rust, etc.),
+    -- some others don't (JavaScript, CSS, etc).
     --
-    -- Specialized formatting tools like `stylua` or `biome` can be used
-    -- when the LPS does not provide (or does it but poorly) formatting
-    -- capabilities.
+    -- For the ones that do, just use a `.editorconfig` file. For the ones that
+    -- do not install a specialized tool here.
     --
+    -- Conform makes it really ease to use a specialized tools and in case
+    -- there is none, use the LPS formatter as a fallback option.
     --
-    -- Make sure there is only one format configuration file (`.editorconfig`,
-    -- `.stylua.tom`, `biome.json`, etc), otherwise Vim-sleuth might set
-    -- `shiftwidth` to a different than the one specified in the format
-    -- configuration file.
-    --
-    -- For more info, watch:
+    -- Watch:
     --   [Code Formatting made easy](https://youtu.be/mEqqkHLhlGY?si=TkREPnxfCoWKpcl_&t=394]
     --   [Configure Neovim's Options (and per-language config)](https://www.youtube.com/watch?v=F1CQVXA5gf0&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=7)
     --
@@ -21,8 +17,8 @@ return {
     --   Run `:checkhealth conform` to verify everything is ok with this plugin.
 
     {
-        -- Vim-sleuth will adjust `shiftwidth` based on the current file status
-        -- or based on other files of the same type nearby. Respects `.editorconfig`.
+        -- Adjust `shiftwidth` based on the current file status or based on
+        -- other files of the same type nearby. Respects `.editorconfig`.
         'tpope/vim-sleuth',
     },
     {
@@ -44,7 +40,7 @@ return {
         cmd = { 'ConformInfo' },
         keys = {
             -- stylua: ignore
-            { '<leader>f', function() require('conform').format()  end, mode = '', },
+            { '<leader>f', function() require('conform').format() end, mode = '', },
         },
         opts = {
             formatters_by_ft = {
@@ -79,11 +75,11 @@ return {
                 }
             end,
             default_format_opts = {
-                lsp_format = 'fallback',
-                stop_after_first = true,
+                lsp_format = 'fallback', -- only use LPS format as a fallback option
+                stop_after_first = true, -- make sure only one formatter applies
                 timeout_ms = 500,
                 async = true,
-                quiet = false,
+                quiet = false, -- show if there is no formatter
             },
             notify_on_error = true,
             notify_no_formatters = true,
