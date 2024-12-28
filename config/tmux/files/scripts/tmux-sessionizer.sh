@@ -14,7 +14,7 @@
 #   The original script doesn't automatically attach when creating the first session
 #
 # Required packages:
-#   fd, fzf
+#   fd, skim
 #
 # ------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ directories="$HOME/ $HOME/projects/"
 if [[ $# -eq 1 ]]; then
   working_directory=$1
 else
-  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | sk)
+  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | sk --layout=reverse)
 fi
 
 if [[ -z $working_directory ]]; then
