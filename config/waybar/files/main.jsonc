@@ -6,9 +6,7 @@
 	"mode": "overlay", // dock | hide | invisible | overlay
 	"layer": "top", // applicable only for overlay mode
 	"spacing": 10, // space between modules
-	"modules-center": [
-		"hyprland/workspaces"
-	],
+	"modules-center": ["hyprland/workspaces"],
 	"modules-right": [
 		"hyprland/workspaces#specials",
 		"bluetooth",
@@ -36,24 +34,15 @@
 		"format": "{icon}",
 		"format-icons": {
 			"music": "",
-			"tempterm": "",
+			"quickterm": "",
 			"explorer": "",
 			"passwords": "󰌆",
-			"gpt": "󰚩"
+			"gpt": "󰚩",
+			"monitor": "",
+			"calculator": "󰪚"
 		},
 		"show-special": true,
-		"ignore-workspaces": [
-			"1",
-			"2",
-			"3",
-			"4",
-			"5",
-			"6",
-			"7",
-			"8",
-			"9",
-			"10"
-		]
+		"ignore-workspaces": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 	},
 	"bluetooth": {
 		// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
@@ -68,13 +57,7 @@
 			"critical": 15
 		},
 		"format": "{icon} {capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		],
+		"format-icons": ["", "", "", "", ""],
 		"tooltip": false
 	},
 	"clock": {
