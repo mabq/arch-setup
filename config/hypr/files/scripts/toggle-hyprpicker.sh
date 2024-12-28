@@ -11,7 +11,7 @@
 # hyprland keybindings
 #
 
-process_id=$(pgrep "hyprpicker")
+process_id=$(pgrep "hyprpicker") # no need for exact match
 
 if [ "$process_id" -gt 0 ] ; then
     kill -9 "$process_id"
