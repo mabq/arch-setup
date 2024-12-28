@@ -17,7 +17,7 @@ alias e='yy' # yazi, change directory on exit
 alias format-disk='sudo mkfs.exfat' # format external disk for any OS (no partitions)
 alias plex='flatpak run tv.plex.PlexDesktop'
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
-alias fonts='fc-list : family | sort | uniq | fzf'
+alias fonts='fc-list : family | sort | uniq | sk --layout=reverse'
 alias ga='git add'
 alias gc='git commit'
 alias gca='git commit --amend'
@@ -50,6 +50,8 @@ alias vi='nvim'
 alias wifi='nmtui'
 # the uuid of a disk will change when formatted
 # alias mount-series='sudo mount /dev/disk/by-uuid/EBC6-97B8 /mnt/series'
+alias fonts='fc-list : family | sort | uniq | sk --layout=reverse'
+alias ga='git add'
 # alias umount-series='sudo umount /mnt/series && sleep 3 && sudo hdparm -y /dev/disk/by-uuid/EBC6-97B8'
 # alias mount-alejandro='sudo mount /dev/disk/by-uuid/04D0-1DBF /mnt/alejandro'
 # alias umount-alejandro='sudo umount /mnt/alejandro && sleep 3 && sudo hdparm -y /dev/disk/by-uuid/04D0-1DBF'
