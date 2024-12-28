@@ -15,12 +15,12 @@
 # blackboxai is slow
 # ollama can only be run locally
 # openai requires a key (use it through duckduckgo layer)
-selected_provider=$(echo "phind,duckduckgo" | tr "," "\n" | fzf)
+selected_provider=$(echo "phind,duckduckgo" | tr "," "\n" | sk --layout=reverse)
 provider="--provider $selected_provider"
 
 model=""
 if [ "$selected_provider" = "duckduckgo" ]; then
-  selected_model=$(echo "gpt-4o-mini,meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo,mistralai/Mixtral-8x7B-Instruct-v0.1,claude-3-haiku-20240307" | tr "," "\n" | fzf)
+  selected_model=$(echo "gpt-4o-mini,meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo,mistralai/Mixtral-8x7B-Instruct-v0.1,claude-3-haiku-20240307" | tr "," "\n" | sk --layout=reverse)
   model="--model $selected_model"
 fi
 
