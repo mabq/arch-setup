@@ -38,7 +38,6 @@
 
     - import_tasks: config/fonts/main.yml # must go after ssh (clone private repo)
     - import_tasks: config/fontconfig/main.yml
-    - import_tasks: config/fontpreview/main.yml
 
     - import_tasks: config/alacritty/main.yml
     - import_tasks: config/ghostty/main.yml
