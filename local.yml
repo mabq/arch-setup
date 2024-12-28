@@ -12,7 +12,6 @@
     - import_tasks: config/ssh/main.yml
     - import_tasks: config/git/main.yml
     - import_tasks: config/tmux/main.yml
-    # - import_tasks: config/zellij/main.yml # not ready yet, see notes inside
     - import_tasks: config/zsh/main.yml
     - import_tasks: config/starship/main.yml
     - import_tasks: config/bat/main.yml
@@ -25,7 +24,6 @@
     - import_tasks: config/keyd/main.yml
 
     - import_tasks: config/nvim/main.yml # must go after asdf (uses npm)
-    # - import_tasks: config/zed/main.yml
 
     - import_tasks: config/hypr/main.yml
     # - import_tasks: config/sway/main.yml
