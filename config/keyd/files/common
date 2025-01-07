@@ -21,16 +21,16 @@ overload_tap_timeout = 300
 
 [main]
 space = overload(meta, space)
-capslock = overload(control, oneshot(control))
-enter = overload(control, oneshot(control))
+#capslock = overload(control, oneshot(control))
+#enter = overload(control, oneshot(control))
+capslock = overload(control, esc)
+enter = overload(control, enter)
 f = overload(nav, f)
 ; = overload(symbols, ;)
 ' = overload(media, ')
 [ = -
 # (is this what is causing keyboard layouts switch?)
-# rightshift = overload(shift, oneshot(shift))
-# leftshift = overload(shift, oneshot(shift))
-
+#shift = oneshot(shift)
 
 [nav]
 # --- top row
@@ -54,7 +54,7 @@ m = tab
 , = [
 . = ]
 / = \
-shift =
+# shift =
 # --- toggle layer
 d = layer(nav2)
 
