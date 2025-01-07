@@ -92,12 +92,12 @@ return {
     },
 
     {
-        -- Use treesitter to auto close and auto rename html tag.
-        -- Will not work unless you have treesitter parsers (like html) installed for a given filetype.
+        -- Use treesitter to auto close and auto rename html tag (works with all major syntax extensions)
+        --   Will not work unless you have treesitter parsers (like html) installed for a given filetype.
         'windwp/nvim-ts-autotag',
         opts = {
-            enable_close = true,           -- auto close tags
-            enable_rename = true,          -- auto rename pairs of tags
+            enable_close = true, -- auto close tags
+            enable_rename = true, -- auto rename pairs of tags
             enable_close_on_slash = false, -- auto close on trailing </
         },
     },
