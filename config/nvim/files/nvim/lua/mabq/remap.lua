@@ -42,10 +42,10 @@ vim.keymap.set('v', 'K', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv
 --   Default keybindings cannot be easily repeated, since you should not be
 --   using arrows in normal mode anyway, you can use them to easily resize
 --   windows. This follows the pattern used by the window manager and tmux.
-vim.keymap.set('n', '<C-Left>', ':vertical resize -1<CR>', { desc = 'Decrease window width' })
-vim.keymap.set('n', '<C-Right>', ':vertical resize +1<CR>', { desc = 'Increase window width' })
-vim.keymap.set('n', '<C-Down>', ':resize -1<CR>', { desc = 'Decrease window height' })
-vim.keymap.set('n', '<C-Up>', ':resize +1<CR>', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-Left>', ':vertical resize -4<CR>', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-Right>', ':vertical resize +4<CR>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<C-Down>', ':resize -4<CR>', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C-Up>', ':resize +4<CR>', { desc = 'Increase window height' })
 
 vim.keymap.set('n', '<C-f>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
 --vim.keymap.set('n', '<C-_>', ':silent !zellij action new-tab --name sessionizer $HOME/.config/zellij/scripts/zellij-sessioniner.sh<CR>', { desc = 'Run zellij-sessionizer' })
