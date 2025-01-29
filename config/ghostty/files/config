@@ -1,21 +1,33 @@
-font-family = monospace
+# (you can define diferent font families for different styles)
+font-family = Berkeley Mono
+font-style = Regular
+font-family-bold = SF Mono
 font-style-bold = Bold
+font-family-italic = Cartograph CF
 font-style-italic = Italic
+font-family-bold-italic = Cartograph CF
 font-style-bold-italic = Bold Italic
-font-size = 10
-# disable ligatures
-font-feature = -liga
 
-adjust-cell-height = 10%
+font-size = 10
+
+# (disable fake italics or bolds)
+font-synthetic-style = false
+
+# (disable ligatures)
+#font-feature = -liga
+
+#adjust-cell-height = 10%
 
 theme = tokyonight
 
+cursor-invert-fg-bg = true
 cursor-style = block
 cursor-style-blink = false
-shell-integration-features = no-cursor
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
+
+shell-integration-features = no-cursor
 
 window-decoration = false
 window-padding-x = 0
