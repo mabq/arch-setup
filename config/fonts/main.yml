@@ -18,7 +18,7 @@
           become: true
           ansible.builtin.file:
             # Check the README of the fonts repo
-            src: "{{ home }}/projects/fonts/include"
+            src: "{{ home }}/projects/fonts/archlinux"
             # https://wiki.archlinux.org/title/Fonts#Manual_installation
             path: "/usr/local/share/fonts"
             owner: "{{ user }}"
