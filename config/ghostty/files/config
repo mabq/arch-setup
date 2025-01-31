@@ -1,12 +1,28 @@
 # (you can define diferent font families for different styles)
+# font-family = RobotoMono Nerd Font
+# font-style = Regular
+# font-style-bold = Bd
+# font-style-italic = It
+#font-style-bold-italic = SmBd
+
+# font-family = SF Mono
+# font-style = Regular
+# font-style-bold = Bold
+# font-style-italic = Regular Italic
+# font-style-bold-italic = Bold Italic
+
 font-family = Berkeley Mono
 font-style = Regular
-font-family-bold = SF Mono
-font-style-bold = Bold
-font-family-italic = Cartograph CF
-font-style-italic = Italic
-font-family-bold-italic = Cartograph CF
-font-style-bold-italic = Bold Italic
+font-family-bold = Berkeley Mono Bold
+font-family-italic = Berkeley Mono Italic
+font-family-bold-italic = Berkeley Mono Bold Italic
+adjust-cell-height = 10%
+
+# font-family = Cartograph CF
+# font-style = Regular
+# font-style-bold = Demi Bold
+# font-style-italic = Italic
+# font-style-bold-italic = Demi Bold Italic
 
 font-size = 10
 
@@ -16,7 +32,6 @@ font-synthetic-style = false
 # (disable ligatures)
 #font-feature = -liga
 
-#adjust-cell-height = 10%
 
 theme = tokyonight
 
