@@ -10,6 +10,10 @@ return {
         config = function()
             require('tokyonight').setup {
                 style = 'night', -- `storm`, `moon`, `night` or `day`
+                styles = {
+                    comments = { italic = false },
+                    keywords = { italic = false },
+                },
                 -- Customize colors for `night` version
                 on_highlights = function(hl, _)
                     -- hl.CursorLine = {
