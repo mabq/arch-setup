@@ -11,20 +11,32 @@
 # font-style-italic = Regular Italic
 # font-style-bold-italic = Bold Italic
 
-font-family = Berkeley Mono
-font-style = Regular
-font-family-bold = Berkeley Mono Bold
-font-family-italic = Berkeley Mono Italic
-font-family-bold-italic = Berkeley Mono Bold Italic
-adjust-cell-height = 10%
-
-# font-family = Cartograph CF
+# font-family = Berkeley Mono
 # font-style = Regular
-# font-style-bold = Demi Bold
-# font-style-italic = Italic
-# font-style-bold-italic = Demi Bold Italic
+# font-family-bold = Berkeley Mono Bold
+# font-family-italic = Berkeley Mono Italic
+# font-family-bold-italic = Berkeley Mono Bold Italic
+# adjust-cell-height = 10%
 
-font-size = 10
+# font-family = Berkeley Mono Variable
+# font-style = Regular
+# font-style-italic = Oblique
+# font-style-bold = Bold
+# font-style-bold-italic = Bold Oblique
+
+font-family = BlexMono Nerd Font
+# font-style = Regular
+font-style-italic = Italic
+font-style-bold = Bold
+font-style-bold-italic = Bold Oblique
+
+# font-family = Cartograph Italic CF
+# font-style = Regular
+# font-style-bold = Bold
+# font-style-italic = Italic
+# font-style-bold-italic = Bold Italic
+
+font-size = 11
 
 # (disable fake italics or bolds)
 font-synthetic-style = false
