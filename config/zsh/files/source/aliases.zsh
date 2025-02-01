@@ -17,7 +17,8 @@ alias e='yy' # yazi, change directory on exit
 alias format-disk='sudo mkfs.exfat' # format external disk for any OS (no partitions)
 alias plex='flatpak run tv.plex.PlexDesktop'
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
-alias fonts='fc-list : family | sort | uniq | sk --layout=reverse'
+#alias fonts='fc-list : family | sort | uniq | sk --layout=reverse'
+alias fonts='ghostty +list-fonts | fzf'
 alias ga='git add'
 alias gc='git commit'
 alias gca='git commit --amend'
