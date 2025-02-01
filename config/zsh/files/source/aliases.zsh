@@ -51,7 +51,6 @@ alias vi='nvim'
 alias wifi='nmtui'
 # the uuid of a disk will change when formatted
 # alias mount-series='sudo mount /dev/disk/by-uuid/EBC6-97B8 /mnt/series'
-alias fonts='fc-list : family | sort | uniq | sk --layout=reverse'
 alias ga='git add'
 # alias umount-series='sudo umount /mnt/series && sleep 3 && sudo hdparm -y /dev/disk/by-uuid/EBC6-97B8'
 # alias mount-alejandro='sudo mount /dev/disk/by-uuid/04D0-1DBF /mnt/alejandro'
