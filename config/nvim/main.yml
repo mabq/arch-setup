@@ -13,6 +13,7 @@
           - gitui # Blazing fast terminal-ui for git written in Rust
           - ripgrep # A search tool that combines the usability of ag with the raw speed of grep (required for telescope)
           - fd # Simple, fast and user-friendly alternative to find (required for telescope)
+          - python-debugpy # An implementation of the Debug Adapter Protocol for Python
           #
           # In case you ever build Neovim from source:
           # https://github.com/neovim/neovim/blob/master/BUILD.md#arch-linux
