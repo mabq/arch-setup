@@ -6,19 +6,12 @@
 # font-style-italic = Regular Italic
 # font-style-bold-italic = Bold Italic
 
-# font-family = Berkeley Mono
-# font-style = Regular
-# font-family-bold = Berkeley Mono Bold
-# font-family-italic = Berkeley Mono Italic
-# font-family-bold-italic = Berkeley Mono Bold Italic
-# adjust-cell-height = 10%
-
 font-family = Berkeley Mono Variable
 font-style = Regular
 font-style-bold = Bold
 font-style-italic = Oblique
 font-style-bold-italic = Bold Oblique
-# adjust-cell-height = 10%
+adjust-cell-height = 15%
 
 # font-family = Cartograph CF
 # font-style-bold = Bold
@@ -33,7 +26,7 @@ font-synthetic-style = false
 # (disable ligatures)
 #font-feature = -liga
 
-# theme = tokyonight
+theme = tokyonight
 
 cursor-invert-fg-bg = true
 cursor-style = block
