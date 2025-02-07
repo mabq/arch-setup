@@ -7,6 +7,9 @@ return {
             search = { enabled = false }, -- do not integrate jump on default search
             char = { enabled = false }, -- do not integrate on default `f`, `F`, `t`, `T`
         },
+        -- jump = {
+        --     pos = 'end',
+        -- },
         highlight = {
             -- do not change all text color when using jump mode
             backdrop = false,
