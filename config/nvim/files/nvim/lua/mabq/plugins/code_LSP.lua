@@ -21,10 +21,10 @@ return {
                     signature = {
                         enabled = false, -- just use Shift-k in normal mode to see the function signature
                     },
-                    appearance = {
-                        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'. Adjusts spacing to ensure icons are aligned.
-                        nerd_font_variant = 'mono',
-                    },
+                    -- appearance = {
+                    -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'. Adjusts spacing to ensure icons are aligned.
+                    -- nerd_font_variant = 'mono',
+                    -- },
                     -- https://cmp.saghen.dev/configuration/sources.html#sources
                     sources = {
                         default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji' },
@@ -98,6 +98,7 @@ return {
                     'lua_ls',
                     'cssls',
                     'html',
+                    'pyright',
                 },
                 automatic_installation = false,
                 handlers = {

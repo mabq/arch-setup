@@ -29,6 +29,7 @@ return {
                 ensure_installed = {
                     'biome', -- https://biomejs.dev/internals/language-support/
                     'stylua',
+                    'black', -- python
                 },
             }
         end,
@@ -55,6 +56,7 @@ return {
                 json = { 'biome' },
                 jsonc = { 'biome' },
                 markdown = { 'biome' },
+                python = { 'black' },
             },
             format_on_save = function(bufnr)
                 -- Disable LSP fallback for `format_on_save` for languages that don't
