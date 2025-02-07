@@ -10,9 +10,9 @@ multiplier = 1
 [font]
 size = 10
 normal = { family = "Berkeley Mono Variable", style = "Regular" }
-bold = { style = "Bold" }
+bold = { style = "SemiBold" }
 italic = { style = "Oblique" }
-bold_italic = { style = "Bold Oblique" }
+bold_italic = { style = "SemiBold Oblique" }
 
 # normal = { family = "Cartograph CF ", style = "Light" }
 # bold = { style = "Bold" }
