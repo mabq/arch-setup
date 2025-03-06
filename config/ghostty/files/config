@@ -1,22 +1,24 @@
 # (you can define diferent font families for different styles)
 
-# font-family = SF Mono
+font-family = SF Mono
+font-style = Medium
+font-style-bold = Bold
+font-style-italic = Medium Italic
+font-style-bold-italic = Bold Italic
+adjust-cell-height = 20%
+
+# font-family = Berkeley Mono Variable
 # font-style = Regular
 # font-style-bold = Bold
-# font-style-italic = Regular Italic
-# font-style-bold-italic = Bold Italic
-
-font-family = Berkeley Mono Variable
-font-style = Regular
-font-style-bold = Bold
-font-style-italic = Oblique
-font-style-bold-italic = Bold Oblique
-adjust-cell-height = 15%
+# font-style-italic = Oblique
+# font-style-bold-italic = Bold Oblique
+# adjust-cell-height = 15%
 
 # font-family = Cartograph CF
 # font-style-bold = Bold
 # font-style-italic = Italic
 # font-style-bold-italic = Bold Italic
+# adjust-cell-height = 10%
 
 font-size = 10
 
