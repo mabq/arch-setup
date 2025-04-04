@@ -42,7 +42,7 @@
     - import_tasks: config/mpv/main.yml
     - import_tasks: config/spotify_launcher/main.yml
     - import_tasks: config/dropbox/main.yml
-    - import_tasks: config/keepassxc/main.yml
+    # - import_tasks: config/keepassxc/main.yml # installed via flatpak now
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
