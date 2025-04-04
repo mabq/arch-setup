@@ -158,13 +158,25 @@
           # - org.mozilla.firefox
           - tv.plex.PlexDesktop
           - org.libreoffice.LibreOffice
-          - com.brave.Browser
+          # - com.brave.Browser
           - org.localsend.localsend_app
+          # - app.zen_browser.zen (browsers installed through flatpak cannot communicate with keepassxc)
+          - org.keepassxc.KeePassXC
 
     - name: no-config - Install packages from AUR
       # Once installed, AUR packages won't be reinstalled, update them manually with `paru`
       tags: aur
       block:
+        - name: Zen browser
+          block:
+            - name: no-config - Check if Zen browser is already installed
+              ansible.builtin.shell: "which zen-browser"
+              register: which_zen
+              ignore_errors: true
+            - name: no-config - Install zen-browser-bin
+              when: which_zen != 0
+              ansible.builtin.shell: "paru -S --skipreview zen-browser-bin"
+
         - name: Plex media server
           # (start the service manually when required to avoid consumming resources)
           block:
