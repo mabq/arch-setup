@@ -39,7 +39,7 @@ return {
                     'sql',
                     'ssh_config',
                     'styled',
-                    'tmux',
+                    -- 'tmux', (doesn't work properly)
                     'toml',
                     'tsx',
                     'typescript',
@@ -94,7 +94,7 @@ return {
 
     {
         -- Use treesitter to auto close and auto rename html tag (works with all major syntax extensions)
-        --   Will not work unless you have treesitter parsers (like html) installed for a given filetype.
+        --   Will not work unless you have treesitter parsers (like ht ml) installed for a given filetype.
         'windwp/nvim-ts-autotag',
         -- opts = {
         --     enable_close = true, -- auto close tags
