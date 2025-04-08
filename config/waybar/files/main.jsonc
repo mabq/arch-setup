@@ -22,7 +22,8 @@
 		"format": "{icon}",
 		"format-icons": {
 			"1": "",
-			"2": "󰈹"
+			"2": "󰈹",
+			"9": ""
 		},
 		"show-special": false
 	},
@@ -33,7 +34,7 @@
 		// "format": "{name}",
 		"format": "{icon}",
 		"format-icons": {
-			"music": "",
+			// "music": "",
 			"quickterm": "",
 			"explorer": "",
 			"passwords": "󰌆",
