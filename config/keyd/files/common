@@ -21,9 +21,9 @@ overload_tap_timeout = 300
 
 [main]
 space = overload(meta, space)
-#capslock = overload(control, oneshot(control))
+capslock = overload(control, oneshot(control))
 #enter = overload(control, oneshot(control))
-capslock = overload(control, esc)
+#capslock = overload(control, esc)
 enter = overload(control, enter)
 f = overload(nav, f)
 ; = overload(symbols, ;)
