@@ -20,8 +20,7 @@ f = overload(nav, f)
 
 
 [shift]
-# (make sure pressing both shifts work, required for accents)
-# (see hyprland input variables)
+# (make sure pressing both shifts work, required for accents, see hyprland input variables)
 rightshift = macro(leftshift+rightshift)
 leftshift = macro(leftshift+rightshift)
 
