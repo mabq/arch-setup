@@ -48,7 +48,7 @@ return {
         local builtin = require 'telescope.builtin'
         -- stylua: ignore start
         vim.keymap.set('n', '<C-g>', builtin.git_files, { desc = 'Project git files' })
-        vim.keymap.set('n', '<C-s>', builtin.find_files, { desc = 'Project files' })
+        vim.keymap.set('n', '<C-e>', builtin.find_files, { desc = 'Project files' })
         vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Project buffers' })
         vim.keymap.set('n', '<leader>sw', function() local word = vim.fn.expand '<cword>' builtin.grep_string { search = word } end, { desc = 'Project word search' })
         vim.keymap.set('n', '<leader>sW', function() local word = vim.fn.expand '<cWORD>' builtin.grep_string { search = word } end, { desc = 'Project WORD search' })

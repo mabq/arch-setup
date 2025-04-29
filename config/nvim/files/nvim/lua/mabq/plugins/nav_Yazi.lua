@@ -15,5 +15,5 @@ return {
             y = 0.5,
         },
     },
-    keys = { { '<C-p>', '<cmd>Tfm<cr>', desc = 'Explore (yazi)' } },
+    keys = { { '<C-y>', '<cmd>Tfm<cr>', desc = 'Explore (yazi)' } },
 }
