@@ -32,6 +32,7 @@ leftshift = macro(leftshift+rightshift)
 # --- top row
 i = esc
 o = backspace
+p = macro(C-S-v)
 [ = +
 # --- home row
 h = left
@@ -54,20 +55,18 @@ m = tab
 # --- disable overload for key repetition
 # space = space
 
-
 [nav2]
 # --- top row
 i = f2
 o = delete
-p = macro(C-S-v)
+p = macro(C-S-tab)
 # --- home row
 h = home
 j = pagedown
 k = pageup
 l = end
 # --- bottom row
-# , = macro(C-S-tab)
-# . = macro(C-tab)
+n = macro(C-tab)
 
 
 [symbols]
