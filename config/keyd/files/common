@@ -1,29 +1,15 @@
-# --- Notes:
-#     DO NOT APPEND COMMENTS, PUT THEM IN THEIR OWN LINES.
-#
-#     These configurations apply to all keyboards.
-#
-#     Included files should not contain an [ids] section.
-#     Included files should not end in `.conf`.
-#     Included files should include other files.
-#
-#     Use:
-#     - `keyd monitor` to check key names
-#     - `sudo systemd enable/start keyd.service` to enable/start the service
-#     - `sudo keyd reload` to update changes on config files
-#     - `sudo journalctl -eu keyd` to check for error after update, the output
-#       will also show the keyboard names and the configuration file applied.
-
 [global]
+
 # (usefull when regret typing a modifier key, just hold it a little longer and nothing will by typed)
 overload_tap_timeout = 300
 
 
+# 1) Edit normal layers:
+
 [main]
-space = overload(meta, space)
-capslock = overload(control, oneshot(control))
-#enter = overload(control, oneshot(control))
-#capslock = overload(control, esc)
+
+# space = overload(meta, space)
+capslock = layer(control)
 enter = overload(control, enter)
 f = overload(nav, f)
 ; = overload(symbols, ;)
@@ -32,13 +18,21 @@ f = overload(nav, f)
 # (is this what is causing keyboard layouts switch?)
 #shift = oneshot(shift)
 
+
+[shift]
+# (make sure pressing both shifts work, required for accents)
+# (see hyprland input variables)
+rightshift = macro(leftshift+rightshift)
+leftshift = macro(leftshift+rightshift)
+
+
+# 2) Custom layers:
+
 [nav]
+
 # --- top row
-y = capslock
-u = tab
 i = esc
 o = backspace
-p = *
 [ = +
 # --- home row
 h = left
@@ -47,45 +41,34 @@ k = up
 l = right
 ; = ~
 ' = `
-enter = enter
+shift = capslock
+d = layer(nav2)
 # --- bottom row
 n = enter
 m = tab
 , = [
 . = ]
 / = \
-# shift =
-# --- toggle layer
-d = layer(nav2)
 
-[nav:M]
+
+# [nav:M]
 # --- disable overload for key repetition
-space = space
+# space = space
+
 
 [nav2]
 # --- top row
-y =
-u = f11
 i = f2
 o = delete
 p = macro(C-S-v)
-[ =
 # --- home row
 h = home
 j = pagedown
 k = pageup
 l = end
-; =
-' =
-enter =
 # --- bottom row
-n =
-m =
-, = macro(C-S-tab)
-. = macro(C-tab)
-/ =
-# --- thumb
-space = macro(C-space [)
+# , = macro(C-S-tab)
+# . = macro(C-tab)
 
 
 [symbols]
@@ -103,9 +86,6 @@ d = {
 f = }
 g = =
 # --- bottom row
-z =
-x =
-c =
 v = |
 b = &
 
@@ -117,9 +97,3 @@ f = volumedown
 g = nextsong
 space = playpause
 
-
-[shift]
-# (make sure pressing both shifts work, required for accents)
-# (see hyprland input variables)
-rightshift = macro(leftshift+rightshift)
-leftshift = macro(leftshift+rightshift)
