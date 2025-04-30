@@ -1,27 +1,48 @@
-@define-color color_bar_bg #161616;
-@define-color color_fg #bbbbbb;
-@define-color color_fg_active #7DCFFF;
+@import "./themes/custom-theme.css";
 
 * {
   font-family: monospace;
-  font-size: 10px;
+  font-size: 12px;
 }
 
-.main {
-  color: @color_fg;
-  background-color: @color_bar_bg;
+.main,
+.monitor {
+  background-color: transparent;
 }
 
-#disk,
-#memory,
 #cpu,
-#network,
-#workspaces,
+#memory,
+#disk,
+#network {
+  margin: 6px 0 0 0;
+}
+
+#network {
+  margin-right: 6px;
+}
+
+#clock,
 #bluetooth,
-#battery,
+#workspaces {
+  margin: 0 0 6px 0;
+}
+
+#clock,
+#bluetooth,
+#workspaces,
+#cpu,
+#memory,
+#disk,
+#network {
+  background: @color_bar_bg;
+  color: @color_fg;
+  padding: 5px 9px;
+  border-radius: 6px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/Module:-Clock -------------------- */
 #clock {
-  margin: 0;
-  padding: 2px 10px 0px; /* 🔥 must match the marked line below */
+  margin-right: 6px; /* most right module */
 }
 
 /* https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#style ----------- */
@@ -33,7 +54,7 @@
   min-width: 0; /* remove default */
   border: none; /* remove default */
   border-radius: inherit; /* remove default, force inherit */
-  padding: 2px 8px 0px; /* 🔥 must be the target line above, remove default */
+  padding: 5px 9px; /* must be the same as the ones applied to all modules above */
   color: @color_fg;
 }
 #workspaces button:hover {
@@ -44,9 +65,9 @@
   box-shadow: inherit; /* remove default */
   text-shadow: inherit; /* remove default */
   transition: none; /* remove default */
-  color: @color_fg; /* remove default */
-  background: @color_bar_bg; /* remove default */
+  background: @color_active_bg; /* remove default */
 }
 #workspaces button.visible {
-  color: @color_fg_active;
+  color: @color_fg;
+  background: @color_active_bg;
 }

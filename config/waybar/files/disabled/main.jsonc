@@ -3,10 +3,9 @@
 	//     Use `man waybar` for more information
 	"name": "main", // this name is used in `exec` and `bindings`
 	"position": "bottom",
-	"mode": "dock", // dock | hide | invisible | overlay
+	"mode": "overlay", // dock | hide | invisible | overlay
 	"layer": "top", // applicable only for overlay mode
-	"spacing": 0, // space between modules
-	"modules-left": ["disk#root", "memory", "cpu"],
+	"spacing": 10, // space between modules
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": [
 		"hyprland/workspaces#specials",
@@ -14,37 +13,7 @@
 		"battery",
 		"clock"
 	],
-	"disk#root": {
-		"interval": 30,
-		// "format": "/ {percentage_used}%",
-		"format": "{specific_free:0.1f}Gb",
-		"path": "/",
-		"unit": "GB"
-		// "tooltip": false
-	},
-	"memory": {
-		"interval": 30,
-		"format": "{avail}Gb"
-		// "format": "mem {used:0.1f}Gb used",
-		// "tooltip": false
-	},
-	"cpu": {
-		"interval": 10,
-		"format": "{usage}%"
-		// "tooltip": false
-	},
-	//"disk#home": {
-	//    "interval": 30,
-	//    "format": "~ {free}",
-	//    "path": "/home"
-	//},
-	// "network": {
-	// 	"interval": 5,
-	// 	"format": "{ifname}",
-	// 	"format-wifi": " {essid} {bandwidthUpBytes} {bandwidthDownBytes}",
-	// 	"format-ethernet": "󰈁  {bandwidthUpBytes} {bandwidthDownBytes}",
-	// 	"format-disconnected": "" //An empty format will hide the module.
-	// },
+	// ---
 	"hyprland/workspaces": {
 		// https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
 		// Numbered and special workspace names have different paddings by default,
@@ -53,8 +22,9 @@
 		"format": "{icon}",
 		"format-icons": {
 			"1": "",
-			"2": "󰈹"
-			// "3": "󰇘",
+			"2": "󰈹",
+			"3": "󰇘",
+			"4": "󰇘"
 		},
 		"show-special": false
 	},
