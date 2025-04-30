@@ -34,7 +34,7 @@
         mode: "0700"
         state: "link"
       loop:
-        - { name: "lazyvim" }
+        # - { name: "lazyvim" }
         - { name: "nvim" }
 
     # - name: nvim - Install npm packages

@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Tmux-sessionizer (same as Zsh)
 vim.keymap.set(
   "n",
-  "<C-f>",
+  "<C-s>",
   ":silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>",
   { desc = "Tmux-sessionizer" }
 )

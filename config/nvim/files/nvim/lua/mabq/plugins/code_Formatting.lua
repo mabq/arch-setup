@@ -30,6 +30,8 @@ return {
                     'biome', -- https://biomejs.dev/internals/language-support/
                     'stylua',
                     'black', -- python
+                    'nixfmt',
+                    -- 'nixpkgs-fmt',
                 },
             }
         end,
@@ -57,6 +59,7 @@ return {
                 jsonc = { 'biome' },
                 markdown = { 'biome' },
                 python = { 'black' },
+                nix = { 'nixfmt' },
             },
             format_on_save = function(bufnr)
                 -- Disable LSP fallback for `format_on_save` for languages that don't

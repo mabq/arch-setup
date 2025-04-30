@@ -2,6 +2,7 @@
 #   (the `appendToPATH_fn` functions avoids duplicate entries in $PATH)
 #   (`~/.local/bin` contains the custom scripts that are called from the terminal)
 appendToPATH_fn "$HOME/.local/bin"
+appendToPATH_fn "$HOME/.nix-profile/bin"
 # appendToPATH_fn "$HOME/go/bin"
 # appendToPATH_fn "$HOME/.cargo/bin"
 #prependToPATH_fn "$HOME/.volta/bin"

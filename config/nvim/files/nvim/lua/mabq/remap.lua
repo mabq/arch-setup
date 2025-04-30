@@ -47,7 +47,7 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +4<CR>', { desc = 'Increase w
 vim.keymap.set('n', '<C-Down>', ':resize -4<CR>', { desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', ':resize +4<CR>', { desc = 'Increase window height' })
 
-vim.keymap.set('n', '<C-f>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
+vim.keymap.set('n', '<C-s>', ':silent !tmux neww $HOME/.config/tmux/scripts/tmux-sessionizer.sh<CR>', { desc = 'Run tmux-sessionizer' })
 --vim.keymap.set('n', '<C-_>', ':silent !zellij action new-tab --name sessionizer $HOME/.config/zellij/scripts/zellij-sessioniner.sh<CR>', { desc = 'Run zellij-sessionizer' })
 
 vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'Next quickfix entry' })
