@@ -30,6 +30,7 @@ leftshift = macro(leftshift+rightshift)
 [nav]
 
 # --- top row
+u = tab
 i = esc
 o = backspace
 p = macro(C-S-v)
@@ -45,7 +46,6 @@ shift = capslock
 d = layer(nav2)
 # --- bottom row
 n = enter
-m = tab
 , = [
 . = ]
 / = \
