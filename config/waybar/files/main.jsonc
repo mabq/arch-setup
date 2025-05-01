@@ -2,7 +2,7 @@
 	// --- Bar configuration:
 	//     Use `man waybar` for more information
 	"name": "main", // this name is used in `exec` and `bindings`
-	"position": "bottom",
+	"position": "top",
 	"mode": "dock", // dock | hide | invisible | overlay
 	"layer": "top", // applicable only for overlay mode
 	"spacing": 0, // space between modules
