@@ -14,6 +14,7 @@
               - hyprlock # hyprlock is a simple, yet fast, multi-threaded and GPU-accelerated screen lock for Hyprland.
               - hyprpaper # hyprpaper is a fast, IPC-controlled wallpaper utility for Hyprland.
               - hyprpicker # hyprpicker is a neat utility for picking a color from your screen on Hyprland.
+              - pastel # A command-line tool to generate, analyze, convert and manipulate colors (required by hyprpicker script)
               - xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
               - xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
               - qt5-wayland # Provides APIs for Wayland
