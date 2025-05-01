@@ -18,7 +18,7 @@ else
     format="hex"
 fi
 
-picked_color=$(hyprpicker)
+picked_color=$(hyprpicker --no-fancy --render-inactive --no-fractional)
 
 if [ -n "$picked_color" ]; then
     wl-copy "$(pastel format "$format" "$picked_color")"
