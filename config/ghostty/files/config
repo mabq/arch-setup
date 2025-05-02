@@ -35,7 +35,7 @@ cursor-style = block
 cursor-style-blink = false
 
 mouse-hide-while-typing = true
-mouse-scroll-multiplier = 2
+mouse-scroll-multiplier = 1
 
 shell-integration-features = no-cursor
 
