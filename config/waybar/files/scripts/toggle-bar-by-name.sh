@@ -17,6 +17,7 @@ process_id=$(pgrep --full --exact "waybar --config $HOME/.config/waybar/$bar_nam
 
 if [ "$process_id" -gt 0 ] ; then
     kill -9 "$process_id"
-else
-    waybar --config "$HOME/.config/waybar/$bar_name.jsonc"
+    return 0
 fi
+
+waybar --config "$HOME/.config/waybar/$bar_name.jsonc"
