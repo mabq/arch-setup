@@ -11,9 +11,10 @@
 # Window manager bind
 #
 
-if ! pgrep --full --exact "tofi-drun" ; then
-    tofi-drun | xargs hyprctl dispatch exec --
-else
-    killall tofi-drun
+# Check if tofi is running (the `> /dev/null` part is important!)
+if pgrep --exact "tofi-drun" > /dev/null; then
+    pkill --exact "tofi-drun"
+    return 0
 fi
 
+tofi-drun | xargs hyprctl dispatch exec --
