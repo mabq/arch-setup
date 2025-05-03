@@ -16,7 +16,7 @@
     - import_tasks: config/starship/main.yml
     - import_tasks: config/bat/main.yml
 
-    - import_tasks: config/tgpt/main.yml
+    # - import_tasks: config/tgpt/main.yml
 
     # - import_tasks: config/asdf/main.yml
     - import_tasks: config/docker/main.yml
@@ -37,7 +37,7 @@
     - import_tasks: config/fonts/main.yml # must go after ssh (clone private repo)
     - import_tasks: config/fontconfig/main.yml
 
-    - import_tasks: config/alacritty/main.yml
+    # - import_tasks: config/alacritty/main.yml
     - import_tasks: config/ghostty/main.yml
     - import_tasks: config/mpv/main.yml
     - import_tasks: config/spotify_launcher/main.yml
@@ -46,3 +46,5 @@
 
     - import_tasks: config/handlr/main.yml
     - import_tasks: config/yazi/main.yml
+
+    - import_tasks: config/logiops/main.yml
