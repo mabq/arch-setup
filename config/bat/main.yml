@@ -30,4 +30,5 @@
         state: "link"
 
     - name: bat - Build themes
+      # https://github.com/sharkdp/bat?tab=readme-ov-file#adding-new-themes
       ansible.builtin.command: bat cache --build
