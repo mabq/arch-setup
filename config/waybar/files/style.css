@@ -21,7 +21,7 @@
 #battery,
 #clock {
   margin: 0;
-  padding: 2px 10px 3px; /* 🔥 must match the marked line below */
+  padding: 3px 10px 2px; /* 🔥 must match the marked line below */
 }
 
 /* https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#style ----------- */
@@ -33,7 +33,7 @@
   min-width: 0; /* remove default */
   border: none; /* remove default */
   border-radius: inherit; /* remove default, force inherit */
-  padding: 2px 8px 3px; /* 🔥 must be the target line above, remove default */
+  padding: 3px 8px 2px; /* 🔥 must be the target line above, remove default */
   color: @color_fg;
 }
 #workspaces button:hover {
