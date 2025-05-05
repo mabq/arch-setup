@@ -139,7 +139,8 @@
           # Programming:
           - hyperfine # A command-line benchmarking tool
           - jq # Command-line JSON processor
-          - tgpt # AI Chatbots in terminal without needing API keys
+          - python-xmljson # Converts XML into JSON/Python dicts/arrays and vice-versa
+          # - tgpt # AI Chatbots in terminal without needing API keys
           # - parallel # A shell tool for executing jobs in parallel
           # - go
           # - shellcheck
