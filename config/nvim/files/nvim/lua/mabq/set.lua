@@ -9,12 +9,12 @@ set.guicursor = ''
 set.number = true
 set.relativenumber = true
 
-set.shiftwidth = 4   -- default, see `vim-sleuth` plugin notes
+set.shiftwidth = 4 -- default, see `vim-sleuth` plugin notes
 set.softtabstop = -1 -- use `shidtwidth` as tab width
 
 set.wrap = false
 set.breakindent = true -- preserve indentation in wrapped text (when enabled)
-set.linebreak = true   -- do not break words when wrapping
+set.linebreak = true -- do not break words when wrapping
 
 set.ignorecase = true
 set.smartcase = true
