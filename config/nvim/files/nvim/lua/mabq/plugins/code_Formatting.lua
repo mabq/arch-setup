@@ -43,7 +43,7 @@ return {
         cmd = { 'ConformInfo' },
         keys = {
             -- stylua: ignore
-            { '<leader>f', function() require('conform').format() end, mode = '', },
+            { '<leader>F', function() require('conform').format() end, mode = '', },
         },
         opts = {
             formatters_by_ft = {
