@@ -32,7 +32,7 @@ alias logout='loginctl terminate-user $USER'
 alias mdserve='mdbook serve --open'
 alias monitor='btm'
 alias mousecodes='xev -event button | grep button'
-alias n='nvim .'
+alias v='nvim .'
 alias nc='new-component' # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
 # alias nvim='NVIM_APPNAME="nvim-kickstart" nvim'
 alias path='echo $PATH | tr ":" "\n"'
