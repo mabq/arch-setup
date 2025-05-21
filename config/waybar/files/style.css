@@ -1,6 +1,6 @@
 @define-color color_bar_bg #171717;
 @define-color color_fg #a6a6a6;
-@define-color color_fg_active #7DCFFF;
+@define-color color_fg_active #6797f2;
 
 * {
   font-family: monospace;
