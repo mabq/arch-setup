@@ -13,7 +13,7 @@ alias mkdir='mkdir -p'
 # Shortcuts/renames:
 alias cpuinfo='bat /proc/cpuinfo'
 alias drivers='lspci -k'
-alias e='yy' # yazi, change directory on exit
+alias e='nvim'
 alias format-disk='sudo mkfs.exfat' # format external disk for any OS (no partitions)
 alias plex='flatpak run tv.plex.PlexDesktop'
 alias fontname="fc-query -f '%{family[0]}\n'" # pass the font path as argument
@@ -32,7 +32,6 @@ alias logout='loginctl terminate-user $USER'
 alias mdserve='mdbook serve --open'
 alias monitor='btm'
 alias mousecodes='xev -event button | grep button'
-alias v='nvim .'
 alias nc='new-component' # https://www.joshwcomeau.com/react/file-structure/#more-boilerplate-11
 # alias nvim='NVIM_APPNAME="nvim-kickstart" nvim'
 alias path='echo $PATH | tr ":" "\n"'
@@ -48,8 +47,8 @@ alias toen='trans es:en'
 alias toes='trans en:es'
 alias trash='trash-put'
 alias tree='eza --tree'
-alias vi='nvim'
 alias wifi='nmtui'
+alias y='yy'
 # the uuid of a disk will change when formatted
 # alias mount-series='sudo mount /dev/disk/by-uuid/EBC6-97B8 /mnt/series'
 alias ga='git add'
