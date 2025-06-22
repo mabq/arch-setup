@@ -59,7 +59,7 @@ return {
                 jsonc = { 'biome' },
                 markdown = { 'biome' },
                 python = { 'black' },
-                -- nix = { 'nixfmt' },
+                nix = { 'nixfmt' },
             },
             format_on_save = function(bufnr)
                 -- Disable LSP fallback for `format_on_save` for languages that don't
