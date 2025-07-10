@@ -27,7 +27,7 @@ set.undofile = true
 set.incsearch = true
 set.hlsearch = true
 
-set.cursorline = false
+set.cursorline = true
 set.colorcolumn = '80'
 
 set.termguicolors = true

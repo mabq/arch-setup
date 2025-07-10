@@ -57,6 +57,8 @@ vim.keymap.set('n', '<C-q>', '<cmd>cclose<CR>', { desc = 'Close quickfix' })
 --vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Page down (centered)' }) -- feels weird
 -- vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up (centered)' }) -- feels weird
 
+vim.keymap.set("n", "<C-e>", vim.cmd.Ex, { desc = 'Netrw file explorer' })
+
 
 -- Alt ------------------------------------------------------------------------
 --   seezvim-tmux-navigator
