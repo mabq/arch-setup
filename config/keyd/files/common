@@ -9,7 +9,8 @@ overload_tap_timeout = 300
 [main]
 
 # space = overload(meta, space)
-capslock = layer(control)
+# capslock = layer(control)
+capslock = overload(control, capslock)
 enter = overload(control, enter)
 f = overload(nav, f)
 ; = overload(symbols, ;)
