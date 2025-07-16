@@ -1,4 +1,4 @@
-require 'mabq.set'
-require 'mabq.remap'
+require 'mabq.options'
+require 'mabq.keymap'
 require 'mabq.lazy-nvim'
 require 'mabq.autocmd'

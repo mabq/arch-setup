@@ -1,4 +1,13 @@
--- Watch [Treesitter basics and installation](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=6)
+-- Treesitter is all about creating abstract syntax trees (AST).
+-- nvim-treesitter is an abstraction layer that allows you to easily use treesitter in Neovim.
+--
+-- Why we need it?
+--   Masive performance improvement over regexes.
+--   Plugins can use the AST provided by treesitter for highlighting, folding and indentation.
+--
+-- Help:
+-- [Treesitter basics and installation](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=6)
+-- [Understanding neovim](https://www.youtube.com/watch?v=87AXw9Quy9U&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft)
 -- `:help lsp-vs-treesitter`
 -- `:help nvim-treesitter`
 -- `:checkhealth nvim-treesitter`
