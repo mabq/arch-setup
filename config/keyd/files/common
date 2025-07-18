@@ -16,14 +16,14 @@ f = overload(nav, f)
 ; = overload(symbols, ;)
 ' = overload(media, ')
 [ = -
-# (is this what is causing keyboard layouts switch?)
+# --- is this what is causing keyboard layouts switch?
 #shift = oneshot(shift)
 
 
-[shift]
-# (make sure pressing both shifts work, required for accents, see hyprland input variables)
-rightshift = macro(leftshift+rightshift)
-leftshift = macro(leftshift+rightshift)
+# [shift]
+# # --- make sure pressing both shifts work, required for accents, see hyprland input variables.
+# rightshift = macro(leftshift+rightshift)
+# leftshift = macro(leftshift+rightshift)
 
 
 # 2) Custom layers:

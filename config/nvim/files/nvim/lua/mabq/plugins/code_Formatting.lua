@@ -1,7 +1,45 @@
--- Always prefer spaces
+-- Notes:
+--
+--   Indentation behaviour is controlled by the following neovim options:
+--
+--     - tabstop     - number of spaces to use for a <Tab>
+--
+--     - shiftwidth  - number of spaces to use for each step of (auto)indent
+--                     >>, <<, =
+--
+--     - softtabstop = number of spaces that a <Tab> counts for while
+--                     performing editing operations (insert mode)
+--
+--   The plugin `guess-indent` will automatically adjust these neovim
+--   options for the given buffer based on the contents of the current buffer
+--   when opening a file. It also checks for an `.editorconfig` file but does
+--   not take into account configuration files for formatter tools like
+--   `.stylua.toml` or `.prettierrc`.
+--
+--   When there is no `.editorconfig` and the content of the buffer does not
+--   provide enough information to correctly adjust the settings you might
+--   find that neovim indentation is not working accordingly to what you
+--   specified in the formatter configuration file.
+--
+--   When this happens, you have 2 options:
+--
+--     1. Manually change the `tabstop` value to match the formatter's value.
+--        `:set tabstop=<value>`
+--        `shiftwidth` and `softtabstop` are configured to mimic the
+--        value of `tabstop`, so you don't need to change those.
+--
+--     2. Configure neovim to use a different indentation level for all files
+--        of a given file type.
+--        `~/.config/nvim/after/ftplugin/<filetype>.lua`.
+--
+--  The `conform` plugin makes it really easy to specify one or more formatters
+--  per language. If you do not specify any it will fallback to LSP.
+--
+--  Make sure you use `:checkhealth conform` to verify everything is working
+--  properly.
+
 return {
   {
-    -- Automatically override neovim indent options based on file detection.
     'NMAC427/guess-indent.nvim',
     opts = {},
   },
@@ -19,9 +57,6 @@ return {
     end,
   },
   {
-    -- Automatically use LSP or manually pick a formatter per language.
-    -- Available formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
-    -- `:checkhealth conform`
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -39,12 +74,10 @@ return {
       notify_on_error = true,
       notify_no_formatters = true,
       formatters_by_ft = {
+        -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
         lua = { 'stylua' },
-        -- Conform will run multiple formatters sequentially
-        python = { 'isort', 'black' },
-        -- You can customize some of the format options for the filetype (:help conform.format)
+        python = { 'isort', 'black' }, -- run multiple formatters sequentially
         rust = { 'rustfmt', lsp_format = 'fallback' },
-        -- Conform will run the first available formatter
         css = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
         javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },

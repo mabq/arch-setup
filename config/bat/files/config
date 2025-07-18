@@ -1,7 +1,2 @@
-# Do not specify theme here. Use an environment variable (zsh exports config file).
-# For more info read the ansible task for bat.
-# --theme=""
-
-# Enable this to use italic text on the terminal. This is not supported on all
-# terminal emulators (like tmux, by default):
+--theme="current"
 --italic-text=always

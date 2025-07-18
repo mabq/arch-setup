@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Bat: change-theme <theme-name>"
+    return 1
+fi
+
+THEME_NAME=$1
+SELECTED_THEME_FILE="$HOME/projects/arch-setup/config/bat/files/themes/${THEME_NAME}.tmTheme"
+
+# use tokyo-night as default
+if [[ ! -f "$SELECTED_THEME_FILE" ]]; then
+    echo "Bat: \"${THEME_NAME}\" theme not available. Applying default."
+    SELECTED_THEME_FILE="$HOME/projects/arch-setup/config/bat/files/themes/tokyo-night.tmTheme"
+fi
+
+# make theme available as "current"
+TEMP_SYM="$HOME/projects/arch-setup/config/bat/files/themes/current.tmTheme"
+ln -nsf "$SELECTED_THEME_FILE" "$TEMP_SYM"
+bat cache --build
+rm "$TEMP_SYM"
+

@@ -1,12 +1,15 @@
---  See `:help lua-guide-autocommands`
+--  Help ----------------------------------------------------------------------
+--
+--  `:help lua-guide-autocommands`
 
 local function augroup(name)
+  -- group all custom autocmds under 'mabq_'
   return vim.api.nvim_create_augroup('mabq_' .. name, { clear = true })
 end
 
 local autocmd = vim.api.nvim_create_autocmd
 
--- Behavior
+-- Behavior -------------------------------------------------------------------
 
 autocmd('TextYankPost', {
   group = augroup 'highlightYank',
@@ -15,11 +18,10 @@ autocmd('TextYankPost', {
   end,
 })
 
--- Filetype autocmd
+-- Filetype -------------------------------------------------------------------
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
-  group = augroup 'close_with_q',
+  group = augroup 'closeBuffersWithQ',
   pattern = {
     'PlenaryTestPopup',
     'checkhealth',
@@ -53,9 +55,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd('FileType', {
-  group = augroup 'wrap_spell',
+  -- automatically wrap and check for spell in text filetypes
+  group = augroup 'enableWrapAndSpellOnTextFiles',
   pattern = { 'text', 'plaintex', 'typst', 'gitcommit', 'markdown' },
   callback = function()
     vim.opt_local.wrap = true
@@ -63,7 +65,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- BufEnter:
+-- BufEnter -------------------------------------------------------------------
 
 -- autocmd('BufEnter', {
 --     group = mabqGroup,
@@ -76,11 +78,10 @@ vim.api.nvim_create_autocmd('FileType', {
 --     end,
 -- })
 
--- BufReadPost:
+-- BufReadPost ----------------------------------------------------------------
 
--- Go to last previous location when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
-  group = augroup 'last_loc',
+  group = augroup 'goToLastLocationOnOpen',
   callback = function(event)
     local exclude = { 'gitcommit' }
     local buf = event.buf
@@ -96,18 +97,16 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
--- BufWritePre:
+-- BufWritePre ----------------------------------------------------------------
 
--- Remove trailling spaces is so-agreed-upon that we can apply it always
--- autocmd({ 'BufWritePre' }, {
---     group = augroup 'removeTraillingSpace',
---     pattern = '*',
---     command = [[%s/\s\+$//e]],
--- })
+autocmd({ 'BufWritePre' }, {
+  group = augroup 'removeTraillingSpacesOnSave',
+  pattern = '*',
+  command = [[%s/\s\+$//e]],
+})
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  group = augroup 'auto_create_dir',
+  group = augroup 'createDirOnSave',
   callback = function(event)
     if event.match:match '^%w%w+:[\\/][\\/]' then
       return

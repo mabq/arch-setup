@@ -48,7 +48,7 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 
 
 # Colors:
-export BAT_THEME="tokyonight_moon" # read notes on the bat ansible task
+# export BAT_THEME=""
 export GTK_THEME="Adwaita:dark"
 
 # fzf tokyonight: https://github.com/folke/tokyonight.nvim/tree/main/extras/fzf

@@ -10,6 +10,21 @@
 #     Apparently the config file works for bat itself but not for the other
 #     packages or Neovim plugins. The environment variable does work for all.
 #     Check the `exports` zsh config file.
+#
+#     ---
+#
+#     Themes in bat are compiled into binary code.
+#     To add custom themes put them in `~/.config/bat/themes/` and run `bat cache --build`.
+#     Use `bat --list-themes` to show all available themes.
+#
+#     Set a theme with one of the following options:
+#       - bat --theme=<name> (make an alias to this to avoid changing config files)
+#         Requires changing zsh aliases' config file.
+#       - Config file `--theme="<name>"` option
+#         Requires changing bat's config file.
+#       - Environment variable: BAT_THEME
+#         Requires changing a zsh config file.
+#
 - tags: bat
   block:
     - name: bat - Install packages
@@ -18,6 +33,7 @@
         state: latest
         name:
           - bat # Cat clone with syntax highlighting and git integration (`cat` alternative)
+          # - batgrep # Bash scripts that integrate bat with various command line tools
 
     - name: bat - Link the whole directory
       # link the whole directory, there is nothing sensible here
