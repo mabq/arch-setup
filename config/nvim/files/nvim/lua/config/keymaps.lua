@@ -40,8 +40,8 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +4<CR>', { desc = 'Increase w
 vim.keymap.set('n', '<C-Down>', ':resize -4<CR>', { desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', ':resize +4<CR>', { desc = 'Increase window height' })
 
-vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>', { desc = 'Quickfix next' })
-vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>', { desc = 'Quickfix previous' })
+vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'Quickfix next' })
+vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'Quickfix previous' })
 
 -- Leader ---------------------------------------------------------------------
 

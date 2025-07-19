@@ -8,7 +8,7 @@ local opt = vim.opt
 
 -- Options --------------------------------------------------------------------
 
--- Before editing, read notes on formatters!
+-- Notes in the formatters plugin file
 opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 0 -- do not edit

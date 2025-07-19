@@ -1,4 +1,5 @@
--- stdpath is `~/.local/share/nvim/`
+-- [Undestanding Neovim #2](https://www.youtube.com/watch?v=N-RFCfs6rxI&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=2&t=389s)
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -10,10 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
--- add the lazy path to the runtimepath
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  spec = 'mabq.plugins',
+  spec = 'plugins',
   change_detection = { notify = false },
 }

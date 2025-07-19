@@ -1,6 +1,6 @@
 -- Notes:
 --
---   Indentation behaviour is controlled by the following neovim options:
+--   Indentation is controlled by the following options:
 --
 --     - tabstop     - number of spaces to use for a <Tab>
 --
@@ -10,18 +10,17 @@
 --     - softtabstop = number of spaces that a <Tab> counts for while
 --                     performing editing operations (insert mode)
 --
---   The plugin `guess-indent` will automatically adjust these neovim
---   options for the given buffer based on the contents of the current buffer
---   when opening a file. It also checks for an `.editorconfig` file but does
---   not take into account configuration files for formatter tools like
---   `.stylua.toml` or `.prettierrc`.
+--   The plugin `guess-indent` will automatically adjust these options for the
+--   current buffer when opening a file based on its content. It also checks
+--   for an `.editorconfig` file but does NOT check for any formatter
+--   configuration file like `.stylua.toml` or `.prettierrc`.
 --
 --   When there is no `.editorconfig` and the content of the buffer does not
---   provide enough information to correctly adjust the settings you might
+--   provide enough information to correctly adjust the options, you might
 --   find that neovim indentation is not working accordingly to what you
 --   specified in the formatter configuration file.
 --
---   When this happens, you have 2 options:
+--   When this happens, you can:
 --
 --     1. Manually change the `tabstop` value to match the formatter's value.
 --        `:set tabstop=<value>`
@@ -41,20 +40,17 @@
 return {
   {
     'NMAC427/guess-indent.nvim',
-    opts = {},
+    opts = {}, -- load inmediately
   },
   {
-    -- Automatically install formatting tools used by conform
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    config = function()
-      require('mason-tool-installer').setup {
-        ensure_installed = {
-          'biome', -- https://biomejs.dev/internals/language-support/
-          'black',
-          'stylua',
-        },
-      }
-    end,
+    opts = {
+      ensure_installed = {
+        'biome', -- https://biomejs.dev/internals/language-support/
+        'black',
+        'stylua',
+      },
+    },
   },
   {
     'stevearc/conform.nvim',

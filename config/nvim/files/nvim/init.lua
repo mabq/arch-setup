@@ -1,4 +1,6 @@
-require 'mabq'
+require 'config.options'
+require 'config.keymaps'
+require 'config.lazy' -- must go after options and keymaps
+require 'config.autocmds'
 
---   https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
---   https://github.com/ThePrimeagen/init.lua
+vim.cmd.colorscheme('tokyonight')
