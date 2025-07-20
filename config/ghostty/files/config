@@ -1,7 +1,5 @@
 # Use `Ctrl+Shift+,` to reload config after changes.
 # Use `ghostty +show-config` to verify applied configurations.
-#
-# https://www.google.com
 
 theme = Kanagawa Wave
 
