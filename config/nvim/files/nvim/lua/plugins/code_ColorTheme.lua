@@ -1,8 +1,27 @@
--- set default colorscheme in `init.lua`
 return {
+  -- Current ------------------------------------------------------------------
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      compile = true, -- run `:KanagawaCompile` after changes
+      commentStyle = { italic = false },
+      functionStyle = {},
+      keywordStyle = { italic = false },
+      statementStyle = { bold = false },
+      typeStyle = {},
+    },
+    config = function()
+      -- this function ensures the theme is installed before trying to set it
+      vim.cmd.colorscheme 'kanagawa'
+    end,
+  },
+  -- Lazy load inactive themes ------------------------------------------------
   {
     'folke/tokyonight.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = {
       style = 'night', -- storm, moon, night, day
@@ -38,37 +57,37 @@ return {
       end,
     },
   },
-  -- {
-  --   'rose-pine/neovim',
-  --   name = 'rose-pine',
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     styles = {
-  --       italic = false,
-  --     },
-  --   },
-  -- },
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   lazy = false,
-  --   priority = 1000,
-  -- },
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   name = 'kanagawa',
-  --   lazy = false,
-  --   priority = 1000,
-  -- },
-  -- {
-  --   'sainnhe/everforest',
-  --   lazy = false,
-  --   priority = 1000,
-  -- },
-  -- {
-  --   'EdenEast/nightfox.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  -- },
+  {
+    'webhooked/kanso.nvim',
+    name = 'kanso',
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = true,
+    priority = 1000,
+    opts = {
+      styles = {
+        italic = false,
+      },
+    },
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    'sainnhe/everforest',
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = true,
+    priority = 1000,
+  },
 }
