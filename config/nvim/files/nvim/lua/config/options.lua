@@ -1,56 +1,57 @@
--- Help -----------------------------------------------------------------------
---
 -- [Configure Neovim Options](https://www.youtube.com/watch?v=F1CQVXA5gf0&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=5)
--- `:options` - shows an interactive list of options
+-- [Options and variables explained](https://www.youtube.com/watch?v=Cp0iap9u29c&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=6)
+-- `:options` - interactive list
 -- `:help opt`
 
-local opt = vim.opt
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
--- Options --------------------------------------------------------------------
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
 
--- Notes in the formatters plugin file
-opt.expandtab = true
-opt.tabstop = 2
-opt.shiftwidth = 0 -- do not edit
-opt.softtabstop = -1 -- do not edit
-opt.shiftround = true
+vim.opt.guicursor = ''
 
-opt.guicursor = ''
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-opt.number = true
-opt.relativenumber = true
+vim.opt.tabstop = 2 -- see notes in formatter plugin
+vim.opt.shiftwidth = 0 -- do not change!
+vim.opt.softtabstop = -1 -- do not change!
+vim.opt.expandtab = true
+vim.opt.shiftround = true
 
-opt.signcolumn = 'yes' -- reserve space in gutter for signs
+vim.opt.smartindent = true
 
-opt.cursorline = false
-opt.colorcolumn = '80'
+vim.opt.wrap = false
+vim.opt.breakindent = true -- preserve indentation in wrapped text
+vim.opt.linebreak = true -- do not break words when wrapping
 
-opt.scrolloff = 8
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undofile = true
 
-opt.wrap = false
-opt.breakindent = true -- preserve indentation in wrapped text (when enabled)
-opt.linebreak = true -- do not break words when wrapping
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-opt.incsearch = true
-opt.hlsearch = true
-opt.ignorecase = true
-opt.smartcase = true
+vim.opt.termguicolors = true
 
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
-opt.undofile = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = 'yes'
+vim.opt.isfname:append '@-@' -- add `@` as a valid filename character
 
-opt.termguicolors = true
+vim.opt.updatetime = 250
 
-opt.spelllang = { 'en', 'es' }
+vim.opt.colorcolumn = '80'
+vim.opt.cursorline = true
 
-opt.splitbelow = true
-opt.splitright = true
+vim.opt.spelllang = { 'en', 'es' }
 
-opt.updatetime = 50
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-opt.list = true
-opt.listchars = { tab = '│ ', trail = '·', nbsp = '␣' } -- see `:help 'list'` and `:help 'listchars'`
-
-opt.isfname:append '@-@' -- adds `-` and `@` as filename characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }

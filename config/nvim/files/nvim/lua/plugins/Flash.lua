@@ -3,13 +3,11 @@ return {
   event = 'VeryLazy',
   opts = {
     modes = {
-      -- just for jumping
       search = { enabled = false },
       char = { enabled = false },
     },
     highlight = {
-      -- do not gray out all text while using it
-      backdrop = false,
+      backdrop = false, -- do not gray out all text while using it
     },
   },
   keys = {

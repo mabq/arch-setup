@@ -5,15 +5,11 @@ return {
   config = function()
     local harpoon = require 'harpoon'
     harpoon:setup {
-      -- menu = {
-      --   width = vim.api.nvim_win_get_width(0) - 4,
-      -- },
-      -- settings = {
-      --   save_on_toggle = false,
-      -- },
+      -- menu = { width = vim.api.nvim_win_get_width(0) - 4, },
+      -- settings = { save_on_toggle = false, },
     }
     -- stylua: ignore start
-    vim.keymap.set('n', '<C-u>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
     -- vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
     -- vim.keymap.set('n', '<leader>a', function() harpoon:list():prepend() end)
     -- vim.keymap.set('n', '<leader>A', function() harpoon:list():add() end)
