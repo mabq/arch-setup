@@ -15,7 +15,7 @@ vim.opt.guicursor = ''
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 2 -- see notes in formatter plugin
+vim.opt.tabstop = 2 -- see GuessIndent plugin
 vim.opt.shiftwidth = 0 -- do not change!
 vim.opt.softtabstop = -1 -- do not change!
 vim.opt.expandtab = true

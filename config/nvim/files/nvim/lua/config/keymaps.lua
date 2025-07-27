@@ -34,8 +34,8 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +4<CR>', { desc = 'Increase w
 vim.keymap.set('n', '<C-Down>', ':resize -4<CR>', { desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', ':resize +4<CR>', { desc = 'Increase window height' })
 
--- vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'Quickfix next' }) -- now with Trouble
--- vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'Quickfix previous' }) -- now with Trouble
+vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'Quickfix next' })
+vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'Quickfix previous' })
 
 -- Leader --
 
@@ -48,4 +48,3 @@ vim.keymap.set('n', '<leader>S', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('n', '<leader>X', '<cmd>!chmod +x %<CR>', { silent = true }) -- make the current file executable
 
 vim.keymap.set('n', '<leader><leader>X', '<cmd>source %<CR>', { desc = 'Source file' }) -- refresh lua configurations
-
