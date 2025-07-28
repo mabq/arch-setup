@@ -22,6 +22,14 @@
           - unzip # For extracting and viewing files in .zip archives
           - ninja # Small build system with a focus on speed
           - curl # Command line tool and library for transferring data with URLs
+          #
+          # LSPs
+          - bash-language-server # Bash language server implementation based on Tree Sitter and its grammar for Bash
+          - lua-language-server # Lua Language Server coded by Lua
+          #
+          # Formatters
+          - biome # Formatter, linter, and more for Javascript, Typescript, JSON, and CSS
+          - stylua # Deterministic code formatter for Lua
 
     - name: nvim - Link config files
       # link entire config directories, there is nothing sensible here

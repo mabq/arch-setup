@@ -2,14 +2,12 @@ return {
   {
     'rebelot/kanagawa.nvim',
     name = 'kanagawa',
-    lazy = false,
     priority = 1000,
     config = function()
       require('kanagawa').setup {
         overrides = function()
           return {
-            -- Remove float border background (Yazi).
-            FloatBorder = { bg = 'none' },
+            FloatBorder = { bg = 'none' }, -- remove float border background (Yazi).
           }
         end,
       }

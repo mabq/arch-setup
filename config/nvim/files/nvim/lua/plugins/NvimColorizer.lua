@@ -1,5 +1,5 @@
 return {
-  'catgoose/nvim-colorizer.lua',
+  'catgoose/nvim-colorizer.lua', -- show hex colors
   opts = {},
   keys = {
     -- stylua: ignore start

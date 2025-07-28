@@ -23,7 +23,7 @@ return {
       markdown = { 'biome' },
     },
     default_format_opts = {
-      asyng = true,
+      async = true,
       lsp_format = 'fallback',
     },
     format_on_save = true,

@@ -1,5 +1,5 @@
 return {
-  'saghen/blink.cmp',
+  'saghen/blink.cmp', -- autocompletion
   event = 'VimEnter',
   version = '1.*',
   dependencies = {
@@ -9,15 +9,16 @@ return {
   },
   opts = {
     keymap = {
-      preset = 'default', -- similar to built-in completion keymaps, see https://cmp.saghen.dev/configuration/keymap#default
-      ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' }, -- default is `Ctrl-Space` but I use that as Tmux-prefix
+      preset = 'default', -- see https://cmp.saghen.dev/configuration/keymap#default
+      ['<C-h>'] = { 'show', 'show_documentation', 'hide_documentation' }, -- `Ctrl-Space` is used as tmux prefix
+    },
+    appearance = { nerd_font_variant = 'mono' },
+    completion = {
+      documentation = { auto_show = false }, -- only show the documentation popup when manually triggered
     },
     signature = { enabled = true }, -- or use `Ctrl-k` to toggle it manually
-    completion = {
-      documentation = { auto_show = true }, -- or use `Ctro-o` to toggle it manually
-    },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'emoji' },
+      default = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'emoji' },
       providers = {
         lazydev = {
           name = 'LazyDev',
@@ -30,7 +31,6 @@ return {
       },
     },
     fuzzy = { implementation = 'prefer_rust_with_warning' },
-    appearance = { nerd_font_variant = 'mono' },
   },
   opts_extend = { 'sources.default' },
 }
