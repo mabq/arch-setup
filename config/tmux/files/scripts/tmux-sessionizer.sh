@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ------------------------------------------------------------------------------
 #
@@ -25,7 +25,7 @@ directories="$HOME/ $HOME/projects/"
 if [[ $# -eq 1 ]]; then
   working_directory=$1
 else
-  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | sk --layout=reverse)
+  working_directory=$(fd --hidden --no-ignore --exact-depth 1 --type directory . $directories | sk)
 fi
 
 if [[ -z $working_directory ]]; then
@@ -36,13 +36,13 @@ fi
 session_name=$(basename "$working_directory" | tr . _)
 
 # Create the session (if necessary) in detached mode
-if ! tmux has-session -t $session_name 2>/dev/null; then
-  tmux new-session -s $session_name -c $working_directory -d
+if ! tmux has-session -t "$session_name" 2>/dev/null; then
+  tmux new-session -s "$session_name" -c "$working_directory" -d
 fi
 
 # Make tmux focus the given session
 if [[ -n $TMUX ]]; then
-  tmux switch-client -t $session_name
+  tmux switch-client -t "$session_name"
 else
-  tmux attach-session -t $session_name
+  tmux attach-session -t "$session_name"
 fi
