@@ -3,6 +3,8 @@ return {
   opts = {},
 }
 
+-- Notes:
+--
 -- Indentation is controlled by the following vim options:
 --
 --   - tabstop     - number of spaces to use for a `<Tab>`.
@@ -15,6 +17,4 @@ return {
 --
 --   1. Manually change the `tabstop` value to match the formatter's value with `:set tabstop=<value>`.
 --      `shiftwidth` and `softtabstop` are configured to mimic the value of `tabstop`, so you don't need to change those.
---
 --   2. If you don't want to do that every time you open a buffer of that file type, you can configure neovim to use a different `tabstop` value for that specific file type in `~/.config/nvim/after/ftplugin/<filetype>.lua`.
---

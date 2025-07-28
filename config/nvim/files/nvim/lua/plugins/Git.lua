@@ -1,8 +1,8 @@
 -- `:checkhealth snacks`
+vim.g.lazygit_floating_window_winblend = 1 -- transparency of floating window
 return {
   {
     'folke/snacks.nvim',
-    priority = 1000,
     lazy = false,
     opts = {
       lazygit = {},

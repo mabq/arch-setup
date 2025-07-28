@@ -10,25 +10,25 @@ return {
       build = 'make', -- `make` is provided by the `base-devel` package in Arch
     },
     'nvim-tree/nvim-web-devicons',
-    -- 'folke/trouble.nvim', -- send results to Trouble
+    'folke/trouble.nvim', -- send results to Trouble
   },
   config = function()
     local actions = require 'telescope.actions'
 
-    -- local open_with_trouble = require('trouble.sources.telescope').open -- sends the list to Trouble, overwritting any previous list
-    -- local append_to_trouble = require('trouble.sources.telescope').add -- sends the list to Trouble, appending to any previous list
+    local open_with_trouble = require('trouble.sources.telescope').open -- sends the list to Trouble, overwritting any previous list
+    local append_to_trouble = require('trouble.sources.telescope').add -- sends the list to Trouble, appending to any previous list
 
     require('telescope').setup { -- see `:help telescope.setup()` or https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#customization
       defaults = {
         mappings = {
           n = {
             ['q'] = actions.close,
-            -- ['<c-t>'] = open_with_trouble,
-            -- ['<c-a>'] = append_to_trouble,
+            ['<c-t>'] = open_with_trouble,
+            ['<c-a>'] = append_to_trouble,
           },
           i = {
-            -- ['<c-t>'] = open_with_trouble,
-            -- ['<c-a>'] = append_to_trouble,
+            ['<c-t>'] = open_with_trouble,
+            ['<c-a>'] = append_to_trouble,
           },
         },
       },
