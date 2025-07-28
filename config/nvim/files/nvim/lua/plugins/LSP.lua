@@ -2,33 +2,24 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'saghen/blink.cmp',
       { 'j-hui/fidget.nvim', opts = {} },
       { 'mason-org/mason.nvim', opts = {} }, -- just to try things out
     },
     config = function()
       local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' }, -- fix undefined global vim
-              },
-            },
-          },
-        },
+        lua_ls = {},
         bashls = {},
       }
 
       local lspconfig = require 'lspconfig'
-      local blink_capabilities = require('blink.cmp').get_lsp_capabilities()
       for name, setup in pairs(servers) do
-        setup.capabilities = vim.tbl_deep_extend('force', {}, blink_capabilities, setup.capabilities or {})
         lspconfig[name].setup(setup)
       end
 
-      vim.diagnostic.config {
-        virtual_text = true,
+      vim.diagnostic.config { -- see `:h vim.diagnostic.Opts`
+        underline = false,
+        virtual_text = true, -- append to line
+        -- virtual_lines = true, -- lines below
       }
     end,
   },
@@ -40,7 +31,7 @@ return {
     },
   },
   {
-    'folke/lazydev.nvim',
+    'folke/lazydev.nvim', -- lsp for Neovim configuration
     ft = 'lua',
     opts = {
       library = {
@@ -57,12 +48,17 @@ return {
 --     Read `:h lsp`
 --
 --   Verify setup:
---     Use `:LspInfo` to verify an LSP is attached to the buffer and everything is setup correctly. If not attached, see [common pitfalls](https://youtu.be/UVcC5ifbXL8?si=LJ8-DBjCPvQ3DZmr&t=439)
---     Use `:=vim.lsp.get_clients()[1].server_capabilities` to check attach LSP server capabilities.
+--     Use `:LspInfo` to verify an LSP is attached to the buffer and everything is setup correctly.
+--     If not attached, see [common pitfalls](https://youtu.be/UVcC5ifbXL8?si=LJ8-DBjCPvQ3DZmr&t=439)
 --
 --   Keymaps:
 --     `:h lsp-defaults`
 --     `:h diagnostic-defaults`
+--
+--   Capabilities:
+--     Neovim 11 already includes the capabilities that we used to add with Blink, so that code is not necessary anymore.
+--     To see Neovim client LSP builtin capabilities run `:=vim.lsp.protocol.make_client_capabilities()`.
+--     To see attached LSP capabilities run `:=vim.lsp.get_clients()[1].server_capabilities`.
 --
 --   Servers:
 --     Install LSPs using your package manager, that way they are available for the whole system, not just Neovim.

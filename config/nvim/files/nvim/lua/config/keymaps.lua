@@ -1,8 +1,3 @@
--- `:Telescope keymaps`         - list all keymaps
--- `:[verbose] map {keybind}`   - check specific keymap
--- `:h lua-guide-mappings`      - how to set keymaps
--- `:h map-modes`               - check modes table
-
 -- Without modifier key --
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hightlight' })
@@ -48,3 +43,9 @@ vim.keymap.set('n', '<leader>S', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('n', '<leader>X', '<cmd>!chmod +x %<CR>', { silent = true }) -- make the current file executable
 
 vim.keymap.set('n', '<leader><leader>X', '<cmd>source %<CR>', { desc = 'Source file' }) -- refresh lua configurations
+
+-- Notes:
+--   `:Telescope keymaps`         - list all keymaps
+--   `:[verbose] map {keybind}`   - check specific keymap
+--   `:h lua-guide-mappings`      - how to set keymaps
+--   `:h map-modes`               - check modes table

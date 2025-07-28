@@ -1,5 +1,4 @@
 return {
-  enabled = true,
   'folke/trouble.nvim',
   opts = {
     focus = true,

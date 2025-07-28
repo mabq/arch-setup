@@ -1,7 +1,3 @@
--- [Autocmds explanation in the context of LSP](https://youtu.be/HL7b63Hrc8U?si=CBt_Hz8IXrJAgear&t=926)
--- `:h lua-guide-autocommands`
--- `:h events`
-
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
@@ -96,3 +92,8 @@ autocmd('FileType', {
 --     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
 --   end,
 -- })
+
+-- Notes:
+--   [Autocmds explanation in the context of LSP](https://youtu.be/HL7b63Hrc8U?si=CBt_Hz8IXrJAgear&t=926)
+--   `:h lua-guide-autocommands`
+--   `:h events`

@@ -1,4 +1,3 @@
--- read notes at the bottom --
 return {
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',

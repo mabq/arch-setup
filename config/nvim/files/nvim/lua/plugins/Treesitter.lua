@@ -1,14 +1,3 @@
--- [Understanding Neovim - Treesitter](https://www.youtube.com/watch?v=kYXcxJxJVxQ&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=4)
--- [Understanding Neovim - Text objects and Incremental Selection](https://www.youtube.com/watch?v=ff0GYrK3nT0&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=5)
--- [Treesitter basics and installation](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=6)
--- `:help lsp-vs-treesitter`
--- `:help nvim-treesitter`
--- `:checkhealth nvim-treesitter`
--- `:Inspect` - shows all currently applied highlights for text under cursor.
--- `:InspectTree` - shows the AST
-
--- If you get an error, try syncing all plugins with Lazy.
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -68,3 +57,15 @@ return {
   --   },
   -- },
 }
+
+-- Notes:
+--   [Understanding Neovim - Treesitter](https://www.youtube.com/watch?v=kYXcxJxJVxQ&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=4)
+--   [Understanding Neovim - Text objects and Incremental Selection](https://www.youtube.com/watch?v=ff0GYrK3nT0&list=PLx2ksyallYzW4WNYHD9xOFrPRYGlntAft&index=5)
+--   [Treesitter basics and installation](https://www.youtube.com/watch?v=MpnjYb-t12A&list=PLep05UYkc6wTyBe7kPjQFWVXTlhKeQejM&index=6)
+--   `:help lsp-vs-treesitter`
+--   `:help nvim-treesitter`
+--   `:checkhealth nvim-treesitter`
+--   `:Inspect` - shows all currently applied highlights for text under cursor.
+--   `:InspectTree` - shows the AST
+
+--   If you get an error, try syncing all plugins with Lazy.

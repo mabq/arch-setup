@@ -1,4 +1,3 @@
--- `:checkhealth snacks`
 vim.g.lazygit_floating_window_winblend = 1 -- transparency of floating window
 return {
   {
@@ -27,3 +26,6 @@ return {
     },
   },
 }
+
+-- Notes:
+--   Use `:checkhealth snacks` to verify evertyhting is setup correctly.
