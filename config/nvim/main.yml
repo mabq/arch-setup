@@ -28,6 +28,7 @@
           - lua-language-server # Lua Language Server coded by Lua
           #
           # Formatters
+          - shfmt # Format shell programs
           - biome # Formatter, linter, and more for Javascript, Typescript, JSON, and CSS
           - stylua # Deterministic code formatter for Lua
 

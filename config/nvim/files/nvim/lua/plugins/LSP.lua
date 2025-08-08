@@ -18,7 +18,7 @@ return {
 
       vim.diagnostic.config { -- see `:h vim.diagnostic.Opts`
         underline = false,
-        virtual_text = true, -- append to line
+        virtual_text = false, -- append to line
         -- virtual_lines = true, -- lines below
       }
     end,

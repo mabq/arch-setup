@@ -21,6 +21,7 @@ return {
       json = { 'biome' },
       jsonc = { 'biome' },
       markdown = { 'biome' },
+      sh = { 'shfmt' },
     },
     default_format_opts = {
       async = true,
