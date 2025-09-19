@@ -17,6 +17,7 @@
           - rsync # A fast and versatile file copying tool for remote and local files (`cp` alternative)
           - trash-cli # Command line trashcan (recycle bin) interface (`rm` alternative)
           - zoxide # A smarter cd command for your terminal (`cd` alternative)
+          - caligula # A user-friendly, lightweight TUI for disk imaging
           #
           # ------------------------------------------------------------------------
           #
